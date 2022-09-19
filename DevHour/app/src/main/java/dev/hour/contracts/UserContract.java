@@ -2,8 +2,7 @@ package dev.hour.contracts;
 
 public interface UserContract {
     public interface Database {
-        String getUserFirst();
-        String getUserLast();
+        User getUser();
     }
     public interface Presenter {
         void setDatabase(Database d);
@@ -13,12 +12,15 @@ public interface UserContract {
 
     }
     public  interface  User {
-        String getName();
+        String getFirstName();
+        String getLastName();
         double getLongitude();
         double getLatitude();
     }
     public interface Meal {
         int getCalories();
     }
-
+    public interface Diet{
+        enum ingredients{}
+    }
 }

@@ -44,7 +44,7 @@ public interface RestaurantContract {
     public interface Ingredient{
         int getCalories();
         String getName();
-        
+
     }
 
 }
