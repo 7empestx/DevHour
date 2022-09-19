@@ -7,23 +7,23 @@ public interface RestaurantContract {
     interface Database {
 
         Restaurant getRestaurant(String id);
-        List<Restaurant> getRestaurantsFromRadiusLocation(double longitude,
-                                                          double latitude,
-                                                          double radius);
+        List<Restaurant> getRestaurantsFromRadiusLocation(final double longitude,
+                                                          final double latitude,
+                                                          final double radius);
 
     }
 
     interface Presenter {
 
-        void setDatabase(Database d);
-        void setView(View v);
+        void setDatabase(final Database database);
+        void setView(final View view);
         void invalidate();
 
     }
 
     interface View {
 
-        void setRestaurants(List <Restaurant> restaurants);
+        void setRestaurants(final List <Restaurant> restaurants);
 
     }
 
@@ -34,7 +34,7 @@ public interface RestaurantContract {
         double getLatitude();
         int getPricing();
         List<MealContract.Meal> getMeals();
-        MealContract.Meal getMeal(String id);
+        MealContract.Meal getMeal(final String id);
 
     }
 

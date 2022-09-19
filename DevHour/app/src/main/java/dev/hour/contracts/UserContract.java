@@ -7,22 +7,22 @@ public interface UserContract {
     interface Database {
 
         User getUser();
-        void updateUser(User user);
+        void updateUser(final User user);
 
     }
 
     interface Presenter {
 
-        void setDatabase(Database d);
-        void setView(View v);
+        void setDatabase(final Database database);
+        void setView(final View view);
         void invalidate();
-        void setUserLocation(double longitude, double latitude);
+        void setUserLocation(final double longitude, final double latitude);
 
     }
 
     interface View {
 
-        void setUser(User user);
+        void setUser(final User user);
 
     }
 
