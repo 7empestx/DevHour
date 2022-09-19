@@ -1,5 +1,7 @@
 package dev.hour.contracts;
 
+import java.util.List;
+
 public interface UserContract {
     public interface Database {
         User getUser();
@@ -17,10 +19,5 @@ public interface UserContract {
         double getLongitude();
         double getLatitude();
     }
-    public interface Meal {
-        int getCalories();
-    }
-    public interface Diet{
-        enum ingredients{}
-    }
+
 }

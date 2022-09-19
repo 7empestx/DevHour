@@ -33,18 +33,6 @@ public interface RestaurantContract {
         List getMeals();
 
         }
-    public interface Meal {
 
-        int getCalories();
-        String getName();
-        List getIngredients();
-
-    }
-
-    public interface Ingredient{
-        int getCalories();
-        String getName();
-
-    }
 
 }
