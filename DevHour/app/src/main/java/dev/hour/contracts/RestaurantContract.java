@@ -7,7 +7,6 @@ public interface RestaurantContract {
     public interface Database {
 
         Restaurant getRestaurant(String id);
-        Meal getMeal(String id); //retrieves from database
 
     }
 
@@ -30,9 +29,9 @@ public interface RestaurantContract {
         double getLongitude();
         double getLatitude();
         int getPricing();
-        List getMeals();
-
-        }
+        List<MealContract.Meal> getMeals();
+        MealContract.Meal getMeal(String id);
+    }
 
 
 }
