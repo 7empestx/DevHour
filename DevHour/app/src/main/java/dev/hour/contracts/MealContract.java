@@ -9,7 +9,7 @@ public interface MealContract {
         int getCalories();
         String getName();
         List<Diet> getDiets();
-        List <Ingredient> getIngredients();
+        List<Ingredient> getIngredients();
 
     }
 
