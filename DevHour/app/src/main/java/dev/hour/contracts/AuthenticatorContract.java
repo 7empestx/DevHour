@@ -9,14 +9,21 @@ public interface AuthenticatorContract {
                     final String firstName, final String lastName);
         void signIn(final String username, final String password);
 
+        interface Listener {
+
+            void onSignInFailed(final String message);
+            void onSignUpFailed(final String message);
+            void onAuthenticated(final String message);
+            void onUnauthenticated(final String message);
+
+        }
+
     }
 
     interface Presenter {
 
         void setAuthenticator(Authenticator authenticator);
         void setAuthenticatorView(View view);
-        void onAuthenticated(final String message);
-        void onUnauthenticated(final String message);
 
     }
 
