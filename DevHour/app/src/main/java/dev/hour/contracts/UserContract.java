@@ -3,7 +3,7 @@ package dev.hour.contracts;
 public interface UserContract {
     public interface Database {
         String getUserFirst();
-        String getGetUserLast();
+        String getUserLast();
     }
     public interface Presenter {
         void setDatabase(Database d);
