@@ -14,7 +14,7 @@ public interface AuthenticatorContract {
     interface Presenter {
 
         void setAuthenticator(Authenticator authenticator);
-        void setView(View view);
+        void setAuthenticatorView(View view);
         void onAuthenticated(final String message);
         void onUnauthenticated(final String message);
 
