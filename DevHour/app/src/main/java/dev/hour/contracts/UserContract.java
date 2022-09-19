@@ -12,4 +12,13 @@ public interface UserContract {
     public interface View {
 
     }
+    public  interface  User {
+        String getName();
+        double getLongitude();
+        double getLatitude();
+    }
+    public interface Meal {
+        int getCalories();
+    }
+
 }
