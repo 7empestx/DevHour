@@ -10,7 +10,7 @@ public class UserDatabase implements UserContract.Database {
     }
 
     @Override
-    public void updateUser(UserContract.User user) {
+    public void updateUser(final UserContract.User user) {
 
     }
 
