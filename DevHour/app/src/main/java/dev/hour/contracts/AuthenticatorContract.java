@@ -22,11 +22,16 @@ public interface AuthenticatorContract {
 
     interface View {
 
-        interface Listener {
+        interface SignUpListener {
 
-            void onReceivedSignInInput(final String username, final String password);
             void onReceivedSignUpInput(final String username, final String password,
                                        final String firstName, final String lastName);
+
+        }
+
+        interface SignInListener {
+
+            void onReceivedSignInInput(final String username, final String password);
 
         }
 
