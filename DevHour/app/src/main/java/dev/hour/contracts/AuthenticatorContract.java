@@ -26,12 +26,14 @@ public interface AuthenticatorContract {
 
             void onReceivedSignUpInput(final String username, final String password,
                                        final String firstName, final String lastName);
+            void onRequestSignIn();
 
         }
 
         interface SignInListener {
 
             void onReceivedSignInInput(final String username, final String password);
+            void onRequestSignUp();
 
         }
 
