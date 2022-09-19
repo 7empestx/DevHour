@@ -1,0 +1,7 @@
+.idea/
+.idea/*
+.DS_Store
+DevHour/.idea/
+DevHour/.idea/*
+dev-hour-cdk/.idea
+dev-hour-cdk/.DS_Store
