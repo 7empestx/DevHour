@@ -2,7 +2,8 @@ package dev.hour.database;
 
 import dev.hour.contracts.UserContract;
 
-public class UserDatabase implements UserContract.Database{
+public class UserDatabase implements UserContract.Database {
+
     @Override
     public UserContract.User getUser() {
         return null;
@@ -12,4 +13,5 @@ public class UserDatabase implements UserContract.Database{
     public void updateUser(UserContract.User user) {
 
     }
+
 }
