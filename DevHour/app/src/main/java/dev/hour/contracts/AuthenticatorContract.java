@@ -5,11 +5,28 @@ public interface AuthenticatorContract {
     interface Authenticator {
 
         void checkSession();
+        void signUp(final String username, final String password,
+                    final String firstName, final String lastName);
+        void signIn(final String username, final String password);
+
+    }
+
+    interface Presenter {
+
+        void setAuthenticator(Authenticator authenticator);
+        void setView(View view);
+        void onAuthenticated(final String message);
+        void onUnauthenticated(final String message);
+
+    }
+
+    interface View {
 
         interface Listener {
 
-            void onAuthenticated(final String message);
-            void onNotAuthenticated(final String message);
+            void onReceivedSignInInput(final String username, final String password);
+            void onReceivedSignUpInput(final String username, final String password,
+                                       final String firstName, final String lastName);
 
         }
 
