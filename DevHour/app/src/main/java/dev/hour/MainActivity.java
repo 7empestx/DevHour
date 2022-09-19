@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import software.amazon.awssdk.services.dynamodb.DynamoDbClientBuilder;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
