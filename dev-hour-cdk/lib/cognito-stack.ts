@@ -1,7 +1,8 @@
 import {UserPool, UserPoolClient, UserPoolIdentityProviderAmazon} from '@aws-cdk/aws-cognito'
 import {Stack, Construct} from '@aws-cdk/core' 
 import {Constants} from './constants';
-import {IdentityPool} from '@aws-cdk/aws-cognito-identitypool'
+import {IdentityPool, IdentityPoolRoleAttachment} from '@aws-cdk/aws-cognito-identitypool'
+import { Role } from 'aws-cdk-lib/aws-iam';
 
 export interface CognitoProps {
     account        : string,
@@ -10,11 +11,15 @@ export interface CognitoProps {
     identityPoolID : string, 
     stackID        : string,
     identityProviderID : string,
+    userPoolClientID : string,
+    userPoolClientSecret : string,
+    authenticatedRole: Role,
+    unauthenticatedRole: Role,
 }
 
 export class CognitoStack extends Stack {
     private readonly userPool : UserPool
-    private readonly Identity : IdentityPool
+    private readonly identityPool : IdentityPool
     private readonly userPoolClient : UserPoolClient
     private readonly userPoolIdentityProviderAmazon : UserPoolIdentityProviderAmazon
 
@@ -41,7 +46,19 @@ export class CognitoStack extends Stack {
             },
         });
         
-        this.userPoolIdentityProviderAmazon = new UserPoolIdentityProviderAmazon(this, props.identityProviderID,{});
+        this.userPoolClient = new UserPoolClient(this, props.userPoolClientID, {
+            userPool: this.userPool
+        })
+
+        this.userPoolIdentityProviderAmazon = new UserPoolIdentityProviderAmazon(this, props.identityProviderID, {
+            userPool: this.userPool,
+            clientId: props.userPoolClientID,
+            clientSecret: props.userPoolClientSecret
+        });
+        this.identityPool = new IdentityPool(this, props.identityPoolID, {
+            authenticatedRole: props.authenticatedRole,
+            unauthenticatedRole: props.unauthenticatedRole,
+        })
     }
 }
 
