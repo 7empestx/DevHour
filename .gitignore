@@ -5,3 +5,5 @@ DevHour/.idea/
 DevHour/.idea/*
 dev-hour-cdk/.idea
 dev-hour-cdk/.DS_Store
+*.d.ts
+*.js
