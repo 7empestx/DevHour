@@ -1,8 +1,8 @@
-import {UserPool, UserPoolClient, UserPoolIdentityProviderAmazon} from '@aws-cdk/aws-cognito'
-import {Stack, Construct} from '@aws-cdk/core' 
-import {Constants} from './constants';
-import {IdentityPool, IdentityPoolRoleAttachment} from '@aws-cdk/aws-cognito-identitypool'
+import { CfnIdentityPool, UserPool, UserPoolClient, UserPoolIdentityProviderAmazon } from 'aws-cdk-lib/aws-cognito'
+import { Stack } from 'aws-cdk-lib'
+import { Construct } from 'constructs'
 import { Role } from 'aws-cdk-lib/aws-iam';
+import { Constants } from './constants';
 
 export interface CognitoProps {
     account        : string,
@@ -19,7 +19,7 @@ export interface CognitoProps {
 
 export class CognitoStack extends Stack {
     private readonly userPool : UserPool
-    private readonly identityPool : IdentityPool
+    private readonly identityPool : CfnIdentityPool
     private readonly userPoolClient : UserPoolClient
     private readonly userPoolIdentityProviderAmazon : UserPoolIdentityProviderAmazon
 
@@ -55,10 +55,9 @@ export class CognitoStack extends Stack {
             clientId: props.userPoolClientID,
             clientSecret: props.userPoolClientSecret
         });
-        this.identityPool = new IdentityPool(this, props.identityPoolID, {
-            authenticatedRole: props.authenticatedRole,
-            unauthenticatedRole: props.unauthenticatedRole,
-        })
+        this.identityPool = new CfnIdentityPool(this, props.identityPoolID, {
+		allowUnauthenticatedIdentities: false
+	});
     }
 }
 

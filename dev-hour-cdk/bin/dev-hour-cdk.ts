@@ -3,8 +3,8 @@
  * @version 0.1.0
  */
 
-import { App } from '@aws-cdk/core'
-import { ShellStep } from '@aws-cdk/pipelines'
+import { App } from 'aws-cdk-lib/core'
+import { ShellStep } from 'aws-cdk-lib/pipelines'
 import { PipelineStack, PipelineStackProps } from '../lib/pipeline-stack'
 import { AlphaStage } from '../lib/alpha-stage'
 import { Constants } from '../lib/constants'

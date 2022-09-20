@@ -2,9 +2,9 @@
  * Pipeline stack. Defines the pipeline for the CDK.
  * @version 0.1.0
  */
-
-import { Construct, Stack, Stage } from '@aws-cdk/core'
-import { CodePipeline, ShellStep } from '@aws-cdk/pipelines'
+import { Construct } from 'constructs'
+import { Stack, Stage } from 'aws-cdk-lib'
+import { CodePipeline, ShellStep } from 'aws-cdk-lib/pipelines'
 import { Constants } from './constants'
 
 /// ----------

@@ -2,7 +2,7 @@
  * Constants File. Defines project-wide constants.
  * @version 0.1.0
  */
-import { SubnetType } from '@aws-cdk/aws-ec2';
+import { SubnetType } from 'aws-cdk-lib/aws-ec2';
 export declare module Constants {
     const Account = "";
     const Region = "us-west-1";
@@ -32,5 +32,11 @@ export declare module Constants {
         module ShellStep {
             const Id: string;
         }
+    }
+    module DynamoDB {
+        module User {
+            const AllowActions: never[];
+        }
+        const AllowActions: string[];
     }
 }

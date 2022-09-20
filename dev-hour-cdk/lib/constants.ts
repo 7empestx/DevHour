@@ -3,7 +3,7 @@
  * @version 0.1.0
  */
 
-import { SubnetType } from '@aws-cdk/aws-ec2'
+import { SubnetType } from 'aws-cdk-lib/aws-ec2'
 
 export module Constants {
 
@@ -70,6 +70,18 @@ export module Constants {
             export const Id = `${AppName}ShellStep`    ;
 
         }
+
+    }
+
+    export module DynamoDB {
+
+	export module User {
+
+            export const AllowActions = [];
+
+        }
+
+	export const AllowActions = ['']     ;	
 
     }
 
