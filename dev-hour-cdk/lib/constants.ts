@@ -10,7 +10,7 @@ export module Constants {
     /// ---
     /// App
     
-    export const Account    =   ''      ;
+    export const Account    =   '060498623801'      ;
     export const Region     =   'us-west-1'         ;
     export const AppName    =   'DevHour'           ;
 
@@ -89,13 +89,13 @@ export module Constants {
 
     export module Cognito {
 
-        export const Id                         =  `${AppName}Cognito`                  ;
-        export const StackId                    =  `${Id}Stack`                         ;
-        export const ServiceName                =   'cognito-identity.amazonaws.com'    ;
-        export const AuthenticatedRoleId        =   `${Id}AuthenticatedRole`            ;
-        export const UnauthenticatedRoleId      =   `${Id}UnauthenticatedRole`          ; 
-        export const IdentityProviderId         =   `${Id}IdentityProvider`             ;        
-        export const IdentityProviderSecretArn  =   "arn:aws:secretsmanager:<region>:<account-id-number>:secret:<secret-name>-<random-6-characters>"     ;
+        export const Id                         =  `${AppName}Cognito`                                                                  ;
+        export const StackId                    =  `${Id}Stack`                                                                         ;
+        export const ServiceName                =   'cognito-identity.amazonaws.com'                                                    ;
+        export const AuthenticatedRoleId        =   `${Id}AuthenticatedRole`                                                            ;
+        export const UnauthenticatedRoleId      =   `${Id}UnauthenticatedRole`                                                          ; 
+        export const IdentityProviderId         =   `${Id}IdentityProvider`                                                             ;        
+        export const IdentityProviderSecretArn  =   "arn:aws:secretsmanager:us-west-1:060498623801:secret:DevHour-Secret-INGIRV"        ;
 
 
         /// ---------
