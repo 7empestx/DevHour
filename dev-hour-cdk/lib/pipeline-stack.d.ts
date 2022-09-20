@@ -1,6 +1,6 @@
 /**
- * Pipeline stack. Defines the pipeline for the CDK.
- * @version 0.1.0
+ * Pipeline Stack
+ * @version 0.9.0
  */
 import { Construct } from 'constructs';
 import { Stack, Stage } from 'aws-cdk-lib';
@@ -8,8 +8,8 @@ import { ShellStep } from 'aws-cdk-lib/pipelines';
 export interface PipelineStackProps {
     account: string;
     region: string;
+    id: string;
     stackId: string;
-    pipelineId: string;
     shellStep: ShellStep;
     stages: Stage[];
 }

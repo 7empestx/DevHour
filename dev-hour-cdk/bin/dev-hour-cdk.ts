@@ -24,7 +24,7 @@ new PipelineStack(app, {
     account:    Constants.Account,
     region:     Constants.Region,
     stackId:    Constants.CodePipeline.StackId,
-    pipelineId: Constants.CodePipeline.Id,
+    id:         Constants.CodePipeline.Id,
     shellStep:  new ShellStep(Constants.CodePipeline.ShellStep.Id, {
         commands: []
     }),
