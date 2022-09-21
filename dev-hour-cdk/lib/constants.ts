@@ -64,6 +64,34 @@ export module Constants {
 
     }
 
+    /// -----------
+    /// Code Commit
+
+    export module CodeCommit {
+
+        export const Repository             = 'CS472-2022/DevHour'          ;
+        export const PrimaryOutputDirectory = 'dev-hour-cdk/cdk.out'        ;
+
+        /// --------
+        /// Branches
+
+        export const Branches {
+
+            export const Main   = 'main'  ;
+
+        }
+
+        /// ----------
+        /// Connection
+
+        export const Connection {
+
+            export const Arn    = 'arn:aws:codestar-connections:us-west-1:060498623801:connection/6eea9f53-2cab-41e0-afa6-2263aa42e39b';
+
+        }
+
+    }
+
     /// -------------
     /// Code Pipeline
 
@@ -72,25 +100,6 @@ export module Constants {
         export const Id         = `${AppName}Pipeline` ;
         export const StackId    = `${Id}Stack`         ;
         export const SelfMutate = true                 ;
-        export const Repository = 'CS472-2022/DevHour' ;
-
-        /// --------
-        /// Branches
-
-        export module Branches {
-
-            export const Main = 'main'                                                                                                  ;
-
-        }
-
-        /// -----------
-        /// Connections
-
-        export module Connection {
-
-            export const Arn = 'arn:aws:codestar-connections:us-west-1:060498623801:connection/6eea9f53-2cab-41e0-afa6-2263aa42e39b'    ;
-
-        }
 
         /// ---------
         /// ShellStep

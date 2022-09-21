@@ -29,15 +29,16 @@ new PipelineStack(app, {
     stackId:    Constants.CodePipeline.StackId,
     id:         Constants.CodePipeline.Id,
     shellStep:  new ShellStep(Constants.CodePipeline.ShellStep.Id, {
-        input:  CodePipelineSource.connection(Constants.CodePipeline.Repository, Constants.CodePipeline.Branches.Main, {
-            connectionArn: Constants.CodePipeline.Connection.Arn,
+        input:  CodePipelineSource.connection(Constants.CodeCommit.Repository, Constants.CodeCommit.Branches.Main, {
+            connectionArn: Constants.CodeCommit.Connection.Arn,
         }),
         commands: [
             'cd dev-hour-cdk',
             'npx cdk synth',
             'npx cdk bootstrap',
             'npx cdk deploy'
-        ]
+        ],
+        primaryOutputDirectory: Constants.CodeCommit.PrimaryOutputDirectory
     }),
     stages:     stages
 });
