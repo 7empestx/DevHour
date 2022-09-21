@@ -1,0 +1,1936 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.107"
+        }
+      },
+      "AlphaStage": {
+        "id": "AlphaStage",
+        "path": "AlphaStage",
+        "children": {
+          "DevHourCognitoStack": {
+            "id": "DevHourCognitoStack",
+            "path": "AlphaStage/DevHourCognitoStack",
+            "children": {
+              "DevHourUserPool": {
+                "id": "DevHourUserPool",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourUserPool",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                      "aws:cdk:cloudformation:props": {
+                        "accountRecoverySetting": {
+                          "recoveryMechanisms": [
+                            {
+                              "name": "verified_phone_number",
+                              "priority": 1
+                            },
+                            {
+                              "name": "verified_email",
+                              "priority": 2
+                            }
+                          ]
+                        },
+                        "adminCreateUserConfig": {
+                          "allowAdminCreateUserOnly": false
+                        },
+                        "aliasAttributes": [
+                          "email"
+                        ],
+                        "autoVerifiedAttributes": [
+                          "email"
+                        ],
+                        "emailVerificationMessage": "The verification code to your new account is {####}",
+                        "emailVerificationSubject": "Verify your new account",
+                        "policies": {
+                          "passwordPolicy": {
+                            "minimumLength": 8
+                          }
+                        },
+                        "schema": [
+                          {
+                            "name": "name",
+                            "mutable": false,
+                            "required": true
+                          }
+                        ],
+                        "smsVerificationMessage": "The verification code to your new account is {####}",
+                        "verificationMessageTemplate": {
+                          "defaultEmailOption": "CONFIRM_WITH_CODE",
+                          "emailMessage": "The verification code to your new account is {####}",
+                          "emailSubject": "Verify your new account",
+                          "smsMessage": "The verification code to your new account is {####}"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+                  "version": "2.42.1"
+                }
+              },
+              "DevHourUserPoolClient": {
+                "id": "DevHourUserPoolClient",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                      "aws:cdk:cloudformation:props": {
+                        "userPoolId": {
+                          "Ref": "DevHourUserPool7653C170"
+                        },
+                        "allowedOAuthFlows": [
+                          "implicit",
+                          "code"
+                        ],
+                        "allowedOAuthFlowsUserPoolClient": true,
+                        "allowedOAuthScopes": [
+                          "profile",
+                          "phone",
+                          "email",
+                          "openid",
+                          "aws.cognito.signin.user.admin"
+                        ],
+                        "callbackUrLs": [
+                          "https://example.com"
+                        ],
+                        "supportedIdentityProviders": [
+                          "COGNITO"
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
+                  "version": "2.42.1"
+                }
+              },
+              "DevHourCognitoIdentityProviderSecret": {
+                "id": "DevHourCognitoIdentityProviderSecret",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProviderSecret",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.42.1"
+                }
+              },
+              "DevHourCognitoIdentityProvider": {
+                "id": "DevHourCognitoIdentityProvider",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolIdentityProvider",
+                      "aws:cdk:cloudformation:props": {
+                        "providerName": "LoginWithAmazon",
+                        "providerType": "LoginWithAmazon",
+                        "userPoolId": {
+                          "Ref": "DevHourUserPool7653C170"
+                        },
+                        "providerDetails": {
+                          "client_id": "DevHourUserPoolClient",
+                          "client_secret": "{{resolve:secretsmanager:arn:aws:secretsmanager:us-west-1:060498623801:secret:DevHour-Secret-INGIRV:SecretString:::}}",
+                          "authorize_scopes": "profile"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolIdentityProvider",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolIdentityProviderAmazon",
+                  "version": "2.42.1"
+                }
+              },
+              "DevHourIdentityPool": {
+                "id": "DevHourIdentityPool",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourIdentityPool",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::IdentityPool",
+                  "aws:cdk:cloudformation:props": {
+                    "allowUnauthenticatedIdentities": false,
+                    "cognitoIdentityProviders": [
+                      {
+                        "clientId": {
+                          "Ref": "DevHourUserPoolClientA0C08451"
+                        },
+                        "providerName": {
+                          "Fn::GetAtt": [
+                            "DevHourUserPool7653C170",
+                            "ProviderName"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnIdentityPool",
+                  "version": "2.42.1"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/DevHourCognitoStack/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.107"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/DevHourCognitoStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.42.1"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/DevHourCognitoStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.42.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.42.1"
+            }
+          },
+          "DevHourVPCStack": {
+            "id": "DevHourVPCStack",
+            "path": "AlphaStage/DevHourVPCStack",
+            "children": {
+              "DevHourVPC": {
+                "id": "DevHourVPC",
+                "path": "AlphaStage/DevHourVPCStack/DevHourVPC",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                      "aws:cdk:cloudformation:props": {
+                        "cidrBlock": "10.0.0.0/16",
+                        "enableDnsHostnames": true,
+                        "enableDnsSupport": true,
+                        "instanceTenancy": "default",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "AlphaStage/DevHourVPCStack/DevHourVPC"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "DevHourVPCSubnetSubnet1": {
+                    "id": "DevHourVPCSubnetSubnet1",
+                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1",
+                    "children": {
+                      "Subnet": {
+                        "id": "Subnet",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/Subnet",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                          "aws:cdk:cloudformation:props": {
+                            "vpcId": {
+                              "Ref": "DevHourVPC77A046B5"
+                            },
+                            "availabilityZone": "us-west-1b",
+                            "cidrBlock": "10.0.0.0/24",
+                            "mapPublicIpOnLaunch": false,
+                            "tags": [
+                              {
+                                "key": "aws-cdk:subnet-name",
+                                "value": "DevHourVPCSubnet"
+                              },
+                              {
+                                "key": "aws-cdk:subnet-type",
+                                "value": "Isolated"
+                              },
+                              {
+                                "key": "Name",
+                                "value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "Acl": {
+                        "id": "Acl",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/Acl",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "RouteTable": {
+                        "id": "RouteTable",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/RouteTable",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                          "aws:cdk:cloudformation:props": {
+                            "vpcId": {
+                              "Ref": "DevHourVPC77A046B5"
+                            },
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "RouteTableAssociation": {
+                        "id": "RouteTableAssociation",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/RouteTableAssociation",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                          "aws:cdk:cloudformation:props": {
+                            "routeTableId": {
+                              "Ref": "DevHourVPCDevHourVPCSubnetSubnet1RouteTable3B2F4C87"
+                            },
+                            "subnetId": {
+                              "Ref": "DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                          "version": "2.42.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "DevHourVPCSubnetSubnet2": {
+                    "id": "DevHourVPCSubnetSubnet2",
+                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2",
+                    "children": {
+                      "Subnet": {
+                        "id": "Subnet",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/Subnet",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                          "aws:cdk:cloudformation:props": {
+                            "vpcId": {
+                              "Ref": "DevHourVPC77A046B5"
+                            },
+                            "availabilityZone": "us-west-1c",
+                            "cidrBlock": "10.0.1.0/24",
+                            "mapPublicIpOnLaunch": false,
+                            "tags": [
+                              {
+                                "key": "aws-cdk:subnet-name",
+                                "value": "DevHourVPCSubnet"
+                              },
+                              {
+                                "key": "aws-cdk:subnet-type",
+                                "value": "Isolated"
+                              },
+                              {
+                                "key": "Name",
+                                "value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "Acl": {
+                        "id": "Acl",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/Acl",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "RouteTable": {
+                        "id": "RouteTable",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/RouteTable",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                          "aws:cdk:cloudformation:props": {
+                            "vpcId": {
+                              "Ref": "DevHourVPC77A046B5"
+                            },
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "RouteTableAssociation": {
+                        "id": "RouteTableAssociation",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/RouteTableAssociation",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                          "aws:cdk:cloudformation:props": {
+                            "routeTableId": {
+                              "Ref": "DevHourVPCDevHourVPCSubnetSubnet2RouteTable88761651"
+                            },
+                            "subnetId": {
+                              "Ref": "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                          "version": "2.42.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+                  "version": "2.42.1"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/DevHourVPCStack/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/DevHourVPCStack/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.107"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/DevHourVPCStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.42.1"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/DevHourVPCStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.42.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.42.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stage",
+          "version": "2.42.1"
+        }
+      },
+      "DevHourPipelineStack": {
+        "id": "DevHourPipelineStack",
+        "path": "DevHourPipelineStack",
+        "children": {
+          "DevHourPipeline": {
+            "id": "DevHourPipeline",
+            "path": "DevHourPipelineStack/DevHourPipeline",
+            "children": {
+              "Pipeline": {
+                "id": "Pipeline",
+                "path": "DevHourPipelineStack/DevHourPipeline/Pipeline",
+                "children": {
+                  "ArtifactsBucket": {
+                    "id": "ArtifactsBucket",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/ArtifactsBucket",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/ArtifactsBucket/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                          "aws:cdk:cloudformation:props": {
+                            "bucketEncryption": {
+                              "serverSideEncryptionConfiguration": [
+                                {
+                                  "serverSideEncryptionByDefault": {
+                                    "sseAlgorithm": "aws:kms"
+                                  }
+                                }
+                              ]
+                            },
+                            "publicAccessBlockConfiguration": {
+                              "blockPublicAcls": true,
+                              "blockPublicPolicy": true,
+                              "ignorePublicAcls": true,
+                              "restrictPublicBuckets": true
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "Policy": {
+                        "id": "Policy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/ArtifactsBucket/Policy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/ArtifactsBucket/Policy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                              "aws:cdk:cloudformation:props": {
+                                "bucket": {
+                                  "Ref": "DevHourPipelineArtifactsBucketF2A01939"
+                                },
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "s3:*",
+                                      "Condition": {
+                                        "Bool": {
+                                          "aws:SecureTransport": "false"
+                                        }
+                                      },
+                                      "Effect": "Deny",
+                                      "Principal": {
+                                        "AWS": "*"
+                                      },
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DevHourPipelineArtifactsBucketF2A01939",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "DevHourPipelineArtifactsBucketF2A01939",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "s3:GetBucket*",
+                                        "s3:GetObject*",
+                                        "s3:List*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "AWS": {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                            ]
+                                          ]
+                                        }
+                                      },
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DevHourPipelineArtifactsBucketF2A01939",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "DevHourPipelineArtifactsBucketF2A01939",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                              "version": "2.42.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                          "version": "2.42.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.Bucket",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Role",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Role/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "codepipeline.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Role/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Role/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:Abort*",
+                                        "s3:DeleteObject*",
+                                        "s3:GetBucket*",
+                                        "s3:GetObject*",
+                                        "s3:List*",
+                                        "s3:PutObject",
+                                        "s3:PutObjectLegalHold",
+                                        "s3:PutObjectRetention",
+                                        "s3:PutObjectTagging",
+                                        "s3:PutObjectVersionTagging"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DevHourPipelineArtifactsBucketF2A01939",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "DevHourPipelineArtifactsBucketF2A01939",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DevHourPipelineCodeBuildActionRole5295A8EF",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::GetAtt": [
+                                            "DevHourPipelineSourceCS4722022DevHourCodePipelineActionRole6AAFD887",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "DevHourPipelineRoleDefaultPolicy2A4F9F47",
+                                "roles": [
+                                  {
+                                    "Ref": "DevHourPipelineRole73183110"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.42.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.42.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CodePipeline::Pipeline",
+                      "aws:cdk:cloudformation:props": {
+                        "roleArn": {
+                          "Fn::GetAtt": [
+                            "DevHourPipelineRole73183110",
+                            "Arn"
+                          ]
+                        },
+                        "stages": [
+                          {
+                            "name": "Source",
+                            "actions": [
+                              {
+                                "name": "CS472-2022_DevHour",
+                                "outputArtifacts": [
+                                  {
+                                    "name": "CS472_2022_DevHour_Source"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Source",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeStarSourceConnection"
+                                },
+                                "configuration": {
+                                  "ConnectionArn": "arn:aws:codestar-connections:us-west-1:060498623801:connection/6eea9f53-2cab-41e0-afa6-2263aa42e39b",
+                                  "FullRepositoryId": "CS472-2022/DevHour",
+                                  "BranchName": "main"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "DevHourPipelineSourceCS4722022DevHourCodePipelineActionRole6AAFD887",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Build",
+                            "actions": [
+                              {
+                                "name": "DevHourShellStep",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "CS472_2022_DevHour_Source"
+                                  }
+                                ],
+                                "outputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "DevHourPipelineBuildDevHourShellStepCdkBuildProjectD77B232F"
+                                  },
+                                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"e1ca9db6eda171a26a1dfd9c872cca634522b5dfca4fb7e86ae3f26a6a35ef79\"}]"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "DevHourPipelineCodeBuildActionRole5295A8EF",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "UpdatePipeline",
+                            "actions": [
+                              {
+                                "name": "SelfMutate",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "DevHourPipelineUpdatePipelineSelfMutation912AF2DD"
+                                  },
+                                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"b247b4af0fd9082672e9d73e2515229df9c5de9126f17311b31a659a85b1c029\"}]"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "DevHourPipelineCodeBuildActionRole5295A8EF",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "AlphaStage",
+                            "actions": [
+                              {
+                                "name": "DevHourCognitoStack.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourCognitoStack",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.template.json"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "DevHourVPCStack.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourVPCStack",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourVPCStack5DD1DC37.template.json"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "DevHourCognitoStack.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourCognitoStack",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 2,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "DevHourVPCStack.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourVPCStack",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 2,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "artifactStore": {
+                          "type": "S3",
+                          "location": {
+                            "Ref": "DevHourPipelineArtifactsBucketF2A01939"
+                          }
+                        },
+                        "restartExecutionOnUpdate": true
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_codepipeline.CfnPipeline",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "Source": {
+                    "id": "Source",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Source",
+                    "children": {
+                      "CS472-2022_DevHour": {
+                        "id": "CS472-2022_DevHour",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Source/CS472-2022_DevHour",
+                        "children": {
+                          "CodePipelineActionRole": {
+                            "id": "CodePipelineActionRole",
+                            "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Source/CS472-2022_DevHour/CodePipelineActionRole",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Source/CS472-2022_DevHour/CodePipelineActionRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "AWS": "arn:aws:iam::060498623801:root"
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                                  "version": "2.42.1"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Source/CS472-2022_DevHour/CodePipelineActionRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Source/CS472-2022_DevHour/CodePipelineActionRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": "codestar-connections:UseConnection",
+                                              "Effect": "Allow",
+                                              "Resource": "arn:aws:codestar-connections:us-west-1:060498623801:connection/6eea9f53-2cab-41e0-afa6-2263aa42e39b"
+                                            },
+                                            {
+                                              "Action": [
+                                                "s3:Abort*",
+                                                "s3:DeleteObject*",
+                                                "s3:GetBucket*",
+                                                "s3:GetObject*",
+                                                "s3:List*",
+                                                "s3:PutObject",
+                                                "s3:PutObjectLegalHold",
+                                                "s3:PutObjectRetention",
+                                                "s3:PutObjectTagging",
+                                                "s3:PutObjectVersionTagging"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": [
+                                                {
+                                                  "Fn::GetAtt": [
+                                                    "DevHourPipelineArtifactsBucketF2A01939",
+                                                    "Arn"
+                                                  ]
+                                                },
+                                                {
+                                                  "Fn::Join": [
+                                                    "",
+                                                    [
+                                                      {
+                                                        "Fn::GetAtt": [
+                                                          "DevHourPipelineArtifactsBucketF2A01939",
+                                                          "Arn"
+                                                        ]
+                                                      },
+                                                      "/*"
+                                                    ]
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "Action": [
+                                                "s3:PutObjectAcl",
+                                                "s3:PutObjectVersionAcl"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::Join": [
+                                                  "",
+                                                  [
+                                                    {
+                                                      "Fn::GetAtt": [
+                                                        "DevHourPipelineArtifactsBucketF2A01939",
+                                                        "Arn"
+                                                      ]
+                                                    },
+                                                    "/*"
+                                                  ]
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "DevHourPipelineSourceCS4722022DevHourCodePipelineActionRoleDefaultPolicy9334F773",
+                                        "roles": [
+                                          {
+                                            "Ref": "DevHourPipelineSourceCS4722022DevHourCodePipelineActionRole6AAFD887"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                      "version": "2.42.1"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                                  "version": "2.42.1"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Role",
+                              "version": "2.42.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.1.107"
+                    }
+                  },
+                  "Build": {
+                    "id": "Build",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build",
+                    "children": {
+                      "DevHourShellStep": {
+                        "id": "DevHourShellStep",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep",
+                        "children": {
+                          "CdkBuildProject": {
+                            "id": "CdkBuildProject",
+                            "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep/CdkBuildProject",
+                            "children": {
+                              "Role": {
+                                "id": "Role",
+                                "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep/CdkBuildProject/Role",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep/CdkBuildProject/Role/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                      "aws:cdk:cloudformation:props": {
+                                        "assumeRolePolicyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": "sts:AssumeRole",
+                                              "Effect": "Allow",
+                                              "Principal": {
+                                                "Service": "codebuild.amazonaws.com"
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                                      "version": "2.42.1"
+                                    }
+                                  },
+                                  "DefaultPolicy": {
+                                    "id": "DefaultPolicy",
+                                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep/CdkBuildProject/Role/DefaultPolicy",
+                                    "children": {
+                                      "Resource": {
+                                        "id": "Resource",
+                                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep/CdkBuildProject/Role/DefaultPolicy/Resource",
+                                        "attributes": {
+                                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                          "aws:cdk:cloudformation:props": {
+                                            "policyDocument": {
+                                              "Statement": [
+                                                {
+                                                  "Action": [
+                                                    "logs:CreateLogGroup",
+                                                    "logs:CreateLogStream",
+                                                    "logs:PutLogEvents"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": [
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          "arn:aws:logs:us-west-1:060498623801:log-group:/aws/codebuild/",
+                                                          {
+                                                            "Ref": "DevHourPipelineBuildDevHourShellStepCdkBuildProjectD77B232F"
+                                                          },
+                                                          ":*"
+                                                        ]
+                                                      ]
+                                                    },
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          "arn:aws:logs:us-west-1:060498623801:log-group:/aws/codebuild/",
+                                                          {
+                                                            "Ref": "DevHourPipelineBuildDevHourShellStepCdkBuildProjectD77B232F"
+                                                          }
+                                                        ]
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "codebuild:BatchPutCodeCoverages",
+                                                    "codebuild:BatchPutTestCases",
+                                                    "codebuild:CreateReport",
+                                                    "codebuild:CreateReportGroup",
+                                                    "codebuild:UpdateReport"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::Join": [
+                                                      "",
+                                                      [
+                                                        "arn:aws:codebuild:us-west-1:060498623801:report-group/",
+                                                        {
+                                                          "Ref": "DevHourPipelineBuildDevHourShellStepCdkBuildProjectD77B232F"
+                                                        },
+                                                        "-*"
+                                                      ]
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "s3:Abort*",
+                                                    "s3:DeleteObject*",
+                                                    "s3:GetBucket*",
+                                                    "s3:GetObject*",
+                                                    "s3:List*",
+                                                    "s3:PutObject",
+                                                    "s3:PutObjectLegalHold",
+                                                    "s3:PutObjectRetention",
+                                                    "s3:PutObjectTagging",
+                                                    "s3:PutObjectVersionTagging"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": [
+                                                    {
+                                                      "Fn::GetAtt": [
+                                                        "DevHourPipelineArtifactsBucketF2A01939",
+                                                        "Arn"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          {
+                                                            "Fn::GetAtt": [
+                                                              "DevHourPipelineArtifactsBucketF2A01939",
+                                                              "Arn"
+                                                            ]
+                                                          },
+                                                          "/*"
+                                                        ]
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "Version": "2012-10-17"
+                                            },
+                                            "policyName": "DevHourPipelineBuildDevHourShellStepCdkBuildProjectRoleDefaultPolicy7796B44F",
+                                            "roles": [
+                                              {
+                                                "Ref": "DevHourPipelineBuildDevHourShellStepCdkBuildProjectRole1F2527BC"
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        "constructInfo": {
+                                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                          "version": "2.42.1"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                                      "version": "2.42.1"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                                  "version": "2.42.1"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/Build/DevHourShellStep/CdkBuildProject/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                                  "aws:cdk:cloudformation:props": {
+                                    "artifacts": {
+                                      "type": "CODEPIPELINE"
+                                    },
+                                    "environment": {
+                                      "type": "LINUX_CONTAINER",
+                                      "image": "aws/codebuild/standard:5.0",
+                                      "imagePullCredentialsType": "CODEBUILD",
+                                      "privilegedMode": false,
+                                      "computeType": "BUILD_GENERAL1_SMALL"
+                                    },
+                                    "serviceRole": {
+                                      "Fn::GetAtt": [
+                                        "DevHourPipelineBuildDevHourShellStepCdkBuildProjectRole1F2527BC",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "source": {
+                                      "type": "CODEPIPELINE",
+                                      "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"build\": {\n      \"commands\": [\n        \"cd dev-hour-cdk\",\n        \"npm install typescript\",\n        \"npx cdk synth\",\n        \"npx cdk bootstrap\",\n        \"npx cdk deploy\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"dev-hour-cdk/cdk.out\",\n    \"files\": \"**/*\"\n  }\n}"
+                                    },
+                                    "cache": {
+                                      "type": "NO_CACHE"
+                                    },
+                                    "description": "Pipeline step DevHourPipelineStack/Pipeline/Build/DevHourShellStep",
+                                    "encryptionKey": "alias/aws/s3"
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_codebuild.CfnProject",
+                                  "version": "2.42.1"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_codebuild.PipelineProject",
+                              "version": "2.42.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.1.107"
+                    }
+                  },
+                  "UpdatePipeline": {
+                    "id": "UpdatePipeline",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/UpdatePipeline",
+                    "children": {
+                      "SelfMutate": {
+                        "id": "SelfMutate",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/UpdatePipeline/SelfMutate",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.1.107"
+                    }
+                  },
+                  "AlphaStage": {
+                    "id": "AlphaStage",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage",
+                    "children": {
+                      "DevHourCognitoStack.Prepare": {
+                        "id": "DevHourCognitoStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      },
+                      "DevHourVPCStack.Prepare": {
+                        "id": "DevHourVPCStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourVPCStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      },
+                      "DevHourCognitoStack.Deploy": {
+                        "id": "DevHourCognitoStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Deploy",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      },
+                      "DevHourVPCStack.Deploy": {
+                        "id": "DevHourVPCStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourVPCStack.Deploy",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.1.107"
+                    }
+                  },
+                  "MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1": {
+                    "id": "MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1": {
+                    "id": "arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+                    "children": {
+                      "8389e75f-0810-4838-bf64-d6f85a95cf83": {
+                        "id": "8389e75f-0810-4838-bf64-d6f85a95cf83",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1/8389e75f-0810-4838-bf64-d6f85a95cf83",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.107"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1": {
+                    "id": "MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1": {
+                    "id": "arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+                    "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_codepipeline.Pipeline",
+                  "version": "2.42.1"
+                }
+              },
+              "CodeBuildActionRole": {
+                "id": "CodeBuildActionRole",
+                "path": "DevHourPipelineStack/DevHourPipeline/CodeBuildActionRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "DevHourPipelineStack/DevHourPipeline/CodeBuildActionRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Condition": {
+                                "Bool": {
+                                  "aws:ViaAWSService": "codepipeline.amazonaws.com"
+                                }
+                              },
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": "arn:aws:iam::060498623801:root"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.42.1"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "DevHourPipelineStack/DevHourPipeline/CodeBuildActionRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "DevHourPipelineStack/DevHourPipeline/CodeBuildActionRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "codebuild:BatchGetBuilds",
+                                    "codebuild:StartBuild",
+                                    "codebuild:StopBuild"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "DevHourPipelineBuildDevHourShellStepCdkBuildProjectD77B232F",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::GetAtt": [
+                                        "DevHourPipelineUpdatePipelineSelfMutation912AF2DD",
+                                        "Arn"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "DevHourPipelineCodeBuildActionRoleDefaultPolicyCF524953",
+                            "roles": [
+                              {
+                                "Ref": "DevHourPipelineCodeBuildActionRole5295A8EF"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.42.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.42.1"
+                }
+              },
+              "UpdatePipeline": {
+                "id": "UpdatePipeline",
+                "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline",
+                "children": {
+                  "SelfMutation": {
+                    "id": "SelfMutation",
+                    "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation",
+                    "children": {
+                      "Role": {
+                        "id": "Role",
+                        "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation/Role",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation/Role/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "codebuild.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.42.1"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": [
+                                            "logs:CreateLogGroup",
+                                            "logs:CreateLogStream",
+                                            "logs:PutLogEvents"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:aws:logs:us-west-1:060498623801:log-group:/aws/codebuild/",
+                                                  {
+                                                    "Ref": "DevHourPipelineUpdatePipelineSelfMutation912AF2DD"
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:aws:logs:us-west-1:060498623801:log-group:/aws/codebuild/",
+                                                  {
+                                                    "Ref": "DevHourPipelineUpdatePipelineSelfMutation912AF2DD"
+                                                  }
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": [
+                                            "codebuild:BatchPutCodeCoverages",
+                                            "codebuild:BatchPutTestCases",
+                                            "codebuild:CreateReport",
+                                            "codebuild:CreateReportGroup",
+                                            "codebuild:UpdateReport"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:aws:codebuild:us-west-1:060498623801:report-group/",
+                                                {
+                                                  "Ref": "DevHourPipelineUpdatePipelineSelfMutation912AF2DD"
+                                                },
+                                                "-*"
+                                              ]
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Condition": {
+                                            "ForAnyValue:StringEquals": {
+                                              "iam:ResourceTag/aws-cdk:bootstrap-role": [
+                                                "image-publishing",
+                                                "file-publishing",
+                                                "deploy"
+                                              ]
+                                            }
+                                          },
+                                          "Effect": "Allow",
+                                          "Resource": "arn:*:iam::060498623801:role/*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "cloudformation:DescribeStacks",
+                                            "s3:ListBucket"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "s3:GetBucket*",
+                                            "s3:GetObject*",
+                                            "s3:List*"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "DevHourPipelineArtifactsBucketF2A01939",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "DevHourPipelineArtifactsBucketF2A01939",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  "/*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "DevHourPipelineUpdatePipelineSelfMutationRoleDefaultPolicy662CE94D",
+                                    "roles": [
+                                      {
+                                        "Ref": "DevHourPipelineUpdatePipelineSelfMutationRole3D592D56"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.42.1"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.42.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.42.1"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                          "aws:cdk:cloudformation:props": {
+                            "artifacts": {
+                              "type": "CODEPIPELINE"
+                            },
+                            "environment": {
+                              "type": "LINUX_CONTAINER",
+                              "image": "aws/codebuild/standard:5.0",
+                              "imagePullCredentialsType": "CODEBUILD",
+                              "privilegedMode": false,
+                              "computeType": "BUILD_GENERAL1_SMALL"
+                            },
+                            "serviceRole": {
+                              "Fn::GetAtt": [
+                                "DevHourPipelineUpdatePipelineSelfMutationRole3D592D56",
+                                "Arn"
+                              ]
+                            },
+                            "source": {
+                              "type": "CODEPIPELINE",
+                              "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g aws-cdk@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy DevHourPipelineStack --require-approval=never --verbose\"\n      ]\n    }\n  }\n}"
+                            },
+                            "cache": {
+                              "type": "NO_CACHE"
+                            },
+                            "description": "Pipeline step DevHourPipelineStack/Pipeline/UpdatePipeline/SelfMutate",
+                            "encryptionKey": "alias/aws/s3"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_codebuild.CfnProject",
+                          "version": "2.42.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_codebuild.PipelineProject",
+                      "version": "2.42.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.107"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.pipelines.CodePipeline",
+              "version": "2.42.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "DevHourPipelineStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "DevHourPipelineStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.42.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.107"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.42.1"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.42.1"
+    }
+  }
+}

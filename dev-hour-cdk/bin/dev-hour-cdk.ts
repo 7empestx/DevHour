@@ -34,10 +34,11 @@ new PipelineStack(app, {
         }),
         commands: [
             'cd dev-hour-cdk',
+            'npm install typescript',
             'npx cdk synth',
-            'npx cdk bootstrap',
             'npx cdk deploy'
-        ]
+        ],
+        primaryOutputDirectory: Constants.CodeCommit.PrimaryOutputDirectory
     }),
     stages:     stages
 });

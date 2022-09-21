@@ -1,0 +1,168 @@
+{
+ "Resources": {
+  "DevHourUserPool7653C170": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AliasAttributes": [
+     "email"
+    ],
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": false,
+      "Name": "name",
+      "Required": true
+     }
+    ],
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource"
+   }
+  },
+  "DevHourUserPoolClientA0C08451": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "UserPoolId": {
+     "Ref": "DevHourUserPool7653C170"
+    },
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://example.com"
+    ],
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient/Resource"
+   }
+  },
+  "DevHourCognitoIdentityProvider16CBB3DD": {
+   "Type": "AWS::Cognito::UserPoolIdentityProvider",
+   "Properties": {
+    "ProviderName": "LoginWithAmazon",
+    "ProviderType": "LoginWithAmazon",
+    "UserPoolId": {
+     "Ref": "DevHourUserPool7653C170"
+    },
+    "ProviderDetails": {
+     "client_id": "DevHourUserPoolClient",
+     "client_secret": "{{resolve:secretsmanager:arn:aws:secretsmanager:us-west-1:060498623801:secret:DevHour-Secret-INGIRV:SecretString:::}}",
+     "authorize_scopes": "profile"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider/Resource"
+   }
+  },
+  "DevHourIdentityPool": {
+   "Type": "AWS::Cognito::IdentityPool",
+   "Properties": {
+    "AllowUnauthenticatedIdentities": false,
+    "CognitoIdentityProviders": [
+     {
+      "ClientId": {
+       "Ref": "DevHourUserPoolClientA0C08451"
+      },
+      "ProviderName": {
+       "Fn::GetAtt": [
+        "DevHourUserPool7653C170",
+        "ProviderName"
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourIdentityPool"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12Lyw6CMBBFv4V9Owoxxq1h5Y5gXJvajmZ4dJK2YJTw75YohLiae8+Zm8EugzRRTy+1qWVDNxjOQelaRHTV/LAUGIaLR1cwNyK/2yXPIW8IbVirH5nrycRG4VU47smgO7bqzXY9+P+Y3MKiH0WJnjuncTJzHoVlg1D5TZ8eYA/bpPJE0nVx1yKU3/sBK2M77eMAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
