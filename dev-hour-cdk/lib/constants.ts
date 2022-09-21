@@ -75,7 +75,7 @@ export module Constants {
         /// --------
         /// Branches
 
-        export const Branches {
+        export module Branches {
 
             export const Main   = 'main'  ;
 
@@ -84,7 +84,7 @@ export module Constants {
         /// ----------
         /// Connection
 
-        export const Connection {
+        export module Connection {
 
             export const Arn    = 'arn:aws:codestar-connections:us-west-1:060498623801:connection/6eea9f53-2cab-41e0-afa6-2263aa42e39b';
 
