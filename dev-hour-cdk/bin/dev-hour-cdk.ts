@@ -6,8 +6,8 @@
  */
 
 import 'source-map-support/register';
-import { App } from 'aws-cdk-lib/core'
-import { ShellStep } from 'aws-cdk-lib/pipelines'
+import { App } from 'aws-cdk-lib'
+import { ShellStep, CodePipelineSource } from 'aws-cdk-lib/pipelines'
 import { PipelineStack, PipelineStackProps } from '../lib/pipeline-stack'
 import { AlphaStage } from '../lib/alpha-stage'
 import { Constants } from '../lib/constants'
@@ -29,7 +29,10 @@ new PipelineStack(app, {
     stackId:    Constants.CodePipeline.StackId,
     id:         Constants.CodePipeline.Id,
     shellStep:  new ShellStep(Constants.CodePipeline.ShellStep.Id, {
-        commands: []
+        input:  CodePipelineSource.connection(Constants.CodePipeline.Repository, Constants.CodePipeline.Branches.Main, {
+            connectionArn: Constants.CodePipeline.Connection.Arn,
+        }),
+        commands: ['']
     }),
     stages:     stages
 });

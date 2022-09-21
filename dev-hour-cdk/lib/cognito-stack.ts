@@ -69,14 +69,14 @@ export class CognitoStack extends Stack {
         
         this.userPoolClient = new UserPoolClient(this, props.userPoolClientId, {
             userPool: this.userPool
-        })
+        });
 
         this.userPoolIdentityProviderAmazon = new UserPoolIdentityProviderAmazon(this, props.identityProviderId, {
             userPool:       this.userPool,
             clientId:       props.userPoolClientId,
             clientSecret:   Secret.fromSecretAttributes(this, `${props.id}IdentityProviderSecret`, {
                 secretCompleteArn: Constants.Cognito.IdentityProviderSecretArn
-            }).secretValue.toString()
+            }).secretValue.unsafeUnwrap()
         });
 
         const identityProviderDomain = `cognito-idp.${Stack.of(this).region}.amazonaws.com/${this.userPool.userPoolId}:${this.userPoolClient.userPoolClientId}`
@@ -89,14 +89,6 @@ export class CognitoStack extends Stack {
                 
             }]
        });
-
-        const defaultPolicy = new CfnIdentityPoolRoleAttachment(this, `${props.id}DefaultPolicy`, {
-            identityPoolId: this.identityPool.ref,
-            roles: {
-                authenticated:      new Roles.Cognito.AuthenticatedRole(this, Constants.Cognito.AuthenticatedRoleId, props.resourceArns, this.identityPool.ref),
-                unauthenticated:    new Roles.Cognito.UnauthenticatedRole(this, Constants.Cognito.UnauthenticatedRoleId, props.resourceArns, this.identityPool.ref)
-            }
-        });
 
     }
 

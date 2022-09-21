@@ -1,0 +1,183 @@
+{
+ "Resources": {
+  "DevHourVPC77A046B5": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AlphaStage/DevHourVPCStack/DevHourVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/Resource"
+   }
+  },
+  "DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DevHourVPC77A046B5"
+    },
+    "AvailabilityZone": "us-west-1b",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "DevHourVPCSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/Subnet"
+   }
+  },
+  "DevHourVPCDevHourVPCSubnetSubnet1RouteTable3B2F4C87": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DevHourVPC77A046B5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/RouteTable"
+   }
+  },
+  "DevHourVPCDevHourVPCSubnetSubnet1RouteTableAssociationAFC88E17": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DevHourVPCDevHourVPCSubnetSubnet1RouteTable3B2F4C87"
+    },
+    "SubnetId": {
+     "Ref": "DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/RouteTableAssociation"
+   }
+  },
+  "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DevHourVPC77A046B5"
+    },
+    "AvailabilityZone": "us-west-1c",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "DevHourVPCSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/Subnet"
+   }
+  },
+  "DevHourVPCDevHourVPCSubnetSubnet2RouteTable88761651": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "DevHourVPC77A046B5"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/RouteTable"
+   }
+  },
+  "DevHourVPCDevHourVPCSubnetSubnet2RouteTableAssociationED8EAC41": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DevHourVPCDevHourVPCSubnetSubnet2RouteTable88761651"
+    },
+    "SubnetId": {
+     "Ref": "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/RouteTableAssociation"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0XKywrCMBCF4WfpPhltEHErfYGSSreSpCNMWxNJJnVR+u7ekKzOz8dRcFBQV+aZpBsmOZOFtWPjJvGmKzoFa/9worn5vm1EG2kxjF22HvmDpXTIjBdjZyxe7JxScGSYgt+ExhRydN/jvzfhw4Awpt1Sn+AI+2pMRDJmz3RH0L99Aa6smuGuAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
