@@ -37,8 +37,7 @@ new PipelineStack(app, {
             'npx cdk synth',
             'npx cdk bootstrap',
             'npx cdk deploy'
-        ],
-        primaryOutputDirectory: Constants.CodeCommit.PrimaryOutputDirectory
+        ]
     }),
     stages:     stages
 });
