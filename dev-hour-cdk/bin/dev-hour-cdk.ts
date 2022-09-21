@@ -1,8 +1,11 @@
+#!/usr/bin/env node
+
 /**
  * App entrypoint.
  * @version 0.1.0
  */
 
+import 'source-map-support/register';
 import { App } from 'aws-cdk-lib/core'
 import { ShellStep } from 'aws-cdk-lib/pipelines'
 import { PipelineStack, PipelineStackProps } from '../lib/pipeline-stack'
