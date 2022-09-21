@@ -34,7 +34,9 @@ new PipelineStack(app, {
         }),
         commands: [
             'cd dev-hour-cdk',
-            'npx cdk synth'
+            'npx cdk synth',
+            'npx cdk bootstrap',
+            'npx cdk deploy'
         ]
     }),
     stages:     stages
