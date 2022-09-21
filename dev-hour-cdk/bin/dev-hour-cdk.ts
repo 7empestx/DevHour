@@ -35,8 +35,7 @@ new PipelineStack(app, {
         commands: [
             'cd dev-hour-cdk',
             'npm install typescript',
-            'npx cdk synth',
-            'npx cdk deploy'
+            'npx cdk synth'
         ],
         primaryOutputDirectory: Constants.CodeCommit.PrimaryOutputDirectory
     }),
