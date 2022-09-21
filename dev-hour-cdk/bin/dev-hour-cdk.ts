@@ -32,7 +32,10 @@ new PipelineStack(app, {
         input:  CodePipelineSource.connection(Constants.CodePipeline.Repository, Constants.CodePipeline.Branches.Main, {
             connectionArn: Constants.CodePipeline.Connection.Arn,
         }),
-        commands: ['']
+        commands: [
+            'cd dev-hour-cdk',
+            'npx cdk synth'
+        ]
     }),
     stages:     stages
 });
