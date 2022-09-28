@@ -3,8 +3,16 @@ package dev.hour.presenter;
 import dev.hour.contracts.UserContract;
 
 public class UserPresenter implements UserContract.Presenter {
+
+    /// ---------------
+    /// Private Members
+
+    private UserContract.Database database;
+
     @Override
     public void setDatabase(UserContract.Database database) {
+
+        this.database = database;
 
     }
 
@@ -22,4 +30,5 @@ public class UserPresenter implements UserContract.Presenter {
     public void setUserLocation(double longitude, double latitude) {
 
     }
+
 }
