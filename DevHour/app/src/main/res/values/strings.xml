@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DevHour</string>
+    <string name="client_id">1kiho7pmmv5c410i5in3m8ulu7</string>
+    <string name="provider_name">us-west-1_aJtem6cJA</string>
+    <string name="auth_endpoint">cognito-idp.us-west-1.amazonaws.com</string>
+    <string name="region">us-west-1</string>
+    <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>
 </resources>

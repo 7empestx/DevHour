@@ -8,6 +8,7 @@ public interface AuthenticatorContract {
 
         void checkSession();
         void signUp(final Map<String, String> input);
+        void signIn(final Map<String, String> input);
         void setListener(final Listener listener);
 
         interface Listener {
