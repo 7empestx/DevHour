@@ -32,8 +32,6 @@ public interface UserContract {
         String getLastName();
         double getLongitude();
         double getLatitude();
-        List<MealContract.Diet> getDiet();
-        List<MealContract.Ingredient> getAllergens();
 
     }
 

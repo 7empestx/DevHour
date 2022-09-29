@@ -33,8 +33,6 @@ public interface RestaurantContract {
         double getLongitude();
         double getLatitude();
         int getPricing();
-        List<MealContract.Meal> getMeals();
-        MealContract.Meal getMeal(final String id);
 
     }
 

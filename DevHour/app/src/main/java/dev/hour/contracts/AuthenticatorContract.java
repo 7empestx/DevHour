@@ -1,13 +1,15 @@
 package dev.hour.contracts;
 
+import java.util.Map;
+
 public interface AuthenticatorContract {
 
     interface Authenticator {
 
         void checkSession();
-        void signUp(final String username, final String password,
-                    final String firstName, final String lastName);
-        void signIn(final String username, final String password);
+        void signUp(final Map<String, String> input);
+        void signIn(final Map<String, String> input);
+        void setListener(final Listener listener);
 
         interface Listener {
 
@@ -31,15 +33,14 @@ public interface AuthenticatorContract {
 
         interface SignUpListener {
 
-            void onReceivedSignUpInput(final String username, final String password,
-                                       final String firstName, final String lastName);
+            void onReceivedSignUpInput(final Map<String, String> input);
             void onRequestSignIn();
 
         }
 
         interface SignInListener {
 
-            void onReceivedSignInInput(final String username, final String password);
+            void onReceivedSignInInput(final Map<String, String> input);
             void onRequestSignUp();
 
         }
