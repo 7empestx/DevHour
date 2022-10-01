@@ -1,25 +1,28 @@
-import { Table } from 'aws-cdk-lib/aws-dynamodb'
+import { Attribute, Table } from 'aws-cdk-lib/aws-dynamodb'
 import { Stack } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 
 export interface TableProps {
-    tableName: string,
-    id: string,
-    stackId: string,
+    partitionKey: Attribute,
+    tableName:    string,
+
+    stackId:      string,
+    id: string
 }
 
 export class DynamoDBStack extends Stack {
     private readonly _db: Table;
     
-    constructor(scope: Construct, props: TableProps) { 
-        super(scope, props.tableName);
+    constructor(scope: Construct, id: string, props: TableProps) { 
+        super(scope, props.stackId, { env: {
+        }});
 
-/*         this._db = new Table(this, props.id, {
-            tableName:  props.tableName
-        }); */
-   }
+        this._db = new Table(this, props.id, {
+            partitionKey: props.partitionKey,
+            tableName: props.tableName
+        });
 
-
+    } 
     
 }
 
