@@ -6,7 +6,7 @@ public interface UserContract {
 
     interface Database {
 
-        User getUser();
+        User getUser(final String id);
         void updateUser(final User user);
 
     }

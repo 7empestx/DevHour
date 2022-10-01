@@ -7,14 +7,18 @@ import dev.hour.contracts.UserContract;
 
 public class UserDatabaseUnitTest {
 
+    final String region     = "us-west-1"       ;
+    final String tableName  = "user-test-table" ;
 
     @Test
     void UserDatabase_returnsUser() {
 
-        final UserContract.Database userDatabase = new UserDatabase();
+        final UserContract.Database userDatabase = new UserDatabase(region, tableName);
         final UserContract.User user;
-        final UserDatabase userDatabase1 = new UserDatabase();
-        user = userDatabase.getUser();
+
+        final String id = "123456";
+
+        user = userDatabase.getUser(id);
 
         Assert.assertNotNull(user);
 
