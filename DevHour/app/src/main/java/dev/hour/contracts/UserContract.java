@@ -33,6 +33,11 @@ public interface UserContract {
         double getLongitude();
         double getLatitude();
 
+        void setFirstName(final String firstName);
+        void setLastName(final String lastName);
+        void setLongitude(final double longitude);
+        void setLatitude(double latitude);
+
     }
 
 }
