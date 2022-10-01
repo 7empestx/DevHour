@@ -9,6 +9,7 @@ public interface AuthenticatorContract {
         void checkSession();
         void signUp(final Map<String, String> input);
         void signIn(final Map<String, String> input);
+        void signOut();
         void setListener(final Listener listener);
 
         interface Listener {
@@ -16,7 +17,9 @@ public interface AuthenticatorContract {
             void onSignInFailed(final String message);
             void onSignUpFailed(final String message);
             void onAuthenticated(final String message);
+            void onSignOutFailed(final String message);
             void onUnauthenticated(final String message);
+            void onSignOut(final String message);
 
         }
 
