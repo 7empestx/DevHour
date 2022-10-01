@@ -3,18 +3,23 @@ import { Stack } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 
 export interface TableProps {
-
+    tableName: string,
+    id: string,
+    stackId: string,
 }
 
-export class dynamoDBStack extends Stack {
+export class DynamoDBStack extends Stack {
     private readonly _db: Table;
     
-    constructor(scope: Construct, id: string, props: TableProps) { 
-        super();
+    constructor(scope: Construct, props: TableProps) { 
+        super(scope, props.tableName);
+
+/*         this._db = new Table(this, props.id, {
+            tableName:  props.tableName
+        }); */
    }
 
-   public get table() {
-        return this._db;
-    }
+
+    
 }
 
