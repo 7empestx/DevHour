@@ -13,7 +13,7 @@ public class UserDatabaseUnitTest {
 
         final UserContract.Database userDatabase = new UserDatabase();
         final UserContract.User user;
-
+        final UserDatabase userDatabase1 = new UserDatabase();
         user = userDatabase.getUser();
 
         Assert.assertNotNull(user);

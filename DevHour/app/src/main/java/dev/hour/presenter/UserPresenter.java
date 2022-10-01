@@ -8,7 +8,8 @@ public class UserPresenter implements UserContract.Presenter {
     /// Private Members
 
     private UserContract.Database database;
-
+    private UserContract.User user;
+    private UserContract.View view;
     @Override
     public void setDatabase(UserContract.Database database) {
 
@@ -23,7 +24,9 @@ public class UserPresenter implements UserContract.Presenter {
 
     @Override
     public void invalidate() {
-
+        if(view!=null){
+            view.setUser(user);
+        }
     }
 
     @Override
