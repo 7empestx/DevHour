@@ -1,20 +1,27 @@
 package dev.hour.authenticator;
 
+import static software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType.USER_PASSWORD_AUTH;
+
 import android.content.Context;
 import android.util.Log;
 
+import dev.hour.R;
 import dev.hour.contracts.AuthenticatorContract;
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.api.aws.AWSApiPlugin;
-import com.amplifyframework.auth.AuthChannelEventName;
-import com.amplifyframework.auth.AuthUserAttribute;
-import com.amplifyframework.auth.AuthUserAttributeKey;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.auth.options.AuthSignUpOptions;
-import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.AWSDataStorePlugin;
-import com.amplifyframework.hub.HubChannel;
+import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.cognitoidentity.model.CognitoIdentityProvider;
+import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.GlobalSignOutRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.GlobalSignOutResponse;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpResponse;
 
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -24,8 +31,12 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
     /// --------------
     /// Private Fields
 
-    private AuthenticatorContract.Authenticator.Listener listener   ;
-    private Context                                      context    ;
+    private AuthenticatorContract.Authenticator.Listener listener       ;
+    private Context                                      context        ;
+    private String                                       idToken        ;
+    private String                                       accessToken    ;
+    private String                                       refreshToken   ;
+    private CognitoIdentityProviderClient                cognitoClient  ;
 
     /// ------------
     /// Constructors
@@ -33,168 +44,96 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
     public Authenticator(final Context context) {
 
         this.context = context;
+        cognitoClient = CognitoIdentityProviderClient.builder()
+                .credentialsProvider(AnonymousCredentialsProvider.create())
+                .httpClient(UrlConnectionHttpClient.create())
+                .region(Region.of(context.getString(R.string.region)))
+                .build();
 
     }
 
     @Override
     public void checkSession() {
 
-        // Clear the DataStore when user signs in.
-        final String signedInEventName = AuthChannelEventName.SIGNED_IN.toString();
-
-        Amplify.Hub.subscribe(HubChannel.AUTH,
-                anyAuthEvent -> signedInEventName.equals(anyAuthEvent.getName()),
-                signedInEvent -> Amplify.DataStore.clear(
-                        () -> Log.i("Amplify", "DataStore is cleared."),
-                        failure -> Log.e("Amplify", "Failed to clear DataStore.")
-                )
-        );
-
-        try {
-
-            Amplify.addPlugin(new AWSApiPlugin()); // UNCOMMENT this line once backend is deployed
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.configure(this.context);
-            Log.i("Amplify", "Initialized Amplify");
-
-        } catch (AmplifyException error) {
-
-            Log.e("Amplify", "Could not initialize Amplify", error);
-
-        }
-
-        Amplify.Auth.fetchAuthSession(
-
-                result ->   {
-
-                    Log.i("Amplify", result.toString());
-
-                    if(listener != null) {
-
-                        listener.onAuthenticated("User Authenticated");
-
-                    }
-
-                },
-
-                error -> {
-
-                    Log.e("Amplify", error.toString());
-
-                    if(listener != null) {
-
-                        listener.onSignInFailed("Sign in failed");
-
-                    }
-
-                }
-
-        );
-
     }
 
     @Override
     public void signUp(Map<String, String> input) {
-
-        final List attr = new Vector();
-
-        attr.add(new AuthUserAttribute(AuthUserAttributeKey.email(), input.get("email")));
-
-        Amplify.Auth.signUp(
-                input.get("email"),
-                input.get("password"),
-                AuthSignUpOptions.builder()
-                        .userAttributes(attr).build(),
-                result -> {
-
-                    Log.i("Amplify Auth", "Result: " + result.toString());
-
-                    if(listener != null) {
-
-                        listener.onAuthenticated("User Authenticated");
-
-                    }
-
-                },
-
-                error -> {
-
-                    Log.e("Amplify Auth", "Sign up failed", error);
-
-                    if(listener != null) {
-
-                        listener.onSignUpFailed("Sign Up Failed");
-
-                    }
-
-                }
-        );
-
+        SignUpRequest signUpRequest = SignUpRequest
+                .builder()
+                .username(input.get("USERNAME"))
+                .password(input.get("PASSWORD"))
+                .clientId(context.getString(R.string.client_id))
+                .userAttributes(AttributeType
+                        .builder()
+                        .name("name")
+                        .value(input.get("name"))
+                        .build())
+                .build();
+        try {
+            SignUpResponse response = cognitoClient.signUp(signUpRequest);
+            Log.i("Cognito", "Result: " + response.toString());
+            if(listener != null) {
+                listener.onAuthenticated("User Authenticated");
+            }
+        } catch (Exception e) {
+            Log.e("Cognito", e.toString());
+            if(listener != null) {
+                listener.onSignUpFailed("Sign-up failed");
+            }
+        }
     }
 
     @Override
     public void signIn(Map<String, String> input) {
+        InitiateAuthRequest authRequest = InitiateAuthRequest
+                .builder()
+                .authFlow(USER_PASSWORD_AUTH)
+                .clientId(context.getString(R.string.client_id))
+                .authParameters(input)
+                .build();
 
-        Amplify.Auth.signIn(
-                input.get("email"),
-                input.get("password"),
-                result -> {
-                    Log.i("Amplify Auth", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+        try {
+            InitiateAuthResponse result = cognitoClient.initiateAuth(authRequest);
 
-                        if(listener != null) {
+            idToken = result.authenticationResult().idToken();
+            accessToken = result.authenticationResult().accessToken();
+            refreshToken = result.authenticationResult().refreshToken();
 
-                            listener.onAuthenticated("User Authenticated");
-
-                        }
-
-                    },
-
-                error -> {
-
-                    Log.e("Amplify Auth", error.toString());
-
-                    if(listener != null) {
-
-                        listener.onSignInFailed("Sign-in failed");
-
-                    }
-
-                }
-
-        );
-
+            if(listener != null) {
+                listener.onAuthenticated("User Authenticated");
+            }
+        } catch (Exception e) {
+            Log.e("Cognito", e.toString());
+            if(listener != null) {
+                listener.onSignInFailed("Sign-in failed");
+            }
+        } finally {
+            Log.i("Cognito", idToken != null ? "Sign in succeeded" : "Sign in not complete");
+        }
     }
 
     @Override
     public void signOut() {
+        GlobalSignOutRequest signOutRequest = GlobalSignOutRequest
+                .builder()
+                .accessToken(accessToken)
+                .build();
 
-        Amplify.Auth.signOut(
-                () -> {
-
-                    Log.i("Amplify Auth", "Signed out successfully");
-
-                    if(listener != null) {
-
-                        listener.onSignOut("User Signed out");
-
-                    }
-
-                },
-                error -> {
-
-                    Log.e("Amplify Auth", error.toString());
-
-                    if(listener != null) {
-
-                        listener.onSignOutFailed("Sign out failed");
-
-                    }
-
-                }
-
-        );
-
+        try {
+            cognitoClient.globalSignOut(signOutRequest);
+            Log.i("Cognito", "Signed out successfully");
+            if(listener != null) {
+                listener.onSignOut("User Signed out");
+            }
+        } catch (Exception e) {
+            Log.e("Cognito", e.toString());
+            if(listener != null) {
+                listener.onSignOutFailed("Sign out failed");
+            }
+        } finally {
+            Log.i("Cognito", idToken != null ? "Sign in succeeded" : "Sign in not complete");
+        }
     }
 
     @Override
