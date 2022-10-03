@@ -130,6 +130,11 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
 
     }
 
+    @Override
+    public void onSignOutFailed(String message) {
+
+    }
+
     /**
      * Invoked when the Sign-Out request succeeded.
      * @param message The success message
@@ -138,6 +143,11 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     public void onUnauthenticated(String message) {
 
         /// TODO Callback to the fragment controller (Activity) here
+
+    }
+
+    @Override
+    public void onSignOut(String message) {
 
     }
 

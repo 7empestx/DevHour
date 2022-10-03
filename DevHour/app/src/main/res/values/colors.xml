@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- ============= -->
-    <!-- Aurora Colors -->
+    <!-- Devhour Colors -->
 
     <color name="devhour_primary">#FF4E84FF</color>
     <color name="devhour_pink">#FFCD5F84</color>
@@ -64,6 +64,12 @@
 
     <color name="text_button_text_color_light">@color/devhour_primary</color>
     <color name="text_button_text_color_dark">@color/devhour_primary</color>
+
+    <!-- =========== -->
+    <!-- Text Button -->
+
+    <color name="text_button_background_color_light">@color/devhour_transparent</color>
+    <color name="text_button_background_color_dark">@color/devhour_transparent</color>
 
     <!-- ===== -->
     <!-- Title -->
