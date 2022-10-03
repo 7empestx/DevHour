@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     /// --------------
     /// Private Fields
 
-    private Fragment lastFragment;
-    private AuthenticatorPresenter authenticatorPresenter;
+    private Fragment                lastFragment            ;
+    private AuthenticatorPresenter  authenticatorPresenter  ;
 
     /// ------------------
     /// Activity Lifecycle
