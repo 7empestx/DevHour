@@ -61,7 +61,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
         final ConstraintLayout    mLayout             = (ConstraintLayout)layout.findViewById(R.id.fragment_login_layout);
         final TextView            createUserButton    = (TextView)layout.findViewById(R.id.fragment_login_create_account);
         final TextView            resetButton         = (TextView)layout.findViewById(R.id.fragment_login_reset);
-        final Button              signInButton        = (Button)layout.findViewById(R.id.fragment_login_sign_in_button);
+        final TextView            signInButton        = (TextView)layout.findViewById(R.id.fragment_login_sign_in_button);
 
         if (mLayout != null) mLayout.setOnClickListener((OnClickListener) this);
 
@@ -110,7 +110,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("EMAIL", getEmail());
+                input.put("USERNAME", getEmail());
                 input.put("PASSWORD", getPassword());
 
                 /// Notify the listener

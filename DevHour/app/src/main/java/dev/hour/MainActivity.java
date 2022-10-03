@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import dev.hour.authenticator.Authenticator;
 import dev.hour.contracts.AuthenticatorContract;
 import dev.hour.fragment.LoginFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
@@ -16,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
     /// --------------
     /// Private Fields
 
-    private Fragment                lastFragment            ;
-    private AuthenticatorPresenter  authenticatorPresenter  ;
+    private Fragment                            lastFragment            ;
+    private AuthenticatorContract.Presenter     authenticatorPresenter  ;
+    private AuthenticatorContract.Authenticator authenticator           ;
 
     /// ------------------
     /// Activity Lifecycle
@@ -27,8 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /// Create the Presenter
-        authenticatorPresenter = new AuthenticatorPresenter();
+        authenticator           = new Authenticator(this);
+        authenticatorPresenter  = new AuthenticatorPresenter();
+
+        // Bind the model
+        authenticatorPresenter.setAuthenticator(authenticator);
 
         // Retrieve the most recent Fragment and show the login screen
         bindRecentFragment();

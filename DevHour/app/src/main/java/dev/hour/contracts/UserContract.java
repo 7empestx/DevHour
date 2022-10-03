@@ -7,7 +7,7 @@ public interface UserContract {
 
     interface Database {
 
-        User getUser();
+        User getUser(final String id);
         void updateUser(final User user);
 
     }
@@ -33,6 +33,11 @@ public interface UserContract {
         String getLastName();
         double getLongitude();
         double getLatitude();
+
+        void setFirstName(final String firstName);
+        void setLastName(final String lastName);
+        void setLongitude(final double longitude);
+        void setLatitude(double latitude);
 
     }
 
