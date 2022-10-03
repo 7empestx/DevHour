@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void bindRecentFragment() {
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        final Fragment fragment = fragmentManager.findFragmentByTag(LoginFragment.TAG);
+        final FragmentManager   fragmentManager = getSupportFragmentManager();
+        final Fragment          fragment        = fragmentManager.findFragmentByTag(LoginFragment.TAG);
 
-        if (fragment != null)
+        if(fragment != null)
             lastFragment = fragment;
 
     }
@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showLoginFragment() {
 
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
 
         Fragment fragment =
                 fragmentManager.findFragmentByTag(LoginFragment.TAG);
 
-        if (fragment == null) {
+        if(fragment == null) {
 
             fragment = new LoginFragment();
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             transaction.add(R.id.activity_main, fragment, LoginFragment.TAG);
 
-        } else if (fragment.isAdded()) {
+        } else if(fragment.isAdded()) {
 
             authenticatorPresenter.setAuthenticatorView((AuthenticatorContract.View) fragment);
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         transaction.show(fragment);
 
-        if (lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
 
         lastFragment = fragment;
 
