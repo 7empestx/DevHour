@@ -110,7 +110,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("EMAIL", getEmail());
+                input.put("USERNAME", getEmail());
                 input.put("PASSWORD", getPassword());
 
                 /// Notify the listener
