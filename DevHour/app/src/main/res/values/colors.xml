@@ -7,4 +7,84 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ============= -->
+    <!-- Aurora Colors -->
+
+    <color name="devhour_primary">#FF4E84FF</color>
+    <color name="devhour_pink">#FFCD5F84</color>
+    <color name="devhour_light_purple">#FFAA61AA</color>
+    <color name="devhour_purple">#FF845FCD</color>
+    <color name="devhour_indigo">#FF6161F2</color>
+    <color name="devhour_indigo_damp">#FF5F71CC</color>
+    <color name="devhour_smoke_blue">#FF658CB2</color>
+    <color name="devhour_smoke">#FF8497A8</color>
+    <color name="devhour_smoke_green">#FF5F8D95</color>
+    <color name="devhour_tangerine">#FFF26161</color>
+    <color name="devhour_blood_orange">#FFC14D4D</color>
+    <color name="devhour_orange">#FFF17860</color>
+    <color name="devhour_stale_orange">#FFC0604C</color>
+    <color name="devhour_orange_halo">#FFF28F5F</color>
+    <color name="devhour_brown">#FFC1724C</color>
+    <color name="devhour_wheat">#FFF2BE61</color>
+    <color name="devhour_yellow">#FFF2D85F</color>
+    <color name="devhour_yellow_green">#FFE6E65D</color>
+    <color name="devhour_green">#FFA8CD5F</color>
+    <color name="devhour_forest_green">#FF5DA65D</color>
+    <color name="devhour_white">#FFFFFFFF</color>
+    <color name="devhour_black">#FF212121</color>
+    <color name="devhour_transparent">#00000000</color>
+    <color name="devhour_grey">#FFeeeeee</color>
+
+    <color name="devhour_primary_translucent">#884E84FF</color>
+    <color name="devhour_forest_green_translucent">#885DA65D</color>
+    <color name="devhour_green_translucent">#88A8CD5F</color>
+    <color name="devhour_pink_translucent">#88CD5F84</color>
+    <color name="devhour_yellow_translucent">#88F2D85F</color>
+    <color name="devhour_smoke_translucent">#888497A8</color>
+
+    <!-- ========= -->
+    <!-- Edit Text -->
+
+    <color name="edit_text_background_light">@color/devhour_grey</color>
+    <color name="edit_text_background_dark">@color/devhour_grey</color>
+    <color name="edit_text_text_color_light">@color/devhour_black</color>
+    <color name="edit_text_text_color_dark">@color/devhour_white</color>
+    <color name="edit_text_hint_text_color_light">@color/devhour_black</color>
+    <color name="edit_text_hint_text_color_dark">@color/devhour_white</color>
+
+    <!-- ======== -->
+    <!-- Subtitle -->
+
+    <color name="subtitle_text_color_light">@color/devhour_black</color>
+    <color name="subtitle_text_color_dark">@color/devhour_white</color>
+
+    <!-- =========== -->
+    <!-- Text Button -->
+
+    <color name="text_button_text_color_light">@color/devhour_primary</color>
+    <color name="text_button_text_color_dark">@color/devhour_primary</color>
+
+    <!-- ===== -->
+    <!-- Title -->
+
+    <color name="title_text_color_light">@color/devhour_black</color>
+    <color name="title_text_color_dark">@color/devhour_white</color>
+
+    <!-- ======================================================================================= -->
+    <!-- Text                                                                                    -->
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <color name="action_button_text_color_light">@color/devhour_white</color>
+    <color name="action_button_text_color_dark">@color/devhour_white</color>
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <color name="action_button_background_light">@color/devhour_primary</color>
+    <color name="action_button_background_dark">@color/devhour_primary</color>
+
+
 </resources>

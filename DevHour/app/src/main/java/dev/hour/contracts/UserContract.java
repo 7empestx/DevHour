@@ -1,6 +1,7 @@
 package dev.hour.contracts;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserContract {
 

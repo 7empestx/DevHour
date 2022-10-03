@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <attr name="actionButtonLayoutHeight" format="dimension"/>
+    <attr name="actionButtonEms" format="integer"/>
+    <attr name="actionButtonTextAllCaps" format="boolean"/>
+    <attr name="actionButtonFontFamily" format="reference"/>
+    <attr name="actionButtonTextColor" format="color"/>
+    <attr name="actionButtonTextSize" format="dimension"/>
+    <attr name="actionButtonBackground" format="reference"/>
+    <attr name="actionButtonElevation" format="dimension"/>
+
+    <!-- ======== -->
+    <!-- EditText -->
+
+    <attr name="editTextColor" format="color"/>
+    <attr name="editTextHintColor" format="color"/>
+    <attr name="editTextBackground" format="reference"/>
+    <attr name="editTextEms" format="integer"/>
+    <attr name="editTextPaddingStart" format="dimension"/>
+    <attr name="editTextPaddingEnd" format="dimension"/>
+    <attr name="editTextSingleLine" format="boolean"/>
+    <attr name="editTextCursorDrawable" format="reference"/>
+    <attr name="editTextLayoutHeight" format="dimension"/>
+
+    <!-- ========== -->
+    <!-- Error Text -->
+
+    <attr name="errorTextColor" format="color"/>
+    <attr name="errorTextSize" format="dimension"/>
+    <attr name="errorTextLayoutHeight" format="dimension"/>
+
+    <!-- ======== -->
+    <!-- Fragment -->
+
+    <attr name="fragmentPadding" format="dimension"/>
+
+    <!-- ======== -->
+    <!-- Subtitle -->
+
+    <attr name="subtitleTextColor" format="color"/>
+    <attr name="subtitleTextSize" format="dimension"/>
+    <attr name="subtitleFontFamily" format="reference"/>
+    <attr name="subtitleLayoutHeight" format="reference"/>
+
+    <!-- =========== -->
+    <!-- Text Button -->
+
+    <attr name="textButtonEms" format="integer"/>
+    <attr name="textButtonTextSize" format="dimension"/>
+    <attr name="textButtonTextColor" format="color"/>
+    <attr name="textButtonBackground" format="reference"/>
+    <attr name="textButtonElevation" format="dimension"/>
+
+    <!-- ===== -->
+    <!-- Title -->
+
+    <attr name="titleTextColor" format="color"/>
+    <attr name="titleFontFamily" format="reference"/>
+    <attr name="titleTextSize" format="dimension"/>
+
+</resources>

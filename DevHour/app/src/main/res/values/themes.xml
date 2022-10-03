@@ -12,5 +12,46 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!-- ============= -->
+        <!-- Action Button -->
+
+        <item name="actionButtonLayoutHeight">@dimen/action_button_height</item>
+        <item name="actionButtonEms">10</item>
+        <item name="actionButtonTextAllCaps">true</item>
+        <item name="actionButtonFontFamily">@font/ibmplexsans_semibold</item>
+        <item name="actionButtonTextColor">@color/action_button_text_color_light</item>
+        <item name="actionButtonTextSize">@dimen/action_button_text_size</item>
+        <item name="actionButtonBackground">@drawable/action_button_background_light</item>
+        <item name="actionButtonElevation">@dimen/action_button_elevation</item>
+
+        <!-- ======== -->
+        <!-- EditText -->
+
+        <item name="editTextColor">@color/edit_text_text_color_light</item>
+        <item name="editTextHintColor">@color/edit_text_hint_text_color_light</item>
+        <item name="editTextBackground">@drawable/edit_text_background_light</item>
+        <item name="editTextEms">10</item>
+        <item name="editTextPaddingStart">@dimen/edit_text_padding_start</item>
+        <item name="editTextPaddingEnd">@dimen/edit_text_padding_end</item>
+        <item name="editTextSingleLine">true</item>
+        <item name="editTextCursorDrawable">@null</item>
+        <item name="editTextLayoutHeight">@dimen/edit_text_height</item>
+
+        <!-- ======== -->
+        <!-- Subtitle -->
+
+        <item name="subtitleTextColor">@color/subtitle_text_color_light</item>
+        <item name="subtitleTextSize">@dimen/sub_title_text_size</item>
+        <item name="subtitleFontFamily">@font/montserrat_regular</item>
+        <item name="subtitleLayoutHeight">@id/wrap_content</item>
+
+        <!-- ===== -->
+        <!-- Title -->
+
+        <item name="titleTextColor">@color/title_text_color_light</item>
+        <item name="titleFontFamily">@font/montserrat_regular</item>
+        <item name="titleTextSize">@dimen/title_text_size</item>
+
     </style>
 </resources>
