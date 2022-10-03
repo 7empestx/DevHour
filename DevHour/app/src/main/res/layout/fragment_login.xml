@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_login_layout"
+    style="@style/Fragment">
+
+    <TextView
+        android:id="@+id/fragment_login_title"
+        style="@style/Theme.DevHour.Title"
+        android:text="@string/fragment_login_title_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/fragment_login_email_input"
+        style="@style/Theme.DevHour.EditText"
+        android:layout_marginTop="@dimen/fragment_login_email_input_margin_top"
+        android:hint="@string/fragment_login_email_input_hint"
+        android:autofillHints="email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/fragment_login_password_input"
+        style="@style/Theme.DevHour.EditText"
+        android:layout_marginTop="@dimen/fragment_login_password_input_margin_top"
+        android:hint="@string/fragment_login_password_input_hint"
+        android:autofillHints="password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_email_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/fragment_login_sign_in_button"
+        style="@style/Theme.DevHour.ActionButton"
+        android:layout_marginTop="@dimen/fragment_login_sign_in_button_margin_top"
+        android:text="@string/fragment_login_sign_in_button_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_password_input"/>
+
+    <TextView
+        android:id="@+id/fragment_login_no_account_title"
+        style="@style/Theme.DevHour.Subtitle"
+        android:layout_marginTop="@dimen/fragment_login_no_account_sub_title_margin_top"
+        android:text="@string/fragment_login_no_account_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_sign_in_button" />
+
+    <TextView
+        android:id="@+id/fragment_login_create_account"
+        style="@style/Theme.DevHour.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_login_create_account_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_no_account_title" />
+
+    <TextView
+        android:id="@+id/fragment_login_forgot_title"
+        style="@style/Theme.DevHour.Subtitle"
+        android:layout_marginTop="@dimen/fragment_login_forgot_sub_title_margin_top"
+        android:text="@string/fragment_login_forgot_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_login_create_account" />
+
+    <TextView
+        android:id="@+id/fragment_login_reset"
+        style="@style/Theme.DevHour.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_login_reset_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_forgot_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

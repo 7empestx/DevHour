@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <style name="Theme.DevHour.ActionButton" parent="Widget.AppCompat.Button">
+
+        <item name="android:layout_height">?attr/actionButtonLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:ems">?attr/actionButtonEms</item>
+        <item name="android:textAllCaps">?attr/actionButtonTextAllCaps</item>
+        <item name="android:fontFamily">?attr/actionButtonFontFamily</item>
+        <item name="android:textColor">?attr/actionButtonTextColor</item>
+        <item name="android:textSize">?attr/actionButtonTextSize</item>
+        <item name="android:background">?attr/actionButtonBackground</item>
+        <item name="android:elevation">?attr/actionButtonElevation</item>
+
+    </style>
+
+    <!-- ======== -->
+    <!-- EditText -->
+
+    <style name="Theme.DevHour.EditText" parent="Widget.AppCompat.EditText">
+
+        <item name="android:background">?attr/editTextBackground</item>
+        <item name="android:ems">?attr/editTextEms</item>
+        <item name="android:paddingStart">?attr/editTextPaddingStart</item>
+        <item name="android:paddingEnd">?attr/editTextPaddingEnd</item>
+        <item name="android:singleLine">?attr/editTextSingleLine</item>
+        <item name="android:textColor">?attr/editTextColor</item>
+        <item name="android:textColorHint">?attr/editTextHintColor</item>
+        <item name="android:textCursorDrawable">?attr/editTextCursorDrawable</item>
+        <item name="android:layout_height">?attr/editTextLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- ========== -->
+    <!-- Error Text -->
+
+    <style name="Theme.DevHour.ErrorText" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textColor">?attr/errorTextColor</item>
+        <item name="android:textSize">?attr/errorTextSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">?attr/errorTextLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- ======== -->
+    <!-- Fragment -->
+
+    <style name="Fragment">
+
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">?attr/fragmentPadding</item>
+
+    </style>
+
+    <!-- ================== -->
+    <!-- Fragment Container -->
+
+    <style name="FragmentContainer">
+
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+
+    </style>
+
+    <!-- ========== -->
+    <!-- TextButton -->
+
+    <style name="Theme.DevHour.TextButton" parent="Widget.AppCompat.TextView">
+
+        <item name="android:ems">?attr/textButtonEms</item>
+        <item name="android:textColor">?attr/textButtonTextColor</item>
+        <item name="android:textSize">?attr/textButtonTextSize</item>
+        <item name="android:background">?attr/textButtonBackground</item>
+        <item name="android:elevation">?attr/textButtonElevation</item>
+        <item name="android:gravity">center_vertical</item>
+
+    </style>
+
+    <!-- ======== -->
+    <!-- Subtitle -->
+
+    <style name="Theme.DevHour.Subtitle" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textColor">?attr/subtitleTextColor</item>
+        <item name="android:textSize">?attr/subtitleTextSize</item>
+        <item name="android:fontFamily">?attr/subtitleFontFamily</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">?attr/subtitleLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- ===== -->
+    <!-- Title -->
+
+    <style name="Theme.DevHour.Title" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textColor">?attr/titleTextColor</item>
+        <item name="android:fontFamily">?attr/titleFontFamily</item>
+        <item name="android:textSize">?attr/titleTextSize</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+</resources>

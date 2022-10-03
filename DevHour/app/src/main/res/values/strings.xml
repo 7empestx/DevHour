@@ -5,4 +5,25 @@
     <string name="auth_endpoint">cognito-idp.us-west-1.amazonaws.com</string>
     <string name="region">us-west-1</string>
     <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>
+
+    <!-- ============== -->
+    <!-- Login Fragment -->
+
+    <string name="fragment_login_title_text">Login</string>
+    <string name="fragment_login_email_input_hint">Email</string>
+    <string name="fragment_login_password_input_hint">Password</string>
+    <string name="fragment_login_sign_in_button_text">Sign-In</string>
+    <string name="fragment_login_no_account_text">Don\'t have an account?</string>
+    <string name="fragment_login_create_account_text">Create One</string>
+    <string name="fragment_login_forgot_title_text">Forgot Email or Password?</string>
+    <string name="fragment_login_reset_title_text">Reset</string>
+    <string name="fragment_login_message_account_creation">Failed to create account</string>
+    <string name="fragment_login_message_weak_password">Invalid password; must be at least 6 characters</string>
+    <string name="fragment_login_message_invalid_email">Invalid email address</string>
+    <string name="fragment_login_message_user_exists">Account creation failed, user already exists</string>
+    <string name="fragment_login_message_invalid_credentials">Sign-In failed; Check user name or password</string>
+    <string name="fragment_login_message_invalid_user">Sign-In failed; User does not exist</string>
+    <string name="fragment_login_message_sign_in_failure">Sign-In failed</string>
+    <string name="fragment_login_message_account_blocked_requests">Too many requests; account blocked - Try again later</string>
+
 </resources>

@@ -48,6 +48,9 @@ public interface AuthenticatorContract {
 
         }
 
+        void setSignInListener(final SignInListener signInListener);
+        void setSignUpListener(final SignUpListener signUpListener);
+
     }
 
 }

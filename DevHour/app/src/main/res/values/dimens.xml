@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ======================================================================================= -->
+    <!-- Font Sizes                                                                              -->
+
+    <dimen name="font_size_m">32dp</dimen>
+    <dimen name="font_size_h">32dp</dimen>
+    <dimen name="font_size_x">32dp</dimen>
+    <dimen name="font_size_xx">32dp</dimen>
+    <dimen name="font_size_xxx">32dp</dimen>
+
+    <dimen name="action_button_text_size">16dp</dimen>
+    <dimen name="error_text_text_size">16dp</dimen>
+    <dimen name="sub_title_text_size">24dp</dimen>
+    <dimen name="text_button_text_size">24dp</dimen>
+    <dimen name="title_text_size">32dp</dimen>
+
+    <!-- ======================================================================================= -->
+    <!-- Drawables                                                                               -->
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <dimen name="action_button_background_light_corner_radius">8dp</dimen>
+    <dimen name="action_button_background_dark_corner_radius">8dp</dimen>
+
+    <!-- ========= -->
+    <!-- Edit Text -->
+
+    <dimen name="edit_text_background_light_corner_radius">20dp</dimen>
+    <dimen name="edit_text_background_dark_corner_radius">20dp</dimen>
+
+    <!-- ======================================================================================= -->
+    <!-- Elevation                                                                               -->
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <dimen name="action_button_elevation">8dp</dimen>
+
+    <!-- =========== -->
+    <!-- Edit Button -->
+
+    <dimen name="edit_button_elevation">0dp</dimen>
+
+    <!-- =========== -->
+    <!-- Text Button -->
+
+    <dimen name="text_button_elevation">8dp</dimen>
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <dimen name="action_button_height">56dp</dimen>
+
+    <!-- =========== -->
+    <!-- Edit Button -->
+
+    <dimen name="edit_button_height">24dp</dimen>
+    <dimen name="edit_button_width">24dp</dimen>
+
+    <!-- ========= -->
+    <!-- Edit Text -->
+
+    <dimen name="edit_text_height">56dp</dimen>
+    <dimen name="edit_text_padding_start">16dp</dimen>
+    <dimen name="edit_text_padding_end">16dp</dimen>
+
+    <!-- ========== -->
+    <!-- Error Text -->
+
+    <dimen name="error_text_layout_height">56dp</dimen>
+
+    <!-- ============== -->
+    <!-- Login Fragment -->
+
+    <dimen name="fragment_login_email_input_margin_top">72dp</dimen>
+    <dimen name="fragment_login_password_input_margin_top">8dp</dimen>
+    <dimen name="fragment_login_sign_in_button_margin_top">16dp</dimen>
+    <dimen name="fragment_login_no_account_sub_title_margin_top">16dp</dimen>
+    <dimen name="fragment_login_forgot_sub_title_margin_top">16dp</dimen>
+
+</resources>
