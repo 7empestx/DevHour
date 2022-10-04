@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         // Retrieve the most recent Fragment and show the login screen
         bindRecentFragment();
 
-
+        showLoginFragment();
     }
 
     @Override
