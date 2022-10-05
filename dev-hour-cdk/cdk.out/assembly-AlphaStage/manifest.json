@@ -17,7 +17,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/370eb5b526c12dfbc3b047855a0f3e2ef91ca13fd89754b1cabdec32e6b98834.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/182c8ff054f3f224f2a04164bbf7eec6a4c7fb8e61f35d84415267f72076b045.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -95,7 +95,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/56d11409713cad5bd04675319713b1dc065e5394fc926ad8b5b3df55df1dbfe5.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/381bfd82c928b498215590c404ce82c3afe00991391766a8c6633761facb6c47.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -174,6 +174,414 @@
         ]
       },
       "displayName": "AlphaStage/DevHourVPCStack"
+    },
+    "AlphaStageuserTestTableAlphaStack2D03A363.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageuserTestTableAlphaStack2D03A363.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStageuserTestTableAlphaStack2D03A363": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageuserTestTableAlphaStack2D03A363.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/dfa8c36b36382755a22b8d496f289276eed6fafca1946c9e97b5a97a0c59891d.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageuserTestTableAlphaStack2D03A363.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-userTestTableAlphaStack"
+      },
+      "dependencies": [
+        "AlphaStageuserTestTableAlphaStack2D03A363.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/userTestTableAlphaStack/userTestTableAlphaID": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "userTestTableAlphaID263AD0DA"
+            }
+          }
+        ],
+        "/AlphaStage/userTestTableAlphaStack/userTestTableAlphaID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userTestTableAlphaID263AD0DA"
+          }
+        ],
+        "/AlphaStage/userTestTableAlphaStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/userTestTableAlphaStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/userTestTableAlphaStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/userTestTableAlphaStack"
+    },
+    "AlphaStagerestaurantTestTableAlphaStack04CB516D.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStagerestaurantTestTableAlphaStack04CB516D.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStagerestaurantTestTableAlphaStack04CB516D": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStagerestaurantTestTableAlphaStack04CB516D.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/6ae165edd61ce6d9226a9aa7848a152cc1d7d2f9280e4b6505d2f79e70a069fb.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStagerestaurantTestTableAlphaStack04CB516D.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-restaurantTestTableAlphaStack"
+      },
+      "dependencies": [
+        "AlphaStagerestaurantTestTableAlphaStack04CB516D.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/restaurantTestTableAlphaStack/restaurantTestTableAlphaID": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "restaurantTestTableAlphaID37264F16"
+            }
+          }
+        ],
+        "/AlphaStage/restaurantTestTableAlphaStack/restaurantTestTableAlphaID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "restaurantTestTableAlphaID37264F16"
+          }
+        ],
+        "/AlphaStage/restaurantTestTableAlphaStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/restaurantTestTableAlphaStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/restaurantTestTableAlphaStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/restaurantTestTableAlphaStack"
+    },
+    "AlphaStagemealTestTableAlphaStackAF65B957.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStagemealTestTableAlphaStackAF65B957.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStagemealTestTableAlphaStackAF65B957": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStagemealTestTableAlphaStackAF65B957.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/a30571176dabf370e3a0a198d7f522a7f2902f3e9a02d75a194a8057fdca77ef.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStagemealTestTableAlphaStackAF65B957.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-mealTestTableAlphaStack"
+      },
+      "dependencies": [
+        "AlphaStagemealTestTableAlphaStackAF65B957.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/mealTestTableAlphaStack/mealTestTableAlphaID": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "mealTestTableAlphaID3E07DECA"
+            }
+          }
+        ],
+        "/AlphaStage/mealTestTableAlphaStack/mealTestTableAlphaID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mealTestTableAlphaID3E07DECA"
+          }
+        ],
+        "/AlphaStage/mealTestTableAlphaStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/mealTestTableAlphaStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/mealTestTableAlphaStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/mealTestTableAlphaStack"
+    },
+    "AlphaStagedietTestTableAlphaStackA6DC3AEA.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStagedietTestTableAlphaStackA6DC3AEA.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStagedietTestTableAlphaStackA6DC3AEA": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStagedietTestTableAlphaStackA6DC3AEA.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/58b93c042b27163a3eacb136357bdc5f561eb9fd321197c11035464df611072f.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStagedietTestTableAlphaStackA6DC3AEA.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-dietTestTableAlphaStack"
+      },
+      "dependencies": [
+        "AlphaStagedietTestTableAlphaStackA6DC3AEA.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/dietTestTableAlphaStack/dietTestTableAlphaID": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "dietTestTableAlphaIDC014BB2F"
+            }
+          }
+        ],
+        "/AlphaStage/dietTestTableAlphaStack/dietTestTableAlphaID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "dietTestTableAlphaIDC014BB2F"
+          }
+        ],
+        "/AlphaStage/dietTestTableAlphaStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/dietTestTableAlphaStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/dietTestTableAlphaStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/dietTestTableAlphaStack"
+    },
+    "AlphaStageingredientTestTableAlphaStack04EB2236.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageingredientTestTableAlphaStack04EB2236.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStageingredientTestTableAlphaStack04EB2236": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageingredientTestTableAlphaStack04EB2236.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/02df9b7798b0cb93a19d62ed09eb0c052bf141a06a0f26866b986c2627dcb737.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageingredientTestTableAlphaStack04EB2236.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-ingredientTestTableAlphaStack"
+      },
+      "dependencies": [
+        "AlphaStageingredientTestTableAlphaStack04EB2236.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/ingredientTestTableAlphaStack/ingredientTestTableAlphaID": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "ingredientTestTableAlphaIDF5FB8886"
+            }
+          }
+        ],
+        "/AlphaStage/ingredientTestTableAlphaStack/ingredientTestTableAlphaID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ingredientTestTableAlphaIDF5FB8886"
+          }
+        ],
+        "/AlphaStage/ingredientTestTableAlphaStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/ingredientTestTableAlphaStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/ingredientTestTableAlphaStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/ingredientTestTableAlphaStack"
+    },
+    "AlphaStagemenuTestTableAlphaStackEDB1572D.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStagemenuTestTableAlphaStackEDB1572D.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStagemenuTestTableAlphaStackEDB1572D": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStagemenuTestTableAlphaStackEDB1572D.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/92015d71c80a10abde43c8961c0fba4691c9a6967a668733ef240106c9dc1a3f.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStagemenuTestTableAlphaStackEDB1572D.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-menuTestTableAlphaStack"
+      },
+      "dependencies": [
+        "AlphaStagemenuTestTableAlphaStackEDB1572D.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/menuTestTableAlphaStack/menuTestTableAlphaID": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "menuTestTableAlphaID3743E851"
+            }
+          }
+        ],
+        "/AlphaStage/menuTestTableAlphaStack/menuTestTableAlphaID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "menuTestTableAlphaID3743E851"
+          }
+        ],
+        "/AlphaStage/menuTestTableAlphaStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/menuTestTableAlphaStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/menuTestTableAlphaStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/menuTestTableAlphaStack"
     }
   }
 }

@@ -8,6 +8,8 @@ import { Stage } from 'aws-cdk-lib'
 import { VpcStack } from './vpc-stack'
 import { CognitoStack } from './cognito-stack'
 import { Constants } from './constants'
+import { DynamoDBStack } from './dynamoDB-stack'
+import { AttributeType } from 'aws-cdk-lib/aws-dynamodb'
 
 /// ----------------
 /// AlphaStage Props
@@ -29,6 +31,12 @@ export class AlphaStage extends Stage {
 
     private readonly cognitoStack: CognitoStack;
     private readonly vpcStack: VpcStack;
+    private readonly userTestTableStack: DynamoDBStack;
+    private readonly restaurantTestTableStack: DynamoDBStack;
+    private readonly mealTestTableStack: DynamoDBStack;
+    private readonly dietTestTableStack: DynamoDBStack;
+    private readonly ingredientTestTableStack: DynamoDBStack;
+    private readonly menuTestTableStack: DynamoDBStack;
 
     /// -----------
     /// Constructor
@@ -75,6 +83,55 @@ export class AlphaStage extends Stage {
                     subnetType:     Constants.EC2.VPC.SubnetConfiguration.Type
                 }
             ]
+        });
+
+        this.userTestTableStack = new DynamoDBStack(this, {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
+            tableName:    "userTestTableAlpha",
+            stackId:      "userTestTableAlphaStack",
+            id:           "userTestTableAlphaID",
+            accountId:    Constants.Account, 
+            region:       Constants.Region,
+        });
+        this.restaurantTestTableStack = new DynamoDBStack(this, {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
+            tableName:    "restaurantTestTableAlpha",
+            stackId:      "restaurantTestTableAlphaStack",
+            id:           "restaurantTestTableAlphaID",
+            accountId:    Constants.Account, 
+            region:       Constants.Region,
+        });
+        this.mealTestTableStack = new DynamoDBStack(this, {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
+            tableName:    "mealTestTableAlpha",
+            stackId:      "mealTestTableAlphaStack",
+            id:           "mealTestTableAlphaID",
+            accountId:    Constants.Account, 
+            region:       Constants.Region,
+        });
+        this.dietTestTableStack = new DynamoDBStack(this, {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
+            tableName:    "dietTestTableAlpha",
+            stackId:      "dietTestTableAlphaStack",
+            id:           "dietTestTableAlphaID",
+            accountId:    Constants.Account, 
+            region:       Constants.Region,
+        });
+        this.ingredientTestTableStack = new DynamoDBStack(this, {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
+            tableName:    "ingredientTestTableAlpha",
+            stackId:      "ingredientTestTableAlphaStack",
+            id:           "ingredientTestTableAlphaID",
+            accountId:    Constants.Account, 
+            region:       Constants.Region,
+        });
+        this.menuTestTableStack = new DynamoDBStack(this, {
+            partitionKey: { name: 'id', type: AttributeType.STRING },
+            tableName:    "menuTestTableAlpha",
+            stackId:      "menuTestTableAlphaStack",
+            id:           "menuTestTableAlphaID",
+            accountId:    Constants.Account, 
+            region:       Constants.Region,
         });
 
     }

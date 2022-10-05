@@ -437,6 +437,282 @@
          "Version": "1"
         },
         "Configuration": {
+         "StackName": "AlphaStage-dietTestTableAlphaStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagedietTestTableAlphaStackA6DC3AEA.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "dietTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-ingredientTestTableAlphaStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageingredientTestTableAlphaStack04EB2236.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "ingredientTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-mealTestTableAlphaStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemealTestTableAlphaStackAF65B957.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "mealTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-menuTestTableAlphaStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemenuTestTableAlphaStackEDB1572D.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "menuTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-restaurantTestTableAlphaStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagerestaurantTestTableAlphaStack04CB516D.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "restaurantTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-userTestTableAlphaStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageuserTestTableAlphaStack2D03A363.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "userTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
          "StackName": "AlphaStage-DevHourCognitoStack",
          "ActionMode": "CHANGE_SET_EXECUTE",
          "ChangeSetName": "PipelineChange"
@@ -469,6 +745,168 @@
          "ChangeSetName": "PipelineChange"
         },
         "Name": "DevHourVPCStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-dietTestTableAlphaStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "dietTestTableAlphaStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-ingredientTestTableAlphaStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "ingredientTestTableAlphaStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-mealTestTableAlphaStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "mealTestTableAlphaStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-menuTestTableAlphaStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "menuTestTableAlphaStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-restaurantTestTableAlphaStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "restaurantTestTableAlphaStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-userTestTableAlphaStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "userTestTableAlphaStack.Deploy",
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -1017,7 +1455,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0VNQQ6CMBB8C/eyKhrjWT5A8AEGljVZKC2hVGOa/l2gRU4zOzM7k8Elg1NSfUyKTZdKrsE9pgo7MfBAkhUZyHVDRbzEnHw6nJXNB/f38pfauBfmDO5usaNp0SMLUGjJ+N3lcHvBVQ+u1HJtWnFPbpllurYsm323GHVLuM5E6r0oyWg7YqiK3As1f0NrDu/TDa5wTFrDnI5WTdwTlAF/0NDjUBMBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0VPWw6CMBA8i/9lfWCi33oBggcwsKzJQmkJpRrT9O4WWuRrZmdnZ7InOOdw2FUfk2HTZZJrcI+pwk4MPJBkRQbuuqEiTSI4nw6Dsu7B/Xf3l1q5FyYHd7PY0TTriUUotGT8bnKcveCqB1dquSQtuDlXz1xdW5bN1luMuiVcahL1XpRktB0xRiXuhQrX0Jr9+3iFS/i7NczZaNXEPUEZ8QceOHcMEwEAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "DevHourPipelineStack/CDKMetadata/Default"
