@@ -124,7 +124,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12Lyw6CMBBFv4V9Owoxxq1h5Y5gXJvajmZ4dJK2YJTw75YohLiae8+Zm8EugzRRTy+1qWVDNxjOQelaRHTV/LAUGIaLR1cwNyK/2yXPIW8IbVirH5nrycRG4VU47smgO7bqzXY9+P+Y3MKiH0WJnjuncTJzHoVlg1D5TZ8eYA/bpPJE0nVx1yKU3/sBK2M77eMAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12PSwvCMBCEf4v3ZH2CXqUnb6XiWWKyyvaRhSStaOl/N0VTiqedmW/nMBvYbWG1UE8vtalkTTfoz0HpSsToqvlhKTD0F48uZ65FdreTTiKrCW2Yo1+S7MlER+GVO+7IoDs26s12Xvj/GNmURT6IAj23TuNIkh6EZYNQ+mW3PsA+7ig9kXRt7DUIxfd+ANuCY1zjAAAA"
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default"
