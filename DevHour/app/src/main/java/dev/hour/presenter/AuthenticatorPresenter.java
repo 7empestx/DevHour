@@ -1,8 +1,11 @@
 package dev.hour.presenter;
 
+import android.util.Log;
+
 import java.util.Map;
 
 import dev.hour.contracts.AuthenticatorContract;
+import dev.hour.fragment.LoginFragment;
 
 public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
         AuthenticatorContract.View.SignUpListener,
@@ -106,6 +109,9 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     public void onSignInFailed(final String message) {
 
         /// TODO Callback to the login view here
+        Log.i("i", "SIGN IN FAILED");
+
+        ((LoginFragment) view).onUserLoginFailed(message);
 
     }
 

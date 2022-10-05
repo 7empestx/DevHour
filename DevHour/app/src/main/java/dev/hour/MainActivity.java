@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
+        // Bind the presenter
+        authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
 
         // Retrieve the most recent Fragment and show the login screen
         bindRecentFragment();
@@ -79,12 +81,20 @@ public class MainActivity extends AppCompatActivity {
         if(fragment == null) {
 
             fragment = new LoginFragment();
+            ((AuthenticatorContract.View)fragment)
+                    .setSignUpListener((AuthenticatorContract.View.SignUpListener) authenticatorPresenter);
+            ((AuthenticatorContract.View)fragment)
+                    .setSignInListener((AuthenticatorContract.View.SignInListener) authenticatorPresenter);
 
             authenticatorPresenter.setAuthenticatorView((AuthenticatorContract.View) fragment);
 
             transaction.add(R.id.activity_main, fragment, LoginFragment.TAG);
 
         } else if(fragment.isAdded()) {
+            ((AuthenticatorContract.View)fragment)
+                    .setSignUpListener((AuthenticatorContract.View.SignUpListener) authenticatorPresenter);
+            ((AuthenticatorContract.View)fragment)
+                    .setSignInListener((AuthenticatorContract.View.SignInListener) authenticatorPresenter);
 
             authenticatorPresenter.setAuthenticatorView((AuthenticatorContract.View) fragment);
 
