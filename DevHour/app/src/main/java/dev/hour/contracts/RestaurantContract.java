@@ -34,6 +34,11 @@ public interface RestaurantContract {
         double getLatitude();
         int getPricing();
 
+        String setName();
+        double setLongitude();
+        double setLatitude();
+        int setPricing();
+
     }
 
 }
