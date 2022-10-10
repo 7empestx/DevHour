@@ -1,4 +1,4 @@
-package dev.hour.database;
+package dev.hour.presenter;
 
 import dev.hour.contracts.MealContract;
 
