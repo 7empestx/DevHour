@@ -14,12 +14,13 @@ public interface AuthenticatorContract {
 
         interface Listener {
 
+            void onSignOut(final String message);
+            void onSignUp(final String message);
             void onSignInFailed(final String message);
             void onSignUpFailed(final String message);
-            void onAuthenticated(final String message);
             void onSignOutFailed(final String message);
+            void onAuthenticated(final Map<String, String> credentials);
             void onUnauthenticated(final String message);
-            void onSignOut(final String message);
 
         }
 
@@ -35,6 +36,10 @@ public interface AuthenticatorContract {
 
             void onSignInRequest();
             void onSignUpRequest();
+            void onAuthenticated(final Map<String, String> credentials);
+            void onUnauthenticated(final String message);
+            void onSignOut(final String message);
+            void onSignUp(final String message);
 
         }
 
@@ -56,8 +61,13 @@ public interface AuthenticatorContract {
 
         }
 
+        void onSignUp();
+        void onSignIn();
         void setSignInListener(final SignInListener signInListener);
         void setSignUpListener(final SignUpListener signUpListener);
+        void onSignInFailed(final String message);
+        void onSignUpFailed(final String message);
+        void onSignOutFailed(final String message);
 
     }
 

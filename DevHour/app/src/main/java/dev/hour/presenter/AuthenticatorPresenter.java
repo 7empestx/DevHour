@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.Map;
 
 import dev.hour.contracts.AuthenticatorContract;
-import dev.hour.fragment.LoginFragment;
 
 public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
         AuthenticatorContract.View.SignUpListener,
@@ -45,6 +44,11 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
 
     }
 
+    /**
+     * Set the listener that will receive call backs when user-authenticator interactions occur.
+     * @param interactionListener The listener that will receive callbacks on user-authenticator
+     *                            interactions.
+     */
     @Override
     public void setInteractionListener(final InteractionListener interactionListener) {
 
@@ -69,7 +73,7 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     }
 
     /**
-     * Invoked when the Sign-In funtionality has been requested over the sign-up
+     * Invoked when the Sign-In functionality has been requested over the sign-up
      * functionality
      */
     @Override
@@ -89,7 +93,7 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
      * @param input The received input
      */
     @Override
-    public void onReceivedSignInInput(Map<String, String> input) {
+    public void onReceivedSignInInput(final Map<String, String> input) {
 
         if(this.authenticator != null)
             this.authenticator.signIn(input);
@@ -118,10 +122,8 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     @Override
     public void onSignInFailed(final String message) {
 
-        /// TODO Callback to the login view here
-        Log.i("i", "SIGN IN FAILED");
-
-        ((LoginFragment) view).onUserLoginFailed(message);
+        if(this.view != null)
+            this.view.onSignInFailed(message);
 
     }
 
@@ -130,40 +132,76 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
      * @param message The error message
      */
     @Override
-    public void onSignUpFailed(String message) {
+    public void onSignUpFailed(final String message) {
 
-        /// TODO Callback to the fragment controller (Activity) here
+        if(this.view != null)
+            this.view.onSignUpFailed(message);
+
+    }
+
+    /**
+     * Invoked when the Authenticator has failed to sign out the user
+     * @param message The error message
+     */
+    @Override
+    public void onSignOutFailed(final String message) {
+
+        if(this.view != null)
+            this.view.onSignOutFailed(message);
+
     }
 
     /**
      * Invoked when the Sign-In request succeeded.
-     * @param message The success message
+     * @param credentials The credentials to pass to the interaction listener
      */
     @Override
-    public void onAuthenticated(String message) {
+    public void onAuthenticated(final Map<String, String> credentials) {
 
-        /// TODO Callback to the view here
+        if(this.view != null)
+            this.view.onSignIn();
 
-    }
-
-    @Override
-    public void onSignOutFailed(String message) {
+        if(this.interactionListener != null)
+            this.interactionListener.onAuthenticated(credentials);
 
     }
 
     /**
-     * Invoked when the Sign-Out request succeeded.
-     * @param message The success message
+     * Invoked when the user is not authenticated
+     * @param message The error message
      */
     @Override
-    public void onUnauthenticated(String message) {
+    public void onUnauthenticated(final String message) {
 
-        /// TODO Callback to the fragment controller (Activity) here
+        if(this.interactionListener != null)
+            this.interactionListener.onUnauthenticated(message);
 
     }
 
+    /**
+     * Invoked when the user has successfully signed out.
+     * @param message the success message
+     */
     @Override
-    public void onSignOut(String message) {
+    public void onSignOut(final String message) {
+
+        if(this.interactionListener != null)
+            this.interactionListener.onSignOut(message);
+
+    }
+
+    /**
+     * Invoked when the user has successfully signed up.
+     * @param message The success message
+     */
+    @Override
+    public void onSignUp(final String message) {
+
+        if(this.view != null)
+            this.view.onSignUp();
+
+        if(this.interactionListener != null)
+            this.interactionListener.onSignUp(message);
 
     }
 

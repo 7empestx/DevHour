@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">DevHour</string>
+    <string name="account">060498623801</string>
     <string name="client_id">1kiho7pmmv5c410i5in3m8ulu7</string>
     <string name="provider_name">us-west-1_aJtem6cJA</string>
     <string name="auth_endpoint">cognito-idp.us-west-1.amazonaws.com</string>
     <string name="region">us-west-1</string>
+    <string name="user_table_name">devhour-user-table</string>
+    <string name="restaurant_table_name">devhour-restaurant-table</string>
     <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>
     <string name="bottom_navigation_location">Location</string>
     <string name="bottom_navigation_list">List</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiZGV2aG91ciIsImEiOiJjbDkzMHB3bG8xYzVlM3ZsZmsxdzU1ZmdjIn0.9sq-L_XAU4zyrf7ROSHOqQ</string>
+    <string name="user">User</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="store">Store</string>
+    <string name="cafe">Cafe</string>
 
     <!-- ============== -->
     <!-- Login Fragment -->
@@ -33,6 +41,7 @@
 
     <string name="fragment_create_account_password_invalid">Password invalid</string>
     <string name="fragment_create_account_title_text">Create Account</string>
+    <string name="fragment_create_account_username_input_hint_text">Username</string>
     <string name="fragment_create_account_email_input_hint_text">Email</string>
     <string name="fragment_create_account_password_input_hint_text">Password (At least 6 Characters)</string>
     <string name="fragment_create_account_first_name_input_hint_text">First Name</string>

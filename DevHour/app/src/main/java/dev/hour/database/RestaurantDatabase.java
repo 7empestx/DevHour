@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
@@ -17,19 +20,23 @@ import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
 
 public class RestaurantDatabase implements RestaurantContract.Database {
-    private DynamoDbAsyncClient client;
-    private String tableName;
 
-    public RestaurantDatabase(final String regionName, final String tableName){
+    /// ---------------
+    /// Private Members
 
-        // Create client
-        client = DynamoDbAsyncClient
-                .builder()
-                .region(Region.of(regionName))
-                .build();
+    private DynamoDbAsyncClient client      ;
+    private String              tableName   ;
+    private String              region      ;
 
-        // Set table name
-        this.tableName = tableName;
+    /// ------------
+    /// Constructing
+
+    public RestaurantDatabase(final String region, final String tableName){
+
+        this.client     = null      ;
+        this.tableName  = tableName ;
+        this.region     = region    ;
+
     }
 
     /// ---------------
@@ -44,20 +51,49 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     private Map<String, AttributeValue> getItem(final String key, final String value) {
 
         final Map<String, AttributeValue> keyMap = new HashMap<>();
+        final Map<String, AttributeValue> result;
 
-        keyMap.put(key, AttributeValue.builder().s(value).build());
+        if(client != null) {
 
-        final GetItemRequest request = GetItemRequest.builder()
-                .key(keyMap)
-                .tableName(tableName)
-                .build();
+            keyMap.put(key, AttributeValue.builder().s(value).build());
 
-        final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
+            final GetItemRequest request = GetItemRequest.builder()
+                    .key(keyMap)
+                    .tableName(tableName)
+                    .build();
 
-        return response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
+            final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
+
+            result = response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
+
+        } else result = new HashMap<>();
+
+        return result;
 
     }
 
+    /**
+     * Sets the credentials required to build the DynamoDB client
+     * @param credentials The credentials to set.
+     */
+    @Override
+    public void setCredentials(final Map<String, String> credentials) {
+
+        client = DynamoDbAsyncClient
+                .builder()
+                .region(Region.of(this.region))
+                .credentialsProvider(() -> AwsBasicCredentials.create(
+                        credentials.get("ACCESS_KEY"),
+                        credentials.get("SECRET_KEY")))
+                .build();
+
+    }
+
+    /**
+     * Retrieves the restaurant corresponding with the given id.
+     * @param id the restaurant id
+     * @return RestaurantContract.Restaurant instance
+     */
     @Override
     public RestaurantContract.Restaurant getRestaurant(final String id) {
 
@@ -66,18 +102,32 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         if(client != null){
 
             final Map<String, AttributeValue> restaurantBlob = getItem("id", id);
+            final String name = Objects.requireNonNull(restaurantBlob.get("name")).s();
 
-            restaurant =  new Restaurant();
+            restaurant =  new Restaurant(id, name);
 
-            restaurant.setName(Objects.requireNonNull(restaurantBlob.get("name")).s());
-            restaurant.setLongitude(String.valueOf(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("longitude")).s())));
-            restaurant.setLatitude(String.valueOf(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("latitude")).s())));
-            restaurant.setPricing(String.valueOf(Integer.parseInt(Objects.requireNonNull(restaurantBlob.get("pricing")).s())));
+            restaurant.setLongitude(
+                    String.valueOf(Double.parseDouble(
+                            Objects.requireNonNull(restaurantBlob.get("longitude")).s())));
+            restaurant.setLatitude(
+                    String.valueOf(Double.parseDouble(
+                            Objects.requireNonNull(restaurantBlob.get("latitude")).s())));
+            restaurant.setPricing(
+                    String.valueOf(Integer.parseInt(
+                            Objects.requireNonNull(restaurantBlob.get("pricing")).s())));
+
         } else restaurant = null;
 
         return restaurant;
     }
 
+    /**
+     * Returns a list of RestaurantContract.Restaurants that are within the specified radius.
+     * @param longitude The center longitude
+     * @param latitude The center latitude
+     * @param radius The radius
+     * @return List of Restaurants.
+     */
     @Override
     public List<RestaurantContract.Restaurant> getRestaurantsFromRadiusLocation(final double longitude,
                                                                                 final double latitude,

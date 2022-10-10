@@ -17,12 +17,20 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dev.hour.authenticator.Authenticator;
 import dev.hour.contracts.AuthenticatorContract;
+import dev.hour.contracts.RestaurantContract;
+import dev.hour.contracts.UserContract;
+import dev.hour.database.RestaurantDatabase;
+import dev.hour.database.UserDatabase;
 import dev.hour.fragment.LoginFragment;
+import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.SignUpFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
+import dev.hour.presenter.RestaurantPresenter;
+import dev.hour.presenter.UserPresenter;
 import dev.hour.view.Utilities;
 
 public class MainActivity extends AppCompatActivity implements
@@ -34,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements
 
     private AuthenticatorContract.Presenter     authenticatorPresenter  ;
     private AuthenticatorContract.Authenticator authenticator           ;
+    private UserContract.Presenter              userPresenter           ;
+    private UserContract.Database               userDatabase            ;
+    private RestaurantContract.Presenter        restaurantPresenter     ;
+    private RestaurantContract.Database         restaurantDatabase      ;
     private Fragment                            lastFragment            ;
 
     /// ------------------
@@ -52,12 +64,31 @@ public class MainActivity extends AppCompatActivity implements
         initializeBottomNavigation();
         hideBottomNavigationBar();
 
-        authenticator           = new Authenticator(this);
+        // Set up the authenticator
+        authenticator           = new Authenticator(
+                this.getString(R.string.account),
+                this.getString(R.string.region),
+                this.getString(R.string.client_id),
+                this.getString(R.string.identity_pool_id),
+                this.getString(R.string.auth_endpoint));
         authenticatorPresenter  = new AuthenticatorPresenter();
+
+        // Set up the user presenter
+        userPresenter           = new UserPresenter();
+        userDatabase            = new UserDatabase(
+                this.getString(R.string.region), this.getString(R.string.user_table_name));
+
+        // Set up the restaurant presenter
+        restaurantPresenter     = new RestaurantPresenter();
+        restaurantDatabase      = new RestaurantDatabase(
+                this.getString(R.string.region), this.getString(R.string.restaurant_table_name));
 
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
         authenticatorPresenter.setInteractionListener(this);
+
+        userPresenter.setDatabase(userDatabase);
+        restaurantPresenter.setDatabase(restaurantDatabase);
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
@@ -74,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
 
-        showLoginFragment();
+        // Check if we're authenticated
+        this.authenticator.checkSession();
 
     }
 
@@ -101,6 +133,54 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    /**
+     * Invoked when the Sign-In request succeeded.
+     * @param credentials The credentials to pass to the interaction listener
+     */
+    @Override
+    public void onAuthenticated(final Map<String, String> credentials) {
+
+        // Set the credentials
+        this.userDatabase.setCredentials(credentials);
+        this.restaurantDatabase.setCredentials(credentials);
+
+        showMapFragment();
+
+    }
+
+    /**
+     * Invoked when the user is not authenticated
+     * @param message The error message
+     */
+    @Override
+    public void onUnauthenticated(final String message) {
+
+        showLoginFragment();
+
+    }
+
+    /**
+     * Invoked when the user has successfully signed out.
+     * @param message the success message
+     */
+    @Override
+    public void onSignOut(final String message) {
+
+        showLoginFragment();
+
+    }
+
+    /**
+     * Invoked when the user has successfully signed up.
+     * @param message The success message
+     */
+    @Override
+    public void onSignUp(final String message) {
+
+        showLoginFragment();
+
+    }
+
     /// ---------------
     /// Private Methods
 
@@ -122,6 +202,15 @@ public class MainActivity extends AppCompatActivity implements
         if(fragment == null) {
 
             fragment = fragmentManager.findFragmentByTag(SignUpFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(MapFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -223,6 +312,48 @@ public class MainActivity extends AppCompatActivity implements
         lastFragment = fragment;
 
         hideBottomNavigationBar();
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    /**
+     * Shows the map fragment to the user
+     */
+    private void showMapFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(MapFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new MapFragment();
+
+            userPresenter.setView((UserContract.View) fragment);
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
+
+            transaction.add(R.id.activity_main, fragment, MapFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+            userPresenter.setView((UserContract.View) fragment);
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        showBottomNavigationBar();
         transaction.commit();
         fragmentManager.executePendingTransactions();
 

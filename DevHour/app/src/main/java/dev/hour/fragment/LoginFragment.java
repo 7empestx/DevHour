@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     /// Private Fields
 
     private Snackbar        snackBar        ;
-    private SignUpListener  signUpListener  ;
     private SignInListener  signInListener  ;
 
     /// --------
@@ -104,7 +104,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
             case R.id.fragment_login_sign_in_button:
 
                 final Button signInButton =
-                        (Button) this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+                        this.requireView().findViewById(R.id.fragment_login_sign_in_button);
 
                 signInButton.setEnabled(false);
 
@@ -130,16 +130,22 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
     }
 
-    /// ----------------------
-    /// UserContract.LoginView
+    /// --------------------------
+    /// AuthenticatorContract.View
+
+    /**
+     * Invoked when the user has successfully signed up
+     */
+    @Override
+    public void onSignUp() { /* Empty */ }
 
     /**
      * Invoked when the user has successfully signed in
      */
-    public void onUserLogin() {
+    @Override
+    public void onSignIn() {
 
-        final Button signInButton =
-                (Button) this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+        final Button signInButton = this.requireView().findViewById(R.id.fragment_login_sign_in_button);
 
         signInButton.setEnabled(true);
 
@@ -150,17 +156,31 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     /**
      * Invoked when the user could not sign in
      */
-    public void onUserLoginFailed(final String errorString) {
+    @Override
+    public void onSignInFailed(final String message) {
 
-        Button signInButton = (Button)this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+        Button signInButton = this.requireView().findViewById(R.id.fragment_login_sign_in_button);
 
         signInButton.setEnabled(true);
 
-        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + errorString), 10);
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10);
 
         this.snackBar.show();
 
+
     }
+
+    /**
+     * Invoked when the user could not sign up
+     */
+    @Override
+    public void onSignUpFailed(final String message) { /* Empty */ }
+
+    /**
+     * Invoked when the user could not sign out
+     */
+    @Override
+    public void onSignOutFailed(final String message) { /* Empty */ }
 
     /// --------------
     /// Public Methods
@@ -175,9 +195,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     /**
      * The Listener that receives callbacks when the user attempts to Sign Up
      */
-    public void setSignUpListener(final SignUpListener listener) {
-        this.signUpListener = listener;
-    }
+    public void setSignUpListener(final SignUpListener listener) { /* Empty */ }
 
     /// ---------------
     /// Private Methods
@@ -248,7 +266,6 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
         this.snackBar           = null;
         this.signInListener     = null;
-        this.signUpListener     = null;
 
     }
 

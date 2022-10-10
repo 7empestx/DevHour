@@ -8,27 +8,29 @@ import java.util.stream.Collectors;
 
 import dev.hour.contracts.UserContract;
 import dev.hour.user.User;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
 
 public class UserDatabase implements UserContract.Database {
 
-    private DynamoDbAsyncClient client       ;
-    private String         tableName    ;
+    /// ---------------
+    /// Private Members
+
+    private DynamoDbAsyncClient client      ;
+    private String              tableName   ;
+    private String              region      ;
 
     /// -----------
     /// Constructor
 
-    public UserDatabase(final String regionName, final String tableName) {
+    public UserDatabase(final String region, final String tableName) {
 
-        // Create the client
-        client = DynamoDbAsyncClient
-                .builder()
-                .region(Region.of(regionName))
-                .build();
+        this.client     = null      ;
+        this.tableName  = tableName ;
+        this.region     = region    ;
 
     }
 
@@ -44,21 +46,49 @@ public class UserDatabase implements UserContract.Database {
     private Map<String, AttributeValue> getItem(final String key, final String value) {
 
         final Map<String, AttributeValue> keyMap = new HashMap<>();
+        final Map<String, AttributeValue> result;
 
-        keyMap.put(key, AttributeValue.builder().s(value).build());
+        if(client != null) {
 
-        final GetItemRequest request = GetItemRequest.builder()
-                .key(keyMap)
-                .tableName(tableName)
-                .build();
+            keyMap.put(key, AttributeValue.builder().s(value).build());
 
+            final GetItemRequest request = GetItemRequest.builder()
+                    .key(keyMap)
+                    .tableName(tableName)
+                    .build();
 
-        final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
+            final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
 
-        return response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
+            result = response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
+
+        } else result = new HashMap<>();
+
+        return result;
 
     }
 
+    /**
+     * Sets the credentials required to build the DynamoDB client
+     * @param credentials The credentials to set.
+     */
+    @Override
+    public void setCredentials(final Map<String, String> credentials) {
+
+        client = DynamoDbAsyncClient
+                .builder()
+                .region(Region.of(this.region))
+                .credentialsProvider(() -> AwsBasicCredentials.create(
+                        credentials.get("ACCESS_KEY"),
+                        credentials.get("SECRET_KEY")))
+                .build();
+
+    }
+
+    /**
+     * Retrieves the user corresponding with the given id.
+     * @param id the user id
+     * @return RestaurantContract.Restaurant instance
+     */
     @Override
     public UserContract.User getUser(final String id) {
 
@@ -68,10 +98,11 @@ public class UserDatabase implements UserContract.Database {
 
             final Map<String, AttributeValue> userBlob = getItem("id", id);
 
-            user = new User();
+            final String firstName = Objects.requireNonNull(userBlob.get("first")).s();
+            final String lastName  = Objects.requireNonNull(userBlob.get("last")).s();
 
-            user.setFirstName(Objects.requireNonNull(userBlob.get("first")).s());
-            user.setLastName(Objects.requireNonNull(userBlob.get("last")).s());
+            user = new User(id, firstName, lastName);
+
             user.setLongitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("longitude")).s()));
             user.setLatitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("latitude")).s()));
             

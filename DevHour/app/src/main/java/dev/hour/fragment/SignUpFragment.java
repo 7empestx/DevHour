@@ -38,7 +38,6 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
     private Snackbar        snackBar        ;
     private SignUpListener  signUpListener  ;
-    private SignInListener  signInListener  ;
 
     /// --------
     /// Fragment
@@ -106,10 +105,11 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("USERNAME", getEmail());
-                input.put("PASSWORD", getPassword());
-                input.put("FIRST", getFirstName());
-                input.put("LAST", getLastName());
+                input.put("username",   getUsername());
+                input.put("email",      getEmail());
+                input.put("password",   getPassword());
+                input.put("name",       getFirstName());
+                input.put("last",       getLastName());
 
                 /// Notify the listener
                 if(this.signUpListener != null)
@@ -133,7 +133,8 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     /**
      * Invoked when the user has successfully signed up
      */
-    public void onUserSignedUp() {
+    @Override
+    public void onSignUp() {
 
         final Button signUpButton =
                 this.requireView().findViewById(R.id.fragment_sign_up_create_account);
@@ -145,19 +146,39 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     }
 
     /**
+     * Invoked when the user has successfully signed in
+     */
+    @Override
+    public void onSignIn() { /* Empty */ }
+
+    /**
+     * Invoked when the user could not sign in
+     */
+    @Override
+    public void onSignInFailed(final String message) { /* Empty */ }
+
+    /**
      * Invoked when the user could not sign up
      */
-    public void onUserSignUpFailed(final String errorString) {
+    @Override
+    public void onSignUpFailed(final String message) {
 
         Button signUpButton = this.requireView().findViewById(R.id.fragment_sign_up_create_account);
 
         signUpButton.setEnabled(true);
 
-        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + errorString), 10);
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10);
 
         this.snackBar.show();
 
+
     }
+
+    /**
+     * Invoked when the user could not sign out
+     */
+    @Override
+    public void onSignOutFailed(final String message) { /* Empty */ }
 
     /// --------------
     /// Public Methods
@@ -165,9 +186,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     /**
      * The Listener that receives callbacks when the user attempts to Sign in
      */
-    public void setSignInListener(final SignInListener listener) {
-        this.signInListener = listener;
-    }
+    public void setSignInListener(final SignInListener listener) { /* Empty */ }
 
     /**
      * The Listener that receives callbacks when the user attempts to Sign Up
@@ -194,6 +213,27 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
         }
+
+    }
+
+    /**
+     * Attempts to retrieve the username from the corresponding [EditText].
+     * Guarantees a non-null [String] that is at least empty
+     * @return valid or invalid [String]
+     */
+    private String getUsername() {
+
+        String email = "";
+
+        final View        view      = this.getView();
+        final EditText    usernameText = view != null ?
+                (EditText)view.findViewById(R.id.fragment_sign_up_username_input) : null;
+
+        CharSequence text = (usernameText != null ? usernameText.getText() : null);
+
+        if (text != null) email = text.toString();
+
+        return email;
 
     }
 
@@ -287,7 +327,6 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
         if (this.snackBar != null)  this.snackBar.dismiss();
 
         this.snackBar           = null;
-        this.signInListener     = null;
         this.signUpListener     = null;
 
     }

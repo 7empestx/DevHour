@@ -6,10 +6,9 @@ import dev.hour.contracts.RestaurantContract;
 
 public class RestaurantPresenter implements RestaurantContract.Presenter {
 
-    //Private Members
-    private RestaurantContract.Database database;
-    private RestaurantContract.View view;
-    private List<RestaurantContract.Restaurant> resturants; //this is missing in the UML..?
+    private RestaurantContract.Database         database    ;
+    private RestaurantContract.View             view        ;
+    private List<RestaurantContract.Restaurant> restaurants  ; //this is missing in the UML..?
 
     @Override
     public void setDatabase(RestaurantContract.Database database) {
@@ -19,12 +18,14 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     @Override
     public void setView(RestaurantContract.View view) {
 
+        this.view = view;
+
     }
 
     @Override
     public void invalidate() {
         if(view != null) {
-            view.setRestaurants(resturants);
+            view.setRestaurants(restaurants);
         }
     }
 }
