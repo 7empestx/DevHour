@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import dev.hour.contracts.UserContract;
 import dev.hour.user.User;
+import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -15,7 +16,7 @@ import software.amazon.awssdk.regions.Region;
 
 public class UserDatabase implements UserContract.Database {
 
-    private DynamoDbClient client       ;
+    private DynamoDbAsyncClient client       ;
     private String         tableName    ;
 
     /// -----------
@@ -24,7 +25,7 @@ public class UserDatabase implements UserContract.Database {
     public UserDatabase(final String regionName, final String tableName) {
 
         // Create the client
-        client = DynamoDbClient
+        client = DynamoDbAsyncClient
                 .builder()
                 .region(Region.of(regionName))
                 .build();
@@ -54,7 +55,8 @@ public class UserDatabase implements UserContract.Database {
                 .tableName(tableName)
                 .build();
 
-        final Collection<AttributeValue> response = this.client.getItem(request).item().values();
+
+        final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
 
         return response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
 
@@ -73,8 +75,8 @@ public class UserDatabase implements UserContract.Database {
 
             user.setFirstName(Objects.requireNonNull(userBlob.get("first")).s());
             user.setLastName(Objects.requireNonNull(userBlob.get("last")).s());
-            user.setLongitude(Objects.requireNonNull(userBlob.get("longitude")).s());
-            user.setLatitude(Objects.requireNonNull(userBlob.get("latitude")).s());
+            user.setLongitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("longitude")).s()));
+            user.setLatitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("latitude")).s()));
             
 
         } else user = null;
