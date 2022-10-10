@@ -29,6 +29,14 @@ public interface AuthenticatorContract {
 
         void setAuthenticator(Authenticator authenticator);
         void setAuthenticatorView(View view);
+        void setInteractionListener(final InteractionListener interactionListener);
+
+        interface InteractionListener {
+
+            void onSignInRequest();
+            void onSignUpRequest();
+
+        }
 
     }
 

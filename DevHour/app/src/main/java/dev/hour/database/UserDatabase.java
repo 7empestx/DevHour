@@ -30,8 +30,6 @@ public class UserDatabase implements UserContract.Database {
                 .region(Region.of(regionName))
                 .build();
 
-
-
     }
 
     /// ---------------
@@ -43,7 +41,6 @@ public class UserDatabase implements UserContract.Database {
      * @param value The specific value to match
      * @return Map containing the requested data, if any
      */
-
     private Map<String, AttributeValue> getItem(final String key, final String value) {
 
         final Map<String, AttributeValue> keyMap = new HashMap<>();

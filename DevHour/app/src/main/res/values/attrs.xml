@@ -13,6 +13,27 @@
     <attr name="actionButtonBackground" format="reference"/>
     <attr name="actionButtonElevation" format="dimension"/>
 
+    <!-- =========== -->
+    <!-- Back Button -->
+
+    <attr name="backButtonWidth" format="dimension"/>
+    <attr name="backButtonHeight" format="dimension"/>
+    <attr name="backButtonSource" format="reference"/>
+    <attr name="backButtonTintMode" format="reference"/>
+    <attr name="backButtonBackground" format="reference"/>
+
+    <!-- ===================== -->
+    <!-- Bottom Navigation Bar -->
+
+    <attr name="bottomNavigationBackground" format="color" />
+    <attr name="bottomNavigationItemTextColor" format="color"/>
+
+    <!-- ================ -->
+    <!-- Navigation Icons -->
+
+    <attr name="bottomNavigationIconLocation" format="reference"/>
+    <attr name="bottomNavigationIconList" format="reference"/>
+
     <!-- ======== -->
     <!-- EditText -->
 

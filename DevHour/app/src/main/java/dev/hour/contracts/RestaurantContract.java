@@ -34,10 +34,10 @@ public interface RestaurantContract {
         double getLatitude();
         int getPricing();
 
-        void setName(String name);
-        void setLongitude(double longitude);
-        void setLatitude(double latitude);
-        void setPricing(int pricing);
+        String setName(String name);
+        double setLongitude(String longitude);
+        double setLatitude(String latitude);
+        int setPricing(String pricing);
 
     }
 

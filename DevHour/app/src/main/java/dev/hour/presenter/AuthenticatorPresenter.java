@@ -15,8 +15,9 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     /// --------------
     /// Private Fields
 
-    private AuthenticatorContract.Authenticator authenticator   ;
-    private AuthenticatorContract.View          view            ;
+    private AuthenticatorContract.Authenticator                 authenticator           ;
+    private AuthenticatorContract.View                          view                    ;
+    private AuthenticatorContract.Presenter.InteractionListener interactionListener     ;
 
     /// -------------------------------
     /// AuthenticatorContract.Presenter
@@ -44,6 +45,13 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
 
     }
 
+    @Override
+    public void setInteractionListener(final InteractionListener interactionListener) {
+
+        this.interactionListener = interactionListener;
+
+    }
+
     /// -----------------------------------------
     /// AuthenticatorContract.View.SignUpListener
 
@@ -67,7 +75,8 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     @Override
     public void onRequestSignIn() {
 
-        /// TODO
+        if(this.interactionListener != null)
+            this.interactionListener.onSignInRequest();
 
     }
 
@@ -94,7 +103,8 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
     @Override
     public void onRequestSignUp() {
 
-        /// TODO
+        if(this.interactionListener != null)
+            this.interactionListener.onSignUpRequest();
 
     }
 

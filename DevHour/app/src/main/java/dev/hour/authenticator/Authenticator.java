@@ -9,6 +9,8 @@ import dev.hour.R;
 import dev.hour.contracts.AuthenticatorContract;
 import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.cognitoidentity.model.CognitoIdentityProvider;
+import software.amazon.awssdk.services.cognitoidentity.model.Credentials;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderAsyncClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.GlobalSignOutRequest;
@@ -109,6 +111,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
             }
             Log.i("Cognito", idToken != null ? "Sign in succeeded" : "Sign in not complete");
         });
+
     }
 
     @Override

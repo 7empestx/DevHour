@@ -40,6 +40,13 @@
     <dimen name="action_button_elevation">8dp</dimen>
 
     <!-- =========== -->
+    <!-- Back Button -->
+
+    <dimen name="back_button_width">48dp</dimen>
+    <dimen name="back_button_height">48dp</dimen>
+
+
+    <!-- =========== -->
     <!-- Edit Button -->
 
     <dimen name="edit_button_elevation">0dp</dimen>
@@ -83,6 +90,15 @@
     <dimen name="fragment_login_sign_in_button_margin_top">16dp</dimen>
     <dimen name="fragment_login_no_account_sub_title_margin_top">16dp</dimen>
     <dimen name="fragment_login_forgot_sub_title_margin_top">16dp</dimen>
+
+    <!-- ======================= -->
+    <!-- Create Account Fragment -->
+
+    <dimen name="fragment_create_account_email_input_top_margin">8dp</dimen>
+    <dimen name="fragment_create_account_password_input_top_margin">8dp</dimen>
+    <dimen name="fragment_create_account_first_name_input_top_margin">8dp</dimen>
+    <dimen name="fragment_create_account_last_name_input_top_margin">8dp</dimen>
+    <dimen name="fragment_create_account_create_account_text_button_top_margin">24dp</dimen>
 
 
 </resources>

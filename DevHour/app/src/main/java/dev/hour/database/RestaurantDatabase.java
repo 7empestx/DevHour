@@ -16,7 +16,6 @@ import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
 
-
 public class RestaurantDatabase implements RestaurantContract.Database {
     private DynamoDbAsyncClient client;
     private String tableName;
@@ -42,7 +41,6 @@ public class RestaurantDatabase implements RestaurantContract.Database {
      * @param value The specific value to match
      * @return Map containing the requested data, if any
      */
-
     private Map<String, AttributeValue> getItem(final String key, final String value) {
 
         final Map<String, AttributeValue> keyMap = new HashMap<>();
@@ -72,9 +70,9 @@ public class RestaurantDatabase implements RestaurantContract.Database {
             restaurant =  new Restaurant();
 
             restaurant.setName(Objects.requireNonNull(restaurantBlob.get("name")).s());
-            restaurant.setLongitude(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("longitude")).s()));
-            restaurant.setLatitude(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("latitude")).s()));
-            restaurant.setPricing(Integer.parseInt(Objects.requireNonNull(restaurantBlob.get("pricing")).s()));
+            restaurant.setLongitude(String.valueOf(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("longitude")).s())));
+            restaurant.setLatitude(String.valueOf(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("latitude")).s())));
+            restaurant.setPricing(String.valueOf(Integer.parseInt(Objects.requireNonNull(restaurantBlob.get("pricing")).s())));
         } else restaurant = null;
 
         return restaurant;

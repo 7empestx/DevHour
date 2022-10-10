@@ -11,6 +11,13 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activity_main_frag_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_login" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/activity_map_keyed_map_bottom_navigation"
+        style="@style/Theme.Aurora.BottomNavigation"
+        android:visibility="gone"
+        app:menu="@menu/bottom_navigation"/>
 
 </FrameLayout>
