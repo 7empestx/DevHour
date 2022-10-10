@@ -72,9 +72,9 @@ public class RestaurantDatabase implements RestaurantContract.Database {
             restaurant =  new Restaurant();
 
             restaurant.setName(Objects.requireNonNull(restaurantBlob.get("name")).s());
-            restaurant.setLongitude(Objects.requireNonNull(restaurantBlob.get("longitude")).s());
-            restaurant.setLatitude(Objects.requireNonNull(restaurantBlob.get("latitude")).s());
-            restaurant.setPricing(Objects.requireNonNull(restaurantBlob.get("pricing")).s());
+            restaurant.setLongitude(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("longitude")).s()));
+            restaurant.setLatitude(Double.parseDouble(Objects.requireNonNull(restaurantBlob.get("latitude")).s()));
+            restaurant.setPricing(Integer.parseInt(Objects.requireNonNull(restaurantBlob.get("pricing")).s()));
         } else restaurant = null;
 
         return restaurant;
