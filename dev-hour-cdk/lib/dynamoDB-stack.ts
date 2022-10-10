@@ -24,8 +24,6 @@ export class DynamoDBStack extends Stack {
             partitionKey: props.partitionKey,
             tableName: props.tableName
         });
-
-    } 
-    
+    }
 }
 

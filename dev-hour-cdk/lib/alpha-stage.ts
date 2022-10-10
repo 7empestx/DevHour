@@ -139,9 +139,10 @@ export class AlphaStage extends Stage {
             account:      props.account,
             instanceName: "ec2Stack",
             id:           "ec2ID",
+            stackId:      "ec2StackID",
             accountId:    Constants.Account,
             region:       Constants.Region,
+            vpc:          this.vpcStack.vpc,
         });
     }
-
 }

@@ -1,0 +1,154 @@
+{
+ "Resources": {
+  "ec2IDInstanceSecurityGroup5E3CA157": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "ec2Stack"
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup/Resource"
+   }
+  },
+  "ec2IDInstanceRole79AD7B51": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "ec2Stack"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/InstanceRole/Resource"
+   }
+  },
+  "ec2IDInstanceProfile20C1288F": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "ec2IDInstanceRole79AD7B51"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/InstanceProfile"
+   }
+  },
+  "ec2ID5A6DA2B1": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": "us-west-1b",
+    "IamInstanceProfile": {
+     "Ref": "ec2IDInstanceProfile20C1288F"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t2.micro",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ec2IDInstanceSecurityGroup5E3CA157",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A32791C744C6"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "ec2Stack"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "ec2IDInstanceRole79AD7B51"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOwQrCMBBEv8V7umoV9O5BvJX0AySmW9g2TWSTKBLy77bUnDzN8GYGpobjAXYb9faV7sbK0ANSG5QexYzuCXUN6WZ9UFajaFFHpvC5sotPcentHyjVLEhNkKQzuOCiJW7Y9WQw5wU2itWEAVlI9C6yXic/n4V1HcLgt6/9GU7z18ETVRxtoAlBrvoFNtDV2McAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

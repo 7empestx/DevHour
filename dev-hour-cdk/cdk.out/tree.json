@@ -451,6 +451,119 @@
                       "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
                       "version": "2.43.0"
                     }
+                  },
+                  "EC2-Ingestion-Endpoint": {
+                    "id": "EC2-Ingestion-Endpoint",
+                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint",
+                    "children": {
+                      "SecurityGroup": {
+                        "id": "SecurityGroup",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "groupDescription": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup",
+                                "securityGroupEgress": [
+                                  {
+                                    "cidrIp": "0.0.0.0/0",
+                                    "description": "Allow all outbound traffic by default",
+                                    "ipProtocol": "-1"
+                                  }
+                                ],
+                                "securityGroupIngress": [
+                                  {
+                                    "cidrIp": {
+                                      "Fn::GetAtt": [
+                                        "DevHourVPC77A046B5",
+                                        "CidrBlock"
+                                      ]
+                                    },
+                                    "ipProtocol": "tcp",
+                                    "fromPort": 443,
+                                    "toPort": 443,
+                                    "description": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "from ",
+                                          {
+                                            "Fn::GetAtt": [
+                                              "DevHourVPC77A046B5",
+                                              "CidrBlock"
+                                            ]
+                                          },
+                                          ":443"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                ],
+                                "tags": [
+                                  {
+                                    "key": "Name",
+                                    "value": "AlphaStage/DevHourVPCStack/DevHourVPC"
+                                  }
+                                ],
+                                "vpcId": {
+                                  "Ref": "DevHourVPC77A046B5"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                              "version": "2.43.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                          "version": "2.43.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::VPCEndpoint",
+                          "aws:cdk:cloudformation:props": {
+                            "serviceName": "com.amazonaws.us-east-1.ec2",
+                            "vpcId": {
+                              "Ref": "DevHourVPC77A046B5"
+                            },
+                            "privateDnsEnabled": true,
+                            "securityGroupIds": [
+                              {
+                                "Fn::GetAtt": [
+                                  "DevHourVPCEC2IngestionEndpointSecurityGroupB6EAD321",
+                                  "GroupId"
+                                ]
+                              }
+                            ],
+                            "subnetIds": [
+                              {
+                                "Ref": "DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327"
+                              },
+                              {
+                                "Ref": "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B"
+                              }
+                            ],
+                            "vpcEndpointType": "Interface"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnVPCEndpoint",
+                          "version": "2.43.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.InterfaceVpcEndpoint",
+                      "version": "2.43.0"
+                    }
                   }
                 },
                 "constructInfo": {
@@ -467,6 +580,32 @@
                     "path": "AlphaStage/DevHourVPCStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/DevHourVPCStack/Exports",
+                "children": {
+                  "Output{\"Ref\":\"DevHourVPC77A046B5\"}": {
+                    "id": "Output{\"Ref\":\"DevHourVPC77A046B5\"}",
+                    "path": "AlphaStage/DevHourVPCStack/Exports/Output{\"Ref\":\"DevHourVPC77A046B5\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.43.0"
+                    }
+                  },
+                  "Output{\"Ref\":\"DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327\"}": {
+                    "id": "Output{\"Ref\":\"DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327\"}",
+                    "path": "AlphaStage/DevHourVPCStack/Exports/Output{\"Ref\":\"DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327\"}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.43.0"
                     }
                   }
@@ -1039,6 +1178,216 @@
               "CheckBootstrapVersion": {
                 "id": "CheckBootstrapVersion",
                 "path": "AlphaStage/menuTestTableAlphaStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.43.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.43.0"
+            }
+          },
+          "ec2StackID": {
+            "id": "ec2StackID",
+            "path": "AlphaStage/ec2StackID",
+            "children": {
+              "ec2ID": {
+                "id": "ec2ID",
+                "path": "AlphaStage/ec2StackID/ec2ID",
+                "children": {
+                  "InstanceSecurityGroup": {
+                    "id": "InstanceSecurityGroup",
+                    "path": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "groupDescription": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup",
+                            "securityGroupEgress": [
+                              {
+                                "cidrIp": "0.0.0.0/0",
+                                "description": "Allow all outbound traffic by default",
+                                "ipProtocol": "-1"
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "ec2Stack"
+                              }
+                            ],
+                            "vpcId": {
+                              "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                          "version": "2.43.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                      "version": "2.43.0"
+                    }
+                  },
+                  "InstanceRole": {
+                    "id": "InstanceRole",
+                    "path": "AlphaStage/ec2StackID/ec2ID/InstanceRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "AlphaStage/ec2StackID/ec2ID/InstanceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "ec2.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "tags": [
+                              {
+                                "key": "Name",
+                                "value": "ec2Stack"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.43.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.43.0"
+                    }
+                  },
+                  "InstanceProfile": {
+                    "id": "InstanceProfile",
+                    "path": "AlphaStage/ec2StackID/ec2ID/InstanceProfile",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                      "aws:cdk:cloudformation:props": {
+                        "roles": [
+                          {
+                            "Ref": "ec2IDInstanceRole79AD7B51"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                      "version": "2.43.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/ec2StackID/ec2ID/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                      "aws:cdk:cloudformation:props": {
+                        "availabilityZone": "us-west-1b",
+                        "iamInstanceProfile": {
+                          "Ref": "ec2IDInstanceProfile20C1288F"
+                        },
+                        "imageId": {
+                          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                        },
+                        "instanceType": "t2.micro",
+                        "securityGroupIds": [
+                          {
+                            "Fn::GetAtt": [
+                              "ec2IDInstanceSecurityGroup5E3CA157",
+                              "GroupId"
+                            ]
+                          }
+                        ],
+                        "subnetId": {
+                          "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A32791C744C6"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ec2Stack"
+                          }
+                        ],
+                        "userData": {
+                          "Fn::Base64": "#!/bin/bash"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.Instance",
+                  "version": "2.43.0"
+                }
+              },
+              "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+                "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+                "path": "AlphaStage/ec2StackID/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.43.0"
+                }
+              },
+              "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+                "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+                "path": "AlphaStage/ec2StackID/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.43.0"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/ec2StackID/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/ec2StackID/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/ec2StackID/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.43.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/ec2StackID/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
                   "version": "2.43.0"
@@ -2050,6 +2399,79 @@
                                     ]
                                   ]
                                 }
+                              },
+                              {
+                                "name": "ec2StackID.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-ec2StackID",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageec2StackIDDF4B80D6.template.json"
+                                },
+                                "runOrder": 3,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "ec2StackID.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-ec2StackID",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 4,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
                               }
                             ]
                           }
@@ -2594,6 +3016,22 @@
                       "userTestTableAlphaStack.Deploy": {
                         "id": "userTestTableAlphaStack.Deploy",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/userTestTableAlphaStack.Deploy",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.109"
+                        }
+                      },
+                      "ec2StackID.Prepare": {
+                        "id": "ec2StackID.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ec2StackID.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.109"
+                        }
+                      },
+                      "ec2StackID.Deploy": {
+                        "id": "ec2StackID.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ec2StackID.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
