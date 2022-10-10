@@ -24,6 +24,7 @@ export class DynamoDBStack extends Stack {
             partitionKey: props.partitionKey,
             tableName: props.tableName
         });
+<<<<<<< HEAD
 
     } 
 
@@ -31,5 +32,8 @@ export class DynamoDBStack extends Stack {
         return this._db.tableArn;
     }
     
+=======
+    }
+>>>>>>> database
 }
 

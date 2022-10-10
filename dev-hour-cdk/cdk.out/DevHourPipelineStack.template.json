@@ -847,6 +847,10 @@
          ]
         },
         "RunOrder": 2
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> database
        },
        {
         "ActionTypeId": {
@@ -856,7 +860,11 @@
          "Version": "1"
         },
         "Configuration": {
+<<<<<<< HEAD
          "StackName": "AlphaStage-DevHourCognitoStack",
+=======
+         "StackName": "AlphaStage-ec2StackID",
+>>>>>>> database
          "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
          "RoleArn": {
           "Fn::Join": [
@@ -872,14 +880,22 @@
          },
          "ActionMode": "CHANGE_SET_REPLACE",
          "ChangeSetName": "PipelineChange",
+<<<<<<< HEAD
          "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.template.json"
+=======
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageec2StackIDDF4B80D6.template.json"
+>>>>>>> database
         },
         "InputArtifacts": [
          {
           "Name": "DevHourShellStep_Output"
          }
         ],
+<<<<<<< HEAD
         "Name": "DevHourCognitoStack.Prepare",
+=======
+        "Name": "ec2StackID.Prepare",
+>>>>>>> database
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -902,11 +918,19 @@
          "Version": "1"
         },
         "Configuration": {
+<<<<<<< HEAD
          "StackName": "AlphaStage-DevHourCognitoStack",
          "ActionMode": "CHANGE_SET_EXECUTE",
          "ChangeSetName": "PipelineChange"
         },
         "Name": "DevHourCognitoStack.Deploy",
+=======
+         "StackName": "AlphaStage-ec2StackID",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "ec2StackID.Deploy",
+>>>>>>> database
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -920,6 +944,11 @@
          ]
         },
         "RunOrder": 4
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> main
+>>>>>>> database
        }
       ],
       "Name": "AlphaStage"

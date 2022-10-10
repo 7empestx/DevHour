@@ -17,7 +17,15 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+<<<<<<< HEAD
         "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/331a861a292c582b9b64637f087abcf985264f606da70337673b3ea5297addcd.json",
+=======
+<<<<<<< HEAD
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/a0cd439a8e5ba6225ae5fa0fdf94cb5a51f0f907ab5c9b5b3f4a51d2aa92d77d.json",
+=======
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/381bfd82c928b498215590c404ce82c3afe00991391766a8c6633761facb6c47.json",
+>>>>>>> main
+>>>>>>> database
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -76,10 +84,34 @@
             "data": "DevHourVPCDevHourVPCSubnetSubnet2RouteTableAssociationED8EAC41"
           }
         ],
+        "/AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourVPCEC2IngestionEndpointSecurityGroupB6EAD321"
+          }
+        ],
+        "/AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourVPCEC2IngestionEndpointFEEAC083"
+          }
+        ],
         "/AlphaStage/DevHourVPCStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/DevHourVPCStack/Exports/Output{\"Ref\":\"DevHourVPC77A046B5\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefDevHourVPC77A046B525023B2B"
+          }
+        ],
+        "/AlphaStage/DevHourVPCStack/Exports/Output{\"Ref\":\"DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327\"}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputRefDevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A32791C744C6"
           }
         ],
         "/AlphaStage/DevHourVPCStack/BootstrapVersion": [
@@ -540,15 +572,25 @@
         ]
       },
       "displayName": "AlphaStage/menuTestTableAlphaStack"
+<<<<<<< HEAD
     },
     "AlphaStageDevHourCognitoStackAF8F29DE.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
         "file": "AlphaStageDevHourCognitoStackAF8F29DE.assets.json",
+=======
+<<<<<<< HEAD
+    },
+    "AlphaStageec2StackIDDF4B80D6.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageec2StackIDDF4B80D6.assets.json",
+>>>>>>> database
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
+<<<<<<< HEAD
     "AlphaStageDevHourCognitoStackAF8F29DE": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://060498623801/us-west-1",
@@ -562,12 +604,28 @@
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "AlphaStageDevHourCognitoStackAF8F29DE.assets"
+=======
+    "AlphaStageec2StackIDDF4B80D6": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageec2StackIDDF4B80D6.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/5d2158982d461dcea0f9dbb58bc12835fbf016086c62a99144d7a19f6fe855b5.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageec2StackIDDF4B80D6.assets"
+>>>>>>> database
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         },
+<<<<<<< HEAD
         "stackName": "AlphaStage-DevHourCognitoStack"
       },
       "dependencies": [
@@ -635,25 +693,79 @@
           }
         ],
         "/AlphaStage/DevHourCognitoStack/CDKMetadata/Default": [
+=======
+        "stackName": "AlphaStage-ec2StackID"
+      },
+      "dependencies": [
+        "AlphaStageDevHourVPCStack5DD1DC37",
+        "AlphaStageec2StackIDDF4B80D6.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2IDInstanceSecurityGroup5E3CA157"
+          }
+        ],
+        "/AlphaStage/ec2StackID/ec2ID/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2IDInstanceRole79AD7B51"
+          }
+        ],
+        "/AlphaStage/ec2StackID/ec2ID/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2IDInstanceProfile20C1288F"
+          }
+        ],
+        "/AlphaStage/ec2StackID/ec2ID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2ID5A6DA2B1"
+          }
+        ],
+        "/AlphaStage/ec2StackID/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/AlphaStage/ec2StackID/CDKMetadata/Default": [
+>>>>>>> database
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
+<<<<<<< HEAD
         "/AlphaStage/DevHourCognitoStack/BootstrapVersion": [
+=======
+        "/AlphaStage/ec2StackID/BootstrapVersion": [
+>>>>>>> database
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
+<<<<<<< HEAD
         "/AlphaStage/DevHourCognitoStack/CheckBootstrapVersion": [
+=======
+        "/AlphaStage/ec2StackID/CheckBootstrapVersion": [
+>>>>>>> database
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
+<<<<<<< HEAD
       "displayName": "AlphaStage/DevHourCognitoStack"
+=======
+      "displayName": "AlphaStage/ec2StackID"
+=======
+>>>>>>> main
+>>>>>>> database
     }
   }
 }

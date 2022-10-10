@@ -10,6 +10,7 @@ import { CognitoStack } from './cognito-stack'
 import { Constants } from './constants'
 import { DynamoDBStack } from './dynamoDB-stack'
 import { AttributeType } from 'aws-cdk-lib/aws-dynamodb'
+import { EC2Stack } from './ec2-stack'
 
 /// ----------------
 /// AlphaStage Props
@@ -37,6 +38,7 @@ export class AlphaStage extends Stage {
     private readonly dietTestTableStack: DynamoDBStack;
     private readonly ingredientTestTableStack: DynamoDBStack;
     private readonly menuTestTableStack: DynamoDBStack;
+    private readonly ec2Stack: EC2Stack;
 
     /// -----------
     /// Constructor
@@ -134,6 +136,14 @@ export class AlphaStage extends Stage {
             resourceArns:                   [this.userTestTableStack.tableArn, this.restaurantTestTableStack.tableArn, this.mealTestTableStack.tableArn, this.dietTestTableStack.tableArn, this.ingredientTestTableStack.tableArn, this.menuTestTableStack.tableArn],
         });
 
+        this.ec2Stack = new EC2Stack(this, {
+            account:      props.account,
+            instanceName: "ec2Stack",
+            id:           "ec2ID",
+            stackId:      "ec2StackID",
+            accountId:    Constants.Account,
+            region:       Constants.Region,
+            vpc:          this.vpcStack.vpc,
+        });
     }
-
 }
