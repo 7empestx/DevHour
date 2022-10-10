@@ -214,7 +214,7 @@ export module Constants {
 
             export module BasicRead {
 
-                export const AllowActions = [];
+                export const AllowActions = ['dynamodb:DescribeTable', 'dynamodb:Scan', 'dynamodb:Query', 'dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:UpdateItem', 'dynamodb:DeleteItem'];
 
             }
 

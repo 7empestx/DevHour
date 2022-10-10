@@ -30,10 +30,23 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHWM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFp1TmJebmpwDFQhKTclJ1nNPywIxanaDU4vzSomSwEIxdq5OXn5Kql1WsX2ZooWcONDarODNTt6g0ryQzN1UvCEIDAP0vWelyAAAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHVM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFp1TmJebmpwDFQhKTclJ1nNPywIxanaDU4vzSomSwEIxdq5OXn5Kql1WsX2ZooWdoADQ3qzgzU7eoNK8kMzdVLwhCAwDlfQaWcwAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/menuTestTableAlphaStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43": {
+   "Value": {
+    "Fn::GetAtt": [
+     "menuTestTableAlphaID3743E851",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
    }
   }
  },

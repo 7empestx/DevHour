@@ -47,25 +47,6 @@ export class AlphaStage extends Stage {
             region:     props.region
         }});
 
-        this.cognitoStack = new CognitoStack(this, {
-            account:                        props.account,
-            region:                         props.region, 
-            id:                             Constants.Cognito.Id,
-            stackId:                        Constants.Cognito.StackId,
-            userPoolId:                     Constants.Cognito.UserPool.Id,
-            identityPoolId:                 Constants.Cognito.IdentityPool.Id,
-            identityProviderId:             Constants.Cognito.IdentityProviderId,
-            userPoolClientId:               Constants.Cognito.UserPool.ClientId,
-            selfSignUpEnabled:              Constants.Cognito.UserPool.SelfSignUpEnabled,
-            enableAliasUsername:            Constants.Cognito.UserPool.SignInAliases.EnableUserName,
-            enableAliasEmail:               Constants.Cognito.UserPool.SignInAliases.EnableEmail,
-            fullnameRequired:               Constants.Cognito.UserPool.StandardAttributes.FullName.Required,
-            fullnameMutable:                Constants.Cognito.UserPool.StandardAttributes.FullName.Mutable,
-            passwordMinimumLength:          Constants.Cognito.UserPool.PasswordPolicy.MinimumLength,
-            allowUnauthenticatedIdentities: Constants.Cognito.IdentityPool.AllowUnauthenticatedIdentities,
-            resourceArns:                   []
-        });
-
         this.vpcStack = new VpcStack(this, {
             account:                props.account,
             region:                 props.region,
@@ -132,6 +113,25 @@ export class AlphaStage extends Stage {
             id:           "menuTestTableAlphaID",
             accountId:    Constants.Account, 
             region:       Constants.Region,
+        });
+
+        this.cognitoStack = new CognitoStack(this, {
+            account:                        props.account,
+            region:                         props.region, 
+            id:                             Constants.Cognito.Id,
+            stackId:                        Constants.Cognito.StackId,
+            userPoolId:                     Constants.Cognito.UserPool.Id,
+            identityPoolId:                 Constants.Cognito.IdentityPool.Id,
+            identityProviderId:             Constants.Cognito.IdentityProviderId,
+            userPoolClientId:               Constants.Cognito.UserPool.ClientId,
+            selfSignUpEnabled:              Constants.Cognito.UserPool.SelfSignUpEnabled,
+            enableAliasUsername:            Constants.Cognito.UserPool.SignInAliases.EnableUserName,
+            enableAliasEmail:               Constants.Cognito.UserPool.SignInAliases.EnableEmail,
+            fullnameRequired:               Constants.Cognito.UserPool.StandardAttributes.FullName.Required,
+            fullnameMutable:                Constants.Cognito.UserPool.StandardAttributes.FullName.Mutable,
+            passwordMinimumLength:          Constants.Cognito.UserPool.PasswordPolicy.MinimumLength,
+            allowUnauthenticatedIdentities: Constants.Cognito.IdentityPool.AllowUnauthenticatedIdentities,
+            resourceArns:                   [this.userTestTableStack.tableArn, this.restaurantTestTableStack.tableArn, this.mealTestTableStack.tableArn, this.dietTestTableStack.tableArn, this.ingredientTestTableStack.tableArn, this.menuTestTableStack.tableArn],
         });
 
     }

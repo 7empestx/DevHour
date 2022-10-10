@@ -345,52 +345,6 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-DevHourCognitoStack",
-         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
-         "RoleArn": {
-          "Fn::Join": [
-           "",
-           [
-            "arn:",
-            {
-             "Ref": "AWS::Partition"
-            },
-            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
-           ]
-          ]
-         },
-         "ActionMode": "CHANGE_SET_REPLACE",
-         "ChangeSetName": "PipelineChange",
-         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.template.json"
-        },
-        "InputArtifacts": [
-         {
-          "Name": "DevHourShellStep_Output"
-         }
-        ],
-        "Name": "DevHourCognitoStack.Prepare",
-        "RoleArn": {
-         "Fn::Join": [
-          "",
-          [
-           "arn:",
-           {
-            "Ref": "AWS::Partition"
-           },
-           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
-          ]
-         ]
-        },
-        "RunOrder": 1
-       },
-       {
-        "ActionTypeId": {
-         "Category": "Deploy",
-         "Owner": "AWS",
-         "Provider": "CloudFormation",
-         "Version": "1"
-        },
-        "Configuration": {
          "StackName": "AlphaStage-DevHourVPCStack",
          "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
          "RoleArn": {
@@ -713,33 +667,6 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-DevHourCognitoStack",
-         "ActionMode": "CHANGE_SET_EXECUTE",
-         "ChangeSetName": "PipelineChange"
-        },
-        "Name": "DevHourCognitoStack.Deploy",
-        "RoleArn": {
-         "Fn::Join": [
-          "",
-          [
-           "arn:",
-           {
-            "Ref": "AWS::Partition"
-           },
-           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
-          ]
-         ]
-        },
-        "RunOrder": 2
-       },
-       {
-        "ActionTypeId": {
-         "Category": "Deploy",
-         "Owner": "AWS",
-         "Provider": "CloudFormation",
-         "Version": "1"
-        },
-        "Configuration": {
          "StackName": "AlphaStage-DevHourVPCStack",
          "ActionMode": "CHANGE_SET_EXECUTE",
          "ChangeSetName": "PipelineChange"
@@ -920,6 +847,79 @@
          ]
         },
         "RunOrder": 2
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-DevHourCognitoStack",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "DevHourCognitoStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 3
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-DevHourCognitoStack",
+         "ActionMode": "CHANGE_SET_EXECUTE",
+         "ChangeSetName": "PipelineChange"
+        },
+        "Name": "DevHourCognitoStack.Deploy",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 4
        }
       ],
       "Name": "AlphaStage"
@@ -1455,7 +1455,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0VPWw6CMBA8i/9lfWCi33oBggcwsKzJQmkJpRrT9O4WWuRrZmdnZ7InOOdw2FUfk2HTZZJrcI+pwk4MPJBkRQbuuqEiTSI4nw6Dsu7B/Xf3l1q5FyYHd7PY0TTriUUotGT8bnKcveCqB1dquSQtuDlXz1xdW5bN1luMuiVcahL1XpRktB0xRiXuhQrX0Jr9+3iFS/i7NczZaNXEPUEZ8QceOHcMEwEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0VPWw6DMAw7y/5LBntI+x4XQOwAE5RMCpQWtXTTVPXuK7SMLzuOYysnuFwhPzQfk/FuyAS14B5zwwc20YSCJBooVYdVmlhwPh0PyrYH99+VL7lxz8wZ3N3yAedFTyxCpQTx7y7H2TNqRnC1EmvSirtz8yzVrSXR7b2VVj3ytSZR71mNRlnNY1TinslwDb05vosbFHl4vDdEmbZyphGhjvgDzw39VhQBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "DevHourPipelineStack/CDKMetadata/Default"

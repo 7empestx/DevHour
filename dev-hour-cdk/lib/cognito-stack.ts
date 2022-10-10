@@ -88,8 +88,29 @@ export class CognitoStack extends Stack {
                 providerName:   this.userPool.userPoolProviderName
                 
             }]
-       });
+      });
 
+        const isAnonymousCognitoGroupRole = new Roles.Cognito.AuthenticatedRole(this, `users-group-role`, props.resourceArns, this.identityPool.ref);
+        const isUserCognitoGroupRole = new Roles.Cognito.UnauthenticatedRole(this, `anonymous-group-role`, props.resourceArns, this.identityPool.ref);
+
+        new CfnIdentityPoolRoleAttachment(
+            this,
+            'identity-pool-role-attachment',
+            {
+            identityPoolId: this.identityPool.ref,
+            roles: {
+                authenticated: isUserCognitoGroupRole.roleArn,
+                unauthenticated: isAnonymousCognitoGroupRole.roleArn,
+            },
+            roleMappings: {
+                mapping: {
+                type: 'Token',
+                ambiguousRoleResolution: 'AuthenticatedRole',
+                identityProvider: identityProviderDomain,
+                },
+            },
+            },
+        );
     }
 
 }

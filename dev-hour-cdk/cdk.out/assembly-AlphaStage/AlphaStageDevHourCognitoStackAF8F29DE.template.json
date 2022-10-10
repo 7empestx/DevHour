@@ -121,10 +121,222 @@
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourIdentityPool"
    }
   },
+  "usersgrouprolePolicy892FFFE2": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "",
+    "Path": "/"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/users-group-rolePolicy/Resource"
+   }
+  },
+  "usersgrouprole5142F148": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "cognito-identity.amazonaws.com:aud": {
+          "Ref": "DevHourIdentityPool"
+         }
+        },
+        "ForAnyValue:StringLike": {
+         "cognito-identity.amazonaws.com:amr": "authenticated"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Default role for authenticated users",
+    "ManagedPolicyArns": [
+     {
+      "Ref": "usersgrouprolePolicy892FFFE2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/users-group-role/Resource"
+   }
+  },
+  "anonymousgrouprolePolicy34C14156": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "",
+    "Path": "/"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/anonymous-group-rolePolicy/Resource"
+   }
+  },
+  "anonymousgrouprole4CF2AF7A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRoleWithWebIdentity",
+       "Condition": {
+        "StringEquals": {
+         "cognito-identity.amazonaws.com:aud": {
+          "Ref": "DevHourIdentityPool"
+         }
+        },
+        "ForAnyValue:StringLike": {
+         "cognito-identity.amazonaws.com:amr": "unauthenticated"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Default role for anonymous users",
+    "ManagedPolicyArns": [
+     {
+      "Ref": "anonymousgrouprolePolicy34C14156"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/anonymous-group-role/Resource"
+   }
+  },
+  "identitypoolroleattachment": {
+   "Type": "AWS::Cognito::IdentityPoolRoleAttachment",
+   "Properties": {
+    "IdentityPoolId": {
+     "Ref": "DevHourIdentityPool"
+    },
+    "RoleMappings": {
+     "mapping": {
+      "AmbiguousRoleResolution": "AuthenticatedRole",
+      "IdentityProvider": {
+       "Fn::Join": [
+        "",
+        [
+         "cognito-idp.us-west-1.amazonaws.com/",
+         {
+          "Ref": "DevHourUserPool7653C170"
+         },
+         ":",
+         {
+          "Ref": "DevHourUserPoolClientA0C08451"
+         }
+        ]
+       ]
+      },
+      "Type": "Token"
+     }
+    },
+    "Roles": {
+     "authenticated": {
+      "Fn::GetAtt": [
+       "anonymousgrouprole4CF2AF7A",
+       "Arn"
+      ]
+     },
+     "unauthenticated": {
+      "Fn::GetAtt": [
+       "usersgrouprole5142F148",
+       "Arn"
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/identity-pool-role-attachment"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12PSwvCMBCEf4v3ZH2CXqUnb6XiWWKyyvaRhSStaOl/N0VTiqedmW/nMBvYbWG1UE8vtalkTTfoz0HpSsToqvlhKTD0F48uZ65FdreTTiKrCW2Yo1+S7MlER+GVO+7IoDs26s12Xvj/GNmURT6IAj23TuNIkh6EZYNQ+mW3PsA+7ig9kXRt7DUIxfd+ANuCY1zjAAAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12QTw+CMAzFP4v3MdFo4pVw8mBCMJ7N3CYWxppsA4OE7+4W/gQ99b1f+9Kme3o40njD3jbioooUPGh/dYxXxKN7z7HQ4JD2NytNhqhI+tSLnkWqQGq3bk1ktmfhHbguM9iCkCap2Qf1OvA/EXoLm/aufY5KJs4f+qo9HAiwmvYXplkhRYYKeBcSvyBkAg11GEguLTaGj2jSA9EoJC3ttt2d6C72ryktQGQav7mWNB/rF2T67tg2AQAA"
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default"

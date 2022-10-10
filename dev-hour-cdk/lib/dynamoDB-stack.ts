@@ -26,6 +26,10 @@ export class DynamoDBStack extends Stack {
         });
 
     } 
+
+    get tableArn(): string {
+        return this._db.tableArn;
+    }
     
 }
 

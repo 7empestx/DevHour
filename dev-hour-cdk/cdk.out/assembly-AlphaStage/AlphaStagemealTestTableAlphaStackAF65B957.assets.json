@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "a30571176dabf370e3a0a198d7f522a7f2902f3e9a02d75a194a8057fdca77ef": {
+    "807f4f378baf6b675d316296b9c8e5dfc078fe7edb6da5c27120f7ef7ae2653b": {
       "source": {
         "path": "AlphaStagemealTestTableAlphaStackAF65B957.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "a30571176dabf370e3a0a198d7f522a7f2902f3e9a02d75a194a8057fdca77ef.json",
+          "objectKey": "807f4f378baf6b675d316296b9c8e5dfc078fe7edb6da5c27120f7ef7ae2653b.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }
