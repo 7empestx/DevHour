@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
+import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -17,14 +18,13 @@ import software.amazon.awssdk.regions.Region;
 
 
 public class RestaurantDatabase implements RestaurantContract.Database {
-
-    private DynamoDbClient client;
+    private DynamoDbAsyncClient client;
     private String tableName;
 
     public RestaurantDatabase(final String regionName, final String tableName){
 
         // Create client
-        client = DynamoDbClient
+        client = DynamoDbAsyncClient
                 .builder()
                 .region(Region.of(regionName))
                 .build();
@@ -54,7 +54,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                 .tableName(tableName)
                 .build();
 
-        final Collection<AttributeValue> response = this.client.getItem(request).item().values();
+        final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
 
         return response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
 
@@ -84,6 +84,8 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     public List<RestaurantContract.Restaurant> getRestaurantsFromRadiusLocation(final double longitude,
                                                                                 final double latitude,
                                                                                 final double radius) {
+        //mercator projection
+        //use scan function to query tables
         //TODO: implement query to find restaurants based off radius
         return null;
     }
