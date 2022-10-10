@@ -105,11 +105,11 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("username",   getUsername());
-                input.put("email",      getEmail());
-                input.put("password",   getPassword());
-                input.put("name",       getFirstName());
-                input.put("last",       getLastName());
+                input.put("USERNAME",   getUsername());
+                input.put("EMAIL",      getEmail());
+                input.put("PASSWORD",   getPassword());
+                input.put("NAME",       getFirstName());
+                input.put("LAST",       getLastName());
 
                 /// Notify the listener
                 if(this.signUpListener != null)

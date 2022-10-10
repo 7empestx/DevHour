@@ -11,7 +11,6 @@ import dev.hour.R;
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.UserContract;
 
-
 public class UserDotView extends MapObjectView {
 
     /// --------------

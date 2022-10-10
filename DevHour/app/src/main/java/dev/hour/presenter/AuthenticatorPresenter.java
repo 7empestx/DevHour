@@ -1,7 +1,5 @@
 package dev.hour.presenter;
 
-import android.util.Log;
-
 import java.util.Map;
 
 import dev.hour.contracts.AuthenticatorContract;
