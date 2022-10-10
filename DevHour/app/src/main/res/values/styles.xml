@@ -4,7 +4,7 @@
     <!-- ============= -->
     <!-- Action Button -->
 
-    <style name="Theme.DevHour.ActionButton" parent="Widget.AppCompat.Button">
+    <style name="Theme.DevHour.ActionButton" parent="Widget.MaterialComponents.Button">
 
         <item name="android:layout_height">?attr/actionButtonLayoutHeight</item>
         <item name="android:layout_width">match_parent</item>
@@ -39,7 +39,7 @@
     <!-- ========== -->
     <!-- Error Text -->
 
-    <style name="Theme.DevHour.ErrorText" parent="Widget.AppCompat.TextView">
+    <style name="Theme.DevHour.ErrorText" parent="Widget.MaterialComponents.TextView">
 
         <item name="android:textColor">?attr/errorTextColor</item>
         <item name="android:textSize">?attr/errorTextSize</item>
@@ -76,7 +76,7 @@
     <!-- ========== -->
     <!-- TextButton -->
 
-    <style name="Theme.DevHour.TextButton" parent="Widget.AppCompat.TextView">
+    <style name="Theme.DevHour.TextButton" parent="Widget.MaterialComponents.TextView">
 
         <item name="android:ems">?attr/textButtonEms</item>
         <item name="android:textColor">?attr/textButtonTextColor</item>
@@ -90,7 +90,7 @@
     <!-- ======== -->
     <!-- Subtitle -->
 
-    <style name="Theme.DevHour.Subtitle" parent="Widget.AppCompat.TextView">
+    <style name="Theme.DevHour.Subtitle" parent="Widget.MaterialComponents.TextView">
 
         <item name="android:textColor">?attr/subtitleTextColor</item>
         <item name="android:textSize">?attr/subtitleTextSize</item>
@@ -104,7 +104,7 @@
     <!-- ===== -->
     <!-- Title -->
 
-    <style name="Theme.DevHour.Title" parent="Widget.AppCompat.TextView">
+    <style name="Theme.DevHour.Title" parent="Widget.MaterialComponents.TextView">
 
         <item name="android:textColor">?attr/titleTextColor</item>
         <item name="android:fontFamily">?attr/titleFontFamily</item>

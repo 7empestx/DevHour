@@ -450,6 +450,7 @@
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
                       "version": "2.43.0"
+<<<<<<< HEAD
                     }
                   },
                   "EC2-Ingestion-Endpoint": {
@@ -563,6 +564,8 @@
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.InterfaceVpcEndpoint",
                       "version": "2.43.0"
+=======
+>>>>>>> main
                     }
                   }
                 },
@@ -587,6 +590,7 @@
                 "constructInfo": {
                   "fqn": "constructs.Construct",
                   "version": "10.1.109"
+<<<<<<< HEAD
                 }
               },
               "Exports": {
@@ -613,6 +617,8 @@
                 "constructInfo": {
                   "fqn": "constructs.Construct",
                   "version": "10.1.109"
+=======
+>>>>>>> main
                 }
               },
               "BootstrapVersion": {
@@ -1187,6 +1193,7 @@
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
               "version": "2.43.0"
+<<<<<<< HEAD
             }
           },
           "ec2StackID": {
@@ -1397,6 +1404,8 @@
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
               "version": "2.43.0"
+=======
+>>>>>>> main
             }
           }
         },
@@ -2399,6 +2408,7 @@
                                     ]
                                   ]
                                 }
+<<<<<<< HEAD
                               },
                               {
                                 "name": "ec2StackID.Prepare",
@@ -2472,6 +2482,8 @@
                                     ]
                                   ]
                                 }
+=======
+>>>>>>> main
                               }
                             ]
                           }
@@ -3019,6 +3031,7 @@
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
+<<<<<<< HEAD
                         }
                       },
                       "ec2StackID.Prepare": {
@@ -3035,6 +3048,8 @@
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
+=======
+>>>>>>> main
                         }
                       }
                     },

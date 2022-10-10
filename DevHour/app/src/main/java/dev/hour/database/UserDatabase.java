@@ -73,8 +73,9 @@ public class UserDatabase implements UserContract.Database {
 
             user.setFirstName(Objects.requireNonNull(userBlob.get("first")).s());
             user.setLastName(Objects.requireNonNull(userBlob.get("last")).s());
-
-            /// Set the rest of the fields
+            user.setLongitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("longitude")).s()));
+            user.setLatitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("latitude")).s()));
+            
 
         } else user = null;
 
