@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "836c4fc31f61bb187e15847fb827eb8a64d3840359389b5022e09b3174382469": {
+    "effbcb3e925a5ad7a767700dfab036ba9d5e2f735be6990c49ff32d038b74a0a": {
       "source": {
         "path": "AlphaStagedietTestTableAlphaStackA6DC3AEA.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "836c4fc31f61bb187e15847fb827eb8a64d3840359389b5022e09b3174382469.json",
+          "objectKey": "effbcb3e925a5ad7a767700dfab036ba9d5e2f735be6990c49ff32d038b74a0a.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }
