@@ -36,13 +36,10 @@ public interface AuthenticatorContract {
 
             void onSignInRequest();
             void onSignUpRequest();
-<<<<<<< Updated upstream
             void onAuthenticated(final Map<String, String> credentials);
             void onUnauthenticated(final String message);
             void onSignOut(final String message);
             void onSignUp(final Map<String, String> data);
-=======
->>>>>>> Stashed changes
 
         }
 

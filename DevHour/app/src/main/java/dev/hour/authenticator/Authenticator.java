@@ -260,7 +260,6 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
         });
 
-<<<<<<< Updated upstream
         try {
 
             thread.start();
@@ -273,7 +272,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
                 credentials.put("ACCESS_KEY", this.credentials.accessKeyId());
                 credentials.put("SECRET_KEY", this.credentials.secretKey());
 
-                this.listener.onAuthenticated(credentials);
+                listener.onAuthenticated(credentials);
 
             }
 
@@ -281,13 +280,11 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
             Log.e("Authenticator", exception.getMessage());
 
-            if(this.listener != null)
-                this.listener.onSignInFailed("Sign-in failed");
+            if(listener != null)
+                listener.onSignInFailed("Sign-in failed");
 
         }
 
-=======
->>>>>>> Stashed changes
     }
 
     /**

@@ -30,22 +30,12 @@ public class UserDatabase implements UserContract.Database {
     /// -----------
     /// Constructor
 
-<<<<<<< Updated upstream
     public UserDatabase(final String region, final String tableName, final SdkHttpClient httpClient) {
 
         this.client     = null       ;
         this.tableName  = tableName  ;
         this.region     = region     ;
         this.httpClient = httpClient ;
-=======
-    public UserDatabase(final String regionName, final String tableName) {
-
-        // Create the client
-        client = DynamoDbClient
-                .builder()
-                .region(Region.of(regionName))
-                .build();
->>>>>>> Stashed changes
 
     }
 
@@ -177,16 +167,12 @@ public class UserDatabase implements UserContract.Database {
             final String firstName = Objects.requireNonNull(userBlob.get("first")).s();
             final String lastName  = Objects.requireNonNull(userBlob.get("last")).s();
 
-<<<<<<< Updated upstream
             user = new User(id, firstName, lastName);
 
-=======
             user.setFirstName(Objects.requireNonNull(userBlob.get("first")).s());
             user.setLastName(Objects.requireNonNull(userBlob.get("last")).s());
->>>>>>> Stashed changes
             user.setLongitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("longitude")).s()));
             user.setLatitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("latitude")).s()));
-            
 
         } else user = null;
 

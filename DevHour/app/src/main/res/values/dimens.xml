@@ -92,15 +92,12 @@
     <dimen name="fragment_login_no_account_sub_title_margin_top">16dp</dimen>
     <dimen name="fragment_login_forgot_sub_title_margin_top">16dp</dimen>
 
-<<<<<<< Updated upstream
     <!-- ============= -->
     <!-- MapObjectView -->
 
     <dimen name="map_object_view_width">32dp</dimen>
     <dimen name="map_object_view_height">32dp</dimen>
 
-=======
->>>>>>> Stashed changes
     <!-- ======================= -->
     <!-- Create Account Fragment -->
 
@@ -110,7 +107,6 @@
     <dimen name="fragment_create_account_last_name_input_top_margin">8dp</dimen>
     <dimen name="fragment_create_account_create_account_text_button_top_margin">24dp</dimen>
 
-<<<<<<< Updated upstream
     <dimen name="user_map_dot_view_elevation">16dp</dimen>
     <dimen name="user_map_dot_view_height">16dp</dimen>
     <dimen name="user_map_dot_view_width">16dp</dimen>

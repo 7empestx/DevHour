@@ -44,14 +44,11 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
 
     }
 
-<<<<<<< Updated upstream
     /**
      * Set the listener that will receive call backs when user-authenticator interactions occur.
      * @param interactionListener The listener that will receive callbacks on user-authenticator
      *                            interactions.
      */
-=======
->>>>>>> Stashed changes
     @Override
     public void setInteractionListener(final InteractionListener interactionListener) {
 
@@ -195,7 +192,7 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
 
     /**
      * Invoked when the user has successfully signed up.
-     * @param message The success message
+     * @param data The success message
      */
     @Override
     public void onSignUp(final Map<String, String> data) {

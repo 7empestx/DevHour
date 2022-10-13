@@ -10,14 +10,11 @@
     <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>
     <string name="bottom_navigation_location">Location</string>
     <string name="bottom_navigation_list">List</string>
-<<<<<<< Updated upstream
     <string name="mapbox_access_token">pk.eyJ1IjoiZGV2aG91ciIsImEiOiJjbDkzMHB3bG8xYzVlM3ZsZmsxdzU1ZmdjIn0.9sq-L_XAU4zyrf7ROSHOqQ</string>
     <string name="user">User</string>
     <string name="restaurant">Restaurant</string>
     <string name="store">Store</string>
     <string name="cafe">Cafe</string>
-=======
->>>>>>> Stashed changes
 
     <!-- ============== -->
     <!-- Login Fragment -->
@@ -44,10 +41,7 @@
 
     <string name="fragment_create_account_password_invalid">Password invalid</string>
     <string name="fragment_create_account_title_text">Create Account</string>
-<<<<<<< Updated upstream
     <string name="fragment_create_account_username_input_hint_text">Username</string>
-=======
->>>>>>> Stashed changes
     <string name="fragment_create_account_email_input_hint_text">Email</string>
     <string name="fragment_create_account_password_input_hint_text">Password (At least 6 Characters)</string>
     <string name="fragment_create_account_first_name_input_hint_text">First Name</string>

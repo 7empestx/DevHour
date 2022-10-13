@@ -3,28 +3,19 @@ package dev.hour.database;
 import android.util.Log;
 
 import java.util.List;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.AwsCredentials;
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.http.SdkHttpClient;
-import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
-<<<<<<< Updated upstream
-import software.amazon.awssdk.services.dynamodb.model.GetItemResponse;
-=======
->>>>>>> Stashed changes
 
 public class RestaurantDatabase implements RestaurantContract.Database {
 
@@ -143,14 +134,6 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                     String.valueOf(Integer.parseInt(
                             Objects.requireNonNull(restaurantBlob.get("pricing")).s())));
 
-<<<<<<< Updated upstream
-=======
-            restaurant.setName(Objects.requireNonNull(restaurantBlob.get("name")).s());
-            restaurant.setLongitude(Objects.requireNonNull(restaurantBlob.get("longitude")).s());
-            restaurant.setLatitude(Objects.requireNonNull(restaurantBlob.get("latitude")).s());
-            restaurant.setPricing(Objects.requireNonNull(restaurantBlob.get("pricing")).s());
-
->>>>>>> Stashed changes
         } else restaurant = null;
 
         return restaurant;
