@@ -41,3 +41,6 @@ export class EC2Stack extends Stack {
     }
 }
 
+// differences:
+//
+
