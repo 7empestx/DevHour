@@ -8,7 +8,7 @@ public interface UserContract {
 
         void setCredentials(final Map<String, String> credentials);
         User getUser(final String id);
-        void updateUser(final User user);
+        void updateUser(final Map<String, String> data);
 
     }
 

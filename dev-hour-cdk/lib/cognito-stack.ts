@@ -25,10 +25,13 @@ export interface CognitoStackProps {
     identityProviderId:             string,
     userPoolClientId:               string,
     selfSignUpEnabled:              boolean,
+    autoVerifyEmail:                boolean,
     enableAliasUsername:            boolean,
     enableAliasEmail:               boolean,
     fullnameRequired:               boolean,
     fullnameMutable:                boolean,
+    emailRequired:                  boolean,
+    emailMutable:                   boolean,
     passwordMinimumLength:          number,
     allowUnauthenticatedIdentities: boolean,
     resourceArns:                   string[]
@@ -52,6 +55,9 @@ export class CognitoStack extends Stack {
 
         this.userPool = new UserPool(this, props.userPoolId, {
             selfSignUpEnabled:          props.selfSignUpEnabled,
+            autoVerify: {
+                email:                  props.autoVerifyEmail
+            },
             signInAliases: {
                 username:               props.enableAliasUsername,
                 email:                  props.enableAliasEmail
@@ -60,7 +66,12 @@ export class CognitoStack extends Stack {
                 fullname: {
                     required:           props.fullnameRequired,
                     mutable:            props.fullnameMutable
+                },
+                email: {
+                    required:           props.emailRequired,
+                    mutable:            props.emailMutable
                 }
+
             },
             passwordPolicy: {
                 minLength:              props.passwordMinimumLength,
@@ -88,27 +99,23 @@ export class CognitoStack extends Stack {
                 providerName:   this.userPool.userPoolProviderName
                 
             }]
-      });
-
-        const isAnonymousCognitoGroupRole = new Roles.Cognito.AuthenticatedRole(this, `users-group-role`, props.resourceArns, this.identityPool.ref);
-        const isUserCognitoGroupRole = new Roles.Cognito.UnauthenticatedRole(this, `anonymous-group-role`, props.resourceArns, this.identityPool.ref);
+        });
 
         new CfnIdentityPoolRoleAttachment(
             this,
-            'identity-pool-role-attachment',
-            {
-            identityPoolId: this.identityPool.ref,
-            roles: {
-                authenticated: isUserCognitoGroupRole.roleArn,
-                unauthenticated: isAnonymousCognitoGroupRole.roleArn,
-            },
-            roleMappings: {
-                mapping: {
-                type: 'Token',
-                ambiguousRoleResolution: 'AuthenticatedRole',
-                identityProvider: identityProviderDomain,
+            `{props.stackId}identity-pool-role-attachment`, {
+                identityPoolId: this.identityPool.ref,
+                roles: {
+                    authenticated:      new Roles.Cognito.AuthenticatedRole(this, Constants.AppName, props.resourceArns, this.identityPool.ref),
+                    unauthenticated:    new Roles.Cognito.UnauthenticatedRole(this, Constants.AppName, props.resourceArns, this.identityPool.ref),
                 },
-            },
+                roleMappings: {
+                    mapping: {
+                        type: 'Token',
+                        ambiguousRoleResolution: 'UnauthenticatedRole',
+                        identityProvider: identityProviderDomain,
+                    },
+                },
             },
         );
     }

@@ -32,6 +32,8 @@ import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
 import dev.hour.view.Utilities;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 
 public class MainActivity extends AppCompatActivity implements
         AuthenticatorContract.Presenter.InteractionListener,
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements
     private RestaurantContract.Presenter        restaurantPresenter     ;
     private RestaurantContract.Database         restaurantDatabase      ;
     private Fragment                            lastFragment            ;
+    private SdkHttpClient                       httpClient              ;
 
     /// ------------------
     /// Activity Lifecycle
@@ -64,24 +67,29 @@ public class MainActivity extends AppCompatActivity implements
         initializeBottomNavigation();
         hideBottomNavigationBar();
 
+        // Initialize the http client
+        this.httpClient = UrlConnectionHttpClient.create();
+
         // Set up the authenticator
         authenticator           = new Authenticator(
                 this.getString(R.string.account),
                 this.getString(R.string.region),
                 this.getString(R.string.client_id),
                 this.getString(R.string.identity_pool_id),
-                this.getString(R.string.auth_endpoint));
+                this.getString(R.string.provider_name),
+                this.getString(R.string.auth_endpoint),
+                this.httpClient);
         authenticatorPresenter  = new AuthenticatorPresenter();
 
         // Set up the user presenter
         userPresenter           = new UserPresenter();
         userDatabase            = new UserDatabase(
-                this.getString(R.string.region), this.getString(R.string.user_table_name));
+                this.getString(R.string.region), this.getString(R.string.user_table_name), this.httpClient);
 
         // Set up the restaurant presenter
         restaurantPresenter     = new RestaurantPresenter();
         restaurantDatabase      = new RestaurantDatabase(
-                this.getString(R.string.region), this.getString(R.string.restaurant_table_name));
+                this.getString(R.string.region), this.getString(R.string.restaurant_table_name), this.httpClient);
 
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
@@ -172,10 +180,13 @@ public class MainActivity extends AppCompatActivity implements
 
     /**
      * Invoked when the user has successfully signed up.
-     * @param message The success message
+     * @param data The user data to update
      */
     @Override
-    public void onSignUp(final String message) {
+    public void onSignUp(final Map<String, String> data) {
+
+        if(this.userDatabase != null)
+            this.userDatabase.updateUser(data);
 
         showLoginFragment();
 

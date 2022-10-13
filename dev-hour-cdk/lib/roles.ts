@@ -27,7 +27,7 @@ export module Roles {
             /// Constructor
 
             constructor(scope: Construct, id: string, arns: string[], identityPoolRef: any) {
-                super(scope, id, {
+                super(scope, `{id}-{Cognito.AuthenticatedRole}`, {
                     description: 'Default role for anonymous users',
                     assumedBy: new FederatedPrincipal(
                         Constants.Cognito.ServiceName, {
@@ -61,7 +61,7 @@ export module Roles {
             /// Constructor
 
             constructor(scope: Construct, id: string, arns: string[], identityPoolRef: any) {
-                super(scope, id, {
+                super(scope, `{id}-{Cognito.AuthenticatedRole}`, {
                     description: 'Default role for authenticated users',
                     assumedBy: new FederatedPrincipal(
                         Constants.Cognito.ServiceName, {

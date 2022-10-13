@@ -109,7 +109,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("USERNAME", getEmail());
+                input.put("USERNAME", getUsernameOrEmail());
                 input.put("PASSWORD", getPassword());
 
                 /// Notify the listener
@@ -162,7 +162,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
         signInButton.setEnabled(true);
 
-        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10);
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10000);
 
         this.snackBar.show();
 
@@ -222,7 +222,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
      * Guarantees a non-null [String] that is at least empty
      * @return valid or invalid [String]
      */
-    private String getEmail() {
+    private String getUsernameOrEmail() {
 
         String email = "";
         final View        view      = this.getView();

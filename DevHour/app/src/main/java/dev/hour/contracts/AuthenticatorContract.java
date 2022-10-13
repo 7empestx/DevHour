@@ -15,7 +15,7 @@ public interface AuthenticatorContract {
         interface Listener {
 
             void onSignOut(final String message);
-            void onSignUp(final String message);
+            void onSignUp(final Map<String, String> data);
             void onSignInFailed(final String message);
             void onSignUpFailed(final String message);
             void onSignOutFailed(final String message);
@@ -39,7 +39,7 @@ public interface AuthenticatorContract {
             void onAuthenticated(final Map<String, String> credentials);
             void onUnauthenticated(final String message);
             void onSignOut(final String message);
-            void onSignUp(final String message);
+            void onSignUp(final Map<String, String> data);
 
         }
 

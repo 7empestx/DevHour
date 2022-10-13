@@ -1,5 +1,7 @@
 package dev.hour.database;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,29 +15,35 @@ import dev.hour.restaurant.Restaurant;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.model.GetItemResponse;
 
 public class RestaurantDatabase implements RestaurantContract.Database {
 
     /// ---------------
     /// Private Members
 
-    private DynamoDbAsyncClient client      ;
-    private String              tableName   ;
-    private String              region      ;
+    private DynamoDbClient              client      ;
+    private String                      tableName   ;
+    private String                      region      ;
+    private SdkHttpClient               httpClient  ;
+    private Map<String, AttributeValue> response    ;
 
     /// ------------
     /// Constructing
 
-    public RestaurantDatabase(final String region, final String tableName){
+    public RestaurantDatabase(final String region, final String tableName,
+                              final SdkHttpClient httpClient){
 
-        this.client     = null      ;
-        this.tableName  = tableName ;
-        this.region     = region    ;
+        this.client     = null          ;
+        this.tableName  = tableName     ;
+        this.region     = region        ;
+        this.httpClient = httpClient    ;
 
     }
 
@@ -51,7 +59,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     private Map<String, AttributeValue> getItem(final String key, final String value) {
 
         final Map<String, AttributeValue> keyMap = new HashMap<>();
-        final Map<String, AttributeValue> result;
+        Map<String, AttributeValue> result;
 
         if(client != null) {
 
@@ -62,9 +70,24 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                     .tableName(tableName)
                     .build();
 
-            final Collection<AttributeValue> response = this.client.getItem(request).join().item().values();
+            final RestaurantDatabase database = this;
 
-            result = response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
+            final Thread thread = new Thread(() ->
+                    database.response = database.client.getItem(request).item());
+
+            try {
+
+                thread.start();
+                thread.join();
+
+                result = response;
+
+            } catch (final Exception exception) {
+
+                Log.e("RestaurantDatabase", exception.getMessage());
+                result = new HashMap<>();
+
+            }
 
         } else result = new HashMap<>();
 
@@ -79,9 +102,10 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     @Override
     public void setCredentials(final Map<String, String> credentials) {
 
-        client = DynamoDbAsyncClient
+        client = DynamoDbClient
                 .builder()
                 .region(Region.of(this.region))
+                .httpClient(this.httpClient)
                 .credentialsProvider(() -> AwsBasicCredentials.create(
                         credentials.get("ACCESS_KEY"),
                         credentials.get("SECRET_KEY")))

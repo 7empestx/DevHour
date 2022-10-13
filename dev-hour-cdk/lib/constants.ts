@@ -155,6 +155,7 @@ export module Constants {
             export const StackId            =   `${Id}Stack`                    ;
             export const ClientId           =   `${Id}Client`                   ; 
             export const SelfSignUpEnabled  =   true                            ;
+            export const AutoVerifyEmail    =   false                           ;
 
             /// ---------------
             /// Sign In Aliases
@@ -175,6 +176,16 @@ export module Constants {
                 /// Full Name
 
                 export module FullName {
+
+                    export const Required   =   true                                ;
+                    export const Mutable    =   false                               ;
+
+                }
+
+                /// -----
+                /// Email
+
+                export module Email {
 
                     export const Required   =   true                                ;
                     export const Mutable    =   false                               ;
@@ -214,7 +225,13 @@ export module Constants {
 
             export module BasicRead {
 
-                export const AllowActions = ['dynamodb:DescribeTable', 'dynamodb:Scan', 'dynamodb:Query', 'dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:UpdateItem', 'dynamodb:DeleteItem'];
+                export const AllowActions = [   'dynamodb:DescribeTable',
+                                                'dynamodb:Scan',
+                                                'dynamodb:Query',
+                                                'dynamodb:GetItem',
+                                                'dynamodb:PutItem',
+                                                'dynamodb:UpdateItem',
+                                                'dynamodb:DeleteItem'];
 
             }
 

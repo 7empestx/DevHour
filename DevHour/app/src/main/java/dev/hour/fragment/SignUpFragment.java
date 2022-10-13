@@ -105,19 +105,18 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("USERNAME",   getUsername());
-                input.put("EMAIL",      getEmail());
-                input.put("PASSWORD",   getPassword());
-                input.put("NAME",       getFirstName());
-                input.put("LAST",       getLastName());
+                input.put("username",   getUsername());
+                input.put("password",   getPassword());
+                input.put("email",      getEmail());
+                input.put("name",       getFirstName() + getLastName());
+                input.put("first",      getFirstName());
+                input.put("last",       getLastName());
 
-                /// Notify the listener
                 if(this.signUpListener != null)
                     this.signUpListener.onReceivedSignUpInput(input);
 
             case R.id.fragment_sign_up_back_button:
 
-                /// Notify the listener
                 if(this.signUpListener != null)
                     this.signUpListener.onRequestSignIn();
 
@@ -167,7 +166,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
         signUpButton.setEnabled(true);
 
-        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10);
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10000);
 
         this.snackBar.show();
 

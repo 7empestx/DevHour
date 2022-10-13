@@ -30,15 +30,15 @@ export class AlphaStage extends Stage {
     /// ---------------
     /// Private Members
 
-    private readonly cognitoStack: CognitoStack;
-    private readonly vpcStack: VpcStack;
-    private readonly userTestTableStack: DynamoDBStack;
-    private readonly restaurantTestTableStack: DynamoDBStack;
-    private readonly mealTestTableStack: DynamoDBStack;
-    private readonly dietTestTableStack: DynamoDBStack;
-    private readonly ingredientTestTableStack: DynamoDBStack;
-    private readonly menuTestTableStack: DynamoDBStack;
-    private readonly ec2Stack: EC2Stack;
+    private readonly cognitoStack:              CognitoStack    ;
+    private readonly vpcStack:                  VpcStack        ;
+    private readonly userTestTableStack:        DynamoDBStack   ;
+    private readonly restaurantTestTableStack:  DynamoDBStack   ;
+    private readonly mealTestTableStack:        DynamoDBStack   ;
+    private readonly dietTestTableStack:        DynamoDBStack   ;
+    private readonly ingredientTestTableStack:  DynamoDBStack   ;
+    private readonly menuTestTableStack:        DynamoDBStack   ;
+    private readonly ec2Stack:                  EC2Stack        ;
 
     /// -----------
     /// Constructor
@@ -76,6 +76,7 @@ export class AlphaStage extends Stage {
             accountId:    Constants.Account, 
             region:       Constants.Region,
         });
+
         this.restaurantTestTableStack = new DynamoDBStack(this, {
             partitionKey: { name: 'id', type: AttributeType.STRING },
             tableName:    "restaurantTestTableAlpha",
@@ -84,6 +85,7 @@ export class AlphaStage extends Stage {
             accountId:    Constants.Account, 
             region:       Constants.Region,
         });
+
         this.mealTestTableStack = new DynamoDBStack(this, {
             partitionKey: { name: 'id', type: AttributeType.STRING },
             tableName:    "mealTestTableAlpha",
@@ -92,6 +94,7 @@ export class AlphaStage extends Stage {
             accountId:    Constants.Account, 
             region:       Constants.Region,
         });
+
         this.dietTestTableStack = new DynamoDBStack(this, {
             partitionKey: { name: 'id', type: AttributeType.STRING },
             tableName:    "dietTestTableAlpha",
@@ -100,6 +103,7 @@ export class AlphaStage extends Stage {
             accountId:    Constants.Account, 
             region:       Constants.Region,
         });
+
         this.ingredientTestTableStack = new DynamoDBStack(this, {
             partitionKey: { name: 'id', type: AttributeType.STRING },
             tableName:    "ingredientTestTableAlpha",
@@ -108,6 +112,7 @@ export class AlphaStage extends Stage {
             accountId:    Constants.Account, 
             region:       Constants.Region,
         });
+        
         this.menuTestTableStack = new DynamoDBStack(this, {
             partitionKey: { name: 'id', type: AttributeType.STRING },
             tableName:    "menuTestTableAlpha",
@@ -127,13 +132,21 @@ export class AlphaStage extends Stage {
             identityProviderId:             Constants.Cognito.IdentityProviderId,
             userPoolClientId:               Constants.Cognito.UserPool.ClientId,
             selfSignUpEnabled:              Constants.Cognito.UserPool.SelfSignUpEnabled,
+            autoVerifyEmail:                Constants.Cognito.UserPool.AutoVerifyEmail,
             enableAliasUsername:            Constants.Cognito.UserPool.SignInAliases.EnableUserName,
             enableAliasEmail:               Constants.Cognito.UserPool.SignInAliases.EnableEmail,
             fullnameRequired:               Constants.Cognito.UserPool.StandardAttributes.FullName.Required,
             fullnameMutable:                Constants.Cognito.UserPool.StandardAttributes.FullName.Mutable,
+            emailRequired:                  Constants.Cognito.UserPool.StandardAttributes.Email.Required,
+            emailMutable:                   Constants.Cognito.UserPool.StandardAttributes.Email.Mutable,
             passwordMinimumLength:          Constants.Cognito.UserPool.PasswordPolicy.MinimumLength,
             allowUnauthenticatedIdentities: Constants.Cognito.IdentityPool.AllowUnauthenticatedIdentities,
-            resourceArns:                   [this.userTestTableStack.tableArn, this.restaurantTestTableStack.tableArn, this.mealTestTableStack.tableArn, this.dietTestTableStack.tableArn, this.ingredientTestTableStack.tableArn, this.menuTestTableStack.tableArn],
+            resourceArns:                   [this.userTestTableStack.tableArn,
+                                             this.restaurantTestTableStack.tableArn,
+                                             this.mealTestTableStack.tableArn,
+                                             this.dietTestTableStack.tableArn,
+                                             this.ingredientTestTableStack.tableArn,
+                                             this.menuTestTableStack.tableArn],
         });
 
         this.ec2Stack = new EC2Stack(this, {
@@ -145,5 +158,7 @@ export class AlphaStage extends Stage {
             region:       Constants.Region,
             vpc:          this.vpcStack.vpc,
         });
+
     }
+
 }
