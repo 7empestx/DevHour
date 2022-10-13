@@ -293,7 +293,7 @@
     },
     "RoleMappings": {
      "mapping": {
-      "AmbiguousRoleResolution": "DevHourCognitoUnauthenticatedRole",
+      "AmbiguousRoleResolution": "AuthenticatedRole",
       "IdentityProvider": {
        "Fn::Join": [
         "",

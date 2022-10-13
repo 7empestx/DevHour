@@ -71,7 +71,6 @@ export class CognitoStack extends Stack {
                     required:           props.emailRequired,
                     mutable:            props.emailMutable
                 } */
-
             },
             passwordPolicy: {
                 minLength:              props.passwordMinimumLength,
@@ -115,7 +114,7 @@ export class CognitoStack extends Stack {
                 roleMappings: {
                     mapping: {
                         type: 'Token',
-                        ambiguousRoleResolution: Constants.Cognito.UnauthenticatedRoleId,
+                        ambiguousRoleResolution: 'AuthenticatedRole',
                         identityProvider: identityProviderDomain,
                     },
                 },

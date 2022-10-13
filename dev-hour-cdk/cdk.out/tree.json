@@ -1493,7 +1493,7 @@
                     "roleMappings": {
                       "mapping": {
                         "type": "Token",
-                        "ambiguousRoleResolution": "DevHourCognitoUnauthenticatedRole",
+                        "ambiguousRoleResolution": "AuthenticatedRole",
                         "identityProvider": {
                           "Fn::Join": [
                             "",
