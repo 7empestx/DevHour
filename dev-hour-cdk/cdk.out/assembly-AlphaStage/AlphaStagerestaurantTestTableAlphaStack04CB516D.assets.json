@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "c90799a7eac1d7b2ecddeebe3b20b6115d6a64a00494d5f17bdc41c40a93f7a5": {
+    "634173898dfa019ee8dad6b55ea49be6dfa7926deb75a399bb8422f8185a4e06": {
       "source": {
         "path": "AlphaStagerestaurantTestTableAlphaStack04CB516D.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "c90799a7eac1d7b2ecddeebe3b20b6115d6a64a00494d5f17bdc41c40a93f7a5.json",
+          "objectKey": "634173898dfa019ee8dad6b55ea49be6dfa7926deb75a399bb8422f8185a4e06.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

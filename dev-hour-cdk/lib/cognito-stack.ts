@@ -67,10 +67,10 @@ export class CognitoStack extends Stack {
                     required:           props.fullnameRequired,
                     mutable:            props.fullnameMutable
                 },
-                email: {
+/*                 email: {
                     required:           props.emailRequired,
                     mutable:            props.emailMutable
-                }
+                } */
 
             },
             passwordPolicy: {

@@ -37,10 +37,5 @@ export class EC2Stack extends Stack {
             instanceType: new InstanceType('t2.micro'),
             machineImage: MachineImage.latestAmazonLinux()
         });
-
     }
 }
-
-// differences:
-//
-

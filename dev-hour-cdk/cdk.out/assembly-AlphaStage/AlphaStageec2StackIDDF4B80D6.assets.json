@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "81f833c9a510810c203bf92100487d04b33a91190ca194cc60593d2e8bf14558": {
+    "5d2158982d461dcea0f9dbb58bc12835fbf016086c62a99144d7a19f6fe855b5": {
       "source": {
         "path": "AlphaStageec2StackIDDF4B80D6.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "81f833c9a510810c203bf92100487d04b33a91190ca194cc60593d2e8bf14558.json",
+          "objectKey": "5d2158982d461dcea0f9dbb58bc12835fbf016086c62a99144d7a19f6fe855b5.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

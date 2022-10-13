@@ -106,7 +106,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOwQrCMBBEv8V7umpR8e5BvJX0AySmW9g2TWSTKBLy77bUnDzN8GYGpobDEXYb9faV7sbK0ANSG5QexYzuCXUN6WZ9UFajaFFHpvC5sotPcentHyjVLEhNkKQzuOCiJW7Y9WQw5wU2itWEAVlI9C6yXic/n4V1HcLgt6/9GU7z18ETVRxtoAlBrvoFZMqw0scAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOwQrCMBBEv8V7umoV9O5BvJX0AySmW9g2TWSTKBLy77bUnDzN8GYGpobjAXYb9faV7sbK0ANSG5QexYzuCXUN6WZ9UFajaFFHpvC5sotPcentHyjVLEhNkKQzuOCiJW7Y9WQw5wU2itWEAVlI9C6yXic/n4V1HcLgt6/9GU7z18ETVRxtoAlBrvoFNtDV2McAAAA="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/ec2StackID/CDKMetadata/Default"

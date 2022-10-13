@@ -34,11 +34,6 @@
       "Mutable": false,
       "Name": "name",
       "Required": true
-     },
-     {
-      "Mutable": false,
-      "Name": "email",
-      "Required": true
      }
     ],
     "SmsVerificationMessage": "The verification code to your new account is {####}",
@@ -339,7 +334,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12Qyw6CMBBFv8V9qY+ocUtYuTAhGNemthUHSidpCwYJ/24bHkFXc++ZuZnJ7Oj+QDcr9rYRF2Wk4EG7q2O8JB7dO465Boe0u1lpUkRFkqee9SQSBVK7ZWskkz0L78C1qcEGhDRxxT6ol4H/idCb2bh36TNUMnb+0FflYU+AVbS7MM1yKVJUwNuQ+AUhE2iofU8yabE2fECj7olGIWlh1832RI/+M4UFiEztF1eSZkP9Al5wHEU1AQAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12Qyw6CMBBFv8V9qc9Et4SVCxOCcW1qW3GgdJK2YJDw77bhEXQ1956Zm5nMjh72dLNibxtxUUYKHrS7OsZL4tG945hrcEi7m5UmRVQkeepZTyJRILVbtkYy2bPwDlybGmxASBNX7IN6GfifCL2ZjXuXPkMlY+cPfVUe9gRYRbsL0yyXIkUFvA2JXxAygYba9ySTFmvDBzTqnmgUkhZ23WxP9Og/U1iAyNR+cSVpNtQvTWHY7DUBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default"
