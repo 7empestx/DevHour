@@ -26,8 +26,8 @@ export module Roles {
             /// -----------
             /// Constructor
 
-            constructor(scope: Construct, id: string, arns: string[], identityPoolRef: any) {
-                super(scope, `{id}-{Cognito.AuthenticatedRole}`, {
+            constructor(scope: Construct, arns: string[], identityPoolRef: any) {
+                super(scope, Constants.Cognito.UnauthenticatedRoleId, {
                     description: 'Default role for anonymous users',
                     assumedBy: new FederatedPrincipal(
                         Constants.Cognito.ServiceName, {
@@ -40,7 +40,7 @@ export module Roles {
                         },
                         Constants.Cognito.Federated.AuthenticatedAssumeRoleAction),
                     managedPolicies: [
-                        new ManagedPolicy(scope, `${id}Policy`,
+                        new ManagedPolicy(scope, `${Constants.Cognito.UnauthenticatedRoleId}UnauthenticatedPolicy`,
                             {
                                 statements: [new PolicyStatements.DynamoDB.BasicReadPolicyStatement(arns)]
                             })
@@ -60,8 +60,8 @@ export module Roles {
             /// -----------
             /// Constructor
 
-            constructor(scope: Construct, id: string, arns: string[], identityPoolRef: any) {
-                super(scope, `{id}-{Cognito.AuthenticatedRole}`, {
+            constructor(scope: Construct, arns: string[], identityPoolRef: any) {
+                super(scope, Constants.Cognito.AuthenticatedRoleId, {
                     description: 'Default role for authenticated users',
                     assumedBy: new FederatedPrincipal(
                         Constants.Cognito.ServiceName, {
@@ -74,7 +74,7 @@ export module Roles {
                         },
                         Constants.Cognito.Federated.AuthenticatedAssumeRoleAction),
                     managedPolicies: [
-                        new ManagedPolicy(scope, `${id}Policy`,
+                        new ManagedPolicy(scope, `${Constants.Cognito.AuthenticatedRoleId}AuthenticatedPolicy`,
                             {
                                 statements: [new PolicyStatements.DynamoDB.BasicReadPolicyStatement(arns)]
                             })

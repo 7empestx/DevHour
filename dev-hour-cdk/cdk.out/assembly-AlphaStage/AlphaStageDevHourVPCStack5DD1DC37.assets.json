@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "a0cd439a8e5ba6225ae5fa0fdf94cb5a51f0f907ab5c9b5b3f4a51d2aa92d77d": {
+    "6467a2d2ddb2647300ed24b95f0f03e284376cc37b33e642ceacadc9692b70d5": {
       "source": {
         "path": "AlphaStageDevHourVPCStack5DD1DC37.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "a0cd439a8e5ba6225ae5fa0fdf94cb5a51f0f907ab5c9b5b3f4a51d2aa92d77d.json",
+          "objectKey": "6467a2d2ddb2647300ed24b95f0f03e284376cc37b33e642ceacadc9692b70d5.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

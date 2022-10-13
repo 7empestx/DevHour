@@ -101,18 +101,21 @@ export class CognitoStack extends Stack {
             }]
         });
 
+        const authenticatedRole     = new Roles.Cognito.AuthenticatedRole(this, props.resourceArns, this.identityPool.ref).roleArn
+        const unauthenticatedRole   = new Roles.Cognito.UnauthenticatedRole(this, props.resourceArns, this.identityPool.ref).roleArn
+
         new CfnIdentityPoolRoleAttachment(
             this,
-            `{props.stackId}identity-pool-role-attachment`, {
+            `identity-pool-role-attachment`, {
                 identityPoolId: this.identityPool.ref,
                 roles: {
-                    authenticated:      new Roles.Cognito.AuthenticatedRole(this, Constants.AppName, props.resourceArns, this.identityPool.ref),
-                    unauthenticated:    new Roles.Cognito.UnauthenticatedRole(this, Constants.AppName, props.resourceArns, this.identityPool.ref),
+                    authenticated:      authenticatedRole,
+                    unauthenticated:    unauthenticatedRole,
                 },
                 roleMappings: {
                     mapping: {
                         type: 'Token',
-                        ambiguousRoleResolution: 'UnauthenticatedRole',
+                        ambiguousRoleResolution: Constants.Cognito.UnauthenticatedRoleId,
                         identityProvider: identityProviderDomain,
                     },
                 },

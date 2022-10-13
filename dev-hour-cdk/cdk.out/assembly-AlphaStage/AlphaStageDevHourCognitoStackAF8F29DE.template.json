@@ -21,9 +21,7 @@
     "AliasAttributes": [
      "email"
     ],
-    "AutoVerifiedAttributes": [
-     "email"
-    ],
+    "AutoVerifiedAttributes": [],
     "EmailVerificationMessage": "The verification code to your new account is {####}",
     "EmailVerificationSubject": "Verify your new account",
     "Policies": {
@@ -35,6 +33,11 @@
      {
       "Mutable": false,
       "Name": "name",
+      "Required": true
+     },
+     {
+      "Mutable": false,
+      "Name": "email",
       "Required": true
      }
     ],
@@ -121,7 +124,7 @@
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourIdentityPool"
    }
   },
-  "usersgrouprolePolicy892FFFE2": {
+  "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy8DF535F3": {
    "Type": "AWS::IAM::ManagedPolicy",
    "Properties": {
     "PolicyDocument": {
@@ -165,10 +168,10 @@
     "Path": "/"
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/users-group-rolePolicy/Resource"
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRoleAuthenticatedPolicy/Resource"
    }
   },
-  "usersgrouprole5142F148": {
+  "DevHourCognitoAuthenticatedRole2A5663C5": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -196,15 +199,15 @@
     "Description": "Default role for authenticated users",
     "ManagedPolicyArns": [
      {
-      "Ref": "usersgrouprolePolicy892FFFE2"
+      "Ref": "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy8DF535F3"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/users-group-role/Resource"
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRole/Resource"
    }
   },
-  "anonymousgrouprolePolicy34C14156": {
+  "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicyB5241957": {
    "Type": "AWS::IAM::ManagedPolicy",
    "Properties": {
     "PolicyDocument": {
@@ -248,10 +251,10 @@
     "Path": "/"
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/anonymous-group-rolePolicy/Resource"
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy/Resource"
    }
   },
-  "anonymousgrouprole4CF2AF7A": {
+  "DevHourCognitoUnauthenticatedRoleF98B7E15": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -279,12 +282,12 @@
     "Description": "Default role for anonymous users",
     "ManagedPolicyArns": [
      {
-      "Ref": "anonymousgrouprolePolicy34C14156"
+      "Ref": "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicyB5241957"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/anonymous-group-role/Resource"
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRole/Resource"
    }
   },
   "identitypoolroleattachment": {
@@ -295,7 +298,7 @@
     },
     "RoleMappings": {
      "mapping": {
-      "AmbiguousRoleResolution": "AuthenticatedRole",
+      "AmbiguousRoleResolution": "DevHourCognitoUnauthenticatedRole",
       "IdentityProvider": {
        "Fn::Join": [
         "",
@@ -317,13 +320,13 @@
     "Roles": {
      "authenticated": {
       "Fn::GetAtt": [
-       "anonymousgrouprole4CF2AF7A",
+       "DevHourCognitoAuthenticatedRole2A5663C5",
        "Arn"
       ]
      },
      "unauthenticated": {
       "Fn::GetAtt": [
-       "usersgrouprole5142F148",
+       "DevHourCognitoUnauthenticatedRoleF98B7E15",
        "Arn"
       ]
      }
@@ -336,7 +339,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12Qyw6CMBBFv8V9qc9Et4SVCxOCcW1qW3GgdJK2YJDw77bhEXQ1956Zm5nMjh72dLNibxtxUUYKHrS7OsZL4tG945hrcEi7m5UmRVQkeepZTyJRILVbtkYy2bPwDlybGmxASBNX7IN6GfifCL2ZjXuXPkMlY+cPfVUe9gRYRbsL0yyXIkUFvA2JXxAygYba9ySTFmvDBzTqnmgUkhZ23WxP9Og/U1iAyNR+cSVpNtQvTWHY7DUBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12Qyw6CMBBFv8V9qY+ocUtYuTAhGNemthUHSidpCwYJ/24bHkFXc++ZuZnJ7Oj+QDcr9rYRF2Wk4EG7q2O8JB7dO465Boe0u1lpUkRFkqee9SQSBVK7ZWskkz0L78C1qcEGhDRxxT6ol4H/idCb2bh36TNUMnb+0FflYU+AVbS7MM1yKVJUwNuQ+AUhE2iofU8yabE2fECj7olGIWlh1832RI/+M4UFiEztF1eSZkP9Al5wHEU1AQAA"
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default"
