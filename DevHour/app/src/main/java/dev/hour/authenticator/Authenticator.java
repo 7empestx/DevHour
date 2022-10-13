@@ -260,6 +260,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
         });
 
+<<<<<<< Updated upstream
         try {
 
             thread.start();
@@ -285,6 +286,8 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
         }
 
+=======
+>>>>>>> Stashed changes
     }
 
     /**

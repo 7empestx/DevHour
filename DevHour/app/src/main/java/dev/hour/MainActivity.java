@@ -329,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
+<<<<<<< Updated upstream
      * Shows the map fragment to the user
      */
     private void showMapFragment() {
@@ -371,6 +372,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
+=======
+>>>>>>> Stashed changes
      * Initializes the bottom navigation bar
      */
     private void initializeBottomNavigation() {

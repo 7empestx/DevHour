@@ -162,7 +162,11 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
         signInButton.setEnabled(true);
 
+<<<<<<< Updated upstream
         this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10000);
+=======
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + errorString), 10);
+>>>>>>> Stashed changes
 
         this.snackBar.show();
 

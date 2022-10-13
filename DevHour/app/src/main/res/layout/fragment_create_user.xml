@@ -23,6 +23,7 @@
         app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_back_button"/>
 
     <EditText
+<<<<<<< Updated upstream
         android:id="@+id/fragment_sign_up_username_input"
         style="@style/Theme.DevHour.EditText"
         android:layout_marginTop="@dimen/fragment_login_email_input_margin_top"
@@ -37,12 +38,21 @@
         android:id="@+id/fragment_sign_up_email_input"
         style="@style/Theme.DevHour.EditText"
         android:layout_marginTop="@dimen/fragment_create_account_email_input_top_margin"
+=======
+        android:id="@+id/fragment_sign_up_email_input"
+        style="@style/Theme.DevHour.EditText"
+        android:layout_marginTop="@dimen/fragment_login_email_input_margin_top"
+>>>>>>> Stashed changes
         android:hint="@string/fragment_create_account_email_input_hint_text"
         android:inputType="textEmailAddress"
         android:autofillHints="Email Address"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_username_input" />
+=======
+        app:layout_constraintTop_toBottomOf="@id/fragment_sign_up_account_title" />
+>>>>>>> Stashed changes
 
     <EditText
         android:id="@+id/fragment_sign_up_password_input"

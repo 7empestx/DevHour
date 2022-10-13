@@ -21,7 +21,10 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
+<<<<<<< Updated upstream
 import software.amazon.awssdk.services.dynamodb.model.GetItemResponse;
+=======
+>>>>>>> Stashed changes
 
 public class RestaurantDatabase implements RestaurantContract.Database {
 
@@ -140,6 +143,14 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                     String.valueOf(Integer.parseInt(
                             Objects.requireNonNull(restaurantBlob.get("pricing")).s())));
 
+<<<<<<< Updated upstream
+=======
+            restaurant.setName(Objects.requireNonNull(restaurantBlob.get("name")).s());
+            restaurant.setLongitude(Objects.requireNonNull(restaurantBlob.get("longitude")).s());
+            restaurant.setLatitude(Objects.requireNonNull(restaurantBlob.get("latitude")).s());
+            restaurant.setPricing(Objects.requireNonNull(restaurantBlob.get("pricing")).s());
+
+>>>>>>> Stashed changes
         } else restaurant = null;
 
         return restaurant;

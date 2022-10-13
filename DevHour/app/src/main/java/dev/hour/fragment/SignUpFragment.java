@@ -38,6 +38,10 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
     private Snackbar        snackBar        ;
     private SignUpListener  signUpListener  ;
+<<<<<<< Updated upstream
+=======
+    private SignInListener  signInListener  ;
+>>>>>>> Stashed changes
 
     /// --------
     /// Fragment
@@ -105,6 +109,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
                 final Map<String, String> input = new HashMap<>();
 
+<<<<<<< Updated upstream
                 input.put("username",   getUsername());
                 input.put("password",   getPassword());
                 input.put("email",      getEmail());
@@ -112,11 +117,23 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                 input.put("first",      getFirstName());
                 input.put("last",       getLastName());
 
+=======
+                input.put("USERNAME", getEmail());
+                input.put("PASSWORD", getPassword());
+                input.put("FIRST", getFirstName());
+                input.put("LAST", getLastName());
+
+                /// Notify the listener
+>>>>>>> Stashed changes
                 if(this.signUpListener != null)
                     this.signUpListener.onReceivedSignUpInput(input);
 
             case R.id.fragment_sign_up_back_button:
 
+<<<<<<< Updated upstream
+=======
+                /// Notify the listener
+>>>>>>> Stashed changes
                 if(this.signUpListener != null)
                     this.signUpListener.onRequestSignIn();
 
@@ -132,8 +149,12 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     /**
      * Invoked when the user has successfully signed up
      */
+<<<<<<< Updated upstream
     @Override
     public void onSignUp() {
+=======
+    public void onUserSignedUp() {
+>>>>>>> Stashed changes
 
         final Button signUpButton =
                 this.requireView().findViewById(R.id.fragment_sign_up_create_account);
@@ -145,6 +166,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     }
 
     /**
+<<<<<<< Updated upstream
      * Invoked when the user has successfully signed in
      */
     @Override
@@ -161,11 +183,17 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
      */
     @Override
     public void onSignUpFailed(final String message) {
+=======
+     * Invoked when the user could not sign up
+     */
+    public void onUserSignUpFailed(final String errorString) {
+>>>>>>> Stashed changes
 
         Button signUpButton = this.requireView().findViewById(R.id.fragment_sign_up_create_account);
 
         signUpButton.setEnabled(true);
 
+<<<<<<< Updated upstream
         this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10000);
 
         this.snackBar.show();
@@ -179,13 +207,27 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     @Override
     public void onSignOutFailed(final String message) { /* Empty */ }
 
+=======
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + errorString), 10);
+
+        this.snackBar.show();
+
+    }
+
+>>>>>>> Stashed changes
     /// --------------
     /// Public Methods
 
     /**
      * The Listener that receives callbacks when the user attempts to Sign in
      */
+<<<<<<< Updated upstream
     public void setSignInListener(final SignInListener listener) { /* Empty */ }
+=======
+    public void setSignInListener(final SignInListener listener) {
+        this.signInListener = listener;
+    }
+>>>>>>> Stashed changes
 
     /**
      * The Listener that receives callbacks when the user attempts to Sign Up
@@ -216,6 +258,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     }
 
     /**
+<<<<<<< Updated upstream
      * Attempts to retrieve the username from the corresponding [EditText].
      * Guarantees a non-null [String] that is at least empty
      * @return valid or invalid [String]
@@ -237,6 +280,8 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
     }
 
     /**
+=======
+>>>>>>> Stashed changes
      * Attempts to retrieve the email from the corresponding [EditText].
      * Guarantees a non-null [String] that is at least empty
      * @return valid or invalid [String]
@@ -326,6 +371,10 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
         if (this.snackBar != null)  this.snackBar.dismiss();
 
         this.snackBar           = null;
+<<<<<<< Updated upstream
+=======
+        this.signInListener     = null;
+>>>>>>> Stashed changes
         this.signUpListener     = null;
 
     }
