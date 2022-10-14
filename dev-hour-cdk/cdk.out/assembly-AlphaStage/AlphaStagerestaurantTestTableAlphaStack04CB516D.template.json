@@ -37,6 +37,19 @@
    }
   }
  },
+ "Outputs": {
+  "ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0": {
+   "Value": {
+    "Fn::GetAtt": [
+     "restaurantTestTableAlphaID37264F16",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+   }
+  }
+ },
  "Parameters": {
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",

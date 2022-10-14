@@ -1,11 +1,13 @@
 package dev.hour.contracts;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RestaurantContract {
     
     interface Database {
 
+        void setCredentials(final Map<String, String> credentials);
         Restaurant getRestaurant(String id);
         List<Restaurant> getRestaurantsFromRadiusLocation(final double longitude,
                                                           final double latitude,
@@ -29,15 +31,16 @@ public interface RestaurantContract {
 
     interface Restaurant {
 
+        String getId();
         String getName();
         double getLongitude();
         double getLatitude();
         int getPricing();
 
-        void setName(String name);
-        void setLongitude(double longitude);
-        void setLatitude(double latitude);
-        void setPricing(int pricing);
+        String setName(String name);
+        double setLongitude(String longitude);
+        double setLatitude(String latitude);
+        int setPricing(String pricing);
 
     }
 

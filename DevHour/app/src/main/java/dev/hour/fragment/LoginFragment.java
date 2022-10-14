@@ -33,13 +33,12 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     /// --------------
     /// Static Members
 
-    public final static String TAG = "LoginFragment"    ;
+    public final static String TAG = "LoginFragment";
 
     /// --------------
     /// Private Fields
 
     private Snackbar        snackBar        ;
-    private SignUpListener  signUpListener  ;
     private SignInListener  signInListener  ;
 
     /// --------
@@ -58,18 +57,18 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
 
         final View                layout              = layoutInflater.inflate(R.layout.fragment_login, container, false);
-        final ConstraintLayout    mLayout             = (ConstraintLayout)layout.findViewById(R.id.fragment_login_layout);
-        final TextView            createUserButton    = (TextView)layout.findViewById(R.id.fragment_login_create_account);
-        final TextView            resetButton         = (TextView)layout.findViewById(R.id.fragment_login_reset);
-        final TextView            signInButton        = (TextView)layout.findViewById(R.id.fragment_login_sign_in_button);
+        final ConstraintLayout    mLayout             = layout.findViewById(R.id.fragment_login_layout);
+        final TextView            createUserButton    = layout.findViewById(R.id.fragment_login_create_account);
+        final TextView            resetButton         = layout.findViewById(R.id.fragment_login_reset);
+        final TextView            signInButton        = layout.findViewById(R.id.fragment_login_sign_in_button);
 
-        if (mLayout != null) mLayout.setOnClickListener((OnClickListener) this);
+        if (mLayout != null) mLayout.setOnClickListener(this);
 
-        if (signInButton != null) signInButton.setOnClickListener((OnClickListener) this);
+        if (signInButton != null) signInButton.setOnClickListener(this);
 
-        if (createUserButton != null) createUserButton.setOnClickListener((OnClickListener) this);
+        if (createUserButton != null) createUserButton.setOnClickListener(this);
 
-        if (resetButton != null) resetButton.setOnClickListener((OnClickListener) this);
+        if (resetButton != null) resetButton.setOnClickListener(this);
 
         return layout;
 
@@ -104,13 +103,13 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
             case R.id.fragment_login_sign_in_button:
 
                 final Button signInButton =
-                        (Button) this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+                        this.requireView().findViewById(R.id.fragment_login_sign_in_button);
 
                 signInButton.setEnabled(false);
 
                 final Map<String, String> input = new HashMap<>();
 
-                input.put("USERNAME", getEmail());
+                input.put("USERNAME", getUsernameOrEmail());
                 input.put("PASSWORD", getPassword());
 
                 /// Notify the listener
@@ -130,16 +129,22 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
     }
 
-    /// ----------------------
-    /// UserContract.LoginView
+    /// --------------------------
+    /// AuthenticatorContract.View
+
+    /**
+     * Invoked when the user has successfully signed up
+     */
+    @Override
+    public void onSignUp() { /* Empty */ }
 
     /**
      * Invoked when the user has successfully signed in
      */
-    public void onUserLogin() {
+    @Override
+    public void onSignIn() {
 
-        final Button signInButton =
-                (Button) this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+        final Button signInButton = this.requireView().findViewById(R.id.fragment_login_sign_in_button);
 
         signInButton.setEnabled(true);
 
@@ -150,17 +155,30 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     /**
      * Invoked when the user could not sign in
      */
-    public void onUserLoginFailed(final String errorString) {
+    @Override
+    public void onSignInFailed(final String message) {
 
-        Button signInButton = (Button)this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+        Button signInButton = this.requireView().findViewById(R.id.fragment_login_sign_in_button);
 
         signInButton.setEnabled(true);
 
-        this.snackBar = Snackbar.make(this.requireView(), (CharSequence)("Error: " + errorString), 10);
+        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10000);
 
         this.snackBar.show();
 
     }
+
+    /**
+     * Invoked when the user could not sign up
+     */
+    @Override
+    public void onSignUpFailed(final String message) { /* Empty */ }
+
+    /**
+     * Invoked when the user could not sign out
+     */
+    @Override
+    public void onSignOutFailed(final String message) { /* Empty */ }
 
     /// --------------
     /// Public Methods
@@ -175,9 +193,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     /**
      * The Listener that receives callbacks when the user attempts to Sign Up
      */
-    public void setSignUpListener(final SignUpListener listener) {
-        this.signUpListener = listener;
-    }
+    public void setSignUpListener(final SignUpListener listener) { /* Empty */ }
 
     /// ---------------
     /// Private Methods
@@ -205,14 +221,14 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
      * Guarantees a non-null [String] that is at least empty
      * @return valid or invalid [String]
      */
-    private String getEmail() {
+    private String getUsernameOrEmail() {
 
         String email = "";
         final View        view      = this.getView();
         final EditText    emailText = view != null ?
                 (EditText)view.findViewById(R.id.fragment_login_email_input) : null;
 
-        CharSequence text = (CharSequence) (emailText != null ? emailText.getText() : null);
+        CharSequence text = (emailText != null ? emailText.getText() : null);
 
         if (text != null) email = text.toString();
 
@@ -232,7 +248,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
         String password = "";
 
-        CharSequence text = (CharSequence) (passwordText != null ? passwordText.getText() : null);
+        CharSequence text = (passwordText != null ? passwordText.getText() : null);
 
         if(text != null) password = text.toString();
 
@@ -248,7 +264,6 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
 
         this.snackBar           = null;
         this.signInListener     = null;
-        this.signUpListener     = null;
 
     }
 

@@ -192,7 +192,7 @@
   "DevHourVPCEC2IngestionEndpointFEEAC083": {
    "Type": "AWS::EC2::VPCEndpoint",
    "Properties": {
-    "ServiceName": "com.amazonaws.us-east-1.ec2",
+    "ServiceName": "com.amazonaws.us-west-1.ec2",
     "VpcId": {
      "Ref": "DevHourVPC77A046B5"
     },
@@ -222,11 +222,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-<<<<<<< HEAD
     "Analytics": "v2:deflate64:H4sIAAAAAAAA/12PQQuCQBSEf0v3dSsL6hoS0U00vMa6PuGlvZXdt0aI/73NEKHTDB/DDBPL/U5uVurlIl01UYulHHJWuhEB3UHHcig6LZKaijQRqcVeMeS+JOAvXFxmPMNNlS0sfGEn54xGxWhIXInB1kpDKD5T1RkkFjlob5HfF2t8NzX8g7A/p0eRgTPe6mlr9qMgU4F8uHW/PcpDePVwiJH1xPgEmf30A7rQnPHxAAAA"
-=======
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0XOwQ6CMBAE0G/xXlZFE70afoAUw9W0ZU0WsDXdLR4I/y5qTE8zeZnDlHA8wG5jXly4bihGsjA3YtygVrqhK2Fun05Vd9/WlaojTUawSdajfDA3HZLg1dgRs2e7MAdHRij4RWnkkKL7Dv99UT50CD1vp/0ZTuulnomKmLzQA0H/8g1RS6NQrgAAAA=="
->>>>>>> main
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourVPCStack/CDKMetadata/Default"

@@ -37,6 +37,19 @@
    }
   }
  },
+ "Outputs": {
+  "ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F": {
+   "Value": {
+    "Fn::GetAtt": [
+     "ingredientTestTableAlphaIDF5FB8886",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+   }
+  }
+ },
  "Parameters": {
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",

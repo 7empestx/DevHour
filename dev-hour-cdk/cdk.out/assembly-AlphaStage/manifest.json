@@ -1,84 +1,6 @@
 {
   "version": "21.0.0",
   "artifacts": {
-    "AlphaStageDevHourCognitoStackAF8F29DE.assets": {
-      "type": "cdk:asset-manifest",
-      "properties": {
-        "file": "AlphaStageDevHourCognitoStackAF8F29DE.assets.json",
-        "requiresBootstrapStackVersion": 6,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
-      }
-    },
-    "AlphaStageDevHourCognitoStackAF8F29DE": {
-      "type": "aws:cloudformation:stack",
-      "environment": "aws://060498623801/us-west-1",
-      "properties": {
-        "templateFile": "AlphaStageDevHourCognitoStackAF8F29DE.template.json",
-        "validateOnSynth": true,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/182c8ff054f3f224f2a04164bbf7eec6a4c7fb8e61f35d84415267f72076b045.json",
-        "requiresBootstrapStackVersion": 6,
-        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
-        "additionalDependencies": [
-          "AlphaStageDevHourCognitoStackAF8F29DE.assets"
-        ],
-        "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
-          "requiresBootstrapStackVersion": 8,
-          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
-        },
-        "stackName": "AlphaStage-DevHourCognitoStack"
-      },
-      "dependencies": [
-        "AlphaStageDevHourCognitoStackAF8F29DE.assets"
-      ],
-      "metadata": {
-        "/AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DevHourUserPool7653C170"
-          }
-        ],
-        "/AlphaStage/DevHourCognitoStack/DevHourUserPoolClient/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DevHourUserPoolClientA0C08451"
-          }
-        ],
-        "/AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider/Resource": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DevHourCognitoIdentityProvider16CBB3DD"
-          }
-        ],
-        "/AlphaStage/DevHourCognitoStack/DevHourIdentityPool": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "DevHourIdentityPool"
-          }
-        ],
-        "/AlphaStage/DevHourCognitoStack/CDKMetadata/Default": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CDKMetadata"
-          }
-        ],
-        "/AlphaStage/DevHourCognitoStack/BootstrapVersion": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "BootstrapVersion"
-          }
-        ],
-        "/AlphaStage/DevHourCognitoStack/CheckBootstrapVersion": [
-          {
-            "type": "aws:cdk:logicalId",
-            "data": "CheckBootstrapVersion"
-          }
-        ]
-      },
-      "displayName": "AlphaStage/DevHourCognitoStack"
-    },
     "AlphaStageDevHourVPCStack5DD1DC37.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -95,11 +17,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-<<<<<<< HEAD
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/a0cd439a8e5ba6225ae5fa0fdf94cb5a51f0f907ab5c9b5b3f4a51d2aa92d77d.json",
-=======
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/381bfd82c928b498215590c404ce82c3afe00991391766a8c6633761facb6c47.json",
->>>>>>> main
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/2e5370230d2728ab9125f0242471f4222a286698a50473af381c5475a1ad47c8.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -219,7 +137,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/dfa8c36b36382755a22b8d496f289276eed6fafca1946c9e97b5a97a0c59891d.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/c5e2108e3e2ebbb021198ebd972c8bb33f8e86b70d37c90ef51a5d32dee32f2a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -256,6 +174,12 @@
             "data": "CDKMetadata"
           }
         ],
+        "/AlphaStage/userTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"userTestTableAlphaID263AD0DA\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+          }
+        ],
         "/AlphaStage/userTestTableAlphaStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -287,7 +211,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/6ae165edd61ce6d9226a9aa7848a152cc1d7d2f9280e4b6505d2f79e70a069fb.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/634173898dfa019ee8dad6b55ea49be6dfa7926deb75a399bb8422f8185a4e06.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -324,6 +248,12 @@
             "data": "CDKMetadata"
           }
         ],
+        "/AlphaStage/restaurantTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"restaurantTestTableAlphaID37264F16\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+          }
+        ],
         "/AlphaStage/restaurantTestTableAlphaStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -355,7 +285,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/a30571176dabf370e3a0a198d7f522a7f2902f3e9a02d75a194a8057fdca77ef.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/5ace7987cf83e566f64c6a8a622546d173e0d0c94e3d7d6f1fe357010be2cd05.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -392,6 +322,12 @@
             "data": "CDKMetadata"
           }
         ],
+        "/AlphaStage/mealTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"mealTestTableAlphaID3E07DECA\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+          }
+        ],
         "/AlphaStage/mealTestTableAlphaStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -423,7 +359,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/58b93c042b27163a3eacb136357bdc5f561eb9fd321197c11035464df611072f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/effbcb3e925a5ad7a767700dfab036ba9d5e2f735be6990c49ff32d038b74a0a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -460,6 +396,12 @@
             "data": "CDKMetadata"
           }
         ],
+        "/AlphaStage/dietTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"dietTestTableAlphaIDC014BB2F\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+          }
+        ],
         "/AlphaStage/dietTestTableAlphaStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -491,7 +433,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/02df9b7798b0cb93a19d62ed09eb0c052bf141a06a0f26866b986c2627dcb737.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/1471ded0a9e06279fb0c2b74091353ec7653c1df0f33d96832fdf4a2513c38a2.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -528,6 +470,12 @@
             "data": "CDKMetadata"
           }
         ],
+        "/AlphaStage/ingredientTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"ingredientTestTableAlphaIDF5FB8886\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+          }
+        ],
         "/AlphaStage/ingredientTestTableAlphaStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -559,7 +507,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/92015d71c80a10abde43c8961c0fba4691c9a6967a668733ef240106c9dc1a3f.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/d85e1bcc0feb5b03b669e55f36ecd14b5fef3222c5e4b8e666ce62c16668086b.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -596,6 +544,12 @@
             "data": "CDKMetadata"
           }
         ],
+        "/AlphaStage/menuTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"menuTestTableAlphaID3743E851\",\"Arn\"]}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+          }
+        ],
         "/AlphaStage/menuTestTableAlphaStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
@@ -610,7 +564,120 @@
         ]
       },
       "displayName": "AlphaStage/menuTestTableAlphaStack"
-<<<<<<< HEAD
+    },
+    "AlphaStageDevHourCognitoStackAF8F29DE.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageDevHourCognitoStackAF8F29DE.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStageDevHourCognitoStackAF8F29DE": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageDevHourCognitoStackAF8F29DE.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/1412e1dd7d920f620d924ccb75828811a3d8f3b9e0d1f43f41a5d8ad2e81d2cd.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageDevHourCognitoStackAF8F29DE.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-DevHourCognitoStack"
+      },
+      "dependencies": [
+        "AlphaStageuserTestTableAlphaStack2D03A363",
+        "AlphaStagerestaurantTestTableAlphaStack04CB516D",
+        "AlphaStagemealTestTableAlphaStackAF65B957",
+        "AlphaStagedietTestTableAlphaStackA6DC3AEA",
+        "AlphaStageingredientTestTableAlphaStack04EB2236",
+        "AlphaStagemenuTestTableAlphaStackEDB1572D",
+        "AlphaStageDevHourCognitoStackAF8F29DE.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourUserPool7653C170"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourUserPoolClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourUserPoolClientA0C08451"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourCognitoIdentityProvider16CBB3DD"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourIdentityPool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourIdentityPool"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRoleAuthenticatedPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy8DF535F3"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourCognitoAuthenticatedRole2A5663C5"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicyB5241957"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourCognitoUnauthenticatedRoleF98B7E15"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/identity-pool-role-attachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "identitypoolroleattachment"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/DevHourCognitoStack"
     },
     "AlphaStageec2StackIDDF4B80D6.assets": {
       "type": "cdk:asset-manifest",
@@ -696,8 +763,6 @@
         ]
       },
       "displayName": "AlphaStage/ec2StackID"
-=======
->>>>>>> main
     }
   }
 }

@@ -37,6 +37,19 @@
    }
   }
  },
+ "Outputs": {
+  "ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70": {
+   "Value": {
+    "Fn::GetAtt": [
+     "userTestTableAlphaID263AD0DA",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+   }
+  }
+ },
  "Parameters": {
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",

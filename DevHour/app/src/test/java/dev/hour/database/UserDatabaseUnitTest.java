@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import dev.hour.contracts.UserContract;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 
 public class UserDatabaseUnitTest {
 
@@ -13,7 +14,7 @@ public class UserDatabaseUnitTest {
     @Test
     void UserDatabase_returnsUser() {
 
-        final UserContract.Database userDatabase = new UserDatabase(region, tableName);
+        final UserContract.Database userDatabase = new UserDatabase(region, tableName, UrlConnectionHttpClient.create());
         final UserContract.User user;
 
         final String id = "123456";

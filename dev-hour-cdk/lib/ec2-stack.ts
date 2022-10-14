@@ -23,7 +23,7 @@ export class EC2Stack extends Stack {
         }});
 
         this._vpe = props.vpc.addInterfaceEndpoint('EC2-Ingestion-Endpoint', {
-            service: { name: 'com.amazonaws.us-west-1.ec2', port: 443 },
+            service: { name: 'com.amazonaws.' + props.region + '.ec2', port: 443 },
             privateDnsEnabled: true,
             subnets: { subnetType: SubnetType.PRIVATE_ISOLATED },
         });
@@ -37,10 +37,5 @@ export class EC2Stack extends Stack {
             instanceType: new InstanceType('t2.micro'),
             machineImage: MachineImage.latestAmazonLinux()
         });
-
     }
 }
-
-// differences:
-//
-

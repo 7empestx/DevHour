@@ -24,6 +24,12 @@ export class DynamoDBStack extends Stack {
             partitionKey: props.partitionKey,
             tableName: props.tableName
         });
+
+    } 
+
+    get tableArn(): string {
+        return this._db.tableArn;
     }
+    
 }
 

@@ -1,14 +1,14 @@
 package dev.hour.contracts;
 
-import java.util.List;
 import java.util.Map;
 
 public interface UserContract {
 
     interface Database {
 
+        void setCredentials(final Map<String, String> credentials);
         User getUser(final String id);
-        void updateUser(final User user);
+        void updateUser(final Map<String, String> data);
 
     }
 
@@ -23,12 +23,15 @@ public interface UserContract {
 
     interface View {
 
-        void setUser(final User user);
+        void update(final User user);
+        void remove(final User user);
+        void clearUsers();
 
     }
 
     interface  User {
 
+        String getId();
         String getFirstName();
         String getLastName();
         double getLongitude();

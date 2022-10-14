@@ -1,16 +1,26 @@
 package dev.hour.user;
 
+import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.UserContract;
 
-public class User implements UserContract.User {
+public class User implements UserContract.User, MapObjectContract.MapObject {
 
     /// --------------
     /// Private Fields
 
+    private String id           ;
     private String firstName    ;
     private String lastName     ;
     private double longitude    ;
     private double latitude     ;
+
+    public User(final String id, final String firstName, final String lastName) {
+
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+    }
 
     @Override
     public String getFirstName() {
@@ -30,6 +40,13 @@ public class User implements UserContract.User {
     @Override
     public double getLatitude() {
         return latitude;
+    }
+
+    @Override
+    public String getId() {
+
+        return this.id;
+
     }
 
     @Override

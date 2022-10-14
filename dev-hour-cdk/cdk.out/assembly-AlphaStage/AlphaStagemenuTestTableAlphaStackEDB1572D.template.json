@@ -37,6 +37,19 @@
    }
   }
  },
+ "Outputs": {
+  "ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43": {
+   "Value": {
+    "Fn::GetAtt": [
+     "menuTestTableAlphaID3743E851",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+   }
+  }
+ },
  "Parameters": {
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",

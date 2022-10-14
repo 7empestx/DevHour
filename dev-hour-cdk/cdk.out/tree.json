@@ -16,227 +16,6 @@
         "id": "AlphaStage",
         "path": "AlphaStage",
         "children": {
-          "DevHourCognitoStack": {
-            "id": "DevHourCognitoStack",
-            "path": "AlphaStage/DevHourCognitoStack",
-            "children": {
-              "DevHourUserPool": {
-                "id": "DevHourUserPool",
-                "path": "AlphaStage/DevHourCognitoStack/DevHourUserPool",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
-                      "aws:cdk:cloudformation:props": {
-                        "accountRecoverySetting": {
-                          "recoveryMechanisms": [
-                            {
-                              "name": "verified_phone_number",
-                              "priority": 1
-                            },
-                            {
-                              "name": "verified_email",
-                              "priority": 2
-                            }
-                          ]
-                        },
-                        "adminCreateUserConfig": {
-                          "allowAdminCreateUserOnly": false
-                        },
-                        "aliasAttributes": [
-                          "email"
-                        ],
-                        "autoVerifiedAttributes": [
-                          "email"
-                        ],
-                        "emailVerificationMessage": "The verification code to your new account is {####}",
-                        "emailVerificationSubject": "Verify your new account",
-                        "policies": {
-                          "passwordPolicy": {
-                            "minimumLength": 8
-                          }
-                        },
-                        "schema": [
-                          {
-                            "name": "name",
-                            "mutable": false,
-                            "required": true
-                          }
-                        ],
-                        "smsVerificationMessage": "The verification code to your new account is {####}",
-                        "verificationMessageTemplate": {
-                          "defaultEmailOption": "CONFIRM_WITH_CODE",
-                          "emailMessage": "The verification code to your new account is {####}",
-                          "emailSubject": "Verify your new account",
-                          "smsMessage": "The verification code to your new account is {####}"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
-                      "version": "2.43.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_cognito.UserPool",
-                  "version": "2.43.0"
-                }
-              },
-              "DevHourUserPoolClient": {
-                "id": "DevHourUserPoolClient",
-                "path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
-                      "aws:cdk:cloudformation:props": {
-                        "userPoolId": {
-                          "Ref": "DevHourUserPool7653C170"
-                        },
-                        "allowedOAuthFlows": [
-                          "implicit",
-                          "code"
-                        ],
-                        "allowedOAuthFlowsUserPoolClient": true,
-                        "allowedOAuthScopes": [
-                          "profile",
-                          "phone",
-                          "email",
-                          "openid",
-                          "aws.cognito.signin.user.admin"
-                        ],
-                        "callbackUrLs": [
-                          "https://example.com"
-                        ],
-                        "supportedIdentityProviders": [
-                          "COGNITO"
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
-                      "version": "2.43.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
-                  "version": "2.43.0"
-                }
-              },
-              "DevHourCognitoIdentityProviderSecret": {
-                "id": "DevHourCognitoIdentityProviderSecret",
-                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProviderSecret",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.43.0"
-                }
-              },
-              "DevHourCognitoIdentityProvider": {
-                "id": "DevHourCognitoIdentityProvider",
-                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolIdentityProvider",
-                      "aws:cdk:cloudformation:props": {
-                        "providerName": "LoginWithAmazon",
-                        "providerType": "LoginWithAmazon",
-                        "userPoolId": {
-                          "Ref": "DevHourUserPool7653C170"
-                        },
-                        "providerDetails": {
-                          "client_id": "DevHourUserPoolClient",
-                          "client_secret": "{{resolve:secretsmanager:arn:aws:secretsmanager:us-west-1:060498623801:secret:DevHour-Secret-INGIRV:SecretString:::}}",
-                          "authorize_scopes": "profile"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolIdentityProvider",
-                      "version": "2.43.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolIdentityProviderAmazon",
-                  "version": "2.43.0"
-                }
-              },
-              "DevHourIdentityPool": {
-                "id": "DevHourIdentityPool",
-                "path": "AlphaStage/DevHourCognitoStack/DevHourIdentityPool",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::Cognito::IdentityPool",
-                  "aws:cdk:cloudformation:props": {
-                    "allowUnauthenticatedIdentities": false,
-                    "cognitoIdentityProviders": [
-                      {
-                        "clientId": {
-                          "Ref": "DevHourUserPoolClientA0C08451"
-                        },
-                        "providerName": {
-                          "Fn::GetAtt": [
-                            "DevHourUserPool7653C170",
-                            "ProviderName"
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_cognito.CfnIdentityPool",
-                  "version": "2.43.0"
-                }
-              },
-              "CDKMetadata": {
-                "id": "CDKMetadata",
-                "path": "AlphaStage/DevHourCognitoStack/CDKMetadata",
-                "children": {
-                  "Default": {
-                    "id": "Default",
-                    "path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default",
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.43.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "constructs.Construct",
-                  "version": "10.1.109"
-                }
-              },
-              "BootstrapVersion": {
-                "id": "BootstrapVersion",
-                "path": "AlphaStage/DevHourCognitoStack/BootstrapVersion",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.43.0"
-                }
-              },
-              "CheckBootstrapVersion": {
-                "id": "CheckBootstrapVersion",
-                "path": "AlphaStage/DevHourCognitoStack/CheckBootstrapVersion",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.43.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "aws-cdk-lib.Stack",
-              "version": "2.43.0"
-            }
-          },
           "DevHourVPCStack": {
             "id": "DevHourVPCStack",
             "path": "AlphaStage/DevHourVPCStack",
@@ -450,7 +229,6 @@
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
                       "version": "2.43.0"
-<<<<<<< HEAD
                     }
                   },
                   "EC2-Ingestion-Endpoint": {
@@ -531,7 +309,7 @@
                         "attributes": {
                           "aws:cdk:cloudformation:type": "AWS::EC2::VPCEndpoint",
                           "aws:cdk:cloudformation:props": {
-                            "serviceName": "com.amazonaws.us-east-1.ec2",
+                            "serviceName": "com.amazonaws.us-west-1.ec2",
                             "vpcId": {
                               "Ref": "DevHourVPC77A046B5"
                             },
@@ -564,8 +342,6 @@
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.InterfaceVpcEndpoint",
                       "version": "2.43.0"
-=======
->>>>>>> main
                     }
                   }
                 },
@@ -590,7 +366,6 @@
                 "constructInfo": {
                   "fqn": "constructs.Construct",
                   "version": "10.1.109"
-<<<<<<< HEAD
                 }
               },
               "Exports": {
@@ -617,8 +392,6 @@
                 "constructInfo": {
                   "fqn": "constructs.Construct",
                   "version": "10.1.109"
-=======
->>>>>>> main
                 }
               },
               "BootstrapVersion": {
@@ -704,6 +477,24 @@
                     "path": "AlphaStage/userTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/userTestTableAlphaStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"userTestTableAlphaID263AD0DA\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"userTestTableAlphaID263AD0DA\",\"Arn\"]}",
+                    "path": "AlphaStage/userTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"userTestTableAlphaID263AD0DA\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.43.0"
                     }
                   }
@@ -805,6 +596,24 @@
                   "version": "10.1.109"
                 }
               },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/restaurantTestTableAlphaStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"restaurantTestTableAlphaID37264F16\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"restaurantTestTableAlphaID37264F16\",\"Arn\"]}",
+                    "path": "AlphaStage/restaurantTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"restaurantTestTableAlphaID37264F16\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
               "BootstrapVersion": {
                 "id": "BootstrapVersion",
                 "path": "AlphaStage/restaurantTestTableAlphaStack/BootstrapVersion",
@@ -888,6 +697,24 @@
                     "path": "AlphaStage/mealTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/mealTestTableAlphaStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"mealTestTableAlphaID3E07DECA\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"mealTestTableAlphaID3E07DECA\",\"Arn\"]}",
+                    "path": "AlphaStage/mealTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"mealTestTableAlphaID3E07DECA\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.43.0"
                     }
                   }
@@ -989,6 +816,24 @@
                   "version": "10.1.109"
                 }
               },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/dietTestTableAlphaStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"dietTestTableAlphaIDC014BB2F\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"dietTestTableAlphaIDC014BB2F\",\"Arn\"]}",
+                    "path": "AlphaStage/dietTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"dietTestTableAlphaIDC014BB2F\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
               "BootstrapVersion": {
                 "id": "BootstrapVersion",
                 "path": "AlphaStage/dietTestTableAlphaStack/BootstrapVersion",
@@ -1072,6 +917,24 @@
                     "path": "AlphaStage/ingredientTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/ingredientTestTableAlphaStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"ingredientTestTableAlphaIDF5FB8886\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"ingredientTestTableAlphaIDF5FB8886\",\"Arn\"]}",
+                    "path": "AlphaStage/ingredientTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"ingredientTestTableAlphaIDF5FB8886\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.43.0"
                     }
                   }
@@ -1173,6 +1036,24 @@
                   "version": "10.1.109"
                 }
               },
+              "Exports": {
+                "id": "Exports",
+                "path": "AlphaStage/menuTestTableAlphaStack/Exports",
+                "children": {
+                  "Output{\"Fn::GetAtt\":[\"menuTestTableAlphaID3743E851\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"menuTestTableAlphaID3743E851\",\"Arn\"]}",
+                    "path": "AlphaStage/menuTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"menuTestTableAlphaID3743E851\",\"Arn\"]}",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnOutput",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
               "BootstrapVersion": {
                 "id": "BootstrapVersion",
                 "path": "AlphaStage/menuTestTableAlphaStack/BootstrapVersion",
@@ -1193,7 +1074,502 @@
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
               "version": "2.43.0"
-<<<<<<< HEAD
+            }
+          },
+          "DevHourCognitoStack": {
+            "id": "DevHourCognitoStack",
+            "path": "AlphaStage/DevHourCognitoStack",
+            "children": {
+              "DevHourUserPool": {
+                "id": "DevHourUserPool",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourUserPool",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPool",
+                      "aws:cdk:cloudformation:props": {
+                        "accountRecoverySetting": {
+                          "recoveryMechanisms": [
+                            {
+                              "name": "verified_phone_number",
+                              "priority": 1
+                            },
+                            {
+                              "name": "verified_email",
+                              "priority": 2
+                            }
+                          ]
+                        },
+                        "adminCreateUserConfig": {
+                          "allowAdminCreateUserOnly": false
+                        },
+                        "aliasAttributes": [
+                          "email"
+                        ],
+                        "autoVerifiedAttributes": [],
+                        "emailVerificationMessage": "The verification code to your new account is {####}",
+                        "emailVerificationSubject": "Verify your new account",
+                        "policies": {
+                          "passwordPolicy": {
+                            "minimumLength": 8
+                          }
+                        },
+                        "schema": [
+                          {
+                            "name": "name",
+                            "mutable": false,
+                            "required": true
+                          }
+                        ],
+                        "smsVerificationMessage": "The verification code to your new account is {####}",
+                        "verificationMessageTemplate": {
+                          "defaultEmailOption": "CONFIRM_WITH_CODE",
+                          "emailMessage": "The verification code to your new account is {####}",
+                          "emailSubject": "Verify your new account",
+                          "smsMessage": "The verification code to your new account is {####}"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPool",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourUserPoolClient": {
+                "id": "DevHourUserPoolClient",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolClient/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolClient",
+                      "aws:cdk:cloudformation:props": {
+                        "userPoolId": {
+                          "Ref": "DevHourUserPool7653C170"
+                        },
+                        "allowedOAuthFlows": [
+                          "implicit",
+                          "code"
+                        ],
+                        "allowedOAuthFlowsUserPoolClient": true,
+                        "allowedOAuthScopes": [
+                          "profile",
+                          "phone",
+                          "email",
+                          "openid",
+                          "aws.cognito.signin.user.admin"
+                        ],
+                        "callbackUrLs": [
+                          "https://example.com"
+                        ],
+                        "supportedIdentityProviders": [
+                          "COGNITO"
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourCognitoIdentityProviderSecret": {
+                "id": "DevHourCognitoIdentityProviderSecret",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProviderSecret",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourCognitoIdentityProvider": {
+                "id": "DevHourCognitoIdentityProvider",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProvider/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Cognito::UserPoolIdentityProvider",
+                      "aws:cdk:cloudformation:props": {
+                        "providerName": "LoginWithAmazon",
+                        "providerType": "LoginWithAmazon",
+                        "userPoolId": {
+                          "Ref": "DevHourUserPool7653C170"
+                        },
+                        "providerDetails": {
+                          "client_id": "DevHourUserPoolClient",
+                          "client_secret": "{{resolve:secretsmanager:arn:aws:secretsmanager:us-west-1:060498623801:secret:DevHour-Secret-INGIRV:SecretString:::}}",
+                          "authorize_scopes": "profile"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolIdentityProvider",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.UserPoolIdentityProviderAmazon",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourIdentityPool": {
+                "id": "DevHourIdentityPool",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourIdentityPool",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::IdentityPool",
+                  "aws:cdk:cloudformation:props": {
+                    "allowUnauthenticatedIdentities": false,
+                    "cognitoIdentityProviders": [
+                      {
+                        "clientId": {
+                          "Ref": "DevHourUserPoolClientA0C08451"
+                        },
+                        "providerName": {
+                          "Fn::GetAtt": [
+                            "DevHourUserPool7653C170",
+                            "ProviderName"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnIdentityPool",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy": {
+                "id": "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRoleAuthenticatedPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRoleAuthenticatedPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "dynamodb:DeleteItem",
+                                "dynamodb:DescribeTable",
+                                "dynamodb:GetItem",
+                                "dynamodb:PutItem",
+                                "dynamodb:Query",
+                                "dynamodb:Scan",
+                                "dynamodb:UpdateItem"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "",
+                        "path": "/"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourCognitoAuthenticatedRole": {
+                "id": "DevHourCognitoAuthenticatedRole",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoAuthenticatedRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRoleWithWebIdentity",
+                              "Condition": {
+                                "StringEquals": {
+                                  "cognito-identity.amazonaws.com:aud": {
+                                    "Ref": "DevHourIdentityPool"
+                                  }
+                                },
+                                "ForAnyValue:StringLike": {
+                                  "cognito-identity.amazonaws.com:amr": "authenticated"
+                                }
+                              },
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Federated": "cognito-identity.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "Default role for authenticated users",
+                        "managedPolicyArns": [
+                          {
+                            "Ref": "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy8DF535F3"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy": {
+                "id": "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "dynamodb:DeleteItem",
+                                "dynamodb:DescribeTable",
+                                "dynamodb:GetItem",
+                                "dynamodb:PutItem",
+                                "dynamodb:Query",
+                                "dynamodb:Scan",
+                                "dynamodb:UpdateItem"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "",
+                        "path": "/"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+                  "version": "2.43.0"
+                }
+              },
+              "DevHourCognitoUnauthenticatedRole": {
+                "id": "DevHourCognitoUnauthenticatedRole",
+                "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoUnauthenticatedRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRoleWithWebIdentity",
+                              "Condition": {
+                                "StringEquals": {
+                                  "cognito-identity.amazonaws.com:aud": {
+                                    "Ref": "DevHourIdentityPool"
+                                  }
+                                },
+                                "ForAnyValue:StringLike": {
+                                  "cognito-identity.amazonaws.com:amr": "unauthenticated"
+                                }
+                              },
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Federated": "cognito-identity.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "Default role for anonymous users",
+                        "managedPolicyArns": [
+                          {
+                            "Ref": "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicyB5241957"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.43.0"
+                }
+              },
+              "identity-pool-role-attachment": {
+                "id": "identity-pool-role-attachment",
+                "path": "AlphaStage/DevHourCognitoStack/identity-pool-role-attachment",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Cognito::IdentityPoolRoleAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "identityPoolId": {
+                      "Ref": "DevHourIdentityPool"
+                    },
+                    "roleMappings": {
+                      "mapping": {
+                        "type": "Token",
+                        "ambiguousRoleResolution": "AuthenticatedRole",
+                        "identityProvider": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "cognito-idp.us-west-1.amazonaws.com/",
+                              {
+                                "Ref": "DevHourUserPool7653C170"
+                              },
+                              ":",
+                              {
+                                "Ref": "DevHourUserPoolClientA0C08451"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "roles": {
+                      "authenticated": {
+                        "Fn::GetAtt": [
+                          "DevHourCognitoAuthenticatedRole2A5663C5",
+                          "Arn"
+                        ]
+                      },
+                      "unauthenticated": {
+                        "Fn::GetAtt": [
+                          "DevHourCognitoUnauthenticatedRoleF98B7E15",
+                          "Arn"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cognito.CfnIdentityPoolRoleAttachment",
+                  "version": "2.43.0"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/DevHourCognitoStack/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.43.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.109"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/DevHourCognitoStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.43.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/DevHourCognitoStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.43.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.43.0"
             }
           },
           "ec2StackID": {
@@ -1404,8 +1780,6 @@
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
               "version": "2.43.0"
-=======
->>>>>>> main
             }
           }
         },
@@ -1826,52 +2200,6 @@
                             "name": "AlphaStage",
                             "actions": [
                               {
-                                "name": "DevHourCognitoStack.Prepare",
-                                "inputArtifacts": [
-                                  {
-                                    "name": "DevHourShellStep_Output"
-                                  }
-                                ],
-                                "actionTypeId": {
-                                  "category": "Deploy",
-                                  "version": "1",
-                                  "owner": "AWS",
-                                  "provider": "CloudFormation"
-                                },
-                                "configuration": {
-                                  "StackName": "AlphaStage-DevHourCognitoStack",
-                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
-                                  "RoleArn": {
-                                    "Fn::Join": [
-                                      "",
-                                      [
-                                        "arn:",
-                                        {
-                                          "Ref": "AWS::Partition"
-                                        },
-                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
-                                      ]
-                                    ]
-                                  },
-                                  "ActionMode": "CHANGE_SET_REPLACE",
-                                  "ChangeSetName": "PipelineChange",
-                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.template.json"
-                                },
-                                "runOrder": 1,
-                                "roleArn": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "arn:",
-                                      {
-                                        "Ref": "AWS::Partition"
-                                      },
-                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
-                                    ]
-                                  ]
-                                }
-                              },
-                              {
                                 "name": "DevHourVPCStack.Prepare",
                                 "inputArtifacts": [
                                   {
@@ -2194,33 +2522,6 @@
                                 }
                               },
                               {
-                                "name": "DevHourCognitoStack.Deploy",
-                                "actionTypeId": {
-                                  "category": "Deploy",
-                                  "version": "1",
-                                  "owner": "AWS",
-                                  "provider": "CloudFormation"
-                                },
-                                "configuration": {
-                                  "StackName": "AlphaStage-DevHourCognitoStack",
-                                  "ActionMode": "CHANGE_SET_EXECUTE",
-                                  "ChangeSetName": "PipelineChange"
-                                },
-                                "runOrder": 2,
-                                "roleArn": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "arn:",
-                                      {
-                                        "Ref": "AWS::Partition"
-                                      },
-                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
-                                    ]
-                                  ]
-                                }
-                              },
-                              {
                                 "name": "DevHourVPCStack.Deploy",
                                 "actionTypeId": {
                                   "category": "Deploy",
@@ -2408,7 +2709,52 @@
                                     ]
                                   ]
                                 }
-<<<<<<< HEAD
+                              },
+                              {
+                                "name": "DevHourCognitoStack.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourCognitoStack",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.template.json"
+                                },
+                                "runOrder": 3,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
                               },
                               {
                                 "name": "ec2StackID.Prepare",
@@ -2457,6 +2803,33 @@
                                 }
                               },
                               {
+                                "name": "DevHourCognitoStack.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourCognitoStack",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 4,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
                                 "name": "ec2StackID.Deploy",
                                 "actionTypeId": {
                                   "category": "Deploy",
@@ -2482,8 +2855,6 @@
                                     ]
                                   ]
                                 }
-=======
->>>>>>> main
                               }
                             ]
                           }
@@ -2905,14 +3276,6 @@
                     "id": "AlphaStage",
                     "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage",
                     "children": {
-                      "DevHourCognitoStack.Prepare": {
-                        "id": "DevHourCognitoStack.Prepare",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Prepare",
-                        "constructInfo": {
-                          "fqn": "constructs.Construct",
-                          "version": "10.1.109"
-                        }
-                      },
                       "DevHourVPCStack.Prepare": {
                         "id": "DevHourVPCStack.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourVPCStack.Prepare",
@@ -2964,14 +3327,6 @@
                       "userTestTableAlphaStack.Prepare": {
                         "id": "userTestTableAlphaStack.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/userTestTableAlphaStack.Prepare",
-                        "constructInfo": {
-                          "fqn": "constructs.Construct",
-                          "version": "10.1.109"
-                        }
-                      },
-                      "DevHourCognitoStack.Deploy": {
-                        "id": "DevHourCognitoStack.Deploy",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
@@ -3031,12 +3386,27 @@
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
-<<<<<<< HEAD
+                        }
+                      },
+                      "DevHourCognitoStack.Prepare": {
+                        "id": "DevHourCognitoStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.109"
                         }
                       },
                       "ec2StackID.Prepare": {
                         "id": "ec2StackID.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ec2StackID.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.109"
+                        }
+                      },
+                      "DevHourCognitoStack.Deploy": {
+                        "id": "DevHourCognitoStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
@@ -3048,8 +3418,6 @@
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.109"
-=======
->>>>>>> main
                         }
                       }
                     },

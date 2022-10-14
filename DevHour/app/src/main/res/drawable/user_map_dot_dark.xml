@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/user_map_dot_view_width"
+    android:height="@dimen/user_map_dot_view_height"
+    android:viewportWidth="@dimen/user_map_dot_view_viewport_width"
+    android:viewportHeight="@dimen/user_map_dot_view_viewport_height"
+    android:elevation="@dimen/user_map_dot_view_elevation">
+
+    <group>
+
+        <path
+            android:name="right_semi_circle_transparent"
+            android:fillColor="@color/user_map_dot_under_light"
+            android:pathData="M 8 0 A 8 8 0 1 1 8 16 Z"/>
+
+        <path
+            android:name="left_semi_circle_transparent"
+            android:fillColor="@color/user_map_dot_under_light"
+            android:pathData="M 8 16 A 8 8 0 1 1 8 0 Z" />
+
+        <path
+            android:name="right_semi_circle"
+            android:fillColor="@color/user_map_dot_over_light"
+            android:pathData="M 8 2 A 5 5 0 1 1 8 14 Z"/>
+
+        <path
+            android:name="left_semi_circle"
+            android:fillColor="@color/user_map_dot_over_light"
+            android:pathData="M 8 14 A 5 5 0 1 1 8 2 Z" />
+
+    </group>
+
+</vector>

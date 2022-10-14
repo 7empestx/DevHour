@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "92015d71c80a10abde43c8961c0fba4691c9a6967a668733ef240106c9dc1a3f": {
+    "d85e1bcc0feb5b03b669e55f36ecd14b5fef3222c5e4b8e666ce62c16668086b": {
       "source": {
         "path": "AlphaStagemenuTestTableAlphaStackEDB1572D.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "92015d71c80a10abde43c8961c0fba4691c9a6967a668733ef240106c9dc1a3f.json",
+          "objectKey": "d85e1bcc0feb5b03b669e55f36ecd14b5fef3222c5e4b8e666ce62c16668086b.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

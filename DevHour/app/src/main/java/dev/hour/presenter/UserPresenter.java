@@ -25,7 +25,7 @@ public class UserPresenter implements UserContract.Presenter {
     @Override
     public void invalidate() {
         if(view!=null){
-            view.setUser(user);
+            view.update(user);
         }
     }
 

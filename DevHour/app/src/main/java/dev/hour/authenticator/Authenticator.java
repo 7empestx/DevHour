@@ -2,14 +2,23 @@ package dev.hour.authenticator;
 
 import static software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType.USER_PASSWORD_AUTH;
 
-import android.content.Context;
 import android.util.Log;
 
-import dev.hour.R;
 import dev.hour.contracts.AuthenticatorContract;
 import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClient;
+import software.amazon.awssdk.services.cognitoidentity.model.CognitoIdentityProvider;
+import software.amazon.awssdk.services.cognitoidentity.model.Credentials;
+import software.amazon.awssdk.services.cognitoidentity.model.GetCredentialsForIdentityRequest;
+import software.amazon.awssdk.services.cognitoidentity.model.GetIdRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderAsyncClient;
+import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.GlobalSignOutRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.GlobalSignOutResponse;
@@ -17,7 +26,9 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAut
 import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpResponse;
+import software.amazon.awssdk.utils.internal.SystemSettingUtilsTestBackdoor;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -26,120 +37,312 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
     /// --------------
     /// Private Fields
 
+    private CognitoIdentityProviderClient                cognitoClient  ;
     private AuthenticatorContract.Authenticator.Listener listener       ;
-    private Context                                      context        ;
+    private Credentials                                  credentials    ;
     private String                                       idToken        ;
     private String                                       accessToken    ;
-    private String                                       refreshToken   ;
-    private CognitoIdentityProviderAsyncClient           cognitoClient  ;
+    private final String                                 accountId      ;
+    private final String                                 region         ;
+    private final String                                 clientId       ;
+    private final String                                 identityPoolId ;
+    private final String                                 providerName   ;
+    private final String                                 authEndpoint   ;
+    private final SdkHttpClient                          httpClient     ;
 
     /// ------------
     /// Constructors
 
-    public Authenticator(final Context context) {
+    /**
+     * Initializes the Authenticator to its' default state.
+     * @param accountId The AWS account id
+     * @param region The AWS region of the identity pool
+     * @param clientId The client Id
+     * @param identityPoolId The identity pool id
+     * @param authEndpoint The Authentication endpoint
+     */
+    public Authenticator(final String accountId, final String region, final String clientId,
+                         final String identityPoolId, final String providerName,
+                         final String authEndpoint, final SdkHttpClient httpClient) {
 
-        this.context = context;
-        cognitoClient = CognitoIdentityProviderAsyncClient.builder()
+        this.accountId      = accountId         ;
+        this.region         = region            ;
+        this.clientId       = clientId          ;
+        this.identityPoolId = identityPoolId    ;
+        this.authEndpoint   = authEndpoint      ;
+        this.providerName   = providerName      ;
+        this.httpClient     = httpClient        ;
+        this.cognitoClient  = CognitoIdentityProviderClient.builder()
+                .httpClient(this.httpClient)
                 .credentialsProvider(AnonymousCredentialsProvider.create())
-                .region(Region.of(context.getString(R.string.region)))
+                .region(Region.of(region))
                 .build();
+
     }
 
+    /**
+     * Returns the Identity Id for the given Id token.
+     * @param logins The logins corresponding to the identity pool
+     * @return identity id that corresponds to the id token.
+     */
+    public String getIdentityId(final CognitoIdentityClient client,
+                                final Map<String, String> logins,
+                                final String identityPoolId,
+                                final String accountId) {
+
+        final GetIdRequest request = GetIdRequest.builder()
+                .identityPoolId(identityPoolId)
+                .accountId(accountId)
+                .logins(logins)
+                .build();
+
+        return client.getId(request).identityId();
+
+    }
+
+    /**
+     * Returns the Credentials corresponding to the specified logins.
+     * @param client The client to make the request
+     * @param logins The logins
+     * @param identityPoolId The identity pool id
+     * @param accountId The account id
+     * @return Credentials
+     */
+    public Credentials getCredentialsForIdentity(final CognitoIdentityClient client,
+                                                 final Map<String, String> logins,
+                                                 final String identityPoolId,
+                                                 final String accountId) {
+
+        final GetCredentialsForIdentityRequest request = GetCredentialsForIdentityRequest.builder()
+                .identityId(getIdentityId(client, logins, identityPoolId, accountId))
+                .logins(logins)
+                .build();
+
+        return client.getCredentialsForIdentity(request).credentials();
+
+    }
+
+    /**
+     * Returns a flag indicating if the user is authenticated.
+     */
     @Override
     public void checkSession() {
 
+        if(this.idToken == null || this.credentials == null) {
+
+            if(this.listener != null)
+                this.listener.onUnauthenticated("User is not authenticated");
+
+        } else {
+
+            final Map<String, String> credentials = new HashMap<>();
+
+            credentials.put("ACCESS_KEY", this.credentials.accessKeyId());
+            credentials.put("SECRET_KEY", this.credentials.secretKey());
+
+            this.listener.onAuthenticated(credentials);
+
+        }
+
     }
 
+    /**
+     * Signs the user up to the service.
+     * @param input The user input data
+     */
     @Override
-    public void signUp(Map<String, String> input) {
-        SignUpRequest signUpRequest = SignUpRequest
-                .builder()
-                .username(input.get("USERNAME"))
-                .password(input.get("PASSWORD"))
-                .clientId(context.getString(R.string.client_id))
-                .userAttributes(AttributeType
-                        .builder()
-                        .name("name")
-                        .value(input.get("name"))
-                        .build())
-                .build();
+    public void signUp(final Map<String, String> input) {
 
-        CompletableFuture<SignUpResponse> response = cognitoClient.signUp(signUpRequest);
+        final Authenticator authenticator = this;
 
-        response.whenComplete((result, e) -> {
-            if (result != null) {
-                Log.i("Cognito", "Result: " + response.toString());
-                if(listener != null) {
-                    listener.onAuthenticated("User Authenticated");
-                }
-            } else {
-                Log.e("Cognito", e.toString());
-                if(listener != null) {
-                    listener.onSignUpFailed("Sign-up failed");
-                }
+        final Thread thread = new Thread(() -> {
+
+            final SignUpRequest signUpRequest = SignUpRequest
+                    .builder()
+                    .username(input.get("username"))
+                    .password(input.get("password"))
+                    .clientId(authenticator.clientId)
+                    .userAttributes(AttributeType
+                            .builder()
+                            .name("name")
+                            .value(input.get("name"))
+                            .build())
+                    .userAttributes(AttributeType
+                            .builder()
+                            .name("first")
+                            .value(input.get("first"))
+                            .build())
+                    .userAttributes(AttributeType
+                            .builder()
+                            .name("last")
+                            .value(input.get("last"))
+                            .build())
+                    .userAttributes(AttributeType
+                            .builder()
+                            .name("email")
+                            .value(input.get("email"))
+                            .build())
+                    .build();
+
+            try {
+
+                authenticator.cognitoClient.signUp(signUpRequest);
+
+            } catch (final Exception exception) {
+
+                Log.e("Cognito", exception.toString());
+
             }
-            Log.i("Cognito", idToken != null ? "Sign in succeeded" : "Sign in not complete");
+
         });
+
+        try {
+
+            thread.start();
+            thread.join();
+
+            if(this.listener != null)
+                this.listener.onSignUp(input);
+
+        } catch (final Exception exception) {
+
+            if(listener != null)
+                listener.onSignUpFailed("Sign-up failed");
+
+        }
+
     }
 
+    /**
+     * Signs the User in using the specified fields
+     * @param input The fields to sign the user in.
+     */
     @Override
-    public void signIn(Map<String, String> input) {
-        InitiateAuthRequest authRequest = InitiateAuthRequest
-                .builder()
-                .authFlow(USER_PASSWORD_AUTH)
-                .clientId(context.getString(R.string.client_id))
-                .authParameters(input)
-                .build();
+    public void signIn(final Map<String, String> input) {
 
-        CompletableFuture<InitiateAuthResponse> response = cognitoClient.initiateAuth(authRequest);
+        final Authenticator authenticator = this;
 
-        response.whenComplete((result, e) -> {
-            if (result != null) {
-                idToken = result.authenticationResult().idToken();
-                accessToken = result.authenticationResult().accessToken();
-                refreshToken = result.authenticationResult().refreshToken();
-                if(listener != null) {
-                    listener.onAuthenticated("User Authenticated");
-                }
-            } else {
-                Log.e("Cognito", e.toString());
-                if(listener != null) {
-                    listener.onSignInFailed("Sign-in failed");
-                }
+        final Thread thread = new Thread(() -> {
+
+            final InitiateAuthRequest authRequest = InitiateAuthRequest
+                    .builder()
+                    .authFlow(USER_PASSWORD_AUTH)
+                    .clientId(authenticator.clientId)
+                    .authParameters(input)
+                    .build();
+
+            try {
+
+                final InitiateAuthResponse response =
+                        authenticator.cognitoClient.initiateAuth(authRequest);
+
+                authenticator.idToken       = response.authenticationResult().idToken();
+                authenticator.accessToken   = response.authenticationResult().accessToken();
+
+                final CognitoIdentityClient client = CognitoIdentityClient.builder()
+                        .httpClient(authenticator.httpClient)
+                        .region(Region.of(authenticator.region))
+                        .credentialsProvider(AnonymousCredentialsProvider.create())
+                        .build();
+
+                final Map<String, String> logins = new HashMap<>();
+
+                logins.put( authEndpoint + "/" + this.providerName, idToken);
+
+                authenticator.credentials =
+                        getCredentialsForIdentity(client, logins, identityPoolId, accountId);
+
+            } catch (final Exception exception) {
+
+                Log.e("Authenticator", exception.toString());
+
             }
-            Log.i("Cognito", idToken != null ? "Sign in succeeded" : "Sign in not complete");
+
         });
+
+        try {
+
+            thread.start();
+            thread.join();
+
+            if(listener != null) {
+
+                final Map<String, String> credentials = new HashMap<>();
+
+                credentials.put("ACCESS_KEY", this.credentials.accessKeyId());
+                credentials.put("SECRET_KEY", this.credentials.secretKey());
+
+                listener.onAuthenticated(credentials);
+
+            }
+
+        } catch (final Exception exception) {
+
+            Log.e("Authenticator", exception.getMessage());
+
+            if(listener != null)
+                listener.onSignInFailed("Sign-in failed");
+
+        }
+
     }
 
+    /**
+     * Signs the user out.
+     */
     @Override
     public void signOut() {
-        GlobalSignOutRequest signOutRequest = GlobalSignOutRequest
-                .builder()
-                .accessToken(accessToken)
-                .build();
 
-        CompletableFuture<GlobalSignOutResponse> response = cognitoClient.globalSignOut(signOutRequest);
+        final Authenticator authenticator = this;
 
-        response.whenComplete((result, e) -> {
-            if (result != null) {
-                Log.i("Cognito", "Signed out successfully");
-                if(listener != null) {
-                    listener.onSignOut("User Signed out");
-                }
-            } else {
-                Log.e("Cognito", e.toString());
-                if(listener != null) {
-                    listener.onSignOutFailed("Sign out failed");
-                }
+        final Thread thread = new Thread(() -> {
+
+            final GlobalSignOutRequest signOutRequest = GlobalSignOutRequest
+                    .builder()
+                    .accessToken(authenticator.accessToken)
+                    .build();
+
+            try {
+
+                authenticator.cognitoClient.globalSignOut(signOutRequest);
+
+            } catch (final Exception exception) {
+
+                Log.e("Authenticator", exception.getMessage());
+
             }
-            Log.i("Cognito", idToken != null ? "Sign out succeeded" : "Sign out not complete");
+
         });
+
+        try {
+
+            thread.start();
+            thread.join();
+
+            if(authenticator.listener != null)
+                authenticator.listener.onSignOut("User Signed out");
+
+        } catch (final Exception exception) {
+
+            Log.e("Authenticator", exception.getMessage());
+
+            if(authenticator.listener != null)
+                authenticator.listener.onSignOutFailed("Sign out failed");
+
+        }
+
     }
 
+    /**
+     * Sets the Listener that will receive that callbacks on authentication events.
+     * @param listener The listener that will receive callbacks
+     */
     @Override
-    public void setListener(Listener listener) {
+    public void setListener(final Listener listener) {
 
         this.listener = listener;
+
+        checkSession();
 
     }
 

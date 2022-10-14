@@ -1,35 +1,41 @@
 package dev.hour.database;
 
-import java.util.Collection;
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import dev.hour.contracts.UserContract;
 import dev.hour.user.User;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
 public class UserDatabase implements UserContract.Database {
 
-    private DynamoDbClient client       ;
-    private String         tableName    ;
+    /// ---------------
+    /// Private Members
+
+    private DynamoDbClient              client      ;
+    private String                      tableName   ;
+    private String                      region      ;
+    private Map<String, AttributeValue> response    ;
+    private SdkHttpClient               httpClient  ;
 
     /// -----------
     /// Constructor
 
-    public UserDatabase(final String regionName, final String tableName) {
+    public UserDatabase(final String region, final String tableName, final SdkHttpClient httpClient) {
 
-        // Create the client
-        client = DynamoDbClient
-                .builder()
-                .region(Region.of(regionName))
-                .build();
-
-
+        this.client     = null       ;
+        this.tableName  = tableName  ;
+        this.region     = region     ;
+        this.httpClient = httpClient ;
 
     }
 
@@ -37,29 +43,118 @@ public class UserDatabase implements UserContract.Database {
     /// Private Methods
 
     /**
+     * Creates an item that can update a DynamoDB table item.
+     * @param data The item to set
+     * @return Map<String, AttributeValue> with the given data.
+     */
+    private Map<String, AttributeValue> createItemFrom(final Map<String, String> data) {
+
+        final Map<String, AttributeValue> result;
+
+        if(data != null) {
+
+            result = new HashMap<>();
+
+            for(Map.Entry<String, String> entry: data.entrySet()) {
+
+                final AttributeValue attributeValue = AttributeValue.builder().s(entry.getValue()).build();
+
+                result.put(entry.getKey(), attributeValue);
+
+            }
+
+
+        } else result = new HashMap<>();
+
+        return result;
+
+    }
+
+    /**
      * Creates a GetItemRequest to get the item  with the specified key, value pair.
      * @param key The value of the key
      * @param value The specific value to match
      * @return Map containing the requested data, if any
      */
-
     private Map<String, AttributeValue> getItem(final String key, final String value) {
 
         final Map<String, AttributeValue> keyMap = new HashMap<>();
+        Map<String, AttributeValue> result;
 
-        keyMap.put(key, AttributeValue.builder().s(value).build());
+        if(client != null) {
 
-        final GetItemRequest request = GetItemRequest.builder()
-                .key(keyMap)
-                .tableName(tableName)
-                .build();
+            keyMap.put(key, AttributeValue.builder().s(value).build());
 
-        final Collection<AttributeValue> response = this.client.getItem(request).item().values();
+            final GetItemRequest request = GetItemRequest.builder()
+                    .key(keyMap)
+                    .tableName(tableName)
+                    .build();
 
-        return response.stream().collect(Collectors.toMap(AttributeValue::s, s->s));
+            final UserDatabase database = this;
+
+            final Thread thread = new Thread(() ->
+                    database.response = database.client.getItem(request).item());
+
+            try {
+
+                thread.start();
+                thread.join();
+
+                result = response;
+
+            } catch (final Exception exception) {
+
+                Log.e("RestaurantDatabase", exception.getMessage());
+                result = new HashMap<>();
+
+            }
+
+        } else result = new HashMap<>();
+
+        return result;
 
     }
 
+    /**
+     * Sets the given item with the given data
+     * @param item The item to write.
+     */
+    private void putItem(final Map<String, AttributeValue> item) {
+
+        if(this.client != null) {
+
+            final PutItemRequest request =
+                    PutItemRequest.builder().item(item).tableName(this.tableName).build();
+
+            this.client.putItem(request);
+
+        }
+
+    }
+
+    /**
+     * Sets the credentials required to build the DynamoDB client
+     * @param credentials The credentials to set.
+     */
+    @Override
+    public void setCredentials(final Map<String, String> credentials) {
+
+        client = DynamoDbClient
+                .builder()
+                .region(Region.of(this.region))
+                .httpClient(this.httpClient)
+                .credentialsProvider(() -> AwsBasicCredentials.create(
+                        credentials.get("ACCESS_KEY"),
+                        credentials.get("SECRET_KEY")))
+                .build();
+
+    }
+
+    /**
+     * Retrieves the user corresponding with the given id.
+     * @param id the user id
+     * @return RestaurantContract.Restaurant instance
+     */
     @Override
     public UserContract.User getUser(final String id) {
 
@@ -69,13 +164,15 @@ public class UserDatabase implements UserContract.Database {
 
             final Map<String, AttributeValue> userBlob = getItem("id", id);
 
-            user = new User();
+            final String firstName = Objects.requireNonNull(userBlob.get("first")).s();
+            final String lastName  = Objects.requireNonNull(userBlob.get("last")).s();
+
+            user = new User(id, firstName, lastName);
 
             user.setFirstName(Objects.requireNonNull(userBlob.get("first")).s());
             user.setLastName(Objects.requireNonNull(userBlob.get("last")).s());
             user.setLongitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("longitude")).s()));
             user.setLatitude(Double.parseDouble(Objects.requireNonNull(userBlob.get("latitude")).s()));
-            
 
         } else user = null;
 
@@ -84,7 +181,22 @@ public class UserDatabase implements UserContract.Database {
     }
 
     @Override
-    public void updateUser(final UserContract.User user) {
+    public void updateUser(final Map<String, String> data) {
+
+        final UserDatabase database = this;
+
+        final Thread thread = new Thread(() -> database.putItem(createItemFrom(data)));
+
+        try {
+
+            thread.start();
+            thread.join();
+
+        } catch (final Exception exception) {
+
+            Log.e("UserDatabase", exception.getMessage());
+
+        }
 
     }
 
