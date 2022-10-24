@@ -68,6 +68,90 @@
               "version": "2.47.0"
             }
           },
+          "DevHourCertificateStack": {
+            "id": "DevHourCertificateStack",
+            "path": "AlphaStage/DevHourCertificateStack",
+            "children": {
+              "DevHourCertificate": {
+                "id": "DevHourCertificate",
+                "path": "AlphaStage/DevHourCertificateStack/DevHourCertificate",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/DevHourCertificateStack/DevHourCertificate/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CertificateManager::Certificate",
+                      "aws:cdk:cloudformation:props": {
+                        "domainName": "devhour.app",
+                        "domainValidationOptions": [
+                          {
+                            "domainName": "devhour.app",
+                            "hostedZoneId": "Z07215181F0MV3GAXD1UU"
+                          }
+                        ],
+                        "subjectAlternativeNames": [
+                          "*.devhour.app"
+                        ],
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "AlphaStage/DevHourCertificateStack/DevHourCertificate"
+                          }
+                        ],
+                        "validationMethod": "DNS"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_certificatemanager.CfnCertificate",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_certificatemanager.Certificate",
+                  "version": "2.47.0"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/DevHourCertificateStack/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/DevHourCertificateStack/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.127"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/DevHourCertificateStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.47.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/DevHourCertificateStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.47.0"
+            }
+          },
           "DevHourVPCStack": {
             "id": "DevHourVPCStack",
             "path": "AlphaStage/DevHourVPCStack",
@@ -457,6 +541,71 @@
               "CheckBootstrapVersion": {
                 "id": "CheckBootstrapVersion",
                 "path": "AlphaStage/DevHourVPCStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.47.0"
+            }
+          },
+          "DevHourInternetGatewayStack": {
+            "id": "DevHourInternetGatewayStack",
+            "path": "AlphaStage/DevHourInternetGatewayStack",
+            "children": {
+              "DevHourInternetGateway": {
+                "id": "DevHourInternetGateway",
+                "path": "AlphaStage/DevHourInternetGatewayStack/DevHourInternetGateway",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "vpcId",
+                        "value": {
+                          "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.47.0"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/DevHourInternetGatewayStack/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/DevHourInternetGatewayStack/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.127"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/DevHourInternetGatewayStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.47.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/DevHourInternetGatewayStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
                   "version": "2.47.0"
@@ -2252,6 +2401,52 @@
                             "name": "AlphaStage",
                             "actions": [
                               {
+                                "name": "DevHourCertificateStack.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourCertificateStack",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourCertificateStack510360C0.template.json"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
                                 "name": "DevHourHostedZoneStack.Prepare",
                                 "inputArtifacts": [
                                   {
@@ -2620,6 +2815,33 @@
                                 }
                               },
                               {
+                                "name": "DevHourCertificateStack.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourCertificateStack",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 2,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
                                 "name": "DevHourHostedZoneStack.Deploy",
                                 "actionTypeId": {
                                   "category": "Deploy",
@@ -2882,6 +3104,52 @@
                                 }
                               },
                               {
+                                "name": "DevHourInternetGatewayStack.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourInternetGatewayStack",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourInternetGatewayStackE00DE010.template.json"
+                                },
+                                "runOrder": 3,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
                                 "name": "ec2StackID.Prepare",
                                 "inputArtifacts": [
                                   {
@@ -2937,6 +3205,33 @@
                                 },
                                 "configuration": {
                                   "StackName": "AlphaStage-DevHourCognitoStack",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 4,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "DevHourInternetGatewayStack.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourInternetGatewayStack",
                                   "ActionMode": "CHANGE_SET_EXECUTE",
                                   "ChangeSetName": "PipelineChange"
                                 },
@@ -3401,6 +3696,14 @@
                     "id": "AlphaStage",
                     "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage",
                     "children": {
+                      "DevHourCertificateStack.Prepare": {
+                        "id": "DevHourCertificateStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCertificateStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.127"
+                        }
+                      },
                       "DevHourHostedZoneStack.Prepare": {
                         "id": "DevHourHostedZoneStack.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourHostedZoneStack.Prepare",
@@ -3460,6 +3763,14 @@
                       "userTestTableAlphaStack.Prepare": {
                         "id": "userTestTableAlphaStack.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/userTestTableAlphaStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.127"
+                        }
+                      },
+                      "DevHourCertificateStack.Deploy": {
+                        "id": "DevHourCertificateStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCertificateStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"
@@ -3537,6 +3848,14 @@
                           "version": "10.1.127"
                         }
                       },
+                      "DevHourInternetGatewayStack.Prepare": {
+                        "id": "DevHourInternetGatewayStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourInternetGatewayStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.127"
+                        }
+                      },
                       "ec2StackID.Prepare": {
                         "id": "ec2StackID.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ec2StackID.Prepare",
@@ -3548,6 +3867,14 @@
                       "DevHourCognitoStack.Deploy": {
                         "id": "DevHourCognitoStack.Deploy",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Deploy",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.127"
+                        }
+                      },
+                      "DevHourInternetGatewayStack.Deploy": {
+                        "id": "DevHourInternetGatewayStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourInternetGatewayStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"

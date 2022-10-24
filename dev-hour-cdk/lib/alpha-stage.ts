@@ -12,6 +12,8 @@ import { DynamoDBStack } from './dynamoDB-stack'
 import { AttributeType } from 'aws-cdk-lib/aws-dynamodb'
 import { EC2Stack } from './ec2-stack'
 import { HostedZoneStack } from './route53-stack' 
+import { CertificateStack } from './certificate-stack'
+import { InternetGatewayStack } from './internet-gateway-stack'
 
 /// ----------------
 /// AlphaStage Props
@@ -41,6 +43,8 @@ export class AlphaStage extends Stage {
     private readonly menuTestTableStack:        DynamoDBStack   ;
     private readonly ec2Stack:                  EC2Stack        ;
     private readonly hostedZoneStack:           HostedZoneStack ;
+    private readonly internetGatewayStack:      InternetGatewayStack;
+    private readonly certificateStack:          CertificateStack;
 
     /// -----------
     /// Constructor
@@ -51,15 +55,23 @@ export class AlphaStage extends Stage {
             region:     props.region
         }});
 
-    this.hostedZoneStack = new HostedZoneStack(this, {
-        accountId:  props.account,
-        region:     props.region,
-        stackId:    Constants.Route53.HostedZone.StackId,
-        id:         Constants.Route53.HostedZone.Id,
-        domainName: Constants.DomainName,
-    });
+        this.hostedZoneStack = new HostedZoneStack(this, {
+            accountId:  props.account,
+            region:     props.region,
+            stackId:    Constants.Route53.HostedZone.StackId,
+            id:         Constants.Route53.HostedZone.Id,
+            domainName: Constants.DomainName,
+        });
 
-
+        // attempt at certificate stack constructor
+        this.certificateStack = new CertificateStack(this, {
+            accountId:  props.account,
+            region:     props.region,
+            stackId:    Constants.Route53.Certificate.StackId,
+            id:         Constants.Route53.Certificate.Id,
+            domainName: Constants.DomainName,
+            hostedZone: this.hostedZoneStack.hostedZone,
+        });
 
         this.vpcStack = new VpcStack(this, {
             account:                props.account,
@@ -78,6 +90,14 @@ export class AlphaStage extends Stage {
                     subnetType:     Constants.EC2.VPC.SubnetConfiguration.Type
                 }
             ]
+        });
+
+        this.internetGatewayStack = new InternetGatewayStack(this, {
+            accountId:  props.account,
+            region:     props.region,
+            stackId:    Constants.EC2.InternetGateway.StackId,
+            id:         Constants.EC2.InternetGateway.Id,
+            vpcId:      this.vpcStack.vpc.vpcId,
         });
 
         this.userTestTableStack = new DynamoDBStack(this, {

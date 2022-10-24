@@ -55,6 +55,66 @@
       },
       "displayName": "AlphaStage/DevHourHostedZoneStack"
     },
+    "AlphaStageDevHourCertificateStack510360C0.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageDevHourCertificateStack510360C0.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStageDevHourCertificateStack510360C0": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageDevHourCertificateStack510360C0.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/1d7171bbe620721eb02419778641b701de126758803703c5fc235101b94aab11.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageDevHourCertificateStack510360C0.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-DevHourCertificateStack"
+      },
+      "dependencies": [
+        "AlphaStageDevHourCertificateStack510360C0.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/DevHourCertificateStack/DevHourCertificate/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourCertificateB909B3F9"
+          }
+        ],
+        "/AlphaStage/DevHourCertificateStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/DevHourCertificateStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/DevHourCertificateStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/DevHourCertificateStack"
+    },
     "AlphaStageDevHourVPCStack5DD1DC37.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
@@ -174,6 +234,67 @@
         ]
       },
       "displayName": "AlphaStage/DevHourVPCStack"
+    },
+    "AlphaStageDevHourInternetGatewayStackE00DE010.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageDevHourInternetGatewayStackE00DE010.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStageDevHourInternetGatewayStackE00DE010": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageDevHourInternetGatewayStackE00DE010.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/a08a55517b8c0c2296dd4cf4982d68f8d3bb43f1bbe7e85f16bb8b4c537f40d4.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageDevHourInternetGatewayStackE00DE010.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-DevHourInternetGatewayStack"
+      },
+      "dependencies": [
+        "AlphaStageDevHourVPCStack5DD1DC37",
+        "AlphaStageDevHourInternetGatewayStackE00DE010.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/DevHourInternetGatewayStack/DevHourInternetGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourInternetGateway"
+          }
+        ],
+        "/AlphaStage/DevHourInternetGatewayStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/DevHourInternetGatewayStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/DevHourInternetGatewayStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/DevHourInternetGatewayStack"
     },
     "AlphaStageuserTestTableAlphaStack2D03A363.assets": {
       "type": "cdk:asset-manifest",

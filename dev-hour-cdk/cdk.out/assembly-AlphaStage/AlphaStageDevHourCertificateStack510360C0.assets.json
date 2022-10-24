@@ -1,15 +1,15 @@
 {
   "version": "21.0.0",
   "files": {
-    "e6f86743405f6fc50300e68a42f42806edfdbf4607ef52793fafafd088e25c5c": {
+    "1d7171bbe620721eb02419778641b701de126758803703c5fc235101b94aab11": {
       "source": {
-        "path": "DevHourPipelineStack.template.json",
+        "path": "AlphaStageDevHourCertificateStack510360C0.template.json",
         "packaging": "file"
       },
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "e6f86743405f6fc50300e68a42f42806edfdbf4607ef52793fafafd088e25c5c.json",
+          "objectKey": "1d7171bbe620721eb02419778641b701de126758803703c5fc235101b94aab11.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

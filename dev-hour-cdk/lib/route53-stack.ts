@@ -7,7 +7,7 @@ import { Construct } from 'constructs'
 import { HostedZone } from 'aws-cdk-lib/aws-route53'
 
 export interface HostedZoneStackProps {
-    accountId:      string,
+    accountId:    string,
     region:       string,
     stackId:      string,
     id:           string,

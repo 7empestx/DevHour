@@ -38,6 +38,14 @@ export module Constants {
     export module EC2 {
         
         /// ---
+        /// InternetGateway
+        export module InternetGateway {
+            export const Id             = `${AppName}InternetGateway`   ;
+            export const StackId        = `${Id}Stack`                  ;    
+        }
+ 
+
+        /// ---
         /// VPC
 
         export module VPC {
@@ -244,6 +252,10 @@ export module Constants {
     /// Route53
     
     export module Route53 {
+        export module Certificate {
+            export const Id = `${AppName}Certificate`       ;
+            export const StackId = `${Id}Stack`             ;
+        }
 
         export module HostedZone {
             export const Id = `${AppName}HostedZone`        ;
