@@ -13,6 +13,7 @@ export module Constants {
     export const Account    =   '060498623801'      ;
     export const Region     =   'us-west-1'         ;
     export const AppName    =   'DevHour'           ;
+    export const DomainName =   'devhour.app'       ;
 
     /// ------
     /// Stages
@@ -237,6 +238,18 @@ export module Constants {
 
         }
 
+    }
+
+    /// --------
+    /// Route53
+    
+    export module Route53 {
+
+        export module HostedZone {
+            export const Id = `${AppName}HostedZone`        ;
+            export const StackId  = `${Id}Stack`            ;
+
+        }
     }
 
 }

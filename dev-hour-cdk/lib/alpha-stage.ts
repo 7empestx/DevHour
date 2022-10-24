@@ -11,6 +11,7 @@ import { Constants } from './constants'
 import { DynamoDBStack } from './dynamoDB-stack'
 import { AttributeType } from 'aws-cdk-lib/aws-dynamodb'
 import { EC2Stack } from './ec2-stack'
+import { HostedZoneStack } from './route53-stack' 
 
 /// ----------------
 /// AlphaStage Props
@@ -39,6 +40,7 @@ export class AlphaStage extends Stage {
     private readonly ingredientTestTableStack:  DynamoDBStack   ;
     private readonly menuTestTableStack:        DynamoDBStack   ;
     private readonly ec2Stack:                  EC2Stack        ;
+    private readonly hostedZoneStack:           HostedZoneStack ;
 
     /// -----------
     /// Constructor
@@ -48,6 +50,16 @@ export class AlphaStage extends Stage {
             account:    props.account,
             region:     props.region
         }});
+
+    this.hostedZoneStack = new HostedZoneStack(this, {
+        accountId:  props.account,
+        region:     props.region,
+        stackId:    Constants.Route53.HostedZone.StackId,
+        id:         Constants.Route53.HostedZone.Id,
+        domainName: Constants.DomainName,
+    });
+
+
 
         this.vpcStack = new VpcStack(this, {
             account:                props.account,

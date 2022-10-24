@@ -16,6 +16,58 @@
         "id": "AlphaStage",
         "path": "AlphaStage",
         "children": {
+          "DevHourHostedZoneStack": {
+            "id": "DevHourHostedZoneStack",
+            "path": "AlphaStage/DevHourHostedZoneStack",
+            "children": {
+              "DevHourHostedZone": {
+                "id": "DevHourHostedZone",
+                "path": "AlphaStage/DevHourHostedZoneStack/DevHourHostedZone",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.47.0"
+                }
+              },
+              "CDKMetadata": {
+                "id": "CDKMetadata",
+                "path": "AlphaStage/DevHourHostedZoneStack/CDKMetadata",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "AlphaStage/DevHourHostedZoneStack/CDKMetadata/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.47.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.1.127"
+                }
+              },
+              "BootstrapVersion": {
+                "id": "BootstrapVersion",
+                "path": "AlphaStage/DevHourHostedZoneStack/BootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnParameter",
+                  "version": "2.47.0"
+                }
+              },
+              "CheckBootstrapVersion": {
+                "id": "CheckBootstrapVersion",
+                "path": "AlphaStage/DevHourHostedZoneStack/CheckBootstrapVersion",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnRule",
+                  "version": "2.47.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Stack",
+              "version": "2.47.0"
+            }
+          },
           "DevHourVPCStack": {
             "id": "DevHourVPCStack",
             "path": "AlphaStage/DevHourVPCStack",
@@ -2200,6 +2252,52 @@
                             "name": "AlphaStage",
                             "actions": [
                               {
+                                "name": "DevHourHostedZoneStack.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourHostedZoneStack",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageDevHourHostedZoneStack8DCDF59B.template.json"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
                                 "name": "DevHourVPCStack.Prepare",
                                 "inputArtifacts": [
                                   {
@@ -2508,6 +2606,33 @@
                                   "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStageuserTestTableAlphaStack2D03A363.template.json"
                                 },
                                 "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "DevHourHostedZoneStack.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-DevHourHostedZoneStack",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 2,
                                 "roleArn": {
                                   "Fn::Join": [
                                     "",
@@ -3276,6 +3401,14 @@
                     "id": "AlphaStage",
                     "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage",
                     "children": {
+                      "DevHourHostedZoneStack.Prepare": {
+                        "id": "DevHourHostedZoneStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourHostedZoneStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.127"
+                        }
+                      },
                       "DevHourVPCStack.Prepare": {
                         "id": "DevHourVPCStack.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourVPCStack.Prepare",
@@ -3327,6 +3460,14 @@
                       "userTestTableAlphaStack.Prepare": {
                         "id": "userTestTableAlphaStack.Prepare",
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/userTestTableAlphaStack.Prepare",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.1.127"
+                        }
+                      },
+                      "DevHourHostedZoneStack.Deploy": {
+                        "id": "DevHourHostedZoneStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourHostedZoneStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"

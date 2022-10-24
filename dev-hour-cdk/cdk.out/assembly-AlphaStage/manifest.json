@@ -1,6 +1,60 @@
 {
   "version": "21.0.0",
   "artifacts": {
+    "AlphaStageDevHourHostedZoneStack8DCDF59B.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AlphaStageDevHourHostedZoneStack8DCDF59B.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AlphaStageDevHourHostedZoneStack8DCDF59B": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://060498623801/us-west-1",
+      "properties": {
+        "templateFile": "AlphaStageDevHourHostedZoneStack8DCDF59B.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/4b4079193d2ffe859a527cbcfe430e41227e5f9ac43aa8b4906b6ca068ff4eeb.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AlphaStageDevHourHostedZoneStack8DCDF59B.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        },
+        "stackName": "AlphaStage-DevHourHostedZoneStack"
+      },
+      "dependencies": [
+        "AlphaStageDevHourHostedZoneStack8DCDF59B.assets"
+      ],
+      "metadata": {
+        "/AlphaStage/DevHourHostedZoneStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AlphaStage/DevHourHostedZoneStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AlphaStage/DevHourHostedZoneStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AlphaStage/DevHourHostedZoneStack"
+    },
     "AlphaStageDevHourVPCStack5DD1DC37.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
