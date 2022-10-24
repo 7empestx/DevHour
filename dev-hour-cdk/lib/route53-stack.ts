@@ -2,48 +2,37 @@
 // Grant mentioned this was a good starting point.
 // Need to make modifications.
 
-
-
-import { Instance, InstanceType, MachineImage, SubnetType, Vpc, VpcEndpoint } from 'aws-cdk-lib/aws-ec2'
-import { Stack } from 'aws-cdk-lib'
+import { Stage, Stack } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
+import { HostedZone } from 'aws-cdk-lib/aws-route53'
 
-export interface TableProps {
-    account:      string,
-    instanceName: string,
-    id:           string,
-    accountId:    string,
+export interface HostedZoneStackProps {
+    accountId:      string,
     region:       string,
     stackId:      string,
-    vpc:          Vpc,
+    id:           string,
+    domainName:   string,
 }
 
-export class EC2Stack extends Stack {
-    private readonly _ec2: Instance;
-    private readonly _vpe: VpcEndpoint;
+export class HostedZoneStack extends Stack {
+    private readonly _hostedZone: HostedZone;
+
     
-    constructor(scope: Construct, props: TableProps) {
+    constructor(scope: Construct, props: HostedZoneStackProps) {
         super(scope, props.stackId, { env: {
-                account: props.accountId,
+                account: props.accountId,   
                 region: props.region,
         }});
 
-        this._vpe = props.vpc.addInterfaceEndpoint('EC2-Ingestion-Endpoint', {
-            service: { name: 'com.amazonaws.us-east-1.ec2', port: 443 },
-            privateDnsEnabled: true,
-            subnets: { subnetType: SubnetType.PRIVATE_ISOLATED },
-        });
+    this._hostedZone = HostedZone.fromLookup(this, props.id, {
+        domainName: props.domainName
 
-        this._ec2 = new Instance(this, props.id, { 
-            vpc: props.vpc,
-            vpcSubnets: {
-                subnetType: SubnetType.PRIVATE_ISOLATED, 
-            },
-            instanceName: props.instanceName,
-            instanceType: new InstanceType('t2.micro'),
-            machineImage: MachineImage.latestAmazonLinux()
-        });
 
+    }) as HostedZone ;
+
+    }
+    public get hostedZone() {
+        return this._hostedZone;
     }
 }
 

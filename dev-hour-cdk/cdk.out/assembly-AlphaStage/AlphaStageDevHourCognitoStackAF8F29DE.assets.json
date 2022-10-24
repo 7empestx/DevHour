@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "1412e1dd7d920f620d924ccb75828811a3d8f3b9e0d1f43f41a5d8ad2e81d2cd": {
+    "3fd98c2da017b5510f1db86dd4634b834ac2efc69271b855a273306f3e0a84b8": {
       "source": {
         "path": "AlphaStageDevHourCognitoStackAF8F29DE.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "1412e1dd7d920f620d924ccb75828811a3d8f3b9e0d1f43f41a5d8ad2e81d2cd.json",
+          "objectKey": "3fd98c2da017b5510f1db86dd4634b834ac2efc69271b855a273306f3e0a84b8.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }
