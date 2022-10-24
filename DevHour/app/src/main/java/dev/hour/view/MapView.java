@@ -54,6 +54,11 @@ public class MapView extends FrameLayout implements
     private final com.mapbox.maps.MapView           mapView             ;
 
     /**
+     * The SearchBar contained in this ViewGroup
+     */
+    private final SearchBar                         searchBar           ;
+
+    /**
      * The Map instance that is used to manipulate the
      * on-screen map
      */
@@ -88,6 +93,7 @@ public class MapView extends FrameLayout implements
         this.restaurantDotViews = new HashMap<>();
         this.mapView            = new com.mapbox.maps.MapView(context);
         this.mapboxMap          = this.mapView.getMapboxMap();
+        this.searchBar          = new SearchBar(context);
 
         // Set the layout parameters
         setLayoutParams(
@@ -97,6 +103,10 @@ public class MapView extends FrameLayout implements
         this.mapView.setLayoutParams(
                 new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        this.searchBar.setLayoutParams(
+                new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // We want to set the children draw order in order to draw the user's dot
         // on top of the map as well as the flag that enables drawing on the ViewGroup's
@@ -112,6 +122,7 @@ public class MapView extends FrameLayout implements
 
         // Add the views
         addView(this.mapView);
+        addView(this.searchBar);
 
     }
 
@@ -126,6 +137,29 @@ public class MapView extends FrameLayout implements
         if(mapView != null)
             mapView.onStart();
 
+    }
+
+    @Override
+    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
+    {
+        this.mapView.measure(widthMeasureSpec,heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        float density = getResources().getDisplayMetrics().density;
+
+        int widthSpec = MeasureSpec.makeMeasureSpec((int)(getMeasuredWidth() - density*4), MeasureSpec.EXACTLY);
+        int heightSpec = MeasureSpec.makeMeasureSpec((int)(density*32), MeasureSpec.EXACTLY);
+
+        this.searchBar.measure(widthSpec, heightSpec);
+    }
+
+    @Override
+    protected void onLayout (boolean changed, int left, int top, int right, int bottom)
+    {
+        this.mapView.layout(left,top,right,bottom);
+        left = (getMeasuredWidth() - this.searchBar.getMeasuredWidth()) / 2;
+        top  = (int)(getResources().getDisplayMetrics().density * 4);
+
+        this.searchBar.layout(left, top, left + this.searchBar.getMeasuredWidth(), top + this.searchBar.getMeasuredHeight());
     }
 
     /**
