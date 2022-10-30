@@ -8,6 +8,7 @@ import dev.hour.contracts.AuthenticatorContract;
 import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
@@ -271,6 +272,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
                 credentials.put("ACCESS_KEY", this.credentials.accessKeyId());
                 credentials.put("SECRET_KEY", this.credentials.secretKey());
+                credentials.put("SESSION_TOKEN", this.credentials.sessionToken());
 
                 listener.onAuthenticated(credentials);
 

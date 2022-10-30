@@ -9,6 +9,7 @@ import java.util.Objects;
 import dev.hour.contracts.UserContract;
 import dev.hour.user.User;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
@@ -143,9 +144,10 @@ public class UserDatabase implements UserContract.Database {
                 .builder()
                 .region(Region.of(this.region))
                 .httpClient(this.httpClient)
-                .credentialsProvider(() -> AwsBasicCredentials.create(
+                .credentialsProvider(() -> AwsSessionCredentials.create(
                         credentials.get("ACCESS_KEY"),
-                        credentials.get("SECRET_KEY")))
+                        credentials.get("SECRET_KEY"),
+                        credentials.get("SESSION_TOKEN")))
                 .build();
 
     }

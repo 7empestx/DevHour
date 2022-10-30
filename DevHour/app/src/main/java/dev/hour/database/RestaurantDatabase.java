@@ -11,6 +11,7 @@ import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
@@ -100,9 +101,10 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                 .builder()
                 .region(Region.of(this.region))
                 .httpClient(this.httpClient)
-                .credentialsProvider(() -> AwsBasicCredentials.create(
+                .credentialsProvider(() -> AwsSessionCredentials.create(
                         credentials.get("ACCESS_KEY"),
-                        credentials.get("SECRET_KEY")))
+                        credentials.get("SECRET_KEY"),
+                        credentials.get("SESSION_TOKEN")))
                 .build();
 
     }
