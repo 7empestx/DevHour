@@ -41,7 +41,7 @@ export class EC2Stack extends Stack {
 
         this._kp = new CfnKeyPair(this, 'MyCfnKeyPair', {
             keyName: 'keyName',
-            keyType: 'keyType',
+            
             publicKeyMaterial: 'publicKeyMaterial',
             tags: [{
                 key: 'DevHour',
