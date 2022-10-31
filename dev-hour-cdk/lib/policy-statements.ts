@@ -10,12 +10,12 @@ export module PolicyStatements {
 
     export module DynamoDB {
 
-        export class BasicReadPolicyStatement extends PolicyStatement {
+        export class BasicCRUDPolicyStatement extends PolicyStatement {
 
             constructor(resourceArns: string[]) {
                 super({
                     effect:     Effect.ALLOW,
-                    actions:    Constants.DynamoDB.PolicyStatements.BasicRead.AllowActions,
+                    actions:    Constants.DynamoDB.PolicyStatements.BasicCRUD.AllowActions,
                     resources:  resourceArns
                 });
             

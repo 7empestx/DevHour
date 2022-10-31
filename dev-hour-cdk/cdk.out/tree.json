@@ -9,7 +9,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.1.107"
+          "version": "10.1.127"
         }
       },
       "AlphaStage": {
@@ -25,7 +25,7 @@
                 "path": "AlphaStage/DevHourHostedZoneStack/DevHourHostedZone",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -37,13 +37,13 @@
                     "path": "AlphaStage/DevHourHostedZoneStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -51,7 +51,7 @@
                 "path": "AlphaStage/DevHourHostedZoneStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -59,13 +59,13 @@
                 "path": "AlphaStage/DevHourHostedZoneStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "DevHourCertificateStack": {
@@ -97,13 +97,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_certificatemanager.CfnCertificate",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_certificatemanager.Certificate",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -115,13 +115,13 @@
                     "path": "AlphaStage/DevHourCertificateStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -129,7 +129,7 @@
                 "path": "AlphaStage/DevHourCertificateStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -137,13 +137,13 @@
                 "path": "AlphaStage/DevHourCertificateStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "DevHourVPCStack": {
@@ -174,7 +174,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "DevHourVPCSubnetSubnet1": {
@@ -192,7 +192,7 @@
                             },
                             "availabilityZone": "us-west-1b",
                             "cidrBlock": "10.0.0.0/24",
-                            "mapPublicIpOnLaunch": false,
+                            "mapPublicIpOnLaunch": true,
                             "tags": [
                               {
                                 "key": "aws-cdk:subnet-name",
@@ -200,7 +200,7 @@
                               },
                               {
                                 "key": "aws-cdk:subnet-type",
-                                "value": "Isolated"
+                                "value": "Public"
                               },
                               {
                                 "key": "Name",
@@ -211,7 +211,7 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "Acl": {
@@ -219,7 +219,7 @@
                         "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/Acl",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.Resource",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "RouteTable": {
@@ -241,7 +241,7 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "RouteTableAssociation": {
@@ -260,13 +260,33 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
+                        }
+                      },
+                      "DefaultRoute": {
+                        "id": "DefaultRoute",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/DefaultRoute",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "routeTableId": {
+                              "Ref": "DevHourVPCDevHourVPCSubnetSubnet1RouteTable3B2F4C87"
+                            },
+                            "destinationCidrBlock": "0.0.0.0/0",
+                            "gatewayId": {
+                              "Ref": "DevHourVPCIGW79F5C8C3"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                          "version": "2.45.0"
                         }
                       }
                     },
                     "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
-                      "version": "2.42.1"
+                      "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                      "version": "2.45.0"
                     }
                   },
                   "DevHourVPCSubnetSubnet2": {
@@ -284,7 +304,7 @@
                             },
                             "availabilityZone": "us-west-1c",
                             "cidrBlock": "10.0.1.0/24",
-                            "mapPublicIpOnLaunch": false,
+                            "mapPublicIpOnLaunch": true,
                             "tags": [
                               {
                                 "key": "aws-cdk:subnet-name",
@@ -292,7 +312,7 @@
                               },
                               {
                                 "key": "aws-cdk:subnet-type",
-                                "value": "Isolated"
+                                "value": "Public"
                               },
                               {
                                 "key": "Name",
@@ -303,7 +323,7 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "Acl": {
@@ -311,7 +331,7 @@
                         "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/Acl",
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.Resource",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "RouteTable": {
@@ -333,7 +353,7 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "RouteTableAssociation": {
@@ -352,132 +372,77 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
-                      "version": "2.42.1"
-                    }
-                  },
-                  "EC2-Ingestion-Endpoint": {
-                    "id": "EC2-Ingestion-Endpoint",
-                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint",
-                    "children": {
-                      "SecurityGroup": {
-                        "id": "SecurityGroup",
-                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup",
-                        "children": {
-                          "Resource": {
-                            "id": "Resource",
-                            "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup/Resource",
-                            "attributes": {
-                              "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
-                              "aws:cdk:cloudformation:props": {
-                                "groupDescription": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup",
-                                "securityGroupEgress": [
-                                  {
-                                    "cidrIp": "0.0.0.0/0",
-                                    "description": "Allow all outbound traffic by default",
-                                    "ipProtocol": "-1"
-                                  }
-                                ],
-                                "securityGroupIngress": [
-                                  {
-                                    "cidrIp": {
-                                      "Fn::GetAtt": [
-                                        "DevHourVPC77A046B5",
-                                        "CidrBlock"
-                                      ]
-                                    },
-                                    "ipProtocol": "tcp",
-                                    "fromPort": 443,
-                                    "toPort": 443,
-                                    "description": {
-                                      "Fn::Join": [
-                                        "",
-                                        [
-                                          "from ",
-                                          {
-                                            "Fn::GetAtt": [
-                                              "DevHourVPC77A046B5",
-                                              "CidrBlock"
-                                            ]
-                                          },
-                                          ":443"
-                                        ]
-                                      ]
-                                    }
-                                  }
-                                ],
-                                "tags": [
-                                  {
-                                    "key": "Name",
-                                    "value": "AlphaStage/DevHourVPCStack/DevHourVPC"
-                                  }
-                                ],
-                                "vpcId": {
-                                  "Ref": "DevHourVPC77A046B5"
-                                }
-                              }
+                      },
+                      "DefaultRoute": {
+                        "id": "DefaultRoute",
+                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/DefaultRoute",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                          "aws:cdk:cloudformation:props": {
+                            "routeTableId": {
+                              "Ref": "DevHourVPCDevHourVPCSubnetSubnet2RouteTable88761651"
                             },
-                            "constructInfo": {
-                              "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
-                              "version": "2.42.1"
+                            "destinationCidrBlock": "0.0.0.0/0",
+                            "gatewayId": {
+                              "Ref": "DevHourVPCIGW79F5C8C3"
                             }
                           }
                         },
                         "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
-                          "version": "2.42.1"
-                        }
-                      },
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::EC2::VPCEndpoint",
-                          "aws:cdk:cloudformation:props": {
-                            "serviceName": "com.amazonaws.us-west-1.ec2",
-                            "vpcId": {
-                              "Ref": "DevHourVPC77A046B5"
-                            },
-                            "privateDnsEnabled": true,
-                            "securityGroupIds": [
-                              {
-                                "Fn::GetAtt": [
-                                  "DevHourVPCEC2IngestionEndpointSecurityGroupB6EAD321",
-                                  "GroupId"
-                                ]
-                              }
-                            ],
-                            "subnetIds": [
-                              {
-                                "Ref": "DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327"
-                              },
-                              {
-                                "Ref": "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B"
-                              }
-                            ],
-                            "vpcEndpointType": "Interface"
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_ec2.CfnVPCEndpoint",
-                          "version": "2.42.1"
+                          "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                          "version": "2.45.0"
                         }
                       }
                     },
                     "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.InterfaceVpcEndpoint",
-                      "version": "2.42.1"
+                      "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                      "version": "2.45.0"
+                    }
+                  },
+                  "IGW": {
+                    "id": "IGW",
+                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/IGW",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "AlphaStage/DevHourVPCStack/DevHourVPC"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                      "version": "2.45.0"
+                    }
+                  },
+                  "VPCGW": {
+                    "id": "VPCGW",
+                    "path": "AlphaStage/DevHourVPCStack/DevHourVPC/VPCGW",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "DevHourVPC77A046B5"
+                        },
+                        "internetGatewayId": {
+                          "Ref": "DevHourVPCIGW79F5C8C3"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.Vpc",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -489,13 +454,13 @@
                     "path": "AlphaStage/DevHourVPCStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -507,7 +472,7 @@
                     "path": "AlphaStage/DevHourVPCStack/Exports/Output{\"Ref\":\"DevHourVPC77A046B5\"}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "Output{\"Ref\":\"DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327\"}": {
@@ -515,13 +480,13 @@
                     "path": "AlphaStage/DevHourVPCStack/Exports/Output{\"Ref\":\"DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327\"}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -529,7 +494,7 @@
                 "path": "AlphaStage/DevHourVPCStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -537,13 +502,13 @@
                 "path": "AlphaStage/DevHourVPCStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "DevHourInternetGatewayStack": {
@@ -568,7 +533,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -580,13 +545,13 @@
                     "path": "AlphaStage/DevHourInternetGatewayStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -594,7 +559,7 @@
                 "path": "AlphaStage/DevHourInternetGatewayStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -602,13 +567,13 @@
                 "path": "AlphaStage/DevHourInternetGatewayStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "userTestTableAlphaStack": {
@@ -646,7 +611,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "ScalingRole": {
@@ -654,13 +619,13 @@
                     "path": "AlphaStage/userTestTableAlphaStack/userTestTableAlphaID/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -672,13 +637,13 @@
                     "path": "AlphaStage/userTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -690,13 +655,13 @@
                     "path": "AlphaStage/userTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"userTestTableAlphaID263AD0DA\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -704,7 +669,7 @@
                 "path": "AlphaStage/userTestTableAlphaStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -712,13 +677,13 @@
                 "path": "AlphaStage/userTestTableAlphaStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "restaurantTestTableAlphaStack": {
@@ -756,7 +721,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "ScalingRole": {
@@ -764,13 +729,13 @@
                     "path": "AlphaStage/restaurantTestTableAlphaStack/restaurantTestTableAlphaID/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -782,13 +747,13 @@
                     "path": "AlphaStage/restaurantTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -800,13 +765,13 @@
                     "path": "AlphaStage/restaurantTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"restaurantTestTableAlphaID37264F16\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -814,7 +779,7 @@
                 "path": "AlphaStage/restaurantTestTableAlphaStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -822,13 +787,13 @@
                 "path": "AlphaStage/restaurantTestTableAlphaStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "mealTestTableAlphaStack": {
@@ -866,7 +831,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "ScalingRole": {
@@ -874,13 +839,13 @@
                     "path": "AlphaStage/mealTestTableAlphaStack/mealTestTableAlphaID/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -892,13 +857,13 @@
                     "path": "AlphaStage/mealTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -910,13 +875,13 @@
                     "path": "AlphaStage/mealTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"mealTestTableAlphaID3E07DECA\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -924,7 +889,7 @@
                 "path": "AlphaStage/mealTestTableAlphaStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -932,13 +897,13 @@
                 "path": "AlphaStage/mealTestTableAlphaStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "dietTestTableAlphaStack": {
@@ -976,7 +941,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "ScalingRole": {
@@ -984,13 +949,13 @@
                     "path": "AlphaStage/dietTestTableAlphaStack/dietTestTableAlphaID/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -1002,13 +967,13 @@
                     "path": "AlphaStage/dietTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -1020,13 +985,13 @@
                     "path": "AlphaStage/dietTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"dietTestTableAlphaIDC014BB2F\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -1034,7 +999,7 @@
                 "path": "AlphaStage/dietTestTableAlphaStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -1042,13 +1007,13 @@
                 "path": "AlphaStage/dietTestTableAlphaStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "ingredientTestTableAlphaStack": {
@@ -1086,7 +1051,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "ScalingRole": {
@@ -1094,13 +1059,13 @@
                     "path": "AlphaStage/ingredientTestTableAlphaStack/ingredientTestTableAlphaID/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -1112,13 +1077,13 @@
                     "path": "AlphaStage/ingredientTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -1130,13 +1095,13 @@
                     "path": "AlphaStage/ingredientTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"ingredientTestTableAlphaIDF5FB8886\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -1144,7 +1109,7 @@
                 "path": "AlphaStage/ingredientTestTableAlphaStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -1152,13 +1117,13 @@
                 "path": "AlphaStage/ingredientTestTableAlphaStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "menuTestTableAlphaStack": {
@@ -1196,7 +1161,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "ScalingRole": {
@@ -1204,13 +1169,13 @@
                     "path": "AlphaStage/menuTestTableAlphaStack/menuTestTableAlphaID/ScalingRole",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_dynamodb.Table",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -1222,13 +1187,13 @@
                     "path": "AlphaStage/menuTestTableAlphaStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "Exports": {
@@ -1240,13 +1205,13 @@
                     "path": "AlphaStage/menuTestTableAlphaStack/Exports/Output{\"Fn::GetAtt\":[\"menuTestTableAlphaID3743E851\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -1254,7 +1219,7 @@
                 "path": "AlphaStage/menuTestTableAlphaStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -1262,13 +1227,13 @@
                 "path": "AlphaStage/menuTestTableAlphaStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "DevHourCognitoStack": {
@@ -1329,13 +1294,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_cognito.CfnUserPool",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cognito.UserPool",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourUserPoolClient": {
@@ -1373,13 +1338,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolClient",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cognito.UserPoolClient",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourCognitoIdentityProviderSecret": {
@@ -1387,7 +1352,7 @@
                 "path": "AlphaStage/DevHourCognitoStack/DevHourCognitoIdentityProviderSecret",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourCognitoIdentityProvider": {
@@ -1414,13 +1379,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_cognito.CfnUserPoolIdentityProvider",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cognito.UserPoolIdentityProviderAmazon",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourIdentityPool": {
@@ -1447,7 +1412,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cognito.CfnIdentityPool",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourCognitoAuthenticatedRoleAuthenticatedPolicy": {
@@ -1503,13 +1468,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourCognitoAuthenticatedRole": {
@@ -1554,13 +1519,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourCognitoUnauthenticatedRoleUnauthenticatedPolicy": {
@@ -1616,13 +1581,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "DevHourCognitoUnauthenticatedRole": {
@@ -1667,13 +1632,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "identity-pool-role-attachment": {
@@ -1724,7 +1689,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_cognito.CfnIdentityPoolRoleAttachment",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -1736,13 +1701,13 @@
                     "path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -1750,7 +1715,7 @@
                 "path": "AlphaStage/DevHourCognitoStack/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -1758,104 +1723,175 @@
                 "path": "AlphaStage/DevHourCognitoStack/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "ec2StackID": {
             "id": "ec2StackID",
             "path": "AlphaStage/ec2StackID",
             "children": {
+              "ec2IDSecurityGroup": {
+                "id": "ec2IDSecurityGroup",
+                "path": "AlphaStage/ec2StackID/ec2IDSecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/ec2StackID/ec2IDSecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "AlphaStage/ec2StackID/ec2IDSecurityGroup",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "securityGroupIngress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 22,
+                            "toPort": 22,
+                            "description": "SSH Access"
+                          },
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 443,
+                            "toPort": 443,
+                            "description": "HTTPS"
+                          }
+                        ],
+                        "vpcId": {
+                          "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.45.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.45.0"
+                }
+              },
+              "DevHourIngestionRolePolicy": {
+                "id": "DevHourIngestionRolePolicy",
+                "path": "AlphaStage/ec2StackID/DevHourIngestionRolePolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/ec2StackID/DevHourIngestionRolePolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::ManagedPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "dynamodb:DeleteItem",
+                                "dynamodb:DescribeTable",
+                                "dynamodb:GetItem",
+                                "dynamodb:PutItem",
+                                "dynamodb:Query",
+                                "dynamodb:Scan",
+                                "dynamodb:UpdateItem"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+                                },
+                                {
+                                  "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "description": "",
+                        "path": "/"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnManagedPolicy",
+                      "version": "2.45.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.ManagedPolicy",
+                  "version": "2.45.0"
+                }
+              },
+              "DevHourIngestionRole": {
+                "id": "DevHourIngestionRole",
+                "path": "AlphaStage/ec2StackID/DevHourIngestionRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AlphaStage/ec2StackID/DevHourIngestionRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Ref": "DevHourIngestionRolePolicy31721C73"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.45.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.45.0"
+                }
+              },
               "ec2ID": {
                 "id": "ec2ID",
                 "path": "AlphaStage/ec2StackID/ec2ID",
                 "children": {
-                  "InstanceSecurityGroup": {
-                    "id": "InstanceSecurityGroup",
-                    "path": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
-                          "aws:cdk:cloudformation:props": {
-                            "groupDescription": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup",
-                            "securityGroupEgress": [
-                              {
-                                "cidrIp": "0.0.0.0/0",
-                                "description": "Allow all outbound traffic by default",
-                                "ipProtocol": "-1"
-                              }
-                            ],
-                            "tags": [
-                              {
-                                "key": "Name",
-                                "value": "ec2Stack"
-                              }
-                            ],
-                            "vpcId": {
-                              "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
-                          "version": "2.42.1"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
-                      "version": "2.42.1"
-                    }
-                  },
-                  "InstanceRole": {
-                    "id": "InstanceRole",
-                    "path": "AlphaStage/ec2StackID/ec2ID/InstanceRole",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "AlphaStage/ec2StackID/ec2ID/InstanceRole/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                          "aws:cdk:cloudformation:props": {
-                            "assumeRolePolicyDocument": {
-                              "Statement": [
-                                {
-                                  "Action": "sts:AssumeRole",
-                                  "Effect": "Allow",
-                                  "Principal": {
-                                    "Service": "ec2.amazonaws.com"
-                                  }
-                                }
-                              ],
-                              "Version": "2012-10-17"
-                            },
-                            "tags": [
-                              {
-                                "key": "Name",
-                                "value": "ec2Stack"
-                              }
-                            ]
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                          "version": "2.42.1"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "aws-cdk-lib.aws_iam.Role",
-                      "version": "2.42.1"
-                    }
-                  },
                   "InstanceProfile": {
                     "id": "InstanceProfile",
                     "path": "AlphaStage/ec2StackID/ec2ID/InstanceProfile",
@@ -1864,14 +1900,14 @@
                       "aws:cdk:cloudformation:props": {
                         "roles": [
                           {
-                            "Ref": "ec2IDInstanceRole79AD7B51"
+                            "Ref": "DevHourIngestionRole63434C1D"
                           }
                         ]
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "Resource": {
@@ -1888,10 +1924,11 @@
                           "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
                         },
                         "instanceType": "t2.micro",
+                        "keyName": "devhour-ingestion",
                         "securityGroupIds": [
                           {
                             "Fn::GetAtt": [
-                              "ec2IDInstanceSecurityGroup5E3CA157",
+                              "ec2IDSecurityGroup0533C6EE",
                               "GroupId"
                             ]
                           }
@@ -1912,13 +1949,13 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_ec2.Instance",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
@@ -1926,7 +1963,7 @@
                 "path": "AlphaStage/ec2StackID/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
@@ -1934,29 +1971,7 @@
                 "path": "AlphaStage/ec2StackID/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.42.1"
-                }
-              },
-              "MyCfnKeyPair": {
-                "id": "MyCfnKeyPair",
-                "path": "AlphaStage/ec2StackID/MyCfnKeyPair",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::EC2::KeyPair",
-                  "aws:cdk:cloudformation:props": {
-                    "keyName": "keyName",
-                    "keyType": "keyType",
-                    "publicKeyMaterial": "publicKeyMaterial",
-                    "tags": [
-                      {
-                        "key": "DevHour",
-                        "value": "DeezNutz"
-                      }
-                    ]
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.aws_ec2.CfnKeyPair",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CDKMetadata": {
@@ -1968,13 +1983,13 @@
                     "path": "AlphaStage/ec2StackID/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               },
               "BootstrapVersion": {
@@ -1982,7 +1997,7 @@
                 "path": "AlphaStage/ec2StackID/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CheckBootstrapVersion": {
@@ -1990,19 +2005,19 @@
                 "path": "AlphaStage/ec2StackID/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.Stack",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "aws-cdk-lib.Stage",
-          "version": "2.42.1"
+          "version": "2.45.0"
         }
       },
       "DevHourPipelineStack": {
@@ -2046,7 +2061,7 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "Policy": {
@@ -2149,19 +2164,19 @@
                             },
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
-                              "version": "2.42.1"
+                              "version": "2.45.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_s3.Bucket",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "Role": {
@@ -2190,7 +2205,7 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "DefaultPolicy": {
@@ -2285,19 +2300,19 @@
                             },
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                              "version": "2.42.1"
+                              "version": "2.45.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_iam.Policy",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.Role",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "Resource": {
@@ -3306,7 +3321,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_codepipeline.CfnPipeline",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "Source": {
@@ -3343,7 +3358,7 @@
                                 },
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                                  "version": "2.42.1"
+                                  "version": "2.45.0"
                                 }
                               },
                               "DefaultPolicy": {
@@ -3434,31 +3449,31 @@
                                     },
                                     "constructInfo": {
                                       "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                                      "version": "2.42.1"
+                                      "version": "2.45.0"
                                     }
                                   }
                                 },
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_iam.Policy",
-                                  "version": "2.42.1"
+                                  "version": "2.45.0"
                                 }
                               }
                             },
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_iam.Role",
-                              "version": "2.42.1"
+                              "version": "2.45.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.1.107"
+                      "version": "10.1.127"
                     }
                   },
                   "Build": {
@@ -3499,7 +3514,7 @@
                                     },
                                     "constructInfo": {
                                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                                      "version": "2.42.1"
+                                      "version": "2.45.0"
                                     }
                                   },
                                   "DefaultPolicy": {
@@ -3619,19 +3634,19 @@
                                         },
                                         "constructInfo": {
                                           "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                                          "version": "2.42.1"
+                                          "version": "2.45.0"
                                         }
                                       }
                                     },
                                     "constructInfo": {
                                       "fqn": "aws-cdk-lib.aws_iam.Policy",
-                                      "version": "2.42.1"
+                                      "version": "2.45.0"
                                     }
                                   }
                                 },
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_iam.Role",
-                                  "version": "2.42.1"
+                                  "version": "2.45.0"
                                 }
                               },
                               "Resource": {
@@ -3669,25 +3684,25 @@
                                 },
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_codebuild.CfnProject",
-                                  "version": "2.42.1"
+                                  "version": "2.45.0"
                                 }
                               }
                             },
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_codebuild.PipelineProject",
-                              "version": "2.42.1"
+                              "version": "2.45.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.1.107"
+                      "version": "10.1.127"
                     }
                   },
                   "UpdatePipeline": {
@@ -3699,13 +3714,13 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/UpdatePipeline/SelfMutate",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.1.107"
+                      "version": "10.1.127"
                     }
                   },
                   "AlphaStage": {
@@ -3717,7 +3732,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCertificateStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourHostedZoneStack.Prepare": {
@@ -3725,7 +3740,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourHostedZoneStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourVPCStack.Prepare": {
@@ -3733,7 +3748,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourVPCStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "dietTestTableAlphaStack.Prepare": {
@@ -3741,7 +3756,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/dietTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "ingredientTestTableAlphaStack.Prepare": {
@@ -3749,7 +3764,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ingredientTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "mealTestTableAlphaStack.Prepare": {
@@ -3757,7 +3772,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/mealTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "menuTestTableAlphaStack.Prepare": {
@@ -3765,7 +3780,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menuTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "restaurantTestTableAlphaStack.Prepare": {
@@ -3773,7 +3788,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/restaurantTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "userTestTableAlphaStack.Prepare": {
@@ -3781,7 +3796,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/userTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourCertificateStack.Deploy": {
@@ -3789,7 +3804,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCertificateStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourHostedZoneStack.Deploy": {
@@ -3797,7 +3812,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourHostedZoneStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourVPCStack.Deploy": {
@@ -3805,7 +3820,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourVPCStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "dietTestTableAlphaStack.Deploy": {
@@ -3813,7 +3828,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/dietTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "ingredientTestTableAlphaStack.Deploy": {
@@ -3821,7 +3836,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ingredientTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "mealTestTableAlphaStack.Deploy": {
@@ -3829,7 +3844,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/mealTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "menuTestTableAlphaStack.Deploy": {
@@ -3837,7 +3852,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menuTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "restaurantTestTableAlphaStack.Deploy": {
@@ -3845,7 +3860,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/restaurantTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "userTestTableAlphaStack.Deploy": {
@@ -3853,7 +3868,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/userTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourCognitoStack.Prepare": {
@@ -3861,7 +3876,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourInternetGatewayStack.Prepare": {
@@ -3869,7 +3884,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourInternetGatewayStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "ec2StackID.Prepare": {
@@ -3877,7 +3892,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ec2StackID.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourCognitoStack.Deploy": {
@@ -3885,7 +3900,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourCognitoStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "DevHourInternetGatewayStack.Deploy": {
@@ -3893,7 +3908,7 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/DevHourInternetGatewayStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       },
                       "ec2StackID.Deploy": {
@@ -3901,13 +3916,13 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/ec2StackID.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "constructs.Construct",
-                      "version": "10.1.107"
+                      "version": "10.1.127"
                     }
                   },
                   "MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1": {
@@ -3915,7 +3930,7 @@
                     "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1": {
@@ -3927,13 +3942,13 @@
                         "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-deploy-role-060498623801-us-west-1/8389e75f-0810-4838-bf64-d6f85a95cf83",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
-                          "version": "10.1.107"
+                          "version": "10.1.127"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1": {
@@ -3941,7 +3956,7 @@
                     "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/MutableRolearn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1": {
@@ -3949,13 +3964,13 @@
                     "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/arn:${AWS::Partition}:iam::060498623801:role--cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.Resource",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_codepipeline.Pipeline",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "CodeBuildActionRole": {
@@ -3989,7 +4004,7 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   },
                   "DefaultPolicy": {
@@ -4039,19 +4054,19 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.Policy",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Role",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               },
               "UpdatePipeline": {
@@ -4088,7 +4103,7 @@
                             },
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                              "version": "2.42.1"
+                              "version": "2.45.0"
                             }
                           },
                           "DefaultPolicy": {
@@ -4223,19 +4238,19 @@
                                 },
                                 "constructInfo": {
                                   "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                                  "version": "2.42.1"
+                                  "version": "2.45.0"
                                 }
                               }
                             },
                             "constructInfo": {
                               "fqn": "aws-cdk-lib.aws_iam.Policy",
-                              "version": "2.42.1"
+                              "version": "2.45.0"
                             }
                           }
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_iam.Role",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       },
                       "Resource": {
@@ -4273,25 +4288,25 @@
                         },
                         "constructInfo": {
                           "fqn": "aws-cdk-lib.aws_codebuild.CfnProject",
-                          "version": "2.42.1"
+                          "version": "2.45.0"
                         }
                       }
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_codebuild.PipelineProject",
-                      "version": "2.42.1"
+                      "version": "2.45.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "constructs.Construct",
-                  "version": "10.1.107"
+                  "version": "10.1.127"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.pipelines.CodePipeline",
-              "version": "2.42.1"
+              "version": "2.45.0"
             }
           },
           "CDKMetadata": {
@@ -4303,25 +4318,25 @@
                 "path": "DevHourPipelineStack/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.42.1"
+                  "version": "2.45.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.1.107"
+              "version": "10.1.127"
             }
           }
         },
         "constructInfo": {
           "fqn": "aws-cdk-lib.Stack",
-          "version": "2.42.1"
+          "version": "2.45.0"
         }
       }
     },
     "constructInfo": {
       "fqn": "aws-cdk-lib.App",
-      "version": "2.42.1"
+      "version": "2.45.0"
     }
   }
 }

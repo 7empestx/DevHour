@@ -14,6 +14,7 @@ import { EC2Stack } from './ec2-stack'
 import { HostedZoneStack } from './route53-stack' 
 import { CertificateStack } from './certificate-stack'
 import { InternetGatewayStack } from './internet-gateway-stack'
+import { Roles } from './roles'
 
 /// ----------------
 /// AlphaStage Props
@@ -188,7 +189,14 @@ export class AlphaStage extends Stage {
             stackId:      "ec2StackID",
             accountId:    Constants.Account,
             region:       Constants.Region,
+            keyName:      Constants.EC2.KeyName,
             vpc:          this.vpcStack.vpc,
+            resourceArns: [ this.userTestTableStack.tableArn,
+                            this.restaurantTestTableStack.tableArn,
+                            this.mealTestTableStack.tableArn,
+                            this.dietTestTableStack.tableArn,
+                            this.ingredientTestTableStack.tableArn,
+                            this.menuTestTableStack.tableArn]
         });
 
     }

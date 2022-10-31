@@ -26,7 +26,7 @@
     },
     "AvailabilityZone": "us-west-1b",
     "CidrBlock": "10.0.0.0/24",
-    "MapPublicIpOnLaunch": false,
+    "MapPublicIpOnLaunch": true,
     "Tags": [
      {
       "Key": "aws-cdk:subnet-name",
@@ -34,7 +34,7 @@
      },
      {
       "Key": "aws-cdk:subnet-type",
-      "Value": "Isolated"
+      "Value": "Public"
      },
      {
       "Key": "Name",
@@ -77,6 +77,24 @@
     "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/RouteTableAssociation"
    }
   },
+  "DevHourVPCDevHourVPCSubnetSubnet1DefaultRoute9AE1DE6A": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "DevHourVPCDevHourVPCSubnetSubnet1RouteTable3B2F4C87"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "DevHourVPCIGW79F5C8C3"
+    }
+   },
+   "DependsOn": [
+    "DevHourVPCVPCGW330473A9"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet1/DefaultRoute"
+   }
+  },
   "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B": {
    "Type": "AWS::EC2::Subnet",
    "Properties": {
@@ -85,7 +103,7 @@
     },
     "AvailabilityZone": "us-west-1c",
     "CidrBlock": "10.0.1.0/24",
-    "MapPublicIpOnLaunch": false,
+    "MapPublicIpOnLaunch": true,
     "Tags": [
      {
       "Key": "aws-cdk:subnet-name",
@@ -93,7 +111,7 @@
      },
      {
       "Key": "aws-cdk:subnet-type",
-      "Value": "Isolated"
+      "Value": "Public"
      },
      {
       "Key": "Name",
@@ -136,93 +154,56 @@
     "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/RouteTableAssociation"
    }
   },
-  "DevHourVPCEC2IngestionEndpointSecurityGroupB6EAD321": {
-   "Type": "AWS::EC2::SecurityGroup",
+  "DevHourVPCDevHourVPCSubnetSubnet2DefaultRoute9D9F497A": {
+   "Type": "AWS::EC2::Route",
    "Properties": {
-    "GroupDescription": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup",
-    "SecurityGroupEgress": [
-     {
-      "CidrIp": "0.0.0.0/0",
-      "Description": "Allow all outbound traffic by default",
-      "IpProtocol": "-1"
-     }
-    ],
-    "SecurityGroupIngress": [
-     {
-      "CidrIp": {
-       "Fn::GetAtt": [
-        "DevHourVPC77A046B5",
-        "CidrBlock"
-       ]
-      },
-      "Description": {
-       "Fn::Join": [
-        "",
-        [
-         "from ",
-         {
-          "Fn::GetAtt": [
-           "DevHourVPC77A046B5",
-           "CidrBlock"
-          ]
-         },
-         ":443"
-        ]
-       ]
-      },
-      "FromPort": 443,
-      "IpProtocol": "tcp",
-      "ToPort": 443
-     }
-    ],
+    "RouteTableId": {
+     "Ref": "DevHourVPCDevHourVPCSubnetSubnet2RouteTable88761651"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "DevHourVPCIGW79F5C8C3"
+    }
+   },
+   "DependsOn": [
+    "DevHourVPCVPCGW330473A9"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/DevHourVPCSubnetSubnet2/DefaultRoute"
+   }
+  },
+  "DevHourVPCIGW79F5C8C3": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
     "Tags": [
      {
       "Key": "Name",
       "Value": "AlphaStage/DevHourVPCStack/DevHourVPC"
      }
-    ],
-    "VpcId": {
-     "Ref": "DevHourVPC77A046B5"
-    }
+    ]
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/SecurityGroup/Resource"
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/IGW"
    }
   },
-  "DevHourVPCEC2IngestionEndpointFEEAC083": {
-   "Type": "AWS::EC2::VPCEndpoint",
+  "DevHourVPCVPCGW330473A9": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
    "Properties": {
-    "ServiceName": "com.amazonaws.us-west-1.ec2",
     "VpcId": {
      "Ref": "DevHourVPC77A046B5"
     },
-    "PrivateDnsEnabled": true,
-    "SecurityGroupIds": [
-     {
-      "Fn::GetAtt": [
-       "DevHourVPCEC2IngestionEndpointSecurityGroupB6EAD321",
-       "GroupId"
-      ]
-     }
-    ],
-    "SubnetIds": [
-     {
-      "Ref": "DevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A327"
-     },
-     {
-      "Ref": "DevHourVPCDevHourVPCSubnetSubnet2Subnet8A32817B"
-     }
-    ],
-    "VpcEndpointType": "Interface"
+    "InternetGatewayId": {
+     "Ref": "DevHourVPCIGW79F5C8C3"
+    }
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/EC2-Ingestion-Endpoint/Resource"
+    "aws:cdk:path": "AlphaStage/DevHourVPCStack/DevHourVPC/VPCGW"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/13NQQuCQBAF4N/ifd1SgrqGRHQTDa+xriOM2qzszhoh/vfMEKHTPD6G92J5iGUUqJcLddWGHZZyzFnpVsz0AB3Lsei1SGoq0kSkFgfFkPuSgL+4pcx4hrsqO9h8s7NzRqNiNCRuxGBrpWEuvlDVGyQWOWhvkd9Xa3y/NPzDvL9+TyIDZ7zVy9aaJ0GmAtm43RCd5FHug8YhhtYT4xNk9rsfgtp1wvEAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0WPwQ6CMAyGn8X7mEI08Uo4GG8EDFezjRoHozOskxjCuzsU5dSvX/6mbcL3B77biMFFqm4joyUfSxKqZUFdQSV8rB6KZTes8ozlXhqtSi8RaHYrFdYTXIQ0sPrVpc5ZpQVpi//wDGck6EPyJAgG8VrWLF1K4Y57B0gTK8BZ36vP0I8nhrYG3rjtMz7yOA5vNE7rqPdIugNefOsbfRCmmeIAAAA="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourVPCStack/CDKMetadata/Default"

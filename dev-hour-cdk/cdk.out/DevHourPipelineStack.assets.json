@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "5dee07d59c80e4b4e488382e96dadb316cf94cb4cda8e1687ba75583baa9ac42": {
+    "8c80d870065851aafee473856d7c3a5d415c4b8985aedadde413faa350ffc283": {
       "source": {
         "path": "DevHourPipelineStack.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "5dee07d59c80e4b4e488382e96dadb316cf94cb4cda8e1687ba75583baa9ac42.json",
+          "objectKey": "8c80d870065851aafee473856d7c3a5d415c4b8985aedadde413faa350ffc283.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

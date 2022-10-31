@@ -1,9 +1,9 @@
 {
  "Resources": {
-  "ec2IDInstanceSecurityGroup5E3CA157": {
+  "ec2IDSecurityGroup0533C6EE": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
-    "GroupDescription": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup",
+    "GroupDescription": "AlphaStage/ec2StackID/ec2IDSecurityGroup",
     "SecurityGroupEgress": [
      {
       "CidrIp": "0.0.0.0/0",
@@ -11,10 +11,20 @@
       "IpProtocol": "-1"
      }
     ],
-    "Tags": [
+    "SecurityGroupIngress": [
      {
-      "Key": "Name",
-      "Value": "ec2Stack"
+      "CidrIp": "0.0.0.0/0",
+      "Description": "SSH Access",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "HTTPS",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
      }
     ],
     "VpcId": {
@@ -22,10 +32,57 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/InstanceSecurityGroup/Resource"
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2IDSecurityGroup/Resource"
    }
   },
-  "ec2IDInstanceRole79AD7B51": {
+  "DevHourIngestionRolePolicy31721C73": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "",
+    "Path": "/"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/DevHourIngestionRolePolicy/Resource"
+   }
+  },
+  "DevHourIngestionRole63434C1D": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -40,15 +97,14 @@
      ],
      "Version": "2012-10-17"
     },
-    "Tags": [
+    "ManagedPolicyArns": [
      {
-      "Key": "Name",
-      "Value": "ec2Stack"
+      "Ref": "DevHourIngestionRolePolicy31721C73"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/InstanceRole/Resource"
+    "aws:cdk:path": "AlphaStage/ec2StackID/DevHourIngestionRole/Resource"
    }
   },
   "ec2IDInstanceProfile20C1288F": {
@@ -56,7 +112,7 @@
    "Properties": {
     "Roles": [
      {
-      "Ref": "ec2IDInstanceRole79AD7B51"
+      "Ref": "DevHourIngestionRole63434C1D"
      }
     ]
    },
@@ -75,10 +131,11 @@
      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
     },
     "InstanceType": "t2.micro",
+    "KeyName": "devhour-ingestion",
     "SecurityGroupIds": [
      {
       "Fn::GetAtt": [
-       "ec2IDInstanceSecurityGroup5E3CA157",
+       "ec2IDSecurityGroup0533C6EE",
        "GroupId"
       ]
      }
@@ -97,33 +154,16 @@
     }
    },
    "DependsOn": [
-    "ec2IDInstanceRole79AD7B51"
+    "DevHourIngestionRole63434C1D"
    ],
    "Metadata": {
     "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/Resource"
    }
   },
-  "MyCfnKeyPair": {
-   "Type": "AWS::EC2::KeyPair",
-   "Properties": {
-    "KeyName": "keyName",
-    "KeyType": "keyType",
-    "PublicKeyMaterial": "publicKeyMaterial",
-    "Tags": [
-     {
-      "Key": "DevHour",
-      "Value": "DeezNutz"
-     }
-    ]
-   },
-   "Metadata": {
-    "aws:cdk:path": "AlphaStage/ec2StackID/MyCfnKeyPair"
-   }
-  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WMywrCMBBFv8V9Otoi6N6FiJvSfoCM6RSmj0QmiVJC/t1qqRtX53I43AL2BeQbfLlMN3028B1i7VH3ala3SLqAeDHOo9GkatJB2E9nseGhTq35E7903leaSmRJinGEWNnha1euZSm25YFS+sgSBUfyJKoiZ4MsR+tOytiGoHPbZ36EA+w2nWPOJBjPI0G18A3kdEbY0gAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WPzQ6CMBCEn8V7WYVo4t2D8WBC8AHMWhazUFrSHw0hfXdB0gOnmf0mk80UcDzBYYdfl8m6yxS/YHp4lJ2Y0XMiWcw3yWDZj1drwiAujd6Cm3YetaQlST4Kxh6mO2p8U10axXJc8i2ojPq3kqZ2aU3DimJcYIkWe/JkRUXOBLs+Sj4KbWqC1u0/+RnyfN7SOubMBu25J6hW/QEVr1y45wAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/ec2StackID/CDKMetadata/Default"

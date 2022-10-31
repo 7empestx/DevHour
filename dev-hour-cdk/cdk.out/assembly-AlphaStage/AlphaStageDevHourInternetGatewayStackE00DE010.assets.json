@@ -1,7 +1,7 @@
 {
   "version": "21.0.0",
   "files": {
-    "28c5a28c8ed733c364a63a3144e9817f342f7d7987c3b8208b460c38768d6f36": {
+    "c327b78d5641ef0899b1b9f0b5403687c7dfc81ad2cb9f8bc9ed77cda7851180": {
       "source": {
         "path": "AlphaStageDevHourInternetGatewayStackE00DE010.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "28c5a28c8ed733c364a63a3144e9817f342f7d7987c3b8208b460c38768d6f36.json",
+          "objectKey": "c327b78d5641ef0899b1b9f0b5403687c7dfc81ad2cb9f8bc9ed77cda7851180.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

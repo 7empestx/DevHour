@@ -36,15 +36,21 @@ export module Constants {
     /// EC2
 
     export module EC2 {
+
+        export const IngestionRoleID    =   `${AppName}IngestionRole`   ;
+        export const ServiceName        =   `ec2.amazonaws.com`         ;
+        export const KeyName            =   'devhour-ingestion'         ;
         
-        /// ---
+        /// ---------------
         /// InternetGateway
+
         export module InternetGateway {
+
             export const Id             = `${AppName}InternetGateway`   ;
             export const StackId        = `${Id}Stack`                  ;    
+
         }
  
-
         /// ---
         /// VPC
 
@@ -65,7 +71,7 @@ export module Constants {
 
                 export const SubnetName         = `${Constants.EC2.VPC.Id}Subnet`   ;
                 export const SubnetCIDRMask     =   24                              ;
-                export const Type               =   SubnetType.PRIVATE_ISOLATED     ;
+                export const Type               =   SubnetType.PUBLIC               ;
 
             }
 
@@ -232,7 +238,7 @@ export module Constants {
             /// ----------
             /// Basic Read
 
-            export module BasicRead {
+            export module BasicCRUD {
 
                 export const AllowActions = [   'dynamodb:DescribeTable',
                                                 'dynamodb:Scan',

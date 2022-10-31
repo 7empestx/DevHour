@@ -4,7 +4,7 @@
  */
 
 import { Construct } from 'constructs'
-import { Role, FederatedPrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam'
+import { Role, ServicePrincipal, FederatedPrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam'
 import { Constants } from './constants'
 import { PolicyStatements } from './policy-statements' 
 
@@ -42,7 +42,7 @@ export module Roles {
                     managedPolicies: [
                         new ManagedPolicy(scope, `${Constants.Cognito.UnauthenticatedRoleId}UnauthenticatedPolicy`,
                             {
-                                statements: [new PolicyStatements.DynamoDB.BasicReadPolicyStatement(arns)]
+                                statements: [new PolicyStatements.DynamoDB.BasicCRUDPolicyStatement(arns)]
                             })
                     ]
 
@@ -76,7 +76,7 @@ export module Roles {
                     managedPolicies: [
                         new ManagedPolicy(scope, `${Constants.Cognito.AuthenticatedRoleId}AuthenticatedPolicy`,
                             {
-                                statements: [new PolicyStatements.DynamoDB.BasicReadPolicyStatement(arns)]
+                                statements: [new PolicyStatements.DynamoDB.BasicCRUDPolicyStatement(arns)]
                             })
                     ]
 
@@ -86,6 +86,37 @@ export module Roles {
 
         }
         
+    }
+
+    /// ---
+    /// EC2
+
+    export module EC2 {
+
+        /// --------------
+        /// Ingestion Role
+
+        export class IngestionRole extends Role {
+
+            /// -----------
+            /// Constructor
+
+            constructor(scope: Construct, arns: string[]) {
+                super(scope, Constants.EC2.IngestionRoleID, {
+                    assumedBy: new ServicePrincipal(Constants.EC2.ServiceName),
+                    managedPolicies: [
+                        new ManagedPolicy(scope, `${Constants.EC2.IngestionRoleID}Policy`,
+                            {
+                                statements: [new PolicyStatements.DynamoDB.BasicCRUDPolicyStatement(arns)]
+                            })
+                    ]
+
+                });
+
+            }
+
+        }
+
     }
 
 }
