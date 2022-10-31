@@ -140,6 +140,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
             credentials.put("ACCESS_KEY", this.credentials.accessKeyId());
             credentials.put("SECRET_KEY", this.credentials.secretKey());
+            credentials.put("SESSION_TOKEN", this.credentials.sessionToken());
 
             this.listener.onAuthenticated(credentials);
 
