@@ -249,7 +249,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
                 final Map<String, String> logins = new HashMap<>();
 
-                logins.put( authEndpoint + "/" + this.providerName, idToken);
+                logins.put(authEndpoint + "/" + this.providerName, idToken);
 
                 authenticator.credentials =
                         getCredentialsForIdentity(client, logins, identityPoolId, accountId);

@@ -151,8 +151,8 @@ public class MainActivity extends AppCompatActivity implements
         // Set the credentials
         this.userDatabase.setCredentials(credentials);
         this.restaurantDatabase.setCredentials(credentials);
-
         this.userPresenter.setUser(userId);
+
         showMapFragment();
 
     }
@@ -330,7 +330,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
-<<<<<<< Updated upstream
      * Shows the map fragment to the user
      */
     private void showMapFragment() {
@@ -373,8 +372,6 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
-=======
->>>>>>> Stashed changes
      * Initializes the bottom navigation bar
      */
     private void initializeBottomNavigation() {
@@ -504,8 +501,8 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (item.getItemId()) {
 
-            case R.id.navigation_list: /// TODO: Show List Fragment
-            case R.id.navigation_location: /// TODO: Show Map Fragment
+            case R.id.navigation_list: break; /// TODO: Show List Fragment
+            case R.id.navigation_location: showMapFragment(); break;
 
         }
 
