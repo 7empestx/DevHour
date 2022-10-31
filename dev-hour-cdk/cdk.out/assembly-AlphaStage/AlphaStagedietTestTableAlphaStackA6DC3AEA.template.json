@@ -30,7 +30,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHXM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFp1TmJebmpwDFQhKTclJ1nNPywIxanaDU4vzSomSwEIxdq5OXn5Kql1WsX2ZooWdoCDQ3qzgzU7eoNK8kMzdVLwhCAwC8eNN0cwAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHSM1RMLC/WTU7J1s3JTNKrDi5JTM7WAQrFp1TmJebmpwDFQhKTclJ1nNPywIxanaDU4vzSomSwEIxdq5OXn5Kql1WsX2ZooWeuZ6CYVZyZqVtUmleSmZuqFwShAS2Om7pyAAAA"
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/dietTestTableAlphaStack/CDKMetadata/Default"

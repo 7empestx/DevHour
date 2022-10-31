@@ -103,10 +103,27 @@
     "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/Resource"
    }
   },
+  "MyCfnKeyPair": {
+   "Type": "AWS::EC2::KeyPair",
+   "Properties": {
+    "KeyName": "keyName",
+    "KeyType": "keyType",
+    "PublicKeyMaterial": "publicKeyMaterial",
+    "Tags": [
+     {
+      "Key": "DevHour",
+      "Value": "DeezNutz"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/MyCfnKeyPair"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WOwQrCMBBEv8V7upoi6N2DeCvpB0hMt7Btk8gmUSTk322pPXma4c0MTA3HExx2+h0q043VRA/IbdRmFDO6ZzQ15JsLUTuDokWTmOLnyj49xaV3f2CrFkHaQlZ+wgVvusUN+54mLGWBjWZtMSILhcEnNuvk54twvkMYwv4lzyDlfHYIRBUnF8kiqFW/MKsjNsgAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WMywrCMBBFv8V9Otoi6N6FiJvSfoCM6RSmj0QmiVJC/t1qqRtX53I43AL2BeQbfLlMN3028B1i7VH3ala3SLqAeDHOo9GkatJB2E9nseGhTq35E7903leaSmRJinGEWNnha1euZSm25YFS+sgSBUfyJKoiZ4MsR+tOytiGoHPbZ36EA+w2nWPOJBjPI0G18A3kdEbY0gAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/ec2StackID/CDKMetadata/Default"

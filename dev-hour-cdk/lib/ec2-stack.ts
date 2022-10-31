@@ -1,4 +1,4 @@
-import { Instance, InstanceType, MachineImage, SubnetType, Vpc, VpcEndpoint } from 'aws-cdk-lib/aws-ec2'
+import { CfnKeyPair, Instance, InstanceType, MachineImage, SubnetType, Vpc, VpcEndpoint } from 'aws-cdk-lib/aws-ec2'
 import { Stack } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 
@@ -15,6 +15,7 @@ export interface TableProps {
 export class EC2Stack extends Stack {
     private readonly _ec2: Instance;
     private readonly _vpe: VpcEndpoint;
+    private readonly _kp:  CfnKeyPair;
     
     constructor(scope: Construct, props: TableProps) {
         super(scope, props.stackId, { env: {
@@ -36,6 +37,16 @@ export class EC2Stack extends Stack {
             instanceName: props.instanceName,
             instanceType: new InstanceType('t2.micro'),
             machineImage: MachineImage.latestAmazonLinux()
+        });
+
+        this._kp = new CfnKeyPair(this, 'MyCfnKeyPair', {
+            keyName: 'keyName',
+            keyType: 'keyType',
+            publicKeyMaterial: 'publicKeyMaterial',
+            tags: [{
+                key: 'DevHour',
+                value: 'DeezNutz',
+            }],
         });
     }
 }

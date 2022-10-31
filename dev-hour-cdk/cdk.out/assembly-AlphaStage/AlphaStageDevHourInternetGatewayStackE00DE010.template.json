@@ -19,7 +19,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHXM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFpyYb6Tmn5XnmlaQW5aWWuCeWpJYnVuoAhYJSi/NLi5JTa3Xy8lNS9bKK9csMLfQMDYFmZRVnZuoWleaVZOam6gVBaAB9nYaHZwAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/yXISwqAIBAA0LO416kkqH2LaGsHCLMJ7DOBTkVEdy9o9eBpyDVkwp5RuWFWi+/hbtm6WX7VodNQjdQQYyDk2jKe9pJfGYzbHhw+krYBYYrJkZVQQCqm6L0KO7FfEczvC81BA9FmAAAA"
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourInternetGatewayStack/CDKMetadata/Default"
