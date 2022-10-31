@@ -11,8 +11,8 @@ import android.widget.TextView;
 public class CustomBaseAdapter extends BaseAdapter {
 
     Context context;
-    String [] restaurantList;
-    int [] listViewIcons;
+    String[] restaurantList;
+    int[] listViewIcons;
     LayoutInflater inflater;
 
     public CustomBaseAdapter(Context ctx, String [] restaurantList, int [] listViewIcons){

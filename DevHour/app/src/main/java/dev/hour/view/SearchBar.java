@@ -7,9 +7,7 @@ import android.util.DisplayMetrics;
 
 import androidx.appcompat.widget.SearchView;
 
-public class SearchBar extends SearchView
-{
-
+public class SearchBar extends SearchView {
 
     public SearchBar(Context context)
     {
