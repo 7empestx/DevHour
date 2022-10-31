@@ -18,7 +18,8 @@ public interface UserContract {
         void setView(final View view);
         void invalidate();
         void setUserLocation(final double longitude, final double latitude);
-
+        void setUser(final String userId);
+        UserContract.User getUser();
     }
 
     interface View {

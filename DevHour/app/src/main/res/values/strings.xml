@@ -5,7 +5,7 @@
     <string name="provider_name">us-west-1_aJtem6cJA</string>
     <string name="auth_endpoint">cognito-idp.us-west-1.amazonaws.com</string>
     <string name="region">us-west-1</string>
-    <string name="user_table_name">devhour-user-table</string>
+    <string name="user_table_name">userTestTableAlpha</string>
     <string name="restaurant_table_name">devhour-restaurant-table</string>
     <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>
     <string name="bottom_navigation_location">Location</string>
@@ -51,6 +51,8 @@
     <string name="fragment_create_account_create_account_invalid_password_message">Invalid Password - Length must at least 6 characters</string>
     <string name="fragment_create_account_create_account_invalid_first_name_message">Must provide a first name.</string>
     <string name="fragment_create_account_create_account_invalid_lase_name_message">Must provide a last name.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

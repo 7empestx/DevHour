@@ -34,4 +34,14 @@ public class UserPresenter implements UserContract.Presenter {
 
     }
 
+    @Override
+    public void setUser(final String userId) {
+        this.user = database.getUser(userId);
+    }
+
+    @Override
+    public UserContract.User getUser() {
+        return this.user;
+    }
+
 }

@@ -146,12 +146,13 @@ public class MainActivity extends AppCompatActivity implements
      * @param credentials The credentials to pass to the interaction listener
      */
     @Override
-    public void onAuthenticated(final Map<String, String> credentials) {
+    public void onAuthenticated(final Map<String, String> credentials, String userId) {
 
         // Set the credentials
         this.userDatabase.setCredentials(credentials);
         this.restaurantDatabase.setCredentials(credentials);
 
+        this.userPresenter.setUser(userId);
         showMapFragment();
 
     }

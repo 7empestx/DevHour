@@ -156,13 +156,13 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
      * @param credentials The credentials to pass to the interaction listener
      */
     @Override
-    public void onAuthenticated(final Map<String, String> credentials) {
+    public void onAuthenticated(final Map<String, String> credentials, String userId) {
 
         if(this.view != null)
             this.view.onSignIn();
 
         if(this.interactionListener != null)
-            this.interactionListener.onAuthenticated(credentials);
+            this.interactionListener.onAuthenticated(credentials, userId);
 
     }
 

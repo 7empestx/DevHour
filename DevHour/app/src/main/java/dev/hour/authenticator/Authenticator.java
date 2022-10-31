@@ -142,7 +142,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
             credentials.put("SECRET_KEY", this.credentials.secretKey());
             credentials.put("SESSION_TOKEN", this.credentials.sessionToken());
 
-            this.listener.onAuthenticated(credentials);
+            this.listener.onAuthenticated(credentials, "");
 
         }
 
@@ -275,7 +275,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
                 credentials.put("SECRET_KEY", this.credentials.secretKey());
                 credentials.put("SESSION_TOKEN", this.credentials.sessionToken());
 
-                listener.onAuthenticated(credentials);
+                listener.onAuthenticated(credentials, input.get("USERNAME"));
 
             }
 

@@ -19,7 +19,7 @@ public interface AuthenticatorContract {
             void onSignInFailed(final String message);
             void onSignUpFailed(final String message);
             void onSignOutFailed(final String message);
-            void onAuthenticated(final Map<String, String> credentials);
+            void onAuthenticated(final Map<String, String> credentials, String userId);
             void onUnauthenticated(final String message);
 
         }
@@ -36,7 +36,7 @@ public interface AuthenticatorContract {
 
             void onSignInRequest();
             void onSignUpRequest();
-            void onAuthenticated(final Map<String, String> credentials);
+            void onAuthenticated(final Map<String, String> credentials, String userId);
             void onUnauthenticated(final String message);
             void onSignOut(final String message);
             void onSignUp(final Map<String, String> data);
