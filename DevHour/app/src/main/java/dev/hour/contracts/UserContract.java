@@ -20,6 +20,7 @@ public interface UserContract {
         void setUserLocation(final double longitude, final double latitude);
         void setUser(final String userId);
         UserContract.User getUser();
+
     }
 
     interface View {
@@ -27,6 +28,14 @@ public interface UserContract {
         void update(final User user);
         void remove(final User user);
         void clearUsers();
+        void onDisplayUserInfo(final User user);
+        void setListener(UserContract.View.Listener listener);
+
+        interface Listener {
+
+            void onGetUserRequest();
+
+        }
 
     }
 

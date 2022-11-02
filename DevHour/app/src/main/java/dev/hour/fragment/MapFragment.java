@@ -26,6 +26,7 @@ public class MapFragment extends Fragment implements
     /// Private Members
 
     private MapView mapView;
+    private UserContract.View.Listener listener;
 
     /// ------------------
     /// Fragment Lifecycle
@@ -128,6 +129,16 @@ public class MapFragment extends Fragment implements
         if(this.mapView != null)
             this.mapView.clearUsers();
 
+    }
+
+    @Override
+    public void onDisplayUserInfo(UserContract.User user) {
+
+    }
+
+    @Override
+    public void setListener(Listener listener) {
+        this.listener = listener;
     }
 
     /**

@@ -27,6 +27,7 @@ import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.fragment.LoginFragment;
 import dev.hour.fragment.MapFragment;
+import dev.hour.fragment.ProfileFragment;
 import dev.hour.fragment.SignUpFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
@@ -275,6 +276,50 @@ public class MainActivity extends AppCompatActivity implements
 
         hideBottomNavigationBar();
 
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    /**
+     * Shows the Profile fragment to the user
+     */
+    private void showProfileFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(ProfileFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new ProfileFragment();
+            ((UserContract.View)fragment)
+                    .setListener((UserContract.View.Listener) userPresenter);
+
+            userPresenter.setView((UserContract.View) fragment);
+
+            transaction.add(R.id.activity_main, fragment, ProfileFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+            ((UserContract.View)fragment)
+                    .setListener((UserContract.View.Listener) userPresenter);
+
+            userPresenter.setView((UserContract.View) fragment);
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        showBottomNavigationBar();
         transaction.commit();
         fragmentManager.executePendingTransactions();
 

@@ -77,6 +77,14 @@
     <attr name="textButtonElevation" format="dimension"/>
 
     <!-- ===== -->
+    <!-- Switch -->
+
+    <attr name="switchTextSize" format="dimension"/>
+    <attr name="switchTextColor" format="color"/>
+    <attr name="switchFontFamily" format="reference"/>
+    <attr name="switchPaddingHorizontal" format="dimension"/>
+
+    <!-- ===== -->
     <!-- Title -->
 
     <attr name="titleTextColor" format="color"/>

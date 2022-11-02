@@ -2,7 +2,7 @@ package dev.hour.presenter;
 
 import dev.hour.contracts.UserContract;
 
-public class UserPresenter implements UserContract.Presenter {
+public class UserPresenter implements UserContract.Presenter, UserContract.View.Listener {
 
     /// ---------------
     /// Private Members
@@ -19,7 +19,7 @@ public class UserPresenter implements UserContract.Presenter {
 
     @Override
     public void setView(UserContract.View view) {
-
+        this.view = view;
     }
 
     @Override
@@ -44,4 +44,8 @@ public class UserPresenter implements UserContract.Presenter {
         return this.user;
     }
 
+    @Override
+    public void onGetUserRequest() {
+        view.onDisplayUserInfo(this.user);
+    }
 }

@@ -115,6 +115,19 @@
     </style>
 
     <!-- ======== -->
+    <!-- Switch -->
+    <style name="Theme.DevHour.Switch" parent="Widget.MaterialComponents.TextView">
+
+        <item name="android:textColor">?attr/switchTextColor</item>
+        <item name="android:fontFamily">?attr/switchFontFamily</item>
+        <item name="android:textSize">?attr/switchTextSize</item>
+        <item name="android:paddingHorizontal">?attr/switchPaddingHorizontal</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- ======== -->
     <!-- Subtitle -->
 
     <style name="Theme.DevHour.Subtitle" parent="Widget.MaterialComponents.TextView">

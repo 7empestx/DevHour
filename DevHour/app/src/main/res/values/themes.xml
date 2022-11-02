@@ -102,6 +102,14 @@
         <item name="textButtonBackground">@color/text_button_background_color_light</item>
         <item name="textButtonElevation">@dimen/text_button_elevation</item>
 
+        <!-- =========== -->
+        <!-- Switch -->
+
+        <item name="switchTextSize">@dimen/font_size_m</item>
+        <item name="switchTextColor">@color/switch_text_color_light</item>
+        <item name="switchFontFamily">@font/montserrat_regular</item>
+        <item name="switchPaddingHorizontal">@dimen/switch_text_padding_horizontal</item>
+
     </style>
 
 </resources>

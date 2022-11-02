@@ -37,6 +37,13 @@ public interface MealContract {
         interface View {
 
             void setDiet(final Diet diet);
+            void onDisplayDietInfo(final Diet diet);
+
+            interface Listener {
+
+                void onGetDietRequest();
+
+            }
 
         }
 
