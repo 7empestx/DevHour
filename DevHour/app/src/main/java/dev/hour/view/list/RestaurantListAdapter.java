@@ -49,6 +49,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                     /*
                     final TextView Foodview = (TextView) view.getChildAt(i);
                     Foodview.setText(restaurant.getName()); //Binding of image box
+                     delete comment later for when we have images populated
                      */
                 }
             }
