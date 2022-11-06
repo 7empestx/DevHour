@@ -58,6 +58,11 @@ public class ProfileFragment extends Fragment implements
     }
 
     @Override
+    public void onDisplayDietInfo(MealContract.Diet diet) {
+
+    }
+
+    @Override
     public void update(UserContract.User user) {
 
     }
