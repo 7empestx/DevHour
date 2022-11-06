@@ -21,6 +21,8 @@ import com.mapbox.maps.plugin.animation.CameraAnimationsUtils;
 import com.mapbox.maps.plugin.animation.MapAnimationOptions;
 import com.mapbox.maps.plugin.delegates.listeners.OnRenderFrameFinishedListener;
 import com.mapbox.maps.plugin.delegates.listeners.OnRenderFrameStartedListener;
+import com.mapbox.maps.plugin.scalebar.ScaleBarPlugin;
+import com.mapbox.maps.plugin.scalebar.ScaleBarUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +61,11 @@ public class MapView extends FrameLayout implements
     private final SearchBar                         searchBar           ;
 
     /**
+     * The ScaleBar contained in this ViewGroup
+     */
+    private final ScaleBarPlugin                    scaleBarPlugin      ;
+
+    /**
      * The Map instance that is used to manipulate the
      * on-screen map
      */
@@ -86,15 +93,18 @@ public class MapView extends FrameLayout implements
      * Initializes the MapView to its' default state
      * @param context The constructing Context
      */
-    public MapView(final Context context) {
+    public MapView(final Context context){
         super(context);
 
         this.userDotViews       = new HashMap<>();
         this.restaurantDotViews = new HashMap<>();
         this.mapView            = new com.mapbox.maps.MapView(context);
         this.mapboxMap          = this.mapView.getMapboxMap();
+        this.scaleBarPlugin = ScaleBarUtils.getScaleBar(this.mapView);;
         this.searchBar          = new SearchBar(context);
 
+
+        scaleBarPlugin.setEnabled(false);
         // Set the layout parameters
         setLayoutParams(
                 new ViewGroup.LayoutParams(
@@ -120,6 +130,9 @@ public class MapView extends FrameLayout implements
         this.mapboxMap.addOnRenderFrameStartedListener(this);
         this.mapboxMap.addOnRenderFrameFinishedListener(this);
 
+        this.searchBar.setElevation(16.0f);
+        this.searchBar.setZ(16.0f);
+
         // Add the views
         addView(this.mapView);
         addView(this.searchBar);
@@ -139,7 +152,7 @@ public class MapView extends FrameLayout implements
 
     }
 
-    @Override
+    /*@Override
     protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
     {
         this.mapView.measure(widthMeasureSpec,heightMeasureSpec);
@@ -160,7 +173,7 @@ public class MapView extends FrameLayout implements
         top  = (int)(getResources().getDisplayMetrics().density * 4);
 
         this.searchBar.layout(left, top, left + this.searchBar.getMeasuredWidth(), top + this.searchBar.getMeasuredHeight());
-    }
+    }*/
 
     /**
      * Invoked when the MapView is stopping
