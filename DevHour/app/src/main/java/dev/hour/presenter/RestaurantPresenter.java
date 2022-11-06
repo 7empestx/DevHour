@@ -1,5 +1,7 @@
 package dev.hour.presenter;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.List;
 
 import dev.hour.contracts.RestaurantContract;
@@ -26,6 +28,16 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     public void invalidate() {
         if(view != null) {
             view.setRestaurants(restaurants);
+        }
+    }
+
+    @Override
+    public void search(String query) {
+        if (this.database != null){
+            List<RestaurantContract.Restaurant> restaurants= this.database.search(query);
+            if (this.view != null){
+                this.view.setRestaurants(restaurants);
+            }
         }
     }
 }

@@ -1,22 +1,32 @@
 package dev.hour.database;
 
+import static software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType.USER_PASSWORD_AUTH;
+
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import dev.hour.authenticator.Authenticator;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbUpdateBehavior;
 import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClient;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
+import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
 
 public class RestaurantDatabase implements RestaurantContract.Database {
 
@@ -156,6 +166,56 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         //use scan function to query tables
         //TODO: implement query to find restaurants based off radius
         return null;
+    }
+
+    @Override
+    public List<RestaurantContract.Restaurant> search(String query) {
+
+        List<RestaurantContract.Restaurant> retList = new ArrayList<>();
+        Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
+        expressionAttributeValues.put(":tags", AttributeValue
+                .builder()
+                .s(query)
+                .build());
+        ScanRequest scanRequest = ScanRequest
+                .builder()
+                .tableName("restaurantTestTableAlpha")
+                .filterExpression("contains(tags, :tags)")
+                .expressionAttributeValues(expressionAttributeValues)
+                .build();
+
+        final Thread thread = new Thread(() -> {
+
+            try {
+
+                ScanResponse scanResponse = client.scan(scanRequest);
+
+
+                for (Map<String, AttributeValue> item : scanResponse.items()) {
+                    final RestaurantContract.Restaurant restaurant = new Restaurant(item.get("id").s(), item.get("name").s());
+                    retList.add(restaurant);
+                }
+
+            } catch (final Exception exception) {
+
+                Log.e("RestaurantDatabase", exception.toString());
+
+            }
+
+        });
+
+        try {
+
+            thread.start();
+            thread.join();
+
+        } catch (final Exception exception) {
+
+            Log.e("RestaurantDatabase", exception.getMessage());
+
+        }
+
+        return retList;
     }
 
 }

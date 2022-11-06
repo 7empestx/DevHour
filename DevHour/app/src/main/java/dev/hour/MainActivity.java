@@ -32,13 +32,15 @@ import dev.hour.fragment.SignUpFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
+import dev.hour.view.MapView;
 import dev.hour.view.Utilities;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 
 public class MainActivity extends AppCompatActivity implements
         AuthenticatorContract.Presenter.InteractionListener,
-        NavigationBarView.OnItemSelectedListener {
+        NavigationBarView.OnItemSelectedListener,
+        MapView.SearchListener {
 
     /// --------------
     /// Private Fields
@@ -400,7 +402,7 @@ public class MainActivity extends AppCompatActivity implements
             restaurantPresenter.setView((RestaurantContract.View) fragment);
 
         }
-
+        ((MapFragment)fragment).setSearchListener(this);
         transaction
                 .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
 
@@ -555,4 +557,13 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    public void onSearch(String query) {
+        restaurantPresenter.search(query);
+    }
+
+    @Override
+    public void onTextChange(String query) {
+
+    }
 }

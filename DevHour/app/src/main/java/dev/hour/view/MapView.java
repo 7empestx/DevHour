@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
@@ -26,6 +27,7 @@ import com.mapbox.maps.plugin.scalebar.ScaleBarUtils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import dev.hour.R;
@@ -36,7 +38,8 @@ import dev.hour.contracts.UserContract;
 public class MapView extends FrameLayout implements
         OnRenderFrameStartedListener,
         OnRenderFrameFinishedListener,
-        View.OnClickListener {
+        View.OnClickListener,
+        SearchView.OnQueryTextListener {
 
     /// ----------------------
     /// Private Static Members
@@ -87,6 +90,11 @@ public class MapView extends FrameLayout implements
      */
     private MapObjectContract.MapObject             focusMapObject      ;
 
+    /**
+     * The focus MapObjectContract.MapObject
+     */
+    private SearchListener                          searchListener      ;
+
     /// ------------
     /// Constructors
 
@@ -103,9 +111,7 @@ public class MapView extends FrameLayout implements
         this.mapboxMap          = this.mapView.getMapboxMap();
         this.scaleBarPlugin = ScaleBarUtils.getScaleBar(this.mapView);;
         this.searchBar          = new SearchBar(context);
-
-
-        scaleBarPlugin.setEnabled(false);
+        scaleBarPlugin.setPosition(1);
         // Set the layout parameters
         setLayoutParams(
                 new ViewGroup.LayoutParams(
@@ -134,7 +140,9 @@ public class MapView extends FrameLayout implements
         this.searchBar.setElevation(16.0f);
         this.searchBar.setZ(16.0f);
         this.searchBar.setBackground(
-            this.getContext().getResources().getDrawable(R.drawable.search_bar_background, null));
+        this.getContext().getResources().getDrawable(R.drawable.search_bar_background, null));
+        this.searchBar.setOnSearchClickListener(this);
+        this.searchBar.setOnQueryTextListener(this);
 
         // Add the views
         addView(this.mapView);
@@ -220,6 +228,11 @@ public class MapView extends FrameLayout implements
 
             updateFocus((MapObjectView) view);
 
+        }
+        else if(view instanceof SearchBar)
+        {
+            SearchBar searchBar = (SearchBar) view;
+            searchBar.getQuery();
         }
 
     }
@@ -543,4 +556,32 @@ public class MapView extends FrameLayout implements
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if(this.searchListener != null) {
+            this.searchListener.onSearch(query.toLowerCase(Locale.ROOT));
+            return true;
+        }
+        else
+            return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        if(this.searchListener != null) {
+            this.searchListener.onTextChange(query);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public interface SearchListener{
+        void onSearch(String query);
+        void onTextChange(String query);
+    }
+
+    public void setSearchListener(SearchListener searchListener){
+        this.searchListener = searchListener;
+    }
 }

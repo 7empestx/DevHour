@@ -27,6 +27,7 @@ public class MapFragment extends Fragment implements
 
     private MapView mapView;
     private UserContract.View.Listener listener;
+    private MapView.SearchListener searchListener;
 
     /// ------------------
     /// Fragment Lifecycle
@@ -43,6 +44,7 @@ public class MapFragment extends Fragment implements
                              final Bundle savedInstanceState) {
 
         mapView = new MapView(getContext());
+        this.mapView.setSearchListener(searchListener);
 
         return mapView;
 
@@ -149,5 +151,12 @@ public class MapFragment extends Fragment implements
     @Override
     public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
 
+    }
+
+    public void setSearchListener(MapView.SearchListener searchListener){
+        this.searchListener = searchListener;
+        if (this.mapView != null){
+            this.mapView.setSearchListener(searchListener);
+        }
     }
 }

@@ -13,6 +13,7 @@ public interface RestaurantContract {
                                                           final double latitude,
                                                           final double radius);
 
+        List<Restaurant> search(String query);
     }
 
     interface Presenter {
@@ -20,6 +21,7 @@ public interface RestaurantContract {
         void setDatabase(final Database database);
         void setView(final View view);
         void invalidate();
+        void search(String query);
 
     }
 
