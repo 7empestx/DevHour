@@ -152,7 +152,7 @@ public class MapView extends FrameLayout implements
 
     }
 
-    /*@Override
+    @Override
     protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
     {
         this.mapView.measure(widthMeasureSpec,heightMeasureSpec);
@@ -173,7 +173,7 @@ public class MapView extends FrameLayout implements
         top  = (int)(getResources().getDisplayMetrics().density * 4);
 
         this.searchBar.layout(left, top, left + this.searchBar.getMeasuredWidth(), top + this.searchBar.getMeasuredHeight());
-    }*/
+    }
 
     /**
      * Invoked when the MapView is stopping
