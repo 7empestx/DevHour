@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dev.hour.R;
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
@@ -132,6 +133,8 @@ public class MapView extends FrameLayout implements
 
         this.searchBar.setElevation(16.0f);
         this.searchBar.setZ(16.0f);
+        this.searchBar.setBackground(
+            this.getContext().getResources().getDrawable(R.drawable.search_bar_background, null));
 
         // Add the views
         addView(this.mapView);
@@ -153,8 +156,7 @@ public class MapView extends FrameLayout implements
     }
 
     @Override
-    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
-    {
+    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec) {
         this.mapView.measure(widthMeasureSpec,heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         float density = getResources().getDisplayMetrics().density;
@@ -166,8 +168,7 @@ public class MapView extends FrameLayout implements
     }
 
     @Override
-    protected void onLayout (boolean changed, int left, int top, int right, int bottom)
-    {
+    protected void onLayout (boolean changed, int left, int top, int right, int bottom) {
         this.mapView.layout(left,top,right,bottom);
         left = (getMeasuredWidth() - this.searchBar.getMeasuredWidth()) / 2;
         top  = (int)(getResources().getDisplayMetrics().density * 4);
