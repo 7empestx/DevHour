@@ -21,10 +21,12 @@ import java.util.Map;
 
 import dev.hour.authenticator.Authenticator;
 import dev.hour.contracts.AuthenticatorContract;
+import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
+import dev.hour.database.DietDatabase;
 import dev.hour.fragment.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
@@ -32,6 +34,7 @@ import dev.hour.fragment.SignUpFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
+import dev.hour.presenter.DietPresenter;
 import dev.hour.view.MapView;
 import dev.hour.view.Utilities;
 import software.amazon.awssdk.http.SdkHttpClient;
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements
     private AuthenticatorContract.Authenticator authenticator           ;
     private UserContract.Presenter              userPresenter           ;
     private UserContract.Database               userDatabase            ;
+    private MealContract.Diet.Presenter         dietPresenter           ;
+    private MealContract.Diet.Database          dietDatabase            ;
     private RestaurantContract.Presenter        restaurantPresenter     ;
     private RestaurantContract.Database         restaurantDatabase      ;
     private Fragment                            lastFragment            ;
@@ -89,6 +94,11 @@ public class MainActivity extends AppCompatActivity implements
         userDatabase            = new UserDatabase(
                 this.getString(R.string.region), this.getString(R.string.user_table_name), this.httpClient);
 
+        // Set up the user presenter
+        dietPresenter           = new DietPresenter();
+        dietDatabase            = new DietDatabase(
+                this.getString(R.string.region), this.getString(R.string.diet_table_name), this.httpClient);
+
         // Set up the restaurant presenter
         restaurantPresenter     = new RestaurantPresenter();
         restaurantDatabase      = new RestaurantDatabase(
@@ -100,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements
 
         userPresenter.setDatabase(userDatabase);
         restaurantPresenter.setDatabase(restaurantDatabase);
+        dietPresenter.setDatabase(dietDatabase);
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
@@ -153,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Set the credentials
         this.userDatabase.setCredentials(credentials);
+        this.dietDatabase.setCredentials(credentials);
         this.restaurantDatabase.setCredentials(credentials);
         this.userPresenter.setUser(userId);
 
@@ -298,15 +310,17 @@ public class MainActivity extends AppCompatActivity implements
 
             fragment = new ProfileFragment();
             ((UserContract.View)fragment)
-                    .setListener((UserContract.View.Listener) userPresenter);
-
+                    .setUserListener((UserContract.View.Listener) userPresenter);
             userPresenter.setView((UserContract.View) fragment);
 
+            dietPresenter.setView((MealContract.Diet.View) fragment);
+            ((MealContract.Diet.View)fragment)
+                    .setDietListener((MealContract.Diet.View.Listener) dietPresenter);
             transaction.add(R.id.activity_main, fragment, ProfileFragment.TAG);
 
         } else if(fragment.isAdded()) {
             ((UserContract.View)fragment)
-                    .setListener((UserContract.View.Listener) userPresenter);
+                    .setUserListener((UserContract.View.Listener) userPresenter);
 
             userPresenter.setView((UserContract.View) fragment);
 

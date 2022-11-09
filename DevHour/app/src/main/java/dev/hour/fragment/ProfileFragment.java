@@ -34,7 +34,9 @@ public class ProfileFragment extends Fragment implements
 
     private TextView firstNameTextView;
     private TextView lastNameTextView;
-    private UserContract.View.Listener listener;
+    private String userId;
+    private UserContract.View.Listener userListener;
+    private MealContract.Diet.View.Listener dietListener;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
@@ -46,7 +48,10 @@ public class ProfileFragment extends Fragment implements
         lastNameTextView = layout.findViewById(R.id.fragment_profile_last_name);
 
         // Populate the name views for the current user
-        listener.onGetUserRequest();
+        userListener.onGetUserRequest();
+
+        // Set the diet filter switches to the correct state for the current user
+        dietListener.onGetDietRequest(userId);
 
         return layout;
 
@@ -78,8 +83,13 @@ public class ProfileFragment extends Fragment implements
     }
 
     @Override
-    public void setListener(UserContract.View.Listener listener) {
-        this.listener = listener;
+    public void setUserListener(UserContract.View.Listener listener) {
+        this.userListener = listener;
+    }
+
+    @Override
+    public void setDietListener(MealContract.Diet.View.Listener listener) {
+        this.dietListener = listener;
     }
 
     /**
@@ -96,6 +106,7 @@ public class ProfileFragment extends Fragment implements
 
         this.firstNameTextView.setText(user.getFirstName());
         this.lastNameTextView.setText(user.getLastName());
+        this.userId = user.getId();
 
     }
 }

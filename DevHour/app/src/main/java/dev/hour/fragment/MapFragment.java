@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
+import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
 import dev.hour.view.MapView;
@@ -139,7 +140,7 @@ public class MapFragment extends Fragment implements
     }
 
     @Override
-    public void setListener(Listener listener) {
+    public void setUserListener(Listener listener) {
         this.listener = listener;
     }
 

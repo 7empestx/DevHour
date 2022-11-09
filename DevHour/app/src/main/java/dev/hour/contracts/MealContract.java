@@ -17,12 +17,24 @@ public interface MealContract {
 
     }
 
+    enum Diets {
+        VEGAN,
+        VEGETARIAN,
+        HALAL,
+        KOSHER,
+        LACTOSE_FREE,
+        GLUTEN_FREE
+
+    }
+
     interface Diet {
 
         List<Ingredient> getAllergens();
+        List<Diets> getDiets();
 
         interface Database {
 
+            void setCredentials(final Map<String, String> credentials);
             Diet getDiet(final String id);
 
         }
@@ -37,11 +49,12 @@ public interface MealContract {
         interface View {
 
             void setDiet(final Diet diet);
+            void setDietListener(MealContract.Diet.View.Listener listener);
             void onDisplayDietInfo(final Diet diet);
 
             interface Listener {
 
-                void onGetDietRequest();
+                void onGetDietRequest(String id);
 
             }
 

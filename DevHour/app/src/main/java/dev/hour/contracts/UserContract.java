@@ -29,7 +29,8 @@ public interface UserContract {
         void remove(final User user);
         void clearUsers();
         void onDisplayUserInfo(final User user);
-        void setListener(UserContract.View.Listener listener);
+        void setUserListener(UserContract.View.Listener listener);
+
 
         interface Listener {
 
