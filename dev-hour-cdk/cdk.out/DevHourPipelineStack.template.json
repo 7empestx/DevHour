@@ -339,6 +339,37 @@
       "Actions": [
        {
         "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "DevHourPipelineAssetsFileAsset17B412A32"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "FileAsset1",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "DevHourPipelineCodeBuildActionRole5295A8EF",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Assets"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
          "Category": "Deploy",
          "Owner": "AWS",
          "Provider": "CloudFormation",
@@ -1539,6 +1570,12 @@
        "Resource": [
         {
          "Fn::GetAtt": [
+          "DevHourPipelineAssetsFileAsset17B412A32",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::GetAtt": [
           "DevHourPipelineBuildDevHourShellStepCdkBuildProjectD77B232F",
           "Arn"
          ]
@@ -1742,6 +1779,145 @@
    },
    "Metadata": {
     "aws:cdk:path": "DevHourPipelineStack/DevHourPipeline/UpdatePipeline/SelfMutation/Resource"
+   }
+  },
+  "DevHourPipelineAssetsFileRole1474442B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "arn:aws:iam::060498623801:root",
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevHourPipelineStack/DevHourPipeline/Assets/FileRole/Resource"
+   }
+  },
+  "DevHourPipelineAssetsFileRoleDefaultPolicy132BCA49": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:logs:us-west-1:060498623801:log-group:/aws/codebuild/*"
+      },
+      {
+       "Action": [
+        "codebuild:BatchPutCodeCoverages",
+        "codebuild:BatchPutTestCases",
+        "codebuild:CreateReport",
+        "codebuild:CreateReportGroup",
+        "codebuild:UpdateReport"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:codebuild:us-west-1:060498623801:report-group/*"
+      },
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Sub": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
+       }
+      },
+      {
+       "Action": [
+        "s3:GetBucket*",
+        "s3:GetObject*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "DevHourPipelineArtifactsBucketF2A01939",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "DevHourPipelineArtifactsBucketF2A01939",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "DevHourPipelineAssetsFileRoleDefaultPolicy132BCA49",
+    "Roles": [
+     {
+      "Ref": "DevHourPipelineAssetsFileRole1474442B"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevHourPipelineStack/DevHourPipeline/Assets/FileRole/DefaultPolicy/Resource"
+   }
+  },
+  "DevHourPipelineAssetsFileAsset17B412A32": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:5.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "DevHourPipelineAssetsFileRole1474442B",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g cdk-assets@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-AlphaStage/AlphaStageDevHourCognitoStackAF8F29DE.assets.json\\\" --verbose publish \\\"bd950219f54d95d429e90cdff3d933da9610675743d76ca15d5d7ea2585c6b6b:060498623801-us-west-1\\\"\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step DevHourPipelineStack/Pipeline/Assets/FileAsset1",
+    "EncryptionKey": "alias/aws/s3"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevHourPipelineStack/DevHourPipeline/Assets/FileAsset1/Resource"
    }
   },
   "CDKMetadata": {

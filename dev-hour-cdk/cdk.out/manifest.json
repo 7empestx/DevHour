@@ -30,7 +30,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/8c80d870065851aafee473856d7c3a5d415c4b8985aedadde413faa350ffc283.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/89bf74e051d9ce12668aea44c4eafe77ffbf1d3c53ad0110ebd7f92b54d24966.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -134,6 +134,24 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "DevHourPipelineUpdatePipelineSelfMutation912AF2DD"
+          }
+        ],
+        "/DevHourPipelineStack/DevHourPipeline/Assets/FileRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourPipelineAssetsFileRole1474442B"
+          }
+        ],
+        "/DevHourPipelineStack/DevHourPipeline/Assets/FileRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourPipelineAssetsFileRoleDefaultPolicy132BCA49"
+          }
+        ],
+        "/DevHourPipelineStack/DevHourPipeline/Assets/FileAsset1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourPipelineAssetsFileAsset17B412A32"
           }
         ],
         "/DevHourPipelineStack/CDKMetadata/Default": [

@@ -768,7 +768,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/baa18ad91101985dcbd9b381a05cb26cb1a553f8ff19a383957c464f4360e902.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/7a89c1164a2bd54083f2852c2184e4d9acbcb9159ed8202927b13f8a2873f151.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -843,6 +843,24 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "identitypoolroleattachment"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourUserPoolAutoVerifyLambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourUserPoolAutoVerifyLambdaServiceRole1E316AE6"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourUserPoolAutoVerifyLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourUserPoolAutoVerifyLambdaF32FAB2A"
+          }
+        ],
+        "/AlphaStage/DevHourCognitoStack/DevHourUserPoolAutoVerifyLambda/PreSignUpCognito": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DevHourUserPoolAutoVerifyLambdaPreSignUpCognitoFAD71549"
           }
         ],
         "/AlphaStage/DevHourCognitoStack/CDKMetadata/Default": [

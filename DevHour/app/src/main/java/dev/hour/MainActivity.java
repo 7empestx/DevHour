@@ -199,10 +199,14 @@ public class MainActivity extends AppCompatActivity implements
      * @param data The user data to update
      */
     @Override
-    public void onSignUp(final Map<String, String> data) {
+    public void onSignUp(final Map<String, String> data, final Map<String, String> credentials) {
 
-        if(this.userDatabase != null)
+        if(this.userDatabase != null) {
+
+            this.userDatabase.setCredentials(credentials);
             this.userDatabase.updateUser(data);
+
+        }
 
         showLoginFragment();
 

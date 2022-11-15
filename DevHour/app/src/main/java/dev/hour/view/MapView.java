@@ -178,6 +178,7 @@ public class MapView extends FrameLayout implements
     @Override
     protected void onLayout (boolean changed, int left, int top, int right, int bottom) {
         this.mapView.layout(left,top,right,bottom);
+
         left = (getMeasuredWidth() - this.searchBar.getMeasuredWidth()) / 2;
         top  = (int)(getResources().getDisplayMetrics().density * 4);
 

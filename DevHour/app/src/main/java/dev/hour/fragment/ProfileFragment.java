@@ -32,11 +32,11 @@ public class ProfileFragment extends Fragment implements
     /// --------------
     /// Private Members
 
-    private TextView firstNameTextView;
-    private TextView lastNameTextView;
-    private String userId;
-    private UserContract.View.Listener userListener;
-    private MealContract.Diet.View.Listener dietListener;
+    private TextView                        firstNameTextView   ;
+    private TextView                        lastNameTextView    ;
+    private String                          userId              ;
+    private UserContract.View.Listener      userListener        ;
+    private MealContract.Diet.View.Listener dietListener        ;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,

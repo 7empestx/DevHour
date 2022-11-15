@@ -81,12 +81,84 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
     }
 
+    /// ---------------
+    /// Private Methods
+
+    /**
+     * Authenticates the user, but does not invoke any callbacks. This is done to be able to
+     * update any user data without having the application transition to extraneous states.
+     * @param input The user input
+     * @return [Map] instance holding the credentials.
+     */
+    private Map<String, String> softSignIn(final Map<String, String> input) {
+
+        final Authenticator authenticator = this;
+
+        final Thread thread = new Thread(() -> {
+
+            final InitiateAuthRequest authRequest = InitiateAuthRequest
+                    .builder()
+                    .authFlow(USER_PASSWORD_AUTH)
+                    .clientId(authenticator.clientId)
+                    .authParameters(input)
+                    .build();
+
+            try {
+
+                final InitiateAuthResponse response =
+                        authenticator.cognitoClient.initiateAuth(authRequest);
+
+                authenticator.idToken       = response.authenticationResult().idToken();
+                authenticator.accessToken   = response.authenticationResult().accessToken();
+
+                final CognitoIdentityClient client = CognitoIdentityClient.builder()
+                        .httpClient(authenticator.httpClient)
+                        .region(Region.of(authenticator.region))
+                        .credentialsProvider(AnonymousCredentialsProvider.create())
+                        .build();
+
+                final Map<String, String> logins = new HashMap<>();
+
+                logins.put(authEndpoint + "/" + this.providerName, idToken);
+
+                authenticator.credentials =
+                        getCredentialsForIdentity(client, logins, identityPoolId, accountId);
+
+            } catch(final Exception exception) {
+
+                Log.e("Authenticator", exception.toString());
+
+            }
+
+        });
+
+        final Map<String, String> credentials = new HashMap<>();
+
+        try {
+
+            thread.start();
+            thread.join();
+
+            credentials.put("ACCESS_KEY", this.credentials.accessKeyId());
+            credentials.put("SECRET_KEY", this.credentials.secretKey());
+            credentials.put("SESSION_TOKEN", this.credentials.sessionToken());
+
+        } catch(final Exception exception) {
+
+            Log.e("Authenticator", exception.toString());
+
+        }
+
+        return credentials;
+
+    }
+
     /**
      * Returns the Identity Id for the given Id token.
      * @param logins The logins corresponding to the identity pool
      * @return identity id that corresponds to the id token.
      */
-    public String getIdentityId(final CognitoIdentityClient client,
+    private String getIdentityId(final CognitoIdentityClient client,
                                 final Map<String, String> logins,
                                 final String identityPoolId,
                                 final String accountId) {
@@ -109,7 +181,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
      * @param accountId The account id
      * @return Credentials
      */
-    public Credentials getCredentialsForIdentity(final CognitoIdentityClient client,
+    private Credentials getCredentialsForIdentity(final CognitoIdentityClient client,
                                                  final Map<String, String> logins,
                                                  final String identityPoolId,
                                                  final String accountId) {
@@ -122,6 +194,9 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
         return client.getCredentialsForIdentity(request).credentials();
 
     }
+
+    /// --------------
+    /// Public Methods
 
     /**
      * Returns a flag indicating if the user is authenticated.
@@ -169,21 +244,6 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
                             .name("name")
                             .value(input.get("name"))
                             .build())
-                    .userAttributes(AttributeType
-                            .builder()
-                            .name("first")
-                            .value(input.get("first"))
-                            .build())
-                    .userAttributes(AttributeType
-                            .builder()
-                            .name("last")
-                            .value(input.get("last"))
-                            .build())
-                    .userAttributes(AttributeType
-                            .builder()
-                            .name("email")
-                            .value(input.get("email"))
-                            .build())
                     .build();
 
             try {
@@ -203,8 +263,25 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
             thread.start();
             thread.join();
 
+            // Slight workaround, we want to be able to sign in
+            // after sign up so we can update the user database
+            input.put("USERNAME", input.get("username"));
+            input.put("PASSWORD", input.get("password"));
+
+            // Retrieve the credentials
+            final Map<String, String> credentials = softSignIn(input);
+
+            // Remove the fields we don't want
+            input.remove("USERNAME");
+            input.remove("PASSWORD");
+            input.remove("password");
+
+            // Set the id as the hash of the username; if we're here
+            // the username must be unique
+            input.put("id", String.valueOf(input.get("username").hashCode()));
+
             if(this.listener != null)
-                this.listener.onSignUp(input);
+                this.listener.onSignUp(input, credentials);
 
         } catch (final Exception exception) {
 

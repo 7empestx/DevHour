@@ -1,7 +1,5 @@
 package dev.hour.presenter;
 
-import android.util.Log;
-
 import java.util.Map;
 
 import dev.hour.contracts.AuthenticatorContract;
@@ -192,16 +190,16 @@ public class AuthenticatorPresenter implements AuthenticatorContract.Presenter,
 
     /**
      * Invoked when the user has successfully signed up.
-     * @param data The success message
+     * @param input The success message
      */
     @Override
-    public void onSignUp(final Map<String, String> data) {
+    public void onSignUp(final Map<String, String> input, final Map<String, String> credentials) {
 
         if(this.view != null)
             this.view.onSignUp();
 
         if(this.interactionListener != null)
-            this.interactionListener.onSignUp(data);
+            this.interactionListener.onSignUp(input, credentials);
 
     }
 

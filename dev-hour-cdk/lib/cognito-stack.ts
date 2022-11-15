@@ -4,11 +4,12 @@
  */
 
 import { CfnIdentityPool, CfnIdentityPoolRoleAttachment,
-         UserPool, UserPoolClient, UserPoolIdentityProviderAmazon } from 'aws-cdk-lib/aws-cognito'
+         UserPool, UserPoolClient, UserPoolIdentityProviderAmazon, UserPoolTriggers, UserPoolOperation } from 'aws-cdk-lib/aws-cognito'
 import { Stack } from 'aws-cdk-lib'
 import { Construct } from 'constructs'
 import { Role } from 'aws-cdk-lib/aws-iam'
 import { Secret } from 'aws-cdk-lib/aws-secretsmanager'
+import { Function, Runtime, Code } from 'aws-cdk-lib/aws-lambda'
 import { Constants } from './constants'
 import { Roles } from './roles'
 
@@ -120,6 +121,13 @@ export class CognitoStack extends Stack {
                 },
             },
         );
+
+        this.userPool.addTrigger(UserPoolOperation.PRE_SIGN_UP, new Function(this, `${props.userPoolId}AutoVerifyLambda`, {
+            runtime: Runtime.PYTHON_3_9,
+            handler: 'handler',
+            code:    Code.fromAsset('cognito_pre_sign_up.zip')
+        }));
+
     }
 
 }
