@@ -1,6 +1,6 @@
 import json
 
-def cognito_pre_sign_up.handler(event, context):
+def handler(event, context):
 
     # Confirm
     event['response']['autoConfirmUser'] = True

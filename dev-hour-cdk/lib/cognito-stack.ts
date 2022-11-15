@@ -124,7 +124,7 @@ export class CognitoStack extends Stack {
 
         this.userPool.addTrigger(UserPoolOperation.PRE_SIGN_UP, new Function(this, `${props.userPoolId}AutoVerifyLambda`, {
             runtime: Runtime.PYTHON_3_9,
-            handler: 'handler',
+            handler: 'cognito_pre_sign_up.handler',
             code:    Code.fromAsset('cognito_pre_sign_up.zip')
         }));
 
