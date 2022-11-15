@@ -44,8 +44,8 @@ public class ProfileFragment extends Fragment implements
         // Inflate the layout for this fragment
         final View layout = layoutInflater.inflate(R.layout.fragment_profile, container, false);
 
-        firstNameTextView = layout.findViewById(R.id.fragment_profile_first_name);
-        lastNameTextView = layout.findViewById(R.id.fragment_profile_last_name);
+        firstNameTextView   = layout.findViewById(R.id.fragment_profile_first_name);
+        lastNameTextView    = layout.findViewById(R.id.fragment_profile_last_name);
 
         // Populate the name views for the current user
         userListener.onGetUserRequest();

@@ -1,10 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="BoundaryAnchorView" >
+
+        <attr name="boundaryAnchorBackground" format="reference"/>
+        <attr name="boundaryAnchorIcon" format="reference"/>
+        <attr name="boundaryAnchorIconColor" format="color"/>
+        <attr name="android:layout_width" format="dimension"/>
+        <attr name="android:layout_height" format="dimension"/>
+        <attr name="android:elevation" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="Dot">
+
+        <attr name="dotBackground" format="reference"/>
+        <attr name="dotIcon" format="reference"/>
+        <attr name="dotIconColor" format="color"/>
+        <attr name="android:layout_width" format="dimension"/>
+        <attr name="android:layout_height" format="dimension"/>
+        <attr name="android:elevation" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="HorizontalSliderView">
+
+        <attr name="horizontalDotBackground" format="reference"/>
+        <attr name="horizontalDotIcon" format="reference"/>
+        <attr name="horizontalDotIconColor" format="color"/>
+        <attr name="horizontalDotElevation" format="dimension"/>
+        <attr name="horizontalDotWidth" format="dimension"/>
+        <attr name="horizontalDotHeight" format="dimension"/>
+        <attr name="horizontalActiveLineColor" format="color"/>
+        <attr name="horizontalInactiveLineColor" format="color"/>
+        <attr name="horizontalActiveLineThickness" format="dimension"/>
+        <attr name="horizontalInactiveLineThickness" format="dimension"/>
+        <attr name="android:layout_width" format="dimension"/>
+        <attr name="android:layout_height" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="LandmarkDropView">
+
+        <attr name="landmarkDropViewIcon" format="reference"/>
+        <attr name="landmarkDropViewCircumference" format="dimension"/>
+        <attr name="landmarkDropViewElevation" format="dimension"/>
+        <attr name="landmarkDropViewIconColor" format="color"/>
+        <attr name="landmarkDropViewBackground" format="reference"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="Indicator">
+
+        <attr name="indicatorLayoutHeight" format="dimension"/>
+        <attr name="indicatorLayoutWidth" format="dimension"/>
+        <attr name="indicatorElevation" format="dimension"/>
+        <attr name="indicatorBackground" format="reference"/>
+        <attr name="indicatorText" format="string"/>
+        <attr name="indicatorTextColor" format="color"/>
+        <attr name="indicatorTextSize" format="dimension"/>
+        <attr name="indicatorIcon" format="reference"/>
+        <attr name="indicatorIconColor" format="reference"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorMenu">
+
+        <attr name="indicatorMenuTopGutter" format="dimension"/>
+        <attr name="indicatorMenuBottomGutter" format="dimension"/>
+        <attr name="indicatorMenuLeftGutter" format="dimension"/>
+        <attr name="indicatorMenuRightGutter" format="dimension"/>
+        <attr name="indicatorMenuIndicatorHorizontalGutter" format="dimension"/>
+        <attr name="indicatorMenuIndicatorVerticalGutter" format="dimension"/>
+        <attr name="indicatorMenuIndicatorCircumference" format="dimension"/>
+        <attr name="indicatorMenuIndicatorElevation" format="dimension"/>
+        <attr name="indicatorMenuIndicatorTextSize" format="dimension"/>
+        <attr name="indicatorMenuIndicatorTextColor" format="color"/>
+        <attr name="indicatorMenuIndicatorBackground" format="reference"/>
+        <attr name="indicatorMenuIndicatorIcon" format="reference"/>
+        <attr name="indicatorMenuIndicatorIconColor" format="color"/>
+        <attr name="indicatorMenuStartAngle" format="float"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="GreyMapView">
+
+        <attr name="greyMapLandmarkDropViewIcon" format="reference"/>
+        <attr name="greyMapLandmarkDropViewCircumference" format="dimension"/>
+        <attr name="greyMapLandmarkDropViewElevation" format="dimension"/>
+        <attr name="greyMapLandmarkDropViewIconColor" format="color"/>
+        <attr name="greyMapLandmarkDropViewBackground" format="reference"/>
+        <attr name="greyMapAttentionItemCircumference" format="dimension"/>
+        <attr name="greyMapAttentionItemBackground" format="reference"/>
+        <attr name="greyMapAttentionItemIcon" format="reference"/>
+        <attr name="greyMapAttentionItemIconColor" format="reference"/>
+        <attr name="greyMapImportantItemCircumference" format="dimension"/>
+        <attr name="greyMapImportantItemBackground" format="reference"/>
+        <attr name="greyMapImportantItemIcon" format="reference"/>
+        <attr name="greyMapImportantItemIconColor" format="reference"/>
+        <attr name="greyMapUrgentItemCircumference" format="dimension"/>
+        <attr name="greyMapUrgentItemBackground" format="reference"/>
+        <attr name="greyMapUrgentItemIcon" format="reference"/>
+        <attr name="greyMapUrgentItemIconColor" format="reference"/>
+        <attr name="greyMapSevereItemCircumference" format="dimension"/>
+        <attr name="greyMapSevereItemBackground" format="reference"/>
+        <attr name="greyMapSevereItemIcon" format="reference"/>
+        <attr name="greyMapSevereItemIconColor" format="reference"/>
+        <attr name="greyMapIndicatorMenuTopGutter" format="dimension"/>
+        <attr name="greyMapIndicatorMenuBottomGutter" format="dimension"/>
+        <attr name="greyMapIndicatorMenuLeftGutter" format="dimension"/>
+        <attr name="greyMapIndicatorMenuRightGutter" format="dimension"/>
+        <attr name="greyMapIndicatorMenuIndicatorHorizontalGutter" format="dimension"/>
+        <attr name="greyMapIndicatorMenuIndicatorVerticalGutter" format="dimension"/>
+        <attr name="greyMapIndicatorMenuIndicatorCircumference" format="dimension"/>
+        <attr name="greyMapIndicatorMenuIndicatorElevation" format="dimension"/>
+        <attr name="greyMapIndicatorMenuIndicatorTextSize" format="dimension"/>
+        <attr name="greyMapIndicatorMenuIndicatorTextColor" format="color"/>
+        <attr name="greyMapIndicatorMenuIndicatorBackground" format="reference"/>
+        <attr name="greyMapIndicatorMenuIndicatorIcon" format="reference"/>
+        <attr name="greyMapIndicatorMenuIndicatorIconColor" format="color"/>
+        <attr name="greyMapIndicatorMenuStartAngle" format="float"/>
+        <attr name="greyMapHorizontalLineColor" format="color"/>
+        <attr name="greyMapVerticalLineColor" format="color"/>
+        <attr name="greyMapHorizontalLineThickness" format="dimension"/>
+        <attr name="greyMapVerticalLineThickness" format="dimension"/>
+        <attr name="greyMapMapStyle" format="string"/>
+        <attr name="greyMapScaleBarHeight" format="dimension"/>
+        <attr name="greyMapScaleBarBorderWidth" format="float"/>
+        <attr name="greyMapScaleBarTextSize" format="dimension"/>
+        <attr name="greyMapScaleBarTextBorder" format="dimension"/>
+        <attr name="greyMapScaleBarTextColor" format="color"/>
+        <attr name="greyMapScaleBarPrimaryColor" format="color"/>
+        <attr name="greyMapScaleBarSecondaryColor" format="color"/>
+        <attr name="android:layout_height" format="dimension"/>
+        <attr name="android:layout_width" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="Item">
+
+        <attr name="itemIcon" format="reference"/>
+        <attr name="itemIconColor" format="color"/>
+        <attr name="itemElevation" format="dimension"/>
+        <attr name="itemBackground" format="reference"/>
+        <attr name="itemCircumference" format="dimension"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="VerticalSliderView">
+
+        <attr name="verticalDotBackground" format="reference"/>
+        <attr name="verticalDotIcon" format="reference"/>
+        <attr name="verticalDotIconColor" format="color"/>
+        <attr name="verticalDotElevation" format="dimension"/>
+        <attr name="verticalDotWidth" format="dimension"/>
+        <attr name="verticalDotHeight" format="dimension"/>
+        <attr name="verticalActiveLineColor" format="color"/>
+        <attr name="verticalInactiveLineColor" format="color"/>
+        <attr name="verticalActiveLineThickness" format="dimension"/>
+        <attr name="verticalInactiveLineThickness" format="dimension"/>
+        <attr name="android:layout_width" format="dimension"/>
+        <attr name="android:layout_height" format="dimension"/>
+
+    </declare-styleable>
+
+    <!-- ======================================================================================= -->
+    <!-- Styles                                                                                  -->
+
     <!-- ============= -->
     <!-- Action Button -->
 
-    <style name="Theme.DevHour.ActionButton" parent="Widget.MaterialComponents.Button">
+    <style name="Theme.DevHour.ActionButton" parent="Widget.AppCompat.Button">
 
         <item name="android:layout_height">?attr/actionButtonLayoutHeight</item>
         <item name="android:layout_width">match_parent</item>
@@ -19,13 +185,37 @@
     </style>
 
     <!-- =========== -->
+    <!-- Add Picture -->
+
+    <style name="Theme.DevHour.AddPicture" parent="Theme.AppCompat">
+
+        <item name="android:background">?attr/addPictureBackground</item>
+        <item name="android:layout_height">?attr/addPictureLayoutHeight</item>
+        <item name="android:layout_width">?attr/addPictureLayoutWidth</item>
+
+    </style>
+
+    <!-- ============= -->
+    <!-- Alert Display -->
+
+    <style name="Theme.DevHour.AlertDisplay" parent="Widget.AppCompat.ImageButton">
+
+        <item name="android:layout_height">?attr/alertDisplayLayoutHeight</item>
+        <item name="android:layout_width">?attr/alertDisplayLayoutWidth</item>
+        <item name="android:background">?attr/alertDisplayBackground</item>
+        <item name="android:elevation">?attr/alertDisplayElevation</item>
+
+    </style>
+
+    <!-- =========== -->
     <!-- Back Button -->
 
     <style name="Theme.DevHour.BackButton" parent="Widget.AppCompat.ImageButton">
 
         <item name="android:layout_height">?attr/backButtonHeight</item>
-        <item name="android:layout_width">?attr/backButtonWidth</item>
+        <item name="android:layout_width">?attr/backButtonHeight</item>
         <item name="android:src">?attr/backButtonSource</item>
+        <item name="android:tint">?attr/backButtonColor</item>
         <item name="android:tintMode">?attr/backButtonTintMode</item>
         <item name="android:background">?attr/backButtonBackground</item>
 
@@ -34,7 +224,7 @@
     <!-- ================= -->
     <!-- Bottom Navigation -->
 
-    <style name="Theme.Aurora.BottomNavigation" parent="Widget.Design.BottomNavigationView">
+    <style name="Theme.DevHour.BottomNavigation" parent="Widget.Design.BottomNavigationView">
 
         <item name="android:background">?attr/bottomNavigationBackground</item>
         <item name="bottomNavigationItemTextColor">?attr/bottomNavigationItemTextColor</item>
@@ -42,6 +232,65 @@
         <item name="labelVisibilityMode">unlabeled</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+
+    </style>
+
+    <!-- ======== -->
+    <!-- Checkbox -->
+
+    <style name="Theme.DevHour.Checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+
+        <item name="android:layout_height">?attr/checkBoxLayoutHeight</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">?attr/checkBoxTextColor</item>
+
+    </style>
+
+    <!-- =================== -->
+    <!-- Country Code Picker -->
+
+    <style name="Theme.DevHour.CountryCodePicker" parent="Theme.AppCompat">
+
+        <item name="android:layout_height">?attr/countryCodePickerLayoutHeight</item>
+        <item name="android:layout_width">?attr/countryCodePickerLayoutWidth</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+    <!-- ============= -->
+    <!-- Drawer Layout -->
+
+    <style name="DrawerLayout">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+
+    </style>
+
+    <!-- ======================= -->
+    <!-- Drawer Layout Container -->
+
+    <style name="DrawerLayoutContainer">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+
+    </style>
+
+    <!-- =========== -->
+    <!-- Edit Button -->
+
+    <style name="Theme.DevHour.ListEditButton" parent="Widget.AppCompat.ImageButton">
+
+        <item name="android:layout_width">?attr/editButtonLayoutWidth</item>
+        <item name="android:layout_height">?attr/editButtonLayoutHeight</item>
+        <item name="android:src">?attr/editButtonDrawable</item>
+        <item name="android:tintMode">?attr/editButtonTintMode</item>
+        <item name="android:tint">?attr/editButtonColor</item>
+        <item name="android:elevation">?attr/editButtonElevation</item>
+        <item name="android:background">?attr/editButtonBackground</item>
 
     </style>
 
@@ -66,7 +315,7 @@
     <!-- ========== -->
     <!-- Error Text -->
 
-    <style name="Theme.DevHour.ErrorText" parent="Widget.MaterialComponents.TextView">
+    <style name="Theme.DevHour.ErrorText" parent="Widget.AppCompat.TextView">
 
         <item name="android:textColor">?attr/errorTextColor</item>
         <item name="android:textSize">?attr/errorTextSize</item>
@@ -100,10 +349,322 @@
 
     </style>
 
+    <!-- ============ -->
+    <!-- GreyMap View -->
+
+    <style name="Theme.DevHour.GreyMap" parent="Theme.AppCompat">
+
+        <item name="greyMapAttentionItemCircumference">?attr/greyMapViewAttentionItemCircumference</item>
+        <item name="greyMapAttentionItemBackground">?attr/greyMapViewAttentionItemBackground</item>
+        <item name="greyMapAttentionItemIcon">?attr/greyMapViewAttentionItemIcon</item>
+        <item name="greyMapAttentionItemIconColor">?attr/greyMapViewAttentionItemIconColor</item>
+        <item name="greyMapImportantItemCircumference">?attr/greyMapViewFlagItemCircumference</item>
+        <item name="greyMapImportantItemBackground">?attr/greyMapViewFlagItemBackground</item>
+        <item name="greyMapImportantItemIcon">?attr/greyMapViewFlagItemIcon</item>
+        <item name="greyMapImportantItemIconColor">?attr/greyMapViewFlagItemIconColor</item>
+        <item name="greyMapUrgentItemCircumference">?attr/greyMapViewUrgentItemCircumference</item>
+        <item name="greyMapUrgentItemBackground">?attr/greyMapViewUrgentItemBackground</item>
+        <item name="greyMapUrgentItemIcon">?attr/greyMapViewUrgentItemIcon</item>
+        <item name="greyMapUrgentItemIconColor">?attr/greyMapViewUrgentItemIconColor</item>
+        <item name="greyMapSevereItemCircumference">?attr/greyMapViewSevereItemCircumference</item>
+        <item name="greyMapSevereItemBackground">?attr/greyMapViewSevereItemBackground</item>
+        <item name="greyMapSevereItemIcon">?attr/greyMapViewSevereItemIcon</item>
+        <item name="greyMapSevereItemIconColor">?attr/greyMapViewSevereItemIconColor</item>
+        <item name="greyMapIndicatorMenuTopGutter">?attr/greyMapViewIndicatorMenuTopGutter</item>
+        <item name="greyMapIndicatorMenuBottomGutter">?attr/greyMapViewIndicatorMenuBottomGutter</item>
+        <item name="greyMapIndicatorMenuLeftGutter">?attr/greyMapViewIndicatorMenuLeftGutter</item>
+        <item name="greyMapIndicatorMenuRightGutter">?attr/greyMapViewIndicatorMenuRightGutter</item>
+        <item name="greyMapIndicatorMenuIndicatorHorizontalGutter">?attr/greyMapViewIndicatorMenuIndicatorHorizontalGutter</item>
+        <item name="greyMapIndicatorMenuIndicatorVerticalGutter">?attr/greyMapViewIndicatorMenuIndicatorVerticalGutter</item>
+        <item name="greyMapIndicatorMenuIndicatorCircumference">?attr/greyMapViewIndicatorMenuIndicatorCircumference</item>
+        <item name="greyMapIndicatorMenuIndicatorElevation">?attr/greyMapViewIndicatorMenuIndicatorElevation</item>
+        <item name="greyMapIndicatorMenuIndicatorTextSize">?attr/greyMapViewIndicatorMenuIndicatorTextSize</item>
+        <item name="greyMapIndicatorMenuIndicatorTextColor">?attr/greyMapViewIndicatorMenuIndicatorTextColor</item>
+        <item name="greyMapIndicatorMenuIndicatorBackground">?attr/greyMapViewIndicatorMenuIndicatorBackground</item>
+        <item name="greyMapIndicatorMenuIndicatorIcon">?attr/greyMapViewIndicatorMenuIndicatorIcon</item>
+        <item name="greyMapIndicatorMenuIndicatorIconColor">?attr/greyMapViewIndicatorMenuIndicatorIconColor</item>
+        <item name="greyMapIndicatorMenuStartAngle">?attr/greyMapViewIndicatorMenuStartAngle</item>
+        <item name="greyMapHorizontalLineColor">?attr/greyMapViewHorizontalLineColor</item>
+        <item name="greyMapVerticalLineColor">?attr/greyMapViewVerticalLineColor</item>
+        <item name="greyMapHorizontalLineThickness">?attr/greyMapViewHorizontalLineThickness</item>
+        <item name="greyMapVerticalLineThickness">?attr/greyMapViewVerticalLineThickness</item>
+        <item name="greyMapMapStyle">?attr/greyMapViewMapStyle</item>
+        <item name="greyMapScaleBarHeight">?attr/greyMapViewScaleBarHeight</item>
+        <item name="greyMapScaleBarBorderWidth">?attr/greyMapViewScaleBarBorderWidth</item>
+        <item name="greyMapScaleBarTextSize">?attr/greyMapViewScaleBarTextSize</item>
+        <item name="greyMapScaleBarTextBorder">?attr/greyMapViewScaleBarTextBorder</item>
+        <item name="greyMapScaleBarTextColor">?attr/greyMapViewScaleBarTextColor</item>
+        <item name="greyMapScaleBarPrimaryColor">?attr/greyMapViewScaleBarPrimaryColor</item>
+        <item name="greyMapScaleBarSecondaryColor">?attr/greyMapViewScaleBarSecondaryColor</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- ================ -->
+    <!-- Landmark Display -->
+
+    <style name="Theme.DevHour.LandmarkDisplay" parent="Widget.AppCompat.ImageButton">
+
+        <item name="android:layout_height">?attr/landmarkDisplayLayoutHeight</item>
+        <item name="android:layout_width">?attr/landmarkDisplayLayoutWidth</item>
+        <item name="android:background">?attr/landmarkDisplayBackground</item>
+        <item name="android:elevation">?attr/landmarkDisplayElevation</item>
+        <item name="android:src">?attr/landmarkDisplaySource</item>
+
+    </style>
+
+    <!-- ======================= -->
+    <!-- List Item Category Text -->
+
+    <style name="Theme.DevHour.ListItemCategoryText" parent="Widget.AppCompat.TextView">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">?attr/listItemCategoryTextTextSize</item>
+        <item name="android:layout_marginStart">?attr/listItemCategoryTextMarginStart</item>
+        <item name="android:layout_marginEnd">?attr/listItemCategoryTextMarginEnd</item>
+        <item name="android:textColor">?attr/listItemCategoryTextTextColor</item>
+        <item name="android:fontFamily">?attr/listItemCategoryTextFontFamily</item>
+
+    </style>
+
+    <!-- ==================== -->
+    <!-- List Item Coordinate -->
+
+    <style name="Theme.DevHour.ListItemCoordinateText" parent="Widget.AppCompat.TextView">
+
+        <item name="android:layout_height">?attr/listItemCoordinateLayoutHeight</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginStart">?attr/listItemCoordinateLayoutMarginStart</item>
+        <item name="android:layout_marginEnd">?attr/listItemCoordinateLayoutMarginEnd</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/listItemCoordinateTextColor</item>
+        <item name="android:textSize">?attr/listItemCoordinateTextSize</item>
+
+    </style>
+
+    <!-- =================== -->
+    <!-- List Item Indicator -->
+
+    <style name="Theme.DevHour.ListItemIndicator" parent="Theme.AppCompat">
+
+        <item name="android:layout_width">?attr/listItemIndicatorWidth</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">?attr/listItemIndicatorBackground</item>
+
+    </style>
+
+    <!-- ============== -->
+    <!-- List Item Text -->
+
+    <style name="Theme.DevHour.ListItemText" parent="Widget.AppCompat.TextView">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">?attr/listItemTextTextSize</item>
+        <item name="android:layout_marginStart">?attr/listItemTextMarginStart</item>
+        <item name="android:layout_marginEnd">?attr/listItemTextMarginEnd</item>
+        <item name="android:textColor">?attr/listItemTextTextColor</item>
+        <item name="android:fontFamily">?attr/listItemTextFontFamily</item>
+
+    </style>
+
+    <!-- =================== -->
+    <!-- List Item Check Box -->
+
+    <style name="Theme.DevHour.ListItemCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+
+        <item name="android:layout_height">?attr/listCheckBoxLayoutHeight</item>
+        <item name="android:layout_width">?attr/listCheckBoxLayoutWidth</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginEnd">?attr/listCheckBoxMarginEnd</item>
+
+    </style>
+
+    <!-- ======== -->
+    <!-- ListItem -->
+
+    <style name="Theme.DevHour.ListItem" parent="Theme.AppCompat">
+
+        <item name="android:layout_height">?attr/listItemLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingStart">?attr/listItemPaddingStart</item>
+        <item name="android:paddingEnd">?attr/listItemPaddingEnd</item>
+
+    </style>
+
+    <!-- ================ -->
+    <!-- List Item Remove -->
+
+    <style name="Theme.DevHour.ListItemRemoveButton" parent="Widget.AppCompat.Button">
+
+        <item name="android:layout_height">?attr/listItemRemoveButtonLayoutHeight</item>
+        <item name="android:layout_width">?attr/listItemRemoveButtonLayoutWidth</item>
+        <item name="android:elevation">?attr/listItemRemoveButtonElevation</item>
+        <item name="android:background">?attr/listItemRemoveButtonBackground</item>
+        <item name="android:text">?attr/listItemRemoveButtonText</item>
+        <item name="android:textAllCaps">?attr/listItemRemoveButtonTextAllCaps</item>
+        <item name="android:textColor">?attr/listItemRemoveButtonTextColor</item>
+
+    </style>
+
+    <!-- ================= -->
+    <!-- List Item Content -->
+
+    <style name="Theme.DevHour.ListItemContent" parent="Theme.AppCompat">
+
+        <item name="android:layout_height">?attr/listItemContentHeight</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:elevation">?attr/listItemContentElevation</item>
+        <item name="android:background">?attr/listItemContentBackground</item>
+
+    </style>
+
+    <!-- ========= -->
+    <!-- ListTitle -->
+
+    <style name="Theme.DevHour.ListTitle" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textColor">?attr/listTitleTextColor</item>
+        <item name="android:fontFamily">?attr/listTitleFontFamily</item>
+        <item name="android:textSize">?attr/listTitleTextSize</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">?attr/listTitleLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- =============== -->
+    <!-- Navigation View -->
+
+    <style name="Theme.DevHour.NavigationView" parent="ThemeOverlay.AppCompat.Dark">nav
+
+        <item name="android:layout_width">@dimen/activity_map_navigation_view_width</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="itemTextColor">?attr/navigationViewItemTextColor</item>
+        <item name="itemIconTint">?attr/navigationViewItemIconTint</item>
+        <item name="menu">?attr/navigationViewMenu</item>
+        <item name="headerLayout">?attr/navigationViewHeader</item>
+
+    </style>
+
+    <!-- ================== -->
+    <!-- Phone Number Input -->
+
+    <style name="Theme.DevHour.PhoneNumberInput" parent="Theme.AppCompat">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/phoneNumberInputLayoutHeight</item>
+        <item name="android:background">?attr/phoneNumberInputBackground</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">?attr/phoneNumberInputPaddingStart</item>
+        <item name="android:paddingEnd">?attr/phoneNumberInputPaddingEnd</item>
+
+    </style>
+
+    <style name="Theme.DevHour.EmailPhoneNumberInput" parent="Theme.AppCompat">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/phoneNumberInputLayoutHeight</item>
+        <item name="android:background">?attr/phoneNumberInputBackground</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">?attr/phoneNumberInputPaddingStart</item>
+        <item name="android:paddingEnd">?attr/phoneNumberInputPaddingEnd</item>
+
+    </style>
+
+    <!-- ============== -->
+    <!-- Paragraph Text -->
+
+    <style name="Theme.DevHour.ParagraphText" parent="Widget.AppCompat.TextView">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/paragraphTextTextColor</item>
+
+    </style>
+
+    <!-- ============ -->
+    <!-- Progress Bar -->
+
+    <style name="Theme.DevHour.ProgressBar" parent="Widget.AppCompat.ProgressBar">
+
+        <item name="android:layout_height">?attr/progressBarLayoutHeight</item>
+        <item name="android:layout_width">?attr/progressBarLayoutWidth</item>
+
+    </style>
+
+    <!-- =========== -->
+    <!-- RadioButton -->
+
+    <style name="Theme.DevHour.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+
+        <item name="android:layout_height">?attr/radioButtonLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">?attr/radioButtonMarginTop</item>
+        <item name="android:fontFamily">?attr/radioButtonFontFamily</item>
+        <item name="android:textColor">?attr/radioButtonTextColor</item>
+        <item name="android:buttonTint">?attr/radioButtonTint</item>
+
+    </style>
+
+    <!-- =========== -->
+    <!-- Round Image -->
+
+    <style name="Theme.DevHour.RoundImage" parent="Widget.AppCompat.ImageButton">
+
+        <item name="android:layout_height">?attr/roundImageLayoutHeight</item>
+        <item name="android:layout_width">?attr/roundImageLayoutWidth</item>
+        <item name="android:background">?attr/roundImageBackground</item>
+
+    </style>
+
+    <!-- =============== -->
+    <!-- Big Round Image -->
+
+    <style name="Theme.DevHour.BigRoundImage" parent="Widget.AppCompat.ImageButton">
+
+        <item name="android:layout_height">?attr/bigRoundImageLayoutHeight</item>
+        <item name="android:layout_width">?attr/bigRoundImageLayoutWidth</item>
+        <item name="android:background">?attr/bigRoundImageBackground</item>
+
+    </style>
+
+    <!-- ========== -->
+    <!-- Status Pip -->
+
+    <style name="StatusPip" >
+
+        <item name="android:layout_height">?attr/statusPipCircumference</item>
+        <item name="android:layout_width">?attr/statusPipCircumference</item>
+        <item name="android:elevation">?attr/statusPipElevation</item>
+        <item name="android:background">?attr/statusPipBackground</item>
+
+    </style>
+
+    <!-- ======== -->
+    <!-- Subtitle -->
+
+    <style name="Theme.DevHour.Subtitle" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textColor">?attr/subtitleTextColor</item>
+        <item name="android:textSize">?attr/subtitleTextSize</item>
+        <item name="android:fontFamily">?attr/subtitleFontFamily</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">?attr/subtitleLayoutHeight</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
     <!-- ========== -->
     <!-- TextButton -->
 
-    <style name="Theme.DevHour.TextButton" parent="Widget.MaterialComponents.TextView">
+    <style name="Theme.DevHour.TextButton" parent="Widget.AppCompat.TextView">
 
         <item name="android:ems">?attr/textButtonEms</item>
         <item name="android:textColor">?attr/textButtonTextColor</item>
@@ -111,6 +672,80 @@
         <item name="android:background">?attr/textButtonBackground</item>
         <item name="android:elevation">?attr/textButtonElevation</item>
         <item name="android:gravity">center_vertical</item>
+
+    </style>
+
+    <!-- ===== -->
+    <!-- Title -->
+
+    <style name="Theme.DevHour.Title" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textColor">?attr/titleTextColor</item>
+        <item name="android:fontFamily">?attr/titleFontFamily</item>
+        <item name="android:textSize">?attr/titleTextSize</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+    <!-- ======= -->
+    <!-- Toolbar -->
+
+    <style name="Toolbar">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/toolbar_height</item>
+        <item name="android:paddingStart">@dimen/toolbar_padding_start</item>
+        <item name="android:paddingEnd">@dimen/toolbar_padding_end</item>
+        <item name="android:background">?attr/toolbarBackground</item>
+
+    </style>
+
+    <!-- =================== -->
+    <!-- Toolbar Icon Button -->
+
+    <style name="Theme.DevHour.ToolbarIconButton" parent="Widget.AppCompat.ImageButton">
+
+        <item name="android:layout_height">@dimen/toolbar_icon_button_height</item>
+        <item name="android:layout_width">@dimen/toolbar_icon_button_width</item>
+        <item name="android:backgroundTint">?attr/toolbarIconButtonTint</item>
+        <item name="backgroundTintMode">src_atop</item>
+
+    </style>
+
+    <!-- ++++++++++++++++++++ -->
+    <!-- Settings Icon Button -->
+
+    <style name="Theme.DevHour.SettingsIconButton" parent="Theme.DevHour.ToolbarIconButton">
+
+        <item name="android:background">@drawable/icon_settings</item>
+
+    </style>
+
+    <!-- ++++++++++++++++ -->
+    <!-- Menu Icon Button -->
+
+    <style name="Theme.DevHour.MenuIconButton" parent="Theme.DevHour.ToolbarIconButton">
+
+        <item name="android:background">@drawable/icon_menu</item>
+
+    </style>
+
+    <!-- ================== -->
+    <!-- Toolbar Title Text -->
+
+    <style name="Theme.DevHour.ToolbarTitle" parent="Widget.AppCompat.TextView">
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">?attr/toolbarTitleTextColor</item>
+        <item name="android:textSize">?attr/toolbarTitleTextSize</item>
+        <item name="android:text">?attr/toolbarTitleText</item>
+        <item name="android:letterSpacing">?attr/toolbarTitleTextLetterSpacing</item>
+        <item name="android:textAllCaps">?attr/toolbarTitleTextAllCaps</item>
+        <item name="android:fontFamily">?attr/toolbarTitleFontFamily</item>
 
     </style>
 
@@ -122,34 +757,6 @@
         <item name="android:fontFamily">?attr/switchFontFamily</item>
         <item name="android:textSize">?attr/switchTextSize</item>
         <item name="android:paddingHorizontal">?attr/switchPaddingHorizontal</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-
-    </style>
-
-    <!-- ======== -->
-    <!-- Subtitle -->
-
-    <style name="Theme.DevHour.Subtitle" parent="Widget.MaterialComponents.TextView">
-
-        <item name="android:textColor">?attr/subtitleTextColor</item>
-        <item name="android:textSize">?attr/subtitleTextSize</item>
-        <item name="android:fontFamily">?attr/subtitleFontFamily</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_height">?attr/subtitleLayoutHeight</item>
-        <item name="android:layout_width">match_parent</item>
-
-    </style>
-
-    <!-- ===== -->
-    <!-- Title -->
-
-    <style name="Theme.DevHour.Title" parent="Widget.MaterialComponents.TextView">
-
-        <item name="android:textColor">?attr/titleTextColor</item>
-        <item name="android:fontFamily">?attr/titleFontFamily</item>
-        <item name="android:textSize">?attr/titleTextSize</item>
-        <item name="android:gravity">center_vertical</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
 

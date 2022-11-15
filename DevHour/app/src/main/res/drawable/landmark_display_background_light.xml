@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/landmark_display_background_light_width"
+    android:height="@dimen/landmark_display_background_light_height"
+    android:viewportWidth="@dimen/landmark_display_background_light_viewport_width"
+    android:viewportHeight="@dimen/landmark_display_background_light_viewport_height">
+
+    <path
+        android:name="edge_clip_path"
+        android:fillColor="@color/landmark_display_background_light"
+        android:pathData="M 0 0 H 96 V 96 h -72 L 0 72 V 0 z"/>
+
+</vector>
+

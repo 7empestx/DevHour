@@ -65,6 +65,36 @@
     <color name="devhour_theme_color_control_activated_dark">@color/devhour_primary</color>
     <color name="devhour_theme_color_control_highlight_dark">@color/devhour_primary</color>
 
+    <!-- ======================================================================================= -->
+    <!-- Drawables                                                                               -->
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <color name="action_button_background_light">@color/devhour_primary</color>
+    <color name="action_button_background_dark">@color/devhour_primary</color>
+
+    <!-- =========== -->
+    <!-- Add Picture -->
+
+    <color name="add_picture_background_light">@color/devhour_smoke</color>
+    <color name="add_picture_background_dark">@color/devhour_smoke</color>
+
+    <!-- ========== -->
+    <!-- Alert View -->
+
+    <color name="alert_view_background_under_light">@color/devhour_pink_translucent</color>
+    <color name="alert_view_background_over_light">@color/devhour_pink</color>
+    <color name="alert_view_background_under_dark">@color/devhour_pink_translucent</color>
+    <color name="alert_view_background_over_dark">@color/devhour_pink</color>
+
+
+    <!-- ============= -->
+    <!-- Alert Display -->
+
+    <color name="alert_display_background_light">@color/alert_new</color>
+    <color name="alert_display_background_dark">@color/alert_new</color>
+
     <!-- =========== -->
     <!-- Back Button -->
 
@@ -79,21 +109,271 @@
     <color name="bottom_navigation_bar_background_light">@color/devhour_primary</color>
     <color name="bottom_navigation_bar_background_dark">@color/devhour_primary</color>
 
-    <!-- ===================== -->
-    <!-- Bottom Navigation Bar -->
+    <!-- =============== -->
+    <!-- Boundary Anchor -->
 
-    <color name="bottom_navigation_bar_text_color_light">@color/devhour_white</color>
-    <color name="bottom_navigation_bar_text_color_dark">@color/devhour_white</color>
+    <color name="boundary_anchor_background_light">@color/devhour_primary</color>
+    <color name="boundary_anchor_background_dark">@color/devhour_primary</color>
+
+    <!-- ================ -->
+    <!-- Map View Compass -->
+
+    <color name="map_view_compass_needle_north_light">@color/devhour_blood_orange</color>
+    <color name="map_view_compass_needle_north_dark">@color/devhour_blood_orange</color>
+
+    <color name="map_view_compass_needle_south_light">@color/devhour_white</color>
+    <color name="map_view_compass_needle_south_dark">@color/devhour_white</color>
+
+    <!-- =================== -->
+    <!-- Country Code Picker -->
+
+    <color name="country_code_picker_background_dark">@color/devhour_black</color>
+    <color name="country_code_picker_background_light">@color/devhour_black</color>
+
+    <!-- =============== -->
+    <!-- Deployment View -->
+
+    <color name="deployment_view_background_under_light">@color/devhour_primary_translucent</color>
+    <color name="deployment_view_background_over_light">@color/devhour_primary</color>
+    <color name="deployment_view_background_under_dark">@color/devhour_primary_translucent</color>
+    <color name="deployment_view_background_over_dark">@color/devhour_primary</color>
 
     <!-- ========= -->
     <!-- Edit Text -->
 
     <color name="edit_text_background_light">@color/devhour_grey</color>
     <color name="edit_text_background_dark">@color/devhour_grey</color>
+
+    <!-- =========== -->
+    <!-- Edit Button -->
+
+    <color name="edit_button_color_light">@color/devhour_primary</color>
+    <color name="edit_button_color_dark">@color/devhour_primary</color>
+    <color name="edit_button_background_color_light">@color/devhour_transparent</color>
+    <color name="edit_button_background_color_dark">@color/devhour_transparent</color>
+
+    <!-- ============== -->
+    <!-- Indicator View -->
+
+    <color name="indicator_background_color_light">@color/devhour_primary</color>
+    <color name="indicator_background_color_dark">@color/devhour_primary</color>
+
+    <!-- ============== -->
+    <!-- Indicator Item -->
+
+    <color name="indicator_item_background_color_light">@color/devhour_primary</color>
+    <color name="indicator_item_background_color_dark">@color/devhour_primary</color>
+
+    <!-- ===================== -->
+    <!-- Horizontal Slider Dot -->
+
+    <color name="horizontal_slider_dot_icon_color_light">@color/devhour_white</color>
+    <color name="horizontal_slider_dot_icon_color_dark">@color/devhour_white</color>
+
+    <!-- ============= -->
+    <!-- Landmark View -->
+
+    <color name="landmark_view_background_under_light">@color/devhour_green_translucent</color>
+    <color name="landmark_view_background_over_light">@color/devhour_green</color>
+    <color name="landmark_view_background_under_dark">@color/devhour_green_translucent</color>
+    <color name="landmark_view_background_over_dark">@color/devhour_green</color>
+
+    <!-- ================= -->
+    <!-- List Item Content -->
+
+    <color name="list_item_alert_content_background_color_light">@color/devhour_white</color>
+    <color name="list_item_alert_content_background_color_dark">@color/devhour_white</color>
+
+    <!-- =================== -->
+    <!-- List Item Indicator -->
+
+    <color name="list_item_indicator_background_color_light">@color/alert_new</color>
+    <color name="list_item_indicator_background_color_dark">@color/alert_new</color>
+
+    <!-- ================ -->
+    <!-- List Item Remove -->
+
+    <color name="list_item_remove_button_background_color_light">@color/devhour_blood_orange</color>
+    <color name="list_item_remove_button_background_color_dark">@color/devhour_blood_orange</color>
+
+    <!-- ================ -->
+    <!-- Landmark Display -->
+
+    <color name="landmark_display_background_light">@color/landmark</color>
+    <color name="landmark_display_background_dark">@color/landmark</color>
+
+    <!-- ================== -->
+    <!-- Phone Number Input -->
+
+    <color name="phone_number_input_background_light">@color/devhour_grey</color>
+    <color name="phone_number_input_background_dark">@color/devhour_grey</color>
+
+    <!-- =========== -->
+    <!-- Round Image -->
+
+    <color name="round_image_background_light">@color/devhour_primary</color>
+    <color name="round_image_background_dark">@color/devhour_primary</color>
+
+    <!-- =============== -->
+    <!-- Big Round Image -->
+
+    <color name="big_round_image_background_light">@color/devhour_primary</color>
+    <color name="big_round_image_background_dark">@color/devhour_primary</color>
+
+    <!-- ========== -->
+    <!-- Slider Dot -->
+
+    <color name="slider_dot_background_light">@color/devhour_primary</color>
+    <color name="slider_dot_background_dark">@color/devhour_primary</color>
+
+    <!-- ========== -->
+    <!-- Status Pip -->
+
+    <color name="status_pip_background_light">@color/alert_new</color>
+    <color name="status_pip_background_dark">@color/alert_new</color>
+
+    <!-- ================== -->
+    <!-- User Delete Button -->
+
+    <color name="user_delete_button_background_light">@color/devhour_blood_orange</color>
+    <color name="user_delete_button_background_dark">@color/devhour_blood_orange</color>
+
+    <!-- =================== -->
+    <!-- Vertical Slider Dot -->
+
+    <color name="vertical_slider_dot_icon_color_light">@color/devhour_white</color>
+    <color name="vertical_slider_dot_icon_color_dark">@color/devhour_white</color>
+
+    <!-- ======================================================================================= -->
+    <!-- Text                                                                                    -->
+
+    <!-- ============= -->
+    <!-- Action Button -->
+
+    <color name="action_button_text_color_light">@color/devhour_white</color>
+    <color name="action_button_text_color_dark">@color/devhour_white</color>
+
+    <!-- ===================== -->
+    <!-- Bottom Navigation Bar -->
+
+    <color name="bottom_navigation_bar_text_color_light">@color/devhour_white</color>
+    <color name="bottom_navigation_bar_text_color_dark">@color/devhour_white</color>
+
+    <!-- ======== -->
+    <!-- Checkbox -->
+
+    <color name="check_box_text_color_light">@color/devhour_black</color>
+    <color name="check_box_text_color_dark">@color/devhour_white</color>
+
+    <!-- =================== -->
+    <!-- Country Code Picker -->
+
+    <color name="country_code_picker_text_color_light">@color/devhour_white</color>
+    <color name="country_code_picker_text_color_dark">@color/devhour_white</color>
+
+    <!-- ========= -->
+    <!-- Edit Text -->
+
     <color name="edit_text_text_color_light">@color/devhour_black</color>
     <color name="edit_text_text_color_dark">@color/devhour_white</color>
     <color name="edit_text_hint_text_color_light">@color/devhour_black</color>
     <color name="edit_text_hint_text_color_dark">@color/devhour_white</color>
+
+    <!-- ========== -->
+    <!-- Error Text -->
+
+    <color name="error_text_text_color_light">@color/devhour_blood_orange</color>
+    <color name="error_text_text_color_dark">@color/devhour_blood_orange</color>
+
+    <!-- ============= -->
+    <!-- Grey Map View -->
+
+    <color name="grey_map_view_scale_bar_text_color_light">@color/devhour_black</color>
+    <color name="grey_map_view_scale_bar_text_color_dark">@color/devhour_black</color>
+    <color name="grey_map_view_scale_bar_primary_color_light">@color/devhour_black</color>
+    <color name="grey_map_view_scale_bar_primary_color_dark">@color/devhour_black</color>
+    <color name="grey_map_view_scale_bar_secondary_color_light">@color/devhour_white</color>
+    <color name="grey_map_view_scale_bar_secondary_color_dark">@color/devhour_white</color>
+
+    <!-- =============== -->
+    <!-- Create Map View -->
+
+    <color name="create_map_view_scale_bar_text_color_light">@color/devhour_black</color>
+    <color name="create_map_view_scale_bar_text_color_dark">@color/devhour_black</color>
+    <color name="create_map_view_scale_bar_primary_color_light">@color/devhour_black</color>
+    <color name="create_map_view_scale_bar_primary_color_dark">@color/devhour_black</color>
+    <color name="create_map_view_scale_bar_secondary_color_light">@color/devhour_white</color>
+    <color name="create_map_view_scale_bar_secondary_color_dark">@color/devhour_white</color>
+
+    <!-- ============== -->
+    <!-- Indicator View -->
+
+    <color name="indicator_text_color_light">@color/devhour_white</color>
+    <color name="indicator_text_color_dark">@color/devhour_white</color>
+
+    <!-- ======================== -->
+    <!-- List ItemCoordinate Text -->
+
+    <color name="list_item_coordinate_text_color_light">@color/devhour_primary</color>
+    <color name="list_item_coordinate_text_color_dark">@color/devhour_primary</color>
+
+    <!-- ============== -->
+    <!-- List Item Text -->
+
+    <color name="list_item_text_text_color_light">@color/devhour_black</color>
+    <color name="list_item_text_text_color_dark">@color/devhour_white</color>
+
+    <!-- ================== -->
+    <!-- List Item Category -->
+
+    <color name="list_item_category_text_text_color_light">@color/devhour_black</color>
+    <color name="list_item_category_text_text_color_dark">@color/devhour_white</color>
+
+    <!-- ================ -->
+    <!-- List Item Remove -->
+
+    <color name="list_item_remove_button_text_color_light">@color/devhour_black</color>
+    <color name="list_item_remove_button_text_color_dark">@color/devhour_black</color>
+
+    <!-- ========== -->
+    <!-- List Title -->
+
+    <color name="list_title_text_color_light">@color/devhour_black</color>
+    <color name="list_title_text_color_dark">@color/devhour_white</color>
+
+    <!-- ================= -->
+    <!-- Navigation Header -->
+
+    <color name="navigation_header_name_text_color_light">@color/devhour_black</color>
+    <color name="navigation_header_name_text_color_dark">@color/devhour_white</color>
+    <color name="navigation_header_title_text_color_light">@color/devhour_black</color>
+    <color name="navigation_header_title_text_color_dark">@color/devhour_white</color>
+
+    <!-- =============== -->
+    <!-- Navigation View -->
+
+    <color name="navigation_view_item_text_color_light">@color/devhour_black</color>
+    <color name="navigation_view_item_text_color_dark">@color/devhour_white</color>
+
+    <!-- ============== -->
+    <!-- Paragraph Text -->
+
+    <color name="paragraph_text_color_light">@color/devhour_black</color>
+    <color name="paragraph_text_color_dark">@color/devhour_white</color>
+
+    <!-- ================== -->
+    <!-- Phone Number Input -->
+
+    <color name="phone_number_input_text_color_light">@color/devhour_black</color>
+    <color name="phone_number_input_text_color_dark">@color/devhour_white</color>
+    <color name="phone_number_input_hint_text_color_light">@color/devhour_black</color>
+    <color name="phone_number_input_hint_text_color_dark">@color/devhour_white</color>
+
+    <!-- ============ -->
+    <!-- Radio Button -->
+
+    <color name="radio_button_text_color_light">@color/devhour_black</color>
+    <color name="radio_button_text_color_dark">@color/devhour_white</color>
 
     <!-- ======== -->
     <!-- Subtitle -->
@@ -107,22 +387,223 @@
     <color name="text_button_text_color_light">@color/devhour_primary</color>
     <color name="text_button_text_color_dark">@color/devhour_primary</color>
 
+    <!-- ===== -->
+    <!-- Title -->
+
+    <color name="title_text_color_light">@color/devhour_black</color>
+    <color name="title_text_color_dark">@color/devhour_white</color>
+
+    <!-- ======= -->
+    <!-- Toolbar -->
+
+    <color name="toolbar_background_light">@color/devhour_white</color>
+    <color name="toolbar_background_dark">@color/devhour_black</color>
+    <color name="toolbar_title_text_color_light">@color/devhour_black</color>
+    <color name="toolbar_title_text_color_dark">@color/devhour_white</color>
+
+    <!-- ======================================================================================= -->
+    <!-- Icon                                                                                    -->
+
+    <!-- ==================== -->
+    <!-- Boundary Anchor View -->
+
+    <color name="boundary_anchor_icon_color_light">@color/devhour_white</color>
+    <color name="boundary_anchor_icon_color_dark">@color/devhour_white</color>
+
+    <!-- ====================== -->
+    <!-- Horizontal Slider View -->
+
+    <color name="view_horizontal_slider_dot_icon_color">@color/devhour_black</color>
+
+    <!-- ============== -->
+    <!-- Indicator View -->
+
+    <color name="view_indicator_icon_color_light">@color/devhour_white</color>
+    <color name="view_indicator_icon_color_dark">@color/devhour_white</color>
+    <color name="view_indicator_item_attention_icon_color_light">@color/devhour_white</color>
+    <color name="view_indicator_item_attention_icon_color_dark">@color/devhour_white</color>
+    <color name="view_indicator_item_important_icon_color_light">@color/devhour_white</color>
+    <color name="view_indicator_item_important_icon_color_dark">@color/devhour_white</color>
+    <color name="view_indicator_item_urgent_icon_color_light">@color/devhour_white</color>
+    <color name="view_indicator_item_urgent_icon_color_dark">@color/devhour_white</color>
+    <color name="view_indicator_item_severe_icon_color_light">@color/devhour_white</color>
+    <color name="view_indicator_item_severe_icon_color_dark">@color/devhour_white</color>
+
+    <!-- ================== -->
+    <!-- Landmark Drop View -->
+
+    <color name="view_landmark_drop_view_icon_color_light">@color/devhour_white</color>
+    <color name="view_landmark_drop_view_icon_color_dark">@color/devhour_white</color>
+
+    <!-- ================ -->
+    <!-- Navigation Icons -->
+
+    <color name="navigation_icon_alert_light">@color/devhour_white</color>
+    <color name="navigation_icon_deployment_light">@color/devhour_white</color>
+    <color name="navigation_icon_landmark_light">@color/devhour_white</color>
+    <color name="navigation_icon_map_light">@color/devhour_white</color>
+    <color name="navigation_icon_alert_dark">@color/devhour_white</color>
+    <color name="navigation_icon_deployment_dark">@color/devhour_white</color>
+    <color name="navigation_icon_landmark_dark">@color/devhour_white</color>
+    <color name="navigation_icon_map_dark">@color/devhour_white</color>
+
+    <!-- =============== -->
+    <!-- Navigation View -->
+
+    <color name="navigation_view_item_icon_color_light">@color/devhour_primary</color>
+    <color name="navigation_view_item_icon_color_dark">@color/devhour_primary</color>
+
+    <!-- ================ -->
+    <!-- Navigation Icons -->
+
+    <color name="menu_icon_contacts_light">@color/devhour_primary</color>
+    <color name="menu_icon_create_map_light">@color/devhour_yellow</color>
+    <color name="menu_icon_maps_light">@color/devhour_purple</color>
+    <color name="menu_icon_sign_out_light">@color/devhour_blood_orange</color>
+    <color name="menu_icon_contacts_dark">@color/devhour_primary</color>
+    <color name="menu_icon_create_map_dark">@color/devhour_yellow</color>
+    <color name="menu_icon_maps_dark">@color/devhour_purple</color>
+    <color name="menu_icon_sign_out_dark">@color/devhour_blood_orange</color>
+
+    <!-- ======= -->
+    <!-- Toolbar -->
+
+    <color name="toolbar_icon_button_tint_light">#FFd8d8d8</color>
+    <color name="toolbar_icon_button_tint_dark">#FFd8d8d8</color>
+
+    <!-- ==================== -->
+    <!-- Vertical Slider View -->
+
+    <color name="view_vertical_slider_dot_icon_color">@color/devhour_black</color>
+
+    <!-- ======================================================================================= -->
+    <!-- Miscellaneous                                                                           -->
+
+    <!-- ================ -->
+    <!-- Boundary Definer -->
+
+    <color name="boundary_definer_shadow_light">@color/devhour_smoke_translucent</color>
+    <color name="boundary_definer_shadow_dark">@color/devhour_smoke_translucent</color>
+
+    <!-- =============== -->
+    <!-- Coordinate View -->
+
+    <color name="coordinate_vertical_line_light">@color/devhour_primary</color>
+    <color name="coordinate_horizontal_line_light">@color/devhour_primary</color>
+
+    <!-- =================== -->
+    <!-- Country Code Picker -->
+
+    <color name="country_code_picker_arrow_color_light">@color/devhour_blood_orange</color>
+    <color name="country_code_picker_arrow_color_dark">@color/devhour_blood_orange</color>
+    <color name="country_code_picker_content_color_light">@color/devhour_white</color>
+    <color name="country_code_picker_content_color_dark">@color/devhour_white</color>
+
+    <!-- =========================== -->
+    <!-- Vertical Slider Active Line -->
+
+    <color name="horizontal_slider_active_line_color_light">@color/devhour_indigo</color>
+    <color name="horizontal_slider_active_line_color_dark">@color/devhour_indigo</color>
+
+    <!-- =========================== -->
+    <!-- Vertical Slider Active Line -->
+
+    <color name="horizontal_slider_inactive_line_color_light">@color/devhour_indigo_damp</color>
+    <color name="horizontal_slider_inactive_line_color_dark">@color/devhour_indigo_damp</color>
+
+    <!-- ================= -->
+    <!-- Map Object Detail -->
+
+    <color name="map_object_detail_background_light">@color/devhour_white</color>
+    <color name="map_object_detail_background_dark">@color/devhour_black</color>
+
+    <!-- ======== -->
+    <!-- Map View -->
+
+    <color name="map_view_coordinate_vertical_line_color_light">@color/devhour_primary</color>
+    <color name="map_view_coordinate_vertical_line_color_dark">@color/devhour_primary</color>
+    <color name="map_view_coordinate_horizontal_line_color_light">@color/devhour_primary</color>
+    <color name="map_view_coordinate_horizontal_line_color_dark">@color/devhour_primary</color>
+
+    <!-- =========================== -->
+    <!-- Vertical Slider Active Line -->
+
+    <color name="vertical_slider_active_line_color_light">@color/devhour_indigo</color>
+    <color name="vertical_slider_active_line_color_dark">@color/devhour_indigo</color>
+
+    <!-- =========================== -->
+    <!-- Vertical Slider Active Line -->
+
+    <color name="vertical_slider_inactive_line_color_light">@color/devhour_indigo_damp</color>
+    <color name="vertical_slider_inactive_line_color_dark">@color/devhour_indigo_damp</color>
+
+    <!-- ============ -->
+    <!-- Radio Button -->
+
+    <color name="radio_button_tint_light">@color/devhour_primary</color>
+    <color name="radio_button_tint_dark">@color/devhour_primary</color>
+
     <!-- =========== -->
     <!-- Text Button -->
 
     <color name="text_button_background_color_light">@color/devhour_transparent</color>
     <color name="text_button_background_color_dark">@color/devhour_transparent</color>
 
+    <!-- ======================================================================================= -->
+    <!-- Type                                                                                    -->
+
+    <!-- ========== -->
+    <!-- Deployment -->
+
+    <color name="deployment">@color/devhour_primary</color>
+    <color name="person">@color/devhour_indigo_damp</color>
+
+    <!-- ====== -->
+    <!-- Alerts -->
+
+    <color name="alert_flag">@color/devhour_primary</color>
+    <color name="alert_attention">#6666FF</color>
+    <color name="alert_urgent">#FFCE76</color>
+    <color name="alert_severe">#FF6666</color>
+
+    <color name="alert_flag_background">#EDF2FF</color>
+    <color name="alert_attention_background">#F2F2FF</color>
+    <color name="alert_urgent_background">#FFF6E5</color>
+    <color name="alert_severe_background">#FFEEEF</color>
+
+    <color name="alert_new">#4E84FF</color>
+    <color name="alert_dispatched">#6666FF</color>
+    <color name="alert_in_progress">#FFA500</color>
+    <color name="alert_resolved">#66B366</color>
+    <color name="alert_archived">#616976</color>
+
+    <!-- ======== -->
+    <!-- Landmark -->
+
+    <color name="landmark_flag">@color/devhour_green</color>
+    <color name="landmark_flag_background">#FBF8E2</color>
+
+    <!-- ======= -->
+    <!-- Generic -->
+
+    <color name="landmark">@color/devhour_yellow</color>
+    <color name="accessibility">#5F71CC</color>
+    <color name="security">#8497A8</color>
+    <color name="sanitation">#658CB2</color>
+    <color name="health">#A8CD5F</color>
+    <color name="medical">#E55C5C</color>
+    <color name="navigation">#A79A5E</color>
+    <color name="infrastructure">#F28F5F</color>
+    <color name="services">#F2BE61</color>
+    <color name="financial">#5DA65D</color>
+    <color name="transportation">#845FCD</color>
+    <color name="social">#AA61AA</color>
+    <color name="food_drink">#CD5F84</color>
+
     <!-- ====== -->
     <!-- Switch -->
 
     <color name="switch_text_color_light">@color/devhour_black</color>
-
-    <!-- ===== -->
-    <!-- Title -->
-
-    <color name="title_text_color_light">@color/devhour_black</color>
-    <color name="title_text_color_dark">@color/devhour_white</color>
 
     <!-- ================= -->
     <!-- User Map Dot View -->
@@ -146,14 +627,6 @@
     <!-- ============= -->
     <!-- Action Button -->
 
-    <color name="action_button_text_color_light">@color/devhour_white</color>
-    <color name="action_button_text_color_dark">@color/devhour_white</color>
-
-    <!-- ============= -->
-    <!-- Action Button -->
-
-    <color name="action_button_background_light">@color/devhour_primary</color>
-    <color name="action_button_background_dark">@color/devhour_primary</color>
     <color name="user">@color/devhour_primary</color>
     <color name="restaurant">@color/devhour_forest_green</color>
 

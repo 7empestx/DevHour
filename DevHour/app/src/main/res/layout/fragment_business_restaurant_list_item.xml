@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.DevHour.ListItem"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/list_item_alert_remove_button"
+        style="@style/Theme.DevHour.ListItemRemoveButton"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/list_item_alert_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/list_item_alert_content"
+        style="@style/Theme.DevHour.ListItemContent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/list_item_alert_type_icon"
+            style="@style/Theme.DevHour.RoundImage"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/list_item_alert_label"
+            style="@style/Theme.DevHour.ListItemText"
+            android:layout_marginStart="12dp"
+            android:text="Alert"
+            android:textSize="16dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/list_item_alert_type_icon"
+            app:layout_constraintTop_toTopOf="@id/list_item_alert_type_icon"/>
+
+        <TextView
+            android:id="@+id/list_item_alert_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum"
+            android:textSize="16dp"
+            android:textColor="@color/devhour_black"
+            app:layout_constraintStart_toStartOf="@+id/list_item_alert_label"
+            app:layout_constraintBottom_toBottomOf="@id/list_item_alert_type_icon"/>
+
+        <TextView
+            android:id="@+id/list_item_alert_time_stamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/devhour_black"
+            android:text="12:45pm"
+            app:layout_constraintStart_toStartOf="@id/list_item_alert_description"
+            app:layout_constraintTop_toBottomOf="@id/list_item_alert_type_icon"/>
+
+        <TextView
+            android:id="@+id/list_item_alert_coordinate"
+            android:text="GD128"
+            android:textSize="16dp"
+            android:textColor="@color/devhour_black"
+            android:fontFamily="@font/ibmplexsans_semibold"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/list_item_alert_time_stamp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_item_alert_time_stamp"/>
+
+        <TextView
+            android:id="@+id/list_item_alert_status_text"
+            android:text="In Progress"
+            android:textSize="16dp"
+            android:textColor="@color/devhour_black"
+            android:layout_marginEnd="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/list_item_alert_label"/>
+
+        <ImageView
+            android:id="@+id/list_item_alert_edit_button"
+            style="@style/Theme.DevHour.ListEditButton"
+            app:layout_constraintEnd_toEndOf="@id/list_item_alert_status_text"
+            app:layout_constraintBottom_toBottomOf="@id/list_item_alert_coordinate"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

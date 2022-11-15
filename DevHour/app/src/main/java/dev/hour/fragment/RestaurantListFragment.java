@@ -13,8 +13,6 @@ import java.util.List;
 
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
-import dev.hour.contracts.UserContract;
-import dev.hour.restaurant.Restaurant;
 import dev.hour.view.list.RestaurantListAdapter;
 
 public class RestaurantListFragment extends Fragment {
@@ -23,7 +21,7 @@ public class RestaurantListFragment extends Fragment {
     public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
         this.restaurantListAdapter = new RestaurantListAdapter();
         final ViewGroup layout = (ViewGroup) lf.inflate(R.layout.fragment_restaurant_list, vg, false);
-        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_item_RV);
+        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_restaurant_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(restaurantListAdapter);
         return layout;

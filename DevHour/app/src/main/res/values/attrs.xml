@@ -14,11 +14,34 @@
     <attr name="actionButtonElevation" format="dimension"/>
 
     <!-- =========== -->
+    <!-- Add Picture -->
+
+    <attr name="addPictureBackground" format="reference"/>
+    <attr name="addPictureLayoutHeight" format="dimension"/>
+    <attr name="addPictureLayoutWidth" format="dimension"/>
+
+    <!-- ========== -->
+    <!-- Alert View -->
+
+    <attr name="alertViewBackground" format="reference"/>
+
+    <!-- ============= -->
+    <!-- Alert Display -->
+
+    <attr name="alertDisplayLayoutWidth" format="dimension"/>
+    <attr name="alertDisplayLayoutHeight" format="dimension"/>
+    <attr name="alertDisplayBackground" format="reference"/>
+    <attr name="alertDisplayElevation" format="dimension"/>
+    <attr name="alertDisplayPadding" format="dimension"/>
+    <attr name="alertDisplaySource" format="reference"/>
+
+    <!-- =========== -->
     <!-- Back Button -->
 
     <attr name="backButtonWidth" format="dimension"/>
     <attr name="backButtonHeight" format="dimension"/>
     <attr name="backButtonSource" format="reference"/>
+    <attr name="backButtonColor" format="color"/>
     <attr name="backButtonTintMode" format="reference"/>
     <attr name="backButtonBackground" format="reference"/>
 
@@ -28,11 +51,93 @@
     <attr name="bottomNavigationBackground" format="color" />
     <attr name="bottomNavigationItemTextColor" format="color"/>
 
-    <!-- ================ -->
-    <!-- Navigation Icons -->
+    <!-- ======== -->
+    <!-- Checkbox -->
 
-    <attr name="bottomNavigationIconLocation" format="reference"/>
-    <attr name="bottomNavigationIconList" format="reference"/>
+    <attr name="checkBoxLayoutHeight" format="dimension"/>
+    <attr name="checkBoxTextColor" format="color"/>
+
+    <!-- ========== -->
+    <!-- Create Map -->
+
+    <attr name="createMapHorizontalSliderMarginTop" format="dimension"/>
+    <attr name="createMapHorizontalSliderMarginBottom" format="dimension"/>
+    <attr name="createMapHorizontalSliderHeight" format="dimension"/>
+    <attr name="createMapHorizontalSliderStartValue" format="float"/>
+    <attr name="createMapHorizontalSliderEndValue" format="float"/>
+    <attr name="createMapHorizontalSliderInitialValue" format="float"/>
+    <attr name="createMapHorizontalSliderDotWidth" format="dimension"/>
+    <attr name="createMapHorizontalSliderDotHeight" format="dimension"/>
+    <attr name="createMapHorizontalSliderDotElevation" format="dimension"/>
+    <attr name="createMapHorizontalSliderDotIcon" format="reference"/>
+    <attr name="createMapHorizontalSliderDotIconColor" format="color"/>
+    <attr name="createMapHorizontalSliderDotBackground" format="reference"/>
+    <attr name="createMapHorizontalSliderActiveLineColor" format="color"/>
+    <attr name="createMapHorizontalSliderActiveLineThickness" format="dimension"/>
+    <attr name="createMapHorizontalSliderInactiveLineColor" format="color"/>
+    <attr name="createMapHorizontalSliderInactiveLineThickness" format="dimension"/>
+    <attr name="createMapVerticalSliderMarginLeft" format="dimension"/>
+    <attr name="createMapVerticalSliderMarginRight" format="dimension"/>
+    <attr name="createMapVerticalSliderWidth" format="dimension"/>
+    <attr name="createMapVerticalSliderStartValue" format="float"/>
+    <attr name="createMapVerticalSliderEndValue" format="float"/>
+    <attr name="createMapVerticalSliderInitialValue" format="float"/>
+    <attr name="createMapVerticalSliderDotWidth" format="dimension"/>
+    <attr name="createMapVerticalSliderDotHeight" format="dimension"/>
+    <attr name="createMapVerticalSliderDotElevation" format="dimension"/>
+    <attr name="createMapVerticalSliderDotIcon" format="reference"/>
+    <attr name="createMapVerticalSliderDotIconColor" format="color"/>
+    <attr name="createMapVerticalSliderDotBackground" format="reference"/>
+    <attr name="createMapVerticalSliderActiveLineColor" format="color"/>
+    <attr name="createMapVerticalSliderActiveLineThickness" format="dimension"/>
+    <attr name="createMapVerticalSliderInactiveLineColor" format="color"/>
+    <attr name="createMapVerticalSliderInactiveLineThickness" format="dimension"/>
+    <attr name="createMapMapViewVerticalLineThickness" format="dimension"/>
+    <attr name="createMapMapViewVerticalLineColor" format="color"/>
+    <attr name="createMapMapViewHorizontalLineThickness" format="dimension"/>
+    <attr name="createMapMapViewHorizontalLineColor" format="color"/>
+    <attr name="createMapMapViewShadow" format="color"/>
+    <attr name="createMapBoundaryAnchorLeftBackground" format="reference"/>
+    <attr name="createMapBoundaryAnchorLeftIcon" format="reference"/>
+    <attr name="createMapBoundaryAnchorLeftIconColor" format="color"/>
+    <attr name="createMapBoundaryAnchorLeftWidth" format="dimension"/>
+    <attr name="createMapBoundaryAnchorLeftHeight" format="dimension"/>
+    <attr name="createMapBoundaryAnchorLeftElevation" format="dimension"/>
+    <attr name="createMapBoundaryAnchorRightBackground" format="reference"/>
+    <attr name="createMapBoundaryAnchorRightIcon" format="reference"/>
+    <attr name="createMapBoundaryAnchorRightIconColor" format="color"/>
+    <attr name="createMapBoundaryAnchorRightWidth" format="dimension"/>
+    <attr name="createMapBoundaryAnchorRightHeight" format="dimension"/>
+    <attr name="createMapBoundaryAnchorRightElevation" format="dimension"/>
+    <attr name="createMapBoundaryAnchorTopBackground" format="reference"/>
+    <attr name="createMapBoundaryAnchorTopIcon" format="reference"/>
+    <attr name="createMapBoundaryAnchorTopIconColor" format="color"/>
+    <attr name="createMapBoundaryAnchorTopWidth" format="dimension"/>
+    <attr name="createMapBoundaryAnchorTopHeight" format="dimension"/>
+    <attr name="createMapBoundaryAnchorTopElevation" format="dimension"/>
+    <attr name="createMapBoundaryAnchorBottomBackground" format="reference"/>
+    <attr name="createMapBoundaryAnchorBottomIcon" format="reference"/>
+    <attr name="createMapBoundaryAnchorBottomIconColor" format="color"/>
+    <attr name="createMapBoundaryAnchorBottomWidth" format="dimension"/>
+    <attr name="createMapBoundaryAnchorBottomHeight" format="dimension"/>
+    <attr name="createMapBoundaryAnchorBottomElevation" format="dimension"/>
+    <attr name="createMapScaleBarHeight" format="dimension"/>
+    <attr name="createMapScaleBarBorderWidth" format="float"/>
+    <attr name="createMapScaleBarTextSize" format="dimension"/>
+    <attr name="createMapScaleBarTextBorder" format="dimension"/>
+    <attr name="createMapScaleBarTextColor" format="color"/>
+    <attr name="createMapScaleBarPrimaryColor" format="color"/>
+    <attr name="createMapScaleBarSecondaryColor" format="color"/>
+
+    <!-- =================== -->
+    <!-- Country Code Picker -->
+
+    <attr name="countryCodePickerLayoutHeight" format="dimension"/>
+    <attr name="countryCodePickerLayoutWidth" format="dimension"/>
+    <attr name="countryCodePickerBackground" format="reference"/>
+    <attr name="countryCodePickerTextColor" format="color"/>
+    <attr name="countryCodePickerArrowColor" format="color"/>
+    <attr name="countryCodePickerContentColor" format="color"/>
 
     <!-- ======== -->
     <!-- EditText -->
@@ -59,6 +164,232 @@
 
     <attr name="fragmentPadding" format="dimension"/>
 
+    <!-- ============ -->
+    <!-- GreyMap View -->
+
+    <attr name="greyMapViewAttentionItemCircumference" format="dimension"/>
+    <attr name="greyMapViewAttentionItemBackground" format="reference"/>
+    <attr name="greyMapViewAttentionItemIcon" format="reference"/>
+    <attr name="greyMapViewAttentionItemIconColor" format="reference"/>
+    <attr name="greyMapViewFlagItemCircumference" format="dimension"/>
+    <attr name="greyMapViewFlagItemBackground" format="reference"/>
+    <attr name="greyMapViewFlagItemIcon" format="reference"/>
+    <attr name="greyMapViewFlagItemIconColor" format="reference"/>
+    <attr name="greyMapViewUrgentItemCircumference" format="dimension"/>
+    <attr name="greyMapViewUrgentItemBackground" format="reference"/>
+    <attr name="greyMapViewUrgentItemIcon" format="reference"/>
+    <attr name="greyMapViewUrgentItemIconColor" format="reference"/>
+    <attr name="greyMapViewSevereItemCircumference" format="dimension"/>
+    <attr name="greyMapViewSevereItemBackground" format="reference"/>
+    <attr name="greyMapViewSevereItemIcon" format="reference"/>
+    <attr name="greyMapViewSevereItemIconColor" format="reference"/>
+    <attr name="greyMapViewIndicatorMenuTopGutter" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuBottomGutter" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuLeftGutter" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuRightGutter" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorHorizontalGutter" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorVerticalGutter" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorCircumference" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorElevation" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorTextSize" format="dimension"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorTextColor" format="color"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorBackground" format="reference"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorIcon" format="reference"/>
+    <attr name="greyMapViewIndicatorMenuIndicatorIconColor" format="color"/>
+    <attr name="greyMapViewIndicatorMenuStartAngle" format="float"/>
+    <attr name="greyMapViewHorizontalLineColor" format="color"/>
+    <attr name="greyMapViewVerticalLineColor" format="color"/>
+    <attr name="greyMapViewHorizontalLineThickness" format="dimension"/>
+    <attr name="greyMapViewVerticalLineThickness" format="dimension"/>
+    <attr name="greyMapViewMapStyle" format="string"/>
+    <attr name="greyMapViewScaleBarHeight" format="dimension"/>
+    <attr name="greyMapViewScaleBarBorderWidth" format="float"/>
+    <attr name="greyMapViewScaleBarTextSize" format="dimension"/>
+    <attr name="greyMapViewScaleBarTextBorder" format="float"/>
+    <attr name="greyMapViewScaleBarTextColor" format="color"/>
+    <attr name="greyMapViewScaleBarPrimaryColor" format="color"/>
+    <attr name="greyMapViewScaleBarSecondaryColor" format="color"/>
+
+    <!-- ================ -->
+    <!-- Landmark Display -->
+
+    <attr name="landmarkDisplayLayoutWidth" format="dimension"/>
+    <attr name="landmarkDisplayLayoutHeight" format="dimension"/>
+    <attr name="landmarkDisplayBackground" format="reference"/>
+    <attr name="landmarkDisplayElevation" format="dimension"/>
+    <attr name="landmarkDisplayPadding" format="dimension"/>
+    <attr name="landmarkDisplaySource" format="reference"/>
+
+    <!-- ================ -->
+    <!-- List Edit Button -->
+
+    <attr name="editButtonLayoutHeight" format="dimension"/>
+    <attr name="editButtonLayoutWidth" format="dimension"/>
+    <attr name="editButtonDrawable" format="reference"/>
+    <attr name="editButtonTintMode" format="reference"/>
+    <attr name="editButtonColor" format="color"/>
+    <attr name="editButtonBackground" format="reference"/>
+    <attr name="editButtonElevation" format="dimension"/>
+
+    <!-- ============== -->
+    <!-- List Indicator -->
+
+    <attr name="listItemIndicatorWidth" format="dimension"/>
+    <attr name="listItemIndicatorBackground" format="reference"/>
+
+    <!-- ========= -->
+    <!-- List Item -->
+
+    <attr name="listItemLayoutHeight" format="dimension"/>
+    <attr name="listItemPaddingStart" format="dimension"/>
+    <attr name="listItemPaddingEnd" format="dimension"/>
+
+    <!-- ==================== -->
+    <!-- List Item Coordinate -->
+
+    <attr name="listItemCoordinateLayoutHeight" format="dimension"/>
+    <attr name="listItemCoordinateLayoutMarginStart" format="dimension"/>
+    <attr name="listItemCoordinateLayoutMarginEnd" format="dimension"/>
+    <attr name="listItemCoordinateTextColor" format="color"/>
+    <attr name="listItemCoordinateTextSize" format="dimension"/>
+
+    <!-- ========== -->
+    <!-- List Title -->
+
+    <attr name="listTitleTextColor" format="color"/>
+    <attr name="listTitleFontFamily" format="reference"/>
+    <attr name="listTitleTextSize" format="dimension"/>
+    <attr name="listTitleLayoutHeight" format="dimension"/>
+
+    <!-- ================== -->
+    <!-- List Category Text -->
+
+    <attr name="listItemCategoryTextTextSize" format="dimension"/>
+    <attr name="listItemCategoryTextMarginStart" format="dimension"/>
+    <attr name="listItemCategoryTextMarginEnd" format="dimension"/>
+    <attr name="listItemCategoryTextTextColor" format="color"/>
+    <attr name="listItemCategoryTextFontFamily" format="reference"/>
+
+    <!-- ========= -->
+    <!-- List Text -->
+
+    <attr name="listItemTextTextSize" format="dimension"/>
+    <attr name="listItemTextMarginStart" format="dimension"/>
+    <attr name="listItemTextMarginEnd" format="dimension"/>
+    <attr name="listItemTextTextColor" format="color"/>
+    <attr name="listItemTextFontFamily" format="reference"/>
+
+    <!-- ================== -->
+    <!-- List Item Category -->
+
+    <attr name="listItemCategoryHeight" format="dimension"/>
+
+    <!-- ============== -->
+    <!-- List Check Box -->
+
+    <attr name="listCheckBoxLayoutHeight" format="dimension"/>
+    <attr name="listCheckBoxLayoutWidth" format="dimension"/>
+    <attr name="listCheckBoxMarginEnd" format="dimension"/>
+
+    <!-- ======================= -->
+    <!-- List Item Remove Button -->
+
+    <attr name="listItemRemoveButtonLayoutHeight" format="dimension"/>
+    <attr name="listItemRemoveButtonLayoutWidth" format="dimension"/>
+    <attr name="listItemRemoveButtonElevation" format="dimension"/>
+    <attr name="listItemRemoveButtonBackground" format="reference"/>
+    <attr name="listItemRemoveButtonText" format="reference"/>
+    <attr name="listItemRemoveButtonTextAllCaps" format="boolean"/>
+    <attr name="listItemRemoveButtonTextColor" format="color"/>
+
+    <!-- ================= -->
+    <!-- List Item Content -->
+
+    <attr name="listItemContentBackground" format="color"/>
+    <attr name="listItemContentHeight" format="dimension"/>
+    <attr name="listItemContentElevation" format="dimension"/>
+
+    <!-- ========== -->
+    <!-- Menu Icons -->
+
+    <attr name="menuIconContacts" format="reference"/>
+    <attr name="menuIconCreateMap" format="reference"/>
+    <attr name="menuIconMaps" format="reference"/>
+    <attr name="menuIconSignOut" format="reference"/>
+
+    <!-- ================= -->
+    <!-- Navigation Header -->
+
+    <attr name="navigationHeaderUserNameTextColor" format="color"/>
+    <attr name="navigationHeaderUserTitleTextColor" format="color"/>
+
+    <!-- ================ -->
+    <!-- Navigation Icons -->
+
+    <attr name="bottomNavigationIconAlert" format="reference"/>
+    <attr name="bottomNavigationIconDeployment" format="reference"/>
+    <attr name="bottomNavigationIconLandmark" format="reference"/>
+    <attr name="bottomNavigationIconMap" format="reference"/>
+
+    <!-- =============== -->
+    <!-- Navigation View -->
+
+    <attr name="navigationViewItemTextColor" format="color"/>
+    <attr name="navigationViewItemIconTint" format="color"/>
+    <attr name="navigationViewMenu" format="reference"/>
+    <attr name="navigationViewHeader" format="reference"/>
+
+    <!-- ============== -->
+    <!-- Paragraph Text -->
+
+    <attr name="paragraphTextTextColor" format="color"/>
+
+    <!-- ================== -->
+    <!-- Phone Number Input -->
+
+    <attr name="phoneNumberInputLayoutHeight" format="dimension"/>
+    <attr name="phoneNumberInputBackground" format="reference"/>
+    <attr name="phoneNumberInputPaddingStart" format="dimension"/>
+    <attr name="phoneNumberInputPaddingEnd" format="dimension"/>
+    <attr name="phoneNumberInputTextColor" format="color"/>
+    <attr name="phoneNumberInputHintTextColor" format="color"/>
+
+    <!-- ============ -->
+    <!-- Progress Bar -->
+
+    <attr name="progressBarLayoutWidth" format="dimension"/>
+    <attr name="progressBarLayoutHeight" format="dimension"/>
+
+    <!-- ============ -->
+    <!-- Radio Button -->
+
+    <attr name="radioButtonLayoutHeight" format="dimension"/>
+    <attr name="radioButtonTint" format="color"/>
+    <attr name="radioButtonMarginTop" format="dimension"/>
+    <attr name="radioButtonFontFamily" format="reference"/>
+    <attr name="radioButtonTextColor" format="color"/>
+
+    <!-- ========== -->
+    <!-- Status Pip -->
+
+    <attr name="statusPipCircumference" format="dimension"/>
+    <attr name="statusPipBackground" format="reference"/>
+    <attr name="statusPipElevation" format="dimension"/>
+
+    <!-- =========== -->
+    <!-- Round Image -->
+
+    <attr name="roundImageLayoutHeight" format="dimension"/>
+    <attr name="roundImageLayoutWidth" format="dimension"/>
+    <attr name="roundImageBackground" format="reference"/>
+
+    <!-- =============== -->
+    <!-- Big Round Image -->
+
+    <attr name="bigRoundImageLayoutHeight" format="dimension"/>
+    <attr name="bigRoundImageLayoutWidth" format="dimension"/>
+    <attr name="bigRoundImageBackground" format="reference"/>
+
     <!-- ======== -->
     <!-- Subtitle -->
 
@@ -77,20 +408,44 @@
     <attr name="textButtonElevation" format="dimension"/>
 
     <!-- ===== -->
-    <!-- Switch -->
-
-    <attr name="switchTextSize" format="dimension"/>
-    <attr name="switchTextColor" format="color"/>
-    <attr name="switchFontFamily" format="reference"/>
-    <attr name="switchPaddingHorizontal" format="dimension"/>
-
-    <!-- ===== -->
     <!-- Title -->
 
     <attr name="titleTextColor" format="color"/>
     <attr name="titleFontFamily" format="reference"/>
     <attr name="titleTextSize" format="dimension"/>
 
+    <!-- ======= -->
+    <!-- Toolbar -->
 
+    <attr name="toolbarBackground" format="reference"/>
+
+    <!-- =================== -->
+    <!-- Toolbar Icon Button -->
+
+    <attr name="toolbarIconButtonTint" format="color"/>
+
+    <!-- ======================== -->
+    <!-- Toolbar Title Text Color -->
+
+    <attr name="toolbarTitleTextColor" format="color"/>
+    <attr name="toolbarTitleTextSize" format="dimension"/>
+    <attr name="toolbarTitleText" format="string"/>
+    <attr name="toolbarTitleTextLetterSpacing" format="float"/>
+    <attr name="toolbarTitleTextAllCaps" format="boolean"/>
+    <attr name="toolbarTitleFontFamily" format="reference"/>
+
+    <!-- ================ -->
+    <!-- Navigation Icons -->
+
+    <attr name="bottomNavigationIconLocation" format="reference"/>
+    <attr name="bottomNavigationIconList" format="reference"/>
+
+    <!-- ===== -->
+    <!-- Switch -->
+
+    <attr name="switchTextSize" format="dimension"/>
+    <attr name="switchTextColor" format="color"/>
+    <attr name="switchFontFamily" format="reference"/>
+    <attr name="switchPaddingHorizontal" format="dimension"/>
 
 </resources>
