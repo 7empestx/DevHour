@@ -16,7 +16,7 @@ import dev.hour.contracts.RestaurantContract;
 import dev.hour.view.list.BusinessRestaurantListAdapter;
 import dev.hour.view.list.CustomerRestaurantListAdapter;
 
-public class BusinessRestaurantListFragment extends Fragment implements RestaurantContract.View {
+public class BusinessRestaurantListFragment extends Fragment implements RestaurantContract.View, View.OnClickListener {
 
     /// --------------
     /// Static Members
@@ -26,7 +26,8 @@ public class BusinessRestaurantListFragment extends Fragment implements Restaura
     /// --------------
     /// Private Fields
 
-    private BusinessRestaurantListAdapter businessRestaurantListAdapter;
+    private BusinessRestaurantListAdapter                       businessRestaurantListAdapter   ;
+    private RestaurantContract.Presenter.InteractionListener    listener                        ;
 
 
     @Override
@@ -40,9 +41,13 @@ public class BusinessRestaurantListFragment extends Fragment implements Restaura
                 layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
         final RecyclerView  recyclerView    =
                 layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
+        final View          floatingActionButton =
+                layout.findViewById(R.id.fragment_business_restaurant_list_add_button);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(this.businessRestaurantListAdapter);
+
+        floatingActionButton.setOnClickListener(this);
 
         return layout;
 
@@ -55,6 +60,32 @@ public class BusinessRestaurantListFragment extends Fragment implements Restaura
             this.businessRestaurantListAdapter = new BusinessRestaurantListAdapter();
 
         this.businessRestaurantListAdapter.setRestaurantLists(restaurants);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        final int id = view.getId();
+
+        switch(id) {
+
+            case R.id.fragment_business_restaurant_list_add_button:
+
+                if(this.listener != null)
+                    this.listener.onAddRestaurantRequest();
+
+                break;
+
+            default: break;
+
+        }
+
+    }
+
+    public void setInteractionListener(final RestaurantContract.Presenter.InteractionListener listener) {
+
+        this.listener = listener;
 
     }
 

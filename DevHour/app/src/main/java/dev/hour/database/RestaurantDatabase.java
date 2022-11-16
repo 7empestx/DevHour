@@ -1,6 +1,5 @@
 package dev.hour.database;
 
-import static software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType.USER_PASSWORD_AUTH;
 
 import android.util.Log;
 
@@ -10,17 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import dev.hour.authenticator.Authenticator;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
-import software.amazon.awssdk.auth.credentials.AnonymousCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbUpdateBehavior;
 import software.amazon.awssdk.http.SdkHttpClient;
-import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClient;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthRequest;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;

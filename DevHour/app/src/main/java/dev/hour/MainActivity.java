@@ -47,6 +47,7 @@ import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 
 public class MainActivity extends AppCompatActivity implements
         AuthenticatorContract.Presenter.InteractionListener,
+        RestaurantContract.Presenter.InteractionListener,
         NavigationBarView.OnItemSelectedListener,
         MapView.SearchListener,
         MealContract.Menu.View.AddIngredientListener,
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements
         this.restaurantDatabase.setCredentials(credentials);
         this.userPresenter.setUser(userId);
 
-        // Retreive the user
+        // Retrieve the user
         final UserContract.User user = this.userPresenter.getUser(userId);
         final String userType = user.getType();
 
@@ -223,6 +224,16 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         showLoginFragment();
+
+    }
+
+    /// ---------------------------------------------------
+    /// RestaurantContract.Presenter.InteractionListener
+
+    @Override
+    public void onAddRestaurantRequest() {
+
+        showBusinessAddRestaurantFragment();
 
     }
 
@@ -435,7 +446,11 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new BusinessRestaurantListFragment();
             transaction.add(R.id.activity_main, fragment, BusinessRestaurantListFragment.TAG);
 
+            ((BusinessRestaurantListFragment) fragment).setInteractionListener(this);
+
         } else if(fragment.isAdded()) {
+
+            ((BusinessRestaurantListFragment) fragment).setInteractionListener(this);
 
         }
 

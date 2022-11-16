@@ -23,6 +23,14 @@ public interface RestaurantContract {
         void invalidate();
         void search(String query);
 
+        interface InteractionListener {
+
+            void onAddRestaurantRequest();
+            void onCreateRestaurantRequest(final Map<String, String> data);
+
+
+        }
+
     }
 
     interface View {

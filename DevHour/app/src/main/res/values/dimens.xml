@@ -767,7 +767,7 @@
     <!-- Login Fragment -->
 
     <dimen name="fragment_login_username_input_margin_top">72dp</dimen>
-    <dimen name="fragment_login_email_input_margin_top">72dp</dimen>
+    <dimen name="fragment_login_email_input_margin_top">36dp</dimen>
     <dimen name="fragment_login_password_input_margin_top">8dp</dimen>
     <dimen name="fragment_login_sign_in_button_margin_top">16dp</dimen>
     <dimen name="fragment_login_no_account_sub_title_margin_top">16dp</dimen>
