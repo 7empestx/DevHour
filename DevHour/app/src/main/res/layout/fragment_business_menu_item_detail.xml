@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Fragment">
 
-<<<<<<< HEAD
-=======
     <ImageButton
-        android:id="@+id/fragment_menu_item_detail_back_button"
+        android:id="@+id/fragment_business_menu_item_detail_back_button"
         style="@style/Theme.DevHour.BackButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/back_button_color_light"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        tools:ignore="SpeakableTextPresentCheck" />
 
->>>>>>> daa60528 (Update Layout)
     <TextView
-        android:id="@+id/list_business_menu_item_title"
+        android:id="@+id/fragment_business_menu_item_detail_title"
         style="@style/Theme.DevHour.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_item_detail_back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp"
         android:text="Menu Item Details"/>
 
     <TextView
-        android:id="@+id/list_business_menu_item_name_subtitle"
+        android:id="@+id/fragment_business_menu_item_detail_name_subtitle"
         style="@style/Theme.DevHour.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/list_business_menu_item_title"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_item_detail_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Item Name"/>
 
     <EditText
-        android:id="@+id/list_business_menu_item_name_input"
+        android:id="@+id/fragment_business_menu_item_detail_name_input"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.EditText"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_business_menu_item_name_subtitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_item_detail_name_subtitle"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_business_menu_item_detail_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -56,21 +56,21 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_business_menu_item_name_input"
-        app:layout_constraintBottom_toTopOf="@+id/list_business_menu_item_tag_button"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_item_detail_name_input"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_business_menu_item_detail_tag_button"/>
 
     <Button
-        android:id="@+id/list_business_menu_item_tag_button"
+        android:id="@+id/fragment_business_menu_item_detail_tag_button"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.ActionButton"
         android:layout_marginBottom="8dp"
         android:text="Tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/list_business_menu_item_confirm_button"/>
+        app:layout_constraintBottom_toTopOf="@+id/fragment_business_menu_item_detail_confirm_button"/>
 
     <Button
-        android:id="@+id/list_business_menu_item_confirm_button"
+        android:id="@+id/fragment_business_menu_item_detail_confirm_button"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.ActionButton"
         android:layout_marginTop="8dp"
@@ -79,6 +79,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

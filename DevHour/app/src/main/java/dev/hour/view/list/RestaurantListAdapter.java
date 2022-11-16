@@ -19,7 +19,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     @NonNull
     @Override
     public RestaurantListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_view,parent,false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_customer_restaurant_list_item,parent,false);
         return new RestaurantListItemViewHolder(view);
     }
 
@@ -29,23 +29,23 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         final RestaurantContract.Restaurant restaurant = (RestaurantLists == null)?null : RestaurantLists.get(position);
         if(restaurant != null){
             for(int i = 0; i < view.getChildCount(); i++) {
-                if(view.getChildAt(i).getId() == R.id.list_item_text_view_Food_Name){
+                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_title){
                     final TextView Foodview = (TextView) view.getChildAt(i);
                     Foodview.setText(restaurant.getName()); //Binding of text box
                 }
 
-                if(view.getChildAt(i).getId() == R.id.list_item_text_view_Category_Name){
+                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_address_line_1){
                     final TextView Foodview = (TextView) view.getChildAt(i);
                     Foodview.setText(restaurant.getName()); //Binding of text box
                 }
 
-                if(view.getChildAt(i).getId() == R.id.list_item_text_view_Mileage){
+                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_distance){
                     final TextView Foodview = (TextView) view.getChildAt(i);
                     Foodview.setText(restaurant.getName()); //Binding of text box
                 }
                 //obtain image after grabbing restaurant info
 
-                if(view.getChildAt(i).getId() == R.id.list_item_image_view) {
+                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_image) {
                     /*
                     final TextView Foodview = (TextView) view.getChildAt(i);
                     Foodview.setText(restaurant.getName()); //Binding of image box

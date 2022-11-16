@@ -219,8 +219,11 @@
        <!-- <item name="android:tintMode">?attr/backButtonTintMode</item> -->
 =======
         <item name="android:tint">?attr/backButtonColor</item>
+<<<<<<< HEAD
         <item name="android:tintMode">?attr/backButtonTintMode</item>
 >>>>>>> ca8f8ba29f55f474aec39c0d92b7e1104880dbcd
+=======
+>>>>>>> 62f8f401 (tidy)
         <item name="android:background">?attr/backButtonBackground</item>
 
     </style>
@@ -291,7 +294,6 @@
         <item name="android:layout_width">?attr/editButtonLayoutWidth</item>
         <item name="android:layout_height">?attr/editButtonLayoutHeight</item>
         <item name="android:src">?attr/editButtonDrawable</item>
-        <item name="android:tintMode">?attr/editButtonTintMode</item>
         <item name="android:tint">?attr/editButtonColor</item>
         <item name="android:elevation">?attr/editButtonElevation</item>
         <item name="android:background">?attr/editButtonBackground</item>

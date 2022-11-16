@@ -20,8 +20,8 @@ public class RestaurantListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
         this.restaurantListAdapter = new RestaurantListAdapter();
-        final ViewGroup layout = (ViewGroup) lf.inflate(R.layout.fragment_restaurant_list, vg, false);
-        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.list_restaurant_view);
+        final ViewGroup layout = (ViewGroup) lf.inflate(R.layout.fragment_customer_restaurant_list, vg, false);
+        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(restaurantListAdapter);
         return layout;

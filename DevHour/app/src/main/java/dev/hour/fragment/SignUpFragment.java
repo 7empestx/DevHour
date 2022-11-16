@@ -56,7 +56,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                              final Bundle savedInstanceState) {
 
         final View                layout              =
-                layoutInflater.inflate(R.layout.fragment_create_user, container, false);
+                layoutInflater.inflate(R.layout.fragment_user_sign_up, container, false);
         final Button              createAccountButton =
                 layout.findViewById(R.id.fragment_sign_up_create_account);
         final View                createAccountClose  =

@@ -56,7 +56,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
                              final Bundle savedInstanceState) {
 
 
-        final View                layout              = layoutInflater.inflate(R.layout.fragment_login, container, false);
+        final View                layout              = layoutInflater.inflate(R.layout.fragment_user_login, container, false);
         final ConstraintLayout    mLayout             = layout.findViewById(R.id.fragment_login_layout);
         final TextView            createUserButton    = layout.findViewById(R.id.fragment_login_create_account);
         final TextView            resetButton         = layout.findViewById(R.id.fragment_login_reset);

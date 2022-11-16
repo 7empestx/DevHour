@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +41,7 @@ public class ProfileFragment extends Fragment implements
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View layout = layoutInflater.inflate(R.layout.fragment_profile, container, false);
+        final View layout = layoutInflater.inflate(R.layout.fragment_user_profile, container, false);
 
         firstNameTextView   = layout.findViewById(R.id.fragment_profile_first_name);
         lastNameTextView    = layout.findViewById(R.id.fragment_profile_last_name);
