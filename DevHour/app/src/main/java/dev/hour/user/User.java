@@ -11,6 +11,7 @@ public class User implements UserContract.User, MapObjectContract.MapObject {
     private String id           ;
     private String firstName    ;
     private String lastName     ;
+    private String type         ;
     private double longitude    ;
     private double latitude     ;
 
@@ -43,6 +44,13 @@ public class User implements UserContract.User, MapObjectContract.MapObject {
     }
 
     @Override
+    public String getType() {
+
+        return this.type;
+
+    }
+
+    @Override
     public String getId() {
 
         return this.id;
@@ -67,6 +75,13 @@ public class User implements UserContract.User, MapObjectContract.MapObject {
     public void setLongitude(final double longitude) {
 
         this.longitude = longitude;
+
+    }
+
+    @Override
+    public void setType(final String type) {
+
+        this.type = type;
 
     }
 

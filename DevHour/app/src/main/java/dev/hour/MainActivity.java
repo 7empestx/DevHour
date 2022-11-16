@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements
      * @param credentials The credentials to pass to the interaction listener
      */
     @Override
-    public void onAuthenticated(final Map<String, String> credentials, String userId) {
+    public void onAuthenticated(final Map<String, String> credentials, final String userId) {
 
         // Set the credentials
         this.userDatabase.setCredentials(credentials);
@@ -173,9 +173,13 @@ public class MainActivity extends AppCompatActivity implements
         this.restaurantDatabase.setCredentials(credentials);
         this.userPresenter.setUser(userId);
 
-        showMapFragment();
-        //showBusinessRestaurantListFragment();
-        //showBusinessMenuItemDetail();
+        // Retreive the user
+        final UserContract.User user = this.userPresenter.getUser(userId);
+        final String userType = user.getType();
+
+        if(userType.equals("customer")) showMapFragment();
+
+        else showBusinessRestaurantListFragment();
 
     }
 
@@ -782,4 +786,5 @@ public class MainActivity extends AppCompatActivity implements
     public void onTextChange(String query) {
 
     }
+
 }
