@@ -40,8 +40,16 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
     }
 
     @Override
-    public UserContract.User getUser() {
+    public UserContract.User getUser(final String userId) {
+
+        if((this.user == null) || (!this.user.getId().equals(userId))) {
+
+            this.user = this.database.getUser(userId);
+
+        }
+
         return this.user;
+
     }
 
     @Override

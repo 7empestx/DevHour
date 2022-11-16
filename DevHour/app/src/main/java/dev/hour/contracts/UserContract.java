@@ -19,7 +19,7 @@ public interface UserContract {
         void invalidate();
         void setUserLocation(final double longitude, final double latitude);
         void setUser(final String userId);
-        UserContract.User getUser();
+        UserContract.User getUser(final String userId);
 
     }
 
@@ -45,11 +45,13 @@ public interface UserContract {
         String getId();
         String getFirstName();
         String getLastName();
+        String getType();
         double getLongitude();
         double getLatitude();
 
         void setFirstName(final String firstName);
         void setLastName(final String lastName);
+        void setType(final String type);
         void setLongitude(final double longitude);
         void setLatitude(double latitude);
 

@@ -16,6 +16,9 @@ import dev.hour.contracts.RestaurantContract;
 import dev.hour.view.list.CustomerRestaurantListAdapter;
 
 public class RestaurantListFragment extends Fragment {
+
+    public final static String TAG = "RestaurantListFragment";
+
     private CustomerRestaurantListAdapter restaurantListAdapter;
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
