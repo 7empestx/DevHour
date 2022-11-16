@@ -11,9 +11,18 @@ public interface MealContract {
         String getName();
         Map<String, Ingredient> getIngredients();
 
+        interface View {
+
+            void setIngredients(final Map<String, Ingredient> ingredients);
+
+        }
+
     }
 
     enum Ingredient {
+        Potato,
+        Salt,
+
 
     }
 

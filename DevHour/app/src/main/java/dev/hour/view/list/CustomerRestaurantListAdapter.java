@@ -25,35 +25,16 @@ public class CustomerRestaurantListAdapter extends RecyclerView.Adapter<Customer
 
     @Override
     public void onBindViewHolder(@NonNull CustomerRestaurantListItemViewHolder holder, int position) {
+
         final ViewGroup view = (ViewGroup) holder.itemView;
         final RestaurantContract.Restaurant restaurant = (RestaurantLists == null)?null : RestaurantLists.get(position);
-        if(restaurant != null){
-            for(int i = 0; i < view.getChildCount(); i++) {
-                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_title){
-                    final TextView Foodview = (TextView) view.getChildAt(i);
-                    Foodview.setText(restaurant.getName()); //Binding of text box
-                }
 
-                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_address_line_1){
-                    final TextView Foodview = (TextView) view.getChildAt(i);
-                    Foodview.setText(restaurant.getName()); //Binding of text box
-                }
+        final TextView title    = view.findViewById(R.id.fragment_customer_restaurant_list_item_title);
+        final TextView address1 = view.findViewById(R.id.fragment_customer_restaurant_list_item_address_line_1);
+        final TextView address2 = view.findViewById(R.id.fragment_customer_restaurant_list_item_address_line_2);
 
-                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_distance){
-                    final TextView Foodview = (TextView) view.getChildAt(i);
-                    Foodview.setText(restaurant.getName()); //Binding of text box
-                }
-                //obtain image after grabbing restaurant info
+        title.setText(restaurant.getName());
 
-                if(view.getChildAt(i).getId() == R.id.fragment_customer_restaurant_list_item_image) {
-                    /*
-                    final TextView Foodview = (TextView) view.getChildAt(i);
-                    Foodview.setText(restaurant.getName()); //Binding of image box
-                     delete comment later for when we have images populated
-                     */
-                }
-            }
-        }
     }
 
     public void setRestaurantLists(List <RestaurantContract.Restaurant> Lists){

@@ -27,7 +27,7 @@ import dev.hour.contracts.UserContract;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
-import dev.hour.fragment.BusinessMenuItemDetail;
+import dev.hour.fragment.BusinessMenuItemDetailFragment;
 import dev.hour.fragment.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
@@ -215,12 +215,12 @@ public class MainActivity extends AppCompatActivity implements
         final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
 
         Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessMenuItemDetail.TAG);
+                fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
 
         if(fragment == null) {
 
-            fragment = new BusinessMenuItemDetail();
-            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetail.TAG);
+            fragment = new BusinessMenuItemDetailFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetailFragment.TAG);
 
         } else if(fragment.isAdded()) {
 

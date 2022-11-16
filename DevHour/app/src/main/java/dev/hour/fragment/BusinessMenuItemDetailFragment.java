@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import dev.hour.R;
 
-public class BusinessMenuItemDetail extends Fragment {
+public class BusinessMenuItemDetailFragment extends Fragment {
     public final static String TAG = "BusinessMenuItemDetail";
 
     @Override

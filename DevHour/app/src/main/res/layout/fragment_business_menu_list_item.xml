@@ -49,12 +49,12 @@
             app:layout_constraintBottom_toBottomOf="@id/fragment_business_menu_list_item_image"/>
 
         <TextView
-            android:id="@+id/fragment_business_restaurant_list_item_details_text_2"
+            android:id="@+id/fragment_business_menu_list_item_details_text_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/devhour_black"
-            android:text="Las Vegas NV, 89108"
+            android:text="Lorem ipsum"
             app:layout_constraintStart_toStartOf="@+id/fragment_business_menu_list_item_details_text_1"
             app:layout_constraintTop_toBottomOf="@id/fragment_business_menu_list_item_image"/>
 
