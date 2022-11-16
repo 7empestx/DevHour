@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
@@ -102,6 +103,13 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                 final Button createAccountButton =
                         this.requireView().findViewById(R.id.fragment_sign_up_create_account);
 
+                // grab a handle to radio group (line 103)
+                final RadioButton userTypeButton =
+                        this.requireView().findViewById(R.id.customer_selection_button);
+
+                final String userType =(userTypeButton.isChecked())? "customer" : "business";
+
+
                 createAccountButton.setEnabled(false);
 
                 final Map<String, String> input = new HashMap<>();
@@ -112,9 +120,17 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                 input.put("name",       getFirstName() + getLastName());
                 input.put("first",      getFirstName());
                 input.put("last",       getLastName());
+                input.put("type",       userType);
 
                 if(this.signUpListener != null)
                     this.signUpListener.onReceivedSignUpInput(input);
+
+
+                // assign the type based on button selection (string "customer")
+
+                // place into input, (lines 109-114)
+
+
 
             case R.id.fragment_sign_up_back_button:
 

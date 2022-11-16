@@ -26,7 +26,7 @@
         <item name="android:layout_height">?attr/backButtonHeight</item>
         <item name="android:layout_width">?attr/backButtonWidth</item>
         <item name="android:src">?attr/backButtonSource</item>
-        <item name="android:tintMode">?attr/backButtonTintMode</item>
+       <!-- <item name="android:tintMode">?attr/backButtonTintMode</item> -->
         <item name="android:background">?attr/backButtonBackground</item>
 
     </style>
