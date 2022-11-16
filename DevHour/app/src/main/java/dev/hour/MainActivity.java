@@ -27,10 +27,13 @@ import dev.hour.contracts.UserContract;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
+import dev.hour.fragment.BusinessAddRestaurantFragment;
 import dev.hour.fragment.BusinessMenuItemDetailFragment;
+import dev.hour.fragment.BusinessMenuListFragment;
 import dev.hour.fragment.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
+import dev.hour.fragment.RestaurantListFragment;
 import dev.hour.fragment.SignUpFragment;
 import dev.hour.fragment.BusinessRestaurantListFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
@@ -176,72 +179,6 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void showBusinessRestaurantListFragment() {
-
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessRestaurantListFragment.TAG);
-
-        if(fragment == null) {
-
-            fragment = new BusinessRestaurantListFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessRestaurantListFragment.TAG);
-
-        } else if(fragment.isAdded()) {
-
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
-
-        transaction.show(fragment);
-
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        hideBottomNavigationBar();
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
-
-    }
-
-    private void showBusinessMenuItemDetail() {
-
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
-
-        if(fragment == null) {
-
-            fragment = new BusinessMenuItemDetailFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetailFragment.TAG);
-
-        } else if(fragment.isAdded()) {
-
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
-
-        transaction.show(fragment);
-
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        hideBottomNavigationBar();
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
-
-    }
-
     /**
      * Invoked when the user is not authenticated
      * @param message The error message
@@ -296,9 +233,14 @@ public class MainActivity extends AppCompatActivity implements
 
         Fragment          fragment        = fragmentManager.findFragmentByTag(LoginFragment.TAG);
 
-        if(fragment != null)
-            lastFragment = fragment;
+        if(fragment == null) {
 
+            fragment = fragmentManager.findFragmentByTag(LoginFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
 
         if(fragment == null) {
 
@@ -317,6 +259,192 @@ public class MainActivity extends AppCompatActivity implements
                 lastFragment = fragment;
 
         }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(ProfileFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(RestaurantListFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(BusinessMenuListFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+        if(fragment == null) {
+
+            fragment = fragmentManager.findFragmentByTag(BusinessRestaurantListFragment.TAG);
+
+            if(fragment != null)
+                lastFragment = fragment;
+
+        }
+
+    }
+
+    private void showBusinessAddRestaurantFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessAddRestaurantFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessMenuItemDetailFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessMenuItemDetailFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetailFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessMenuListFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessMenuListFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessMenuListFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessMenuListFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessRestaurantListFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessRestaurantListFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessRestaurantListFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessRestaurantListFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
 
     }
 
