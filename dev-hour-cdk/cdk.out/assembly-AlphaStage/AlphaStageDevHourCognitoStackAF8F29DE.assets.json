@@ -1,7 +1,21 @@
 {
   "version": "21.0.0",
   "files": {
-    "baa18ad91101985dcbd9b381a05cb26cb1a553f8ff19a383957c464f4360e902": {
+    "bd950219f54d95d429e90cdff3d933da9610675743d76ca15d5d7ea2585c6b6b": {
+      "source": {
+        "path": "../asset.bd950219f54d95d429e90cdff3d933da9610675743d76ca15d5d7ea2585c6b6b.zip",
+        "packaging": "file"
+      },
+      "destinations": {
+        "060498623801-us-west-1": {
+          "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
+          "objectKey": "bd950219f54d95d429e90cdff3d933da9610675743d76ca15d5d7ea2585c6b6b.zip",
+          "region": "us-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
+        }
+      }
+    },
+    "7a89c1164a2bd54083f2852c2184e4d9acbcb9159ed8202927b13f8a2873f151": {
       "source": {
         "path": "AlphaStageDevHourCognitoStackAF8F29DE.template.json",
         "packaging": "file"
@@ -9,7 +23,7 @@
       "destinations": {
         "060498623801-us-west-1": {
           "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
-          "objectKey": "baa18ad91101985dcbd9b381a05cb26cb1a553f8ff19a383957c464f4360e902.json",
+          "objectKey": "7a89c1164a2bd54083f2852c2184e4d9acbcb9159ed8202927b13f8a2873f151.json",
           "region": "us-west-1",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
         }

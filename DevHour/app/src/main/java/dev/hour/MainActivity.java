@@ -27,10 +27,12 @@ import dev.hour.contracts.UserContract;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
+import dev.hour.fragment.BusinessMenuItemDetail;
 import dev.hour.fragment.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
 import dev.hour.fragment.SignUpFragment;
+import dev.hour.fragment.BusinessRestaurantListFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
@@ -169,6 +171,74 @@ public class MainActivity extends AppCompatActivity implements
         this.userPresenter.setUser(userId);
 
         showMapFragment();
+        //showBusinessRestaurantListFragment();
+        //showBusinessMenuItemDetail();
+
+    }
+
+    private void showBusinessRestaurantListFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessRestaurantListFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessRestaurantListFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessRestaurantListFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessMenuItemDetail() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessMenuItemDetail.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessMenuItemDetail();
+            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetail.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
 
     }
 
@@ -199,10 +269,14 @@ public class MainActivity extends AppCompatActivity implements
      * @param data The user data to update
      */
     @Override
-    public void onSignUp(final Map<String, String> data) {
+    public void onSignUp(final Map<String, String> data, final Map<String, String> credentials) {
 
-        if(this.userDatabase != null)
+        if(this.userDatabase != null) {
+
+            this.userDatabase.setCredentials(credentials);
             this.userDatabase.updateUser(data);
+
+        }
 
         showLoginFragment();
 
