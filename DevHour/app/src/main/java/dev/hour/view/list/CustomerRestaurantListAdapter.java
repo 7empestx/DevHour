@@ -13,18 +13,18 @@ import java.util.List;
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
 
-public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantListItemViewHolder> {
+public class CustomerRestaurantListAdapter extends RecyclerView.Adapter<CustomerRestaurantListAdapter.CustomerRestaurantListItemViewHolder> {
     private List<RestaurantContract.Restaurant> RestaurantLists;
 
     @NonNull
     @Override
-    public RestaurantListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomerRestaurantListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_customer_restaurant_list_item,parent,false);
-        return new RestaurantListItemViewHolder(view);
+        return new CustomerRestaurantListItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RestaurantListItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomerRestaurantListItemViewHolder holder, int position) {
         final ViewGroup view = (ViewGroup) holder.itemView;
         final RestaurantContract.Restaurant restaurant = (RestaurantLists == null)?null : RestaurantLists.get(position);
         if(restaurant != null){
@@ -67,9 +67,12 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         return (this.RestaurantLists == null)?0: this.RestaurantLists.size();
     }
 
-    class RestaurantListItemViewHolder extends RecyclerView.ViewHolder{
-     RestaurantListItemViewHolder(View view){
-         super(view);
-     }
+    class CustomerRestaurantListItemViewHolder extends RecyclerView.ViewHolder{
+
+        CustomerRestaurantListItemViewHolder(View view){
+            super(view);
+        }
+
     }
+
 }

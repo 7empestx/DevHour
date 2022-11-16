@@ -215,15 +215,7 @@
         <item name="android:layout_height">?attr/backButtonHeight</item>
         <item name="android:layout_width">?attr/backButtonHeight</item>
         <item name="android:src">?attr/backButtonSource</item>
-<<<<<<< HEAD
-       <!-- <item name="android:tintMode">?attr/backButtonTintMode</item> -->
-=======
         <item name="android:tint">?attr/backButtonColor</item>
-<<<<<<< HEAD
-        <item name="android:tintMode">?attr/backButtonTintMode</item>
->>>>>>> ca8f8ba29f55f474aec39c0d92b7e1104880dbcd
-=======
->>>>>>> 62f8f401 (tidy)
         <item name="android:background">?attr/backButtonBackground</item>
 
     </style>

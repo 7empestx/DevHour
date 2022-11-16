@@ -13,13 +13,13 @@ import java.util.List;
 
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
-import dev.hour.view.list.RestaurantListAdapter;
+import dev.hour.view.list.CustomerRestaurantListAdapter;
 
 public class RestaurantListFragment extends Fragment {
-    private RestaurantListAdapter restaurantListAdapter;
+    private CustomerRestaurantListAdapter restaurantListAdapter;
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
-        this.restaurantListAdapter = new RestaurantListAdapter();
+        this.restaurantListAdapter = new CustomerRestaurantListAdapter();
         final ViewGroup layout = (ViewGroup) lf.inflate(R.layout.fragment_customer_restaurant_list, vg, false);
         final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
