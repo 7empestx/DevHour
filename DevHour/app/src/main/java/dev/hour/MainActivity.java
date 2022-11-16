@@ -48,7 +48,10 @@ import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 public class MainActivity extends AppCompatActivity implements
         AuthenticatorContract.Presenter.InteractionListener,
         NavigationBarView.OnItemSelectedListener,
-        MapView.SearchListener {
+        MapView.SearchListener,
+        MealContract.Menu.View.AddIngredientListener,
+        MealContract.Menu.View.TagListener,
+        MealContract.Menu.View.ConfirmListener {
 
     /// --------------
     /// Private Fields
@@ -787,4 +790,18 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    public void onReceivedAddIngredientInput(String input) {
+
+    }
+
+    @Override
+    public void onReceivedTagInput(String input) {
+
+    }
+
+    @Override
+    public void onReceivedConfirmInput() {
+
+    }
 }

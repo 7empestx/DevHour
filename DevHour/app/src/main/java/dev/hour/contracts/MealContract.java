@@ -93,6 +93,24 @@ public interface MealContract {
 
             void setMenu(final Menu menu);
 
+            interface AddIngredientListener {
+
+                void onReceivedAddIngredientInput(final String input);
+
+            }
+
+            interface TagListener {
+
+                void onReceivedTagInput(final String input);
+
+            }
+
+            interface ConfirmListener {
+
+                void onReceivedConfirmInput();
+
+            }
+
         }
 
     }
