@@ -5,21 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageButton
-        android:id="@+id/fragment_menu_item_detail_back_button"
-        style="@style/Theme.DevHour.BackButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/back_button_color_light"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <TextView
         android:id="@+id/list_business_menu_item_title"
         style="@style/Theme.DevHour.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_menu_item_detail_back_button"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp"
