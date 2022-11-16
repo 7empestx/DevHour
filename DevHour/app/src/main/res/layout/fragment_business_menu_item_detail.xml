@@ -5,6 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+<<<<<<< HEAD
+=======
+    <ImageButton
+        android:id="@+id/fragment_menu_item_detail_back_button"
+        style="@style/Theme.DevHour.BackButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/back_button_color_light"
+        tools:ignore="SpeakableTextPresentCheck"/>
+
+>>>>>>> daa60528 (Update Layout)
     <TextView
         android:id="@+id/list_business_menu_item_title"
         style="@style/Theme.DevHour.Title"
