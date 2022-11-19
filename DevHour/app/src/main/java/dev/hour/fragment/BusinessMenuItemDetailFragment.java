@@ -24,10 +24,6 @@ public class BusinessMenuItemDetailFragment extends Fragment implements View.OnC
     /// --------------
     /// Private Fields
 
-    private MealContract.Menu.View.AddIngredientListener addIngredientListener  ;
-    private MealContract.Menu.View.TagListener tagListener  ;
-    private MealContract.Menu.View.ConfirmListener confirmListener  ;
-
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
         final View layout = (View) lf.inflate(R.layout.fragment_business_menu_item_detail, vg, false);
@@ -55,9 +51,6 @@ public class BusinessMenuItemDetailFragment extends Fragment implements View.OnC
 
                 signInButton.setEnabled(false);
 
-                /// Notify the listener
-                if(this.addIngredientListener != null)
-                    this.addIngredientListener.onReceivedAddIngredientInput(input);
                 break;
             case R.id.fragment_business_menu_item_detail_tag_button:
 
@@ -66,9 +59,6 @@ public class BusinessMenuItemDetailFragment extends Fragment implements View.OnC
 
                 tagButton.setEnabled(false);
 
-                /// Notify the listener
-                if(this.tagListener != null)
-                    this.tagListener.onReceivedTagInput(input);
                 break;
 
             case R.id.fragment_business_menu_item_detail_confirm_button:
@@ -78,9 +68,6 @@ public class BusinessMenuItemDetailFragment extends Fragment implements View.OnC
 
                 confirmButton.setEnabled(false);
 
-                /// Notify the listener
-                if(this.confirmListener != null)
-                    this.confirmListener.onReceivedConfirmInput();
 
                 break;
             default:

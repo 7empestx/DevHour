@@ -73,43 +73,34 @@ public interface MealContract {
 
     interface Menu {
 
-        String getName();
-        List<Meal> getMeals();
+        String      getName();
+        List<Meal>  getMeals();
 
         interface Database {
 
-            List<Meal> getMenu();
+            List<Meal> getMenu(final String menuId);
 
         }
 
         interface Presenter {
 
             void setDatabase(final Database database);
+            void setMenu(final String menuId);
             void setView(final View view);
+
+            interface InteractionListener {
+
+                void onShowMenuRequest();
+                void onShowBusinessAddMenuMeal(final Map<String, Object> export);
+                void onShowBusinessAddMenuAddTag(final Map<String, Object> export);
+
+            }
 
         }
 
         interface View {
 
-            void setMenu(final Menu menu);
-
-            interface AddIngredientListener {
-
-                void onReceivedAddIngredientInput(final String input);
-
-            }
-
-            interface TagListener {
-
-                void onReceivedTagInput(final String input);
-
-            }
-
-            interface ConfirmListener {
-
-                void onReceivedConfirmInput();
-
-            }
+            void setMenu(final List<Meal> meals);
 
         }
 

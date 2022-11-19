@@ -16,8 +16,6 @@ public interface RestaurantContract {
                                                        final double latitude,
                                                        final double radius);
 
-
-
     }
 
     interface Presenter {
@@ -31,10 +29,11 @@ public interface RestaurantContract {
         interface InteractionListener {
 
             void onAddRestaurantRequest();
-            void onCreateRestaurantRequest(final Map<String, Object> data);
             void onShowBusinessRestaurantListRequest();
-            void onShowBusinessAddRestaurantImageRequest();
-            void onShowBusinessAddRestaurantTagRequest(final Map<String, String> tags);
+            void onCreateRestaurantRequest(final Map<String, Object> data);
+            void onShowBusinessAddRestaurantImageRequest(final Map<String, Object> export);
+            void onShowBusinessAddRestaurantTagRequest(final Map<String, Object> export);
+            void onRestaurantSelected(final Restaurant restaurant);
 
         }
 
@@ -42,7 +41,7 @@ public interface RestaurantContract {
 
     interface View {
 
-        void setRestaurants(final List <Restaurant> restaurants);
+        void setRestaurants(final List<Restaurant> restaurants);
 
     }
 
@@ -53,12 +52,14 @@ public interface RestaurantContract {
         double getLongitude();
         double getLatitude();
         int getPricing();
+        String getMenuId();
         String getAddress1();
         String getAddress2();
 
         void setId(final String id);
         void setName(final String name);
         void setPricing(final int pricing);
+        void setMenuId(final String menuId);
         void setAddress1(final String address1);
         void setAddress2(final String address2);
         void setLongitude(final double longitude);

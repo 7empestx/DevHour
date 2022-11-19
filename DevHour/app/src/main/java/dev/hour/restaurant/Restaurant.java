@@ -13,6 +13,7 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     private int     pricing     ;
     private String  address1    ;
     private String  address2    ;
+    private String  menuId      ;
     private double  longitude   ;
     private double  latitude    ;
 
@@ -42,7 +43,14 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public int getPricing(){
         return pricing;
     }
-    
+
+    @Override
+    public String getMenuId() {
+
+        return this.menuId;
+
+    }
+
     @Override
     public String getAddress1() {
 
@@ -85,6 +93,13 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public void setPricing(final int pricing) {
 
         this.pricing = pricing;
+
+    }
+
+    @Override
+    public void setMenuId(final String menuId) {
+
+        this.menuId = menuId;
 
     }
 

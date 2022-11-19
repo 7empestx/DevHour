@@ -8,9 +8,15 @@ import dev.hour.contracts.RestaurantContract;
 
 public class RestaurantPresenter implements RestaurantContract.Presenter {
 
+    /// --------------
+    /// Private Fields
+
     private RestaurantContract.Database         database    ;
     private RestaurantContract.View             view        ;
     private List<RestaurantContract.Restaurant> restaurants ;
+
+    /// ----------------------------
+    /// RestaurantContract.Presenter
 
     @Override
     public void setDatabase(RestaurantContract.Database database) {
@@ -29,6 +35,14 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     }
 
     @Override
+    public void createRestaurant(final Map<String, Object> data, final String ownerId) {
+
+        if(this.database != null)
+            this.database.createRestaurant(data, ownerId);
+
+    }
+
+    @Override
     public void setRestaurantsByTag(final String query) {
         if (this.database != null){
             List<RestaurantContract.Restaurant> restaurants= this.database.retrieveRestaurantsByTag(query);
@@ -36,14 +50,6 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
                 this.view.setRestaurants(restaurants);
             }
         }
-    }
-
-    @Override
-    public void createRestaurant(final Map<String, Object> data, final String ownerId) {
-
-        if(this.database != null)
-            this.database.createRestaurant(data, ownerId);
-
     }
 
     @Override

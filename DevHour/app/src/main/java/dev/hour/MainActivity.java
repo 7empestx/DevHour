@@ -51,10 +51,7 @@ public class MainActivity extends AppCompatActivity implements
         AuthenticatorContract.Presenter.InteractionListener,
         RestaurantContract.Presenter.InteractionListener,
         NavigationBarView.OnItemSelectedListener,
-        MapView.SearchListener,
-        MealContract.Menu.View.AddIngredientListener,
-        MealContract.Menu.View.TagListener,
-        MealContract.Menu.View.ConfirmListener {
+        MapView.SearchListener {
 
     /// --------------
     /// Private Fields
@@ -211,10 +208,9 @@ public class MainActivity extends AppCompatActivity implements
         this.userPresenter.setUser(userId);
 
         // Retrieve the user
-        final UserContract.User user        = this.userPresenter.getUser(userId)    ;
-        final String            userType    = user.getType()                        ;
+        final UserContract.User user = this.userPresenter.getUser(userId)    ;
 
-        if(userType.equals("customer")) showMapFragment();
+        if(user.getType().equals("customer")) showMapFragment();
 
         else {
 
@@ -277,6 +273,13 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onShowBusinessRestaurantListRequest() {
+
+        showBusinessRestaurantListFragment();
+
+    }
+
+    @Override
     public void onCreateRestaurantRequest(final Map<String, Object> data) {
 
         if(data != null) {
@@ -291,19 +294,32 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onShowBusinessAddRestaurantTagRequest(final Map<String, String> data) {
+    public void onShowBusinessAddRestaurantImageRequest(final Map<String, Object> export) {
 
     }
 
     @Override
-    public void onShowBusinessAddRestaurantImageRequest() {
+    public void onShowBusinessAddRestaurantTagRequest(final Map<String, Object> data) {
 
     }
 
     @Override
-    public void onShowBusinessRestaurantListRequest() {
+    public void onRestaurantSelected(final RestaurantContract.Restaurant restaurant) {
 
-        showBusinessRestaurantListFragment();
+        // TODO: MenuPresenter -> set Menu Id
+
+    }
+
+    /// ----------------------
+    /// MapView.SearchListener
+
+    @Override
+    public void onSearch(final String query) {
+        restaurantPresenter.setRestaurantsByTag(query);
+    }
+
+    @Override
+    public void onTextChange(final String query) {
 
     }
 
@@ -873,28 +889,4 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void onSearch(String query) {
-        restaurantPresenter.setRestaurantsByTag(query);
-    }
-
-    @Override
-    public void onTextChange(String query) {
-
-    }
-
-    @Override
-    public void onReceivedAddIngredientInput(String input) {
-
-    }
-
-    @Override
-    public void onReceivedTagInput(String input) {
-
-    }
-
-    @Override
-    public void onReceivedConfirmInput() {
-
-    }
 }

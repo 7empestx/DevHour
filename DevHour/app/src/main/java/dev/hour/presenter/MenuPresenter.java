@@ -13,6 +13,11 @@ public class MenuPresenter implements MealContract.Menu.Presenter {
     }
 
     @Override
+    public void setMenu(String menuId) {
+
+    }
+
+    @Override
     public void setView(MealContract.Menu.View view) {
 
     }

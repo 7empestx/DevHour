@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.util.List;
+
 import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.view.list.CustomerMenuListAdapter;
@@ -53,12 +55,12 @@ public final class CustomerMenuListFragment extends Fragment implements MealCont
     }
 
     @Override
-    public void setMenu(final MealContract.Menu menu) {
+    public void setMenu(List<MealContract.Meal> meals) {
 
         if (this.customerMenuListAdapter == null)
             this.customerMenuListAdapter = new CustomerMenuListAdapter();
 
-        this.customerMenuListAdapter.setMealsList(menu.getMeals());
+        this.customerMenuListAdapter.setMealsList(meals);
 
     }
 

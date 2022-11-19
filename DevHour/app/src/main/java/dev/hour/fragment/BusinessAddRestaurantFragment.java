@@ -29,13 +29,15 @@ public class BusinessAddRestaurantFragment extends Fragment implements
     /// Private Fields
 
     private RestaurantContract.Presenter.InteractionListener interactionListener    ;
-    private Map<String, String>                              tags                   ;
+    private Map<String, Object>                              tags                   ;
+    private Map<String, Object>                              image                  ;
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
                              final ViewGroup viewGroup, final Bundle bundle) {
 
-        tags = new HashMap<>();
+        tags    = new HashMap<>();
+        image   = new HashMap<>();
 
         final View layout =
                 layoutInflater.inflate(R.layout.fragment_business_add_restaurant, viewGroup, false);
@@ -87,8 +89,8 @@ public class BusinessAddRestaurantFragment extends Fragment implements
 
                 final List<String> tags = new ArrayList<>();
 
-                for(final Map.Entry<String, String> entry: this.tags.entrySet())
-                    tags.add(entry.getValue());
+                for(final Map.Entry<String, Object> entry: this.tags.entrySet())
+                    tags.add((String) entry.getValue());
 
                 data.put("tags", tags);
 
@@ -101,9 +103,7 @@ public class BusinessAddRestaurantFragment extends Fragment implements
 
                 if(this.interactionListener != null) {
 
-                    if(this.tags != null)
-                        this.tags = new HashMap<>();
-
+                    this.tags.clear();
                     this.interactionListener.onShowBusinessAddRestaurantTagRequest(this.tags);
 
                 }
@@ -112,8 +112,12 @@ public class BusinessAddRestaurantFragment extends Fragment implements
 
             case R.id.fragment_business_add_restaurant_image:
 
-                if(this.interactionListener != null)
-                    this.interactionListener.onShowBusinessAddRestaurantImageRequest();
+                if(this.interactionListener != null) {
+
+                    this.image.clear();
+                    this.interactionListener.onShowBusinessAddRestaurantImageRequest(this.image);
+
+                }
 
                 break;
 
