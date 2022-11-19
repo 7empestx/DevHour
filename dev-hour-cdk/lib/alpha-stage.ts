@@ -15,6 +15,7 @@ import { HostedZoneStack } from './route53-stack'
 import { CertificateStack } from './certificate-stack'
 import { InternetGatewayStack } from './internet-gateway-stack'
 import { Roles } from './roles'
+import { S3Stack } from './S3-stack'
 
 /// ----------------
 /// AlphaStage Props
@@ -46,6 +47,7 @@ export class AlphaStage extends Stage {
     private readonly hostedZoneStack:           HostedZoneStack ;
     private readonly internetGatewayStack:      InternetGatewayStack;
     private readonly certificateStack:          CertificateStack;
+    private readonly S3Stack:                   S3Stack         ;
 
     /// -----------
     /// Constructor
@@ -155,6 +157,27 @@ export class AlphaStage extends Stage {
             region:       Constants.Region,
         });
 
+        this.S3Stack = new S3Stack(this, { 
+            account:      props.account,
+            instanceName: "S3Stack",
+            id:           "restaurants",
+            accountId:    Constants.Account,
+            region:       Constants.Region,
+            stackId:      "S3StackID",
+            keyName:      Constants.EC2.KeyName,
+        });
+
+        this.S3Stack = new S3Stack(this, { 
+            account:      props.account,
+            instanceName: "S3Stack",
+            id:           "meals",
+            accountId:    Constants.Account,
+            region:       Constants.Region,
+            stackId:      "S3StackID",
+            keyName:      Constants.EC2.KeyName,
+        });
+
+
         this.cognitoStack = new CognitoStack(this, {
             account:                        props.account,
             region:                         props.region, 
@@ -179,7 +202,8 @@ export class AlphaStage extends Stage {
                                              this.mealTestTableStack.tableArn,
                                              this.dietTestTableStack.tableArn,
                                              this.ingredientTestTableStack.tableArn,
-                                             this.menuTestTableStack.tableArn],
+                                             this.menuTestTableStack.tableArn,
+                                             this.S3Stack.bucketArn],
         });
 
         this.ec2Stack = new EC2Stack(this, {
@@ -198,7 +222,5 @@ export class AlphaStage extends Stage {
                             this.ingredientTestTableStack.tableArn,
                             this.menuTestTableStack.tableArn]
         });
-
     }
-
 }

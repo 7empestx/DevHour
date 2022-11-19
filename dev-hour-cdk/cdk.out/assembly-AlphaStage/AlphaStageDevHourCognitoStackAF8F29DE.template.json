@@ -58,6 +58,28 @@
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourUserPool/Resource"
    }
   },
+  "DevHourUserPoolPreSignUpCognito983F8FD9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DevHourUserPoolAutoVerifyLambdaF32FAB2A",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "DevHourUserPool7653C170",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourUserPool/PreSignUpCognito"
+   }
+  },
   "DevHourUserPoolClientA0C08451": {
    "Type": "AWS::Cognito::UserPoolClient",
    "Properties": {
@@ -154,6 +176,9 @@
          "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
         },
         {
+         "Fn::ImportValue": "AlphaStage-meals:ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
+        },
+        {
          "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
         },
         {
@@ -235,6 +260,9 @@
         },
         {
          "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-meals:ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
         },
         {
          "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
@@ -378,7 +406,7 @@
    "Properties": {
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-060498623801-us-west-1",
-     "S3Key": "bd950219f54d95d429e90cdff3d933da9610675743d76ca15d5d7ea2585c6b6b.zip"
+     "S3Key": "ce704583b7a0d09498af5be1e32827ae89f6946ce8285670ff0972a12eaafdee.zip"
     },
     "Role": {
      "Fn::GetAtt": [
@@ -386,7 +414,7 @@
       "Arn"
      ]
     },
-    "Handler": "handler",
+    "Handler": "cognito_pre_sign_up.handler",
     "Runtime": "python3.9"
    },
    "DependsOn": [
@@ -394,37 +422,15 @@
    ],
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolAutoVerifyLambda/Resource",
-    "aws:asset:path": "../asset.bd950219f54d95d429e90cdff3d933da9610675743d76ca15d5d7ea2585c6b6b.zip",
+    "aws:asset:path": "../asset.ce704583b7a0d09498af5be1e32827ae89f6946ce8285670ff0972a12eaafdee.zip",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
-   }
-  },
-  "DevHourUserPoolAutoVerifyLambdaPreSignUpCognitoFAD71549": {
-   "Type": "AWS::Lambda::Permission",
-   "Properties": {
-    "Action": "lambda:InvokeFunction",
-    "FunctionName": {
-     "Fn::GetAtt": [
-      "DevHourUserPoolAutoVerifyLambdaF32FAB2A",
-      "Arn"
-     ]
-    },
-    "Principal": "cognito-idp.amazonaws.com",
-    "SourceArn": {
-     "Fn::GetAtt": [
-      "DevHourUserPool7653C170",
-      "Arn"
-     ]
-    }
-   },
-   "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourCognitoStack/DevHourUserPoolAutoVerifyLambda/PreSignUpCognito"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11QyU7DMBD9Fu7OQChIXNNKSByQolScK9cewjReJI9TVKz8O3abVoHT2zyL5xGenuHhTn5zpfRQGdpD2kapBpGtXVK+dxQ9pA/G0HpvxObT3fiVbAyhi8todq7yTWdF8dQGfySNobHyx7tlwf8XJbt589yl7rzBJuZFv2w2J0HSQnqXTvaoW29InUrFX6PUFLfgJIy0ey0hvY5ORbpss+QtBkvMWU2CVzvJjJGhKZA1rEc1YFxLzq06ZD8GheKc5vP15PrzpDmYhPMa4cD3x/oF6jpf/MBEVRjzhyxCd8FfRnT5B40BAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/11QyWrDMBD9lt7l6ZJCe3UCgR4CxqXnoEhTd2ItoJFTUuF/r5TYwe3pbbNI8wTPL/BwJ7+5UrqvDB0gvUepepGtfVK+cxQ9pA/G0HhvxObT3fhMNobQxWU0ObN801lRPDfBn0hjqK388W7Z8L+iZDdv2rvUrTdYx/zQL5vNURhpD1pCymUNBkvMlBdsB6ciXTfNfBQkLaSddLJD3XhD6lzyv0aZX9yCo+DVXjJjZKgLZA3rQfUY15Jz3CL7ISgUlzSfryPXXbqnYBTOa4Qj358eX6Ec/MhEVRjyfyxCe8VfAna0LIwBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCognitoStack/CDKMetadata/Default"

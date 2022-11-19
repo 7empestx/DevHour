@@ -13,6 +13,12 @@
     "SubjectAlternativeNames": [
      "*.devhour.app"
     ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AlphaStage/DevHourCertificateStack/DevHourCertificate"
+     }
+    ],
     "ValidationMethod": "DNS"
    },
    "Metadata": {
@@ -22,7 +28,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHVM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFJ6cWlWSmZSYnlqTmJuYlpqcW6VU7I8R0nNPykLi1IH5QanF+aVEykJOXn5Kql1WsX2ZooWdoCLQkqzgzU7eoNK8kMzdVLwhCAwCvchYhgAAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHXM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFJ6cWlWSmZSYnlqTmJuYlpqcW6VU7I8R0nNPykLi1IH5QanF+aVEykJOXn5Kql1WsX2ZooQeyI6s4M1O3qDSvJDM3VS8IQgMAG64Q9n8AAAA="
    },
    "Metadata": {
     "aws:cdk:path": "AlphaStage/DevHourCertificateStack/CDKMetadata/Default"
