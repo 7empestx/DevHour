@@ -74,7 +74,10 @@ public interface MealContract {
     interface Menu {
 
         String getId();
-        List<Meal>  getMeals();
+        List<Meal> getMeals();
+
+        void setId(final String id);
+        void setMeals(final List<Meal> meals);
 
         interface Database {
 
