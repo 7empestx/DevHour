@@ -107,7 +107,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                 final RadioButton userTypeButton =
                         this.requireView().findViewById(R.id.customer_selection_button);
 
-                final String userType =(userTypeButton.isChecked())? "customer" : "business";
+                final String userType = (userTypeButton.isChecked()) ? "customer" : "business";
 
 
                 createAccountButton.setEnabled(false);
@@ -117,20 +117,13 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                 input.put("username",   getUsername());
                 input.put("password",   getPassword());
                 input.put("email",      getEmail());
-                input.put("name",       getFirstName() + getLastName());
+                input.put("name",       getFirstName() + " " + getLastName());
                 input.put("first",      getFirstName());
                 input.put("last",       getLastName());
                 input.put("type",       userType);
 
                 if(this.signUpListener != null)
                     this.signUpListener.onReceivedSignUpInput(input);
-
-
-                // assign the type based on button selection (string "customer")
-
-                // place into input, (lines 109-114)
-
-
 
             case R.id.fragment_sign_up_back_button:
 

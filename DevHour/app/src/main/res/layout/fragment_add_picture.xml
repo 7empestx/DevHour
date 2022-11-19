@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_add_picture_layout"
+    style="@style/Fragment">
+
+    <ImageButton
+        android:id="@+id/fragment_add_picture_back_button"
+        style="@style/Theme.DevHour.BackButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/back_button_color_light"
+        tools:ignore="SpeakableTextPresentCheck"/>
+
+    <TextView
+        android:id="@+id/fragment_add_picture_title"
+        style="@style/Theme.DevHour.Title"
+        android:text="@string/fragment_add_picture_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_picture_back_button"/>
+
+    <ImageView
+        android:id="@+id/fragment_add_picture_user_image"
+        style="@style/Theme.DevHour.AddPicture"
+        android:contentDescription="@string/fragment_add_picture_user_image_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_add_picture_upload_picture_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/fragment_add_picture_error_message"
+        style="@style/Theme.DevHour.ErrorText"
+        android:layout_marginTop="@dimen/fragment_add_picture_error_message_margin_bottom"
+        android:text="@string/fragment_add_picture_add_phone_number_error_message_title"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/fragment_add_picture_user_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/fragment_add_picture_upload_picture_button"
+        style="@style/Theme.DevHour.ActionButton"
+        android:layout_marginBottom="@dimen/fragment_add_picture_upload_margin_top"
+        android:text="@string/fragment_add_picture_upload_button_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_add_picture_save_picture_button"/>
+
+    <Button
+        android:id="@+id/fragment_add_picture_save_picture_button"
+        style="@style/Theme.DevHour.ActionButton"
+        android:layout_marginTop="@dimen/fragment_add_picture_save_margin_top"
+        android:text="@string/fragment_add_picture_save_button_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

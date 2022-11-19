@@ -10,9 +10,11 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
 
     private String  id          ;
     private String  name        ;
+    private int     pricing     ;
+    private String  address1    ;
+    private String  address2    ;
     private double  longitude   ;
     private double  latitude    ;
-    private int     pricing     ;
 
     /// -----------
     /// Constructor
@@ -23,6 +25,8 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
         this.name   = name  ;
 
     }
+
+    public Restaurant() { /* Empty */ }
 
     @Override
     public String getId() {
@@ -35,6 +39,25 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     }
 
     @Override
+    public int getPricing(){
+        return pricing;
+    }
+    
+    @Override
+    public String getAddress1() {
+
+        return this.address1;
+
+    }
+
+    @Override
+    public String getAddress2() {
+
+        return this.address2;
+
+    }
+    
+    @Override
     public double getLongitude(){
         return longitude;
     }
@@ -43,31 +66,55 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public double getLatitude(){
         return latitude;
     }
-
+    
     @Override
-    public int getPricing(){
-        return pricing;
+    public void setId(final String id) {
+
+        this.id = id;
+
     }
-
+    
     @Override
-    public String setName(String name){
+    public void setName(final String name){
+
         this.name = name;
-        return name;
+
     }
 
     @Override
-    public double setLongitude(String longitude) {
-        return 0;
+    public void setPricing(final int pricing) {
+
+        this.pricing = pricing;
+
     }
 
     @Override
-    public double setLatitude(String latitude) {
-        return 0;
+    public void setAddress1(final String address1) {
+
+        this.address1 = address1;
+
     }
 
     @Override
-    public int setPricing(String pricing) {
-        return 0;
+    public void setAddress2(final String address2) {
+
+        this.address2 = address2;
+
     }
+    
+    @Override
+    public void setLongitude(final double longitude) {
+
+        this.longitude = longitude;
+
+    }
+
+    @Override
+    public void setLatitude(final double latitude) {
+
+        this.latitude = latitude;
+
+    }
+
 
 }

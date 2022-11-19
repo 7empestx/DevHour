@@ -1,8 +1,8 @@
 package dev.hour.presenter;
 
-import org.jetbrains.annotations.Contract;
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import dev.hour.contracts.RestaurantContract;
 
@@ -10,7 +10,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
 
     private RestaurantContract.Database         database    ;
     private RestaurantContract.View             view        ;
-    private List<RestaurantContract.Restaurant> restaurants  ; //this is missing in the UML..?
+    private List<RestaurantContract.Restaurant> restaurants ;
 
     @Override
     public void setDatabase(RestaurantContract.Database database) {
@@ -20,7 +20,11 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     @Override
     public void setView(RestaurantContract.View view) {
 
+        // Set the view
         this.view = view;
+
+        if(this.view != null)
+            this.view.setRestaurants(this.restaurants);
 
     }
 
@@ -34,10 +38,32 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     @Override
     public void search(String query) {
         if (this.database != null){
-            List<RestaurantContract.Restaurant> restaurants= this.database.search(query);
+            List<RestaurantContract.Restaurant> restaurants= this.database.retrieveRestaurantsByTag(query);
             if (this.view != null){
                 this.view.setRestaurants(restaurants);
             }
         }
     }
+
+    @Override
+    public void createRestaurant(final Map<String, Object> data, String ownerId) {
+
+        if(this.database != null)
+            this.database.createRestaurant(data, ownerId);
+
+    }
+
+    @Override
+    public void setRestaurantsBy(final String owner) {
+
+        // Retrieve the restaurants by owner id
+        this.restaurants = (this.database != null) ?
+                this.database.retrieveRestaurantsByOwnerId(owner) : new ArrayList<>();
+
+        // Set the restaurants if possible
+        if(this.view != null)
+            this.view.setRestaurants(this.restaurants);
+
+    }
+
 }

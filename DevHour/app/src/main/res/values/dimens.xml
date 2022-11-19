@@ -546,8 +546,8 @@
     <!-- =============== -->
     <!-- Big Round Image -->
 
-    <dimen name="big_round_image_height">192dp</dimen>
-    <dimen name="big_round_image_width">192dp</dimen>
+    <dimen name="big_round_image_height">168dp</dimen>
+    <dimen name="big_round_image_width">168dp</dimen>
 
     <!-- ====== -->
     <!-- Slider -->

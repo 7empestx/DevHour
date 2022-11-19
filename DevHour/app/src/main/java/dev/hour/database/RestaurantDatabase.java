@@ -3,7 +3,12 @@ package dev.hour.database;
 
 import android.util.Log;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,33 +18,76 @@ import dev.hour.contracts.RestaurantContract;
 import dev.hour.restaurant.Restaurant;
 
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
+import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.waiters.S3Waiter;
 
 public class RestaurantDatabase implements RestaurantContract.Database {
+
+    /// ---------------------
+    /// Public Static Members
+
+    public final static String ACCESS_KEY       = "ACCESS_KEY"      ;
+    public final static String SECRET_KEY       = "SECRET_KEY"      ;
+    public final static String SESSION_TOKEN    = "SESSION_TOKEN"   ;
+
+    /// ----------------------
+    /// Private Static Members
+
+    private final static int BUFFER_SIZE = 4096;
+
+    /// ---------------------
+    /// Public Static Methods
+
+    /**
+     * Generates a semi-unique hexadecimal identifier based on the current time
+     * @return [String] value of a semi-unique hexadecimal identifier
+     */
+    public static String GenerateId() {
+
+        final long      time        = Calendar.getInstance().getTimeInMillis();
+        final String    timeString  = String.valueOf(time);
+
+        return Integer.toHexString(timeString.hashCode());
+
+    }
 
     /// ---------------
     /// Private Members
 
-    private DynamoDbClient              client      ;
-    private String                      tableName   ;
-    private String                      region      ;
-    private SdkHttpClient               httpClient  ;
-    private Map<String, AttributeValue> response    ;
+    private DynamoDbClient                          client          ;
+    private S3Client                                s3Client        ;
+    private String                                  tableName       ;
+    private String                                  bucketName      ;
+    private String                                  region          ;
+    private SdkHttpClient                           httpClient      ;
+    private Map<String, AttributeValue>             response        ;
+    private ResponseInputStream<GetObjectResponse>  objectResponse  ;
 
     /// ------------
     /// Constructing
 
-    public RestaurantDatabase(final String region, final String tableName,
+    public RestaurantDatabase(final String region, final String tableName, final String bucketName,
                               final SdkHttpClient httpClient){
 
         this.client     = null          ;
         this.tableName  = tableName     ;
+        this.bucketName = bucketName    ;
         this.region     = region        ;
         this.httpClient = httpClient    ;
 
@@ -48,8 +96,45 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     /// ---------------
     /// Private Methods
 
+
     /**
-     * Creates a GetItemRequest to get the item  with the specified key, value pair.
+     * Creates an item that can update a DynamoDB table item.
+     * @param data The item to set
+     * @return Map<String, AttributeValue> with the given data.
+     */
+    private Map<String, AttributeValue> createItemFrom(final Map<String, Object> data) {
+
+        final Map<String, AttributeValue> result;
+
+        if(data != null) {
+
+            result = new HashMap<>();
+
+            for(Map.Entry<String, Object> entry: data.entrySet()) {
+
+                final Object value = entry.getValue();
+                AttributeValue attributeValue = null;
+
+                if(value instanceof String)
+                    attributeValue = AttributeValue.builder().s((String) value).build();
+
+                else if(value instanceof List)
+                    attributeValue = AttributeValue.builder().l((List) value).build();
+
+                if(attributeValue != null)
+                    result.put(entry.getKey(), attributeValue);
+
+            }
+
+
+        } else result = new HashMap<>();
+
+        return result;
+
+    }
+
+    /**
+     * Creates a GetItemRequest to retrieve the item with the specified key-value pair.
      * @param key The value of the key
      * @param value The specific value to match
      * @return Map containing the requested data, if any
@@ -59,13 +144,13 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final Map<String, AttributeValue> keyMap = new HashMap<>();
         Map<String, AttributeValue> result;
 
-        if(client != null) {
+        if(this.client != null) {
 
             keyMap.put(key, AttributeValue.builder().s(value).build());
 
             final GetItemRequest request = GetItemRequest.builder()
                     .key(keyMap)
-                    .tableName(tableName)
+                    .tableName(this.tableName)
                     .build();
 
             final RestaurantDatabase database = this;
@@ -94,85 +179,267 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     }
 
     /**
-     * Sets the credentials required to build the DynamoDB client
+     * Returns an S3 Object with the specified key (if any) as an [OutputStream] instance
+     * @param key The key corresponding to the S3 Object
+     * @return [OutputStream]
+     */
+    private OutputStream getObject(final String key) {
+
+        // Create the resultant OutputStream
+        final OutputStream result = new BufferedOutputStream(new ByteArrayOutputStream());
+
+        // If we have a client
+        if(this.s3Client != null) {
+
+            // Create the request
+            final GetObjectRequest request = GetObjectRequest.builder()
+                    .bucket(this.bucketName)
+                    .key(key)
+                    .build();
+
+            // Retrieve a handle to ourselves
+            final RestaurantDatabase database = this;
+
+            // Create the request thread
+            final Thread thread = new Thread(() ->
+                    database.objectResponse = database.s3Client.getObject(request));
+
+            try {
+
+                // Perform the request
+                thread.start();
+                thread.join();
+
+                // Create our buffer and bytes read
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int bytes;
+
+                do {
+
+                    // Attempt to read the bytes into the buffer
+                    bytes = this.objectResponse.read(buffer);
+
+                    // Break condition
+                    if(bytes == -1) break;
+
+                    // Write the result into the output stream
+                    result.write(buffer, 0, bytes);
+
+                } while(true);
+
+            } catch(final Exception exception) {
+
+                Log.e("RestaurantDatabase", exception.getMessage());
+
+            }
+
+        }
+
+        // Return the result
+        return result;
+
+    }
+
+    /**
+     * Sets the given item with the given data onto the current table
+     * @param item The item to write.
+     */
+    private void putItem(final Map<String, AttributeValue> item) {
+
+        if(this.client != null) {
+
+            final PutItemRequest request =
+                    PutItemRequest.builder().tableName(this.tableName).item(item).build();
+
+            this.client.putItem(request);
+
+        }
+
+    }
+
+    /**
+     * Puts the contents of the given [InputStream] into the specified S3 bucket with the given key
+     * @param key The key to set to the S3 Object
+     * @param inputStream The contents of the Object
+     * @param length The length of the content
+     */
+    private void putObject(final String key, final InputStream inputStream, final long length) {
+
+        if(this.s3Client != null) {
+
+            // Create the request
+            final PutObjectRequest request =
+                    PutObjectRequest.builder().bucket(this.bucketName).key(key).build();
+
+            // Upload the object
+            this.s3Client.putObject(request, RequestBody.fromInputStream(inputStream, length));
+
+            final S3Waiter waiter = this.s3Client.waiter();
+
+            // Create the wait request
+            final HeadObjectRequest waitRequest =
+                    HeadObjectRequest.builder().bucket(this.bucketName).key(key).build();
+
+            // Wait
+            final WaiterResponse<HeadObjectResponse> response = waiter.waitUntilObjectExists(waitRequest);
+
+        }
+        
+    }
+
+    /**
+     * Retrieves the [InputStream] containing the picture data of the restaurant, if any.
+     * @param data The restaurant data
+     * @return [InputStream] object containing the restaurant picture data.
+     */
+    private InputStream getRestaurantPictureInputStreamFrom(final Map<String, Object> data) {
+
+        final Object intermediate = data.get("picture")  ;
+
+        InputStream   result = null;
+
+        if(intermediate instanceof InputStream)
+            result = (InputStream) intermediate;
+
+        if(intermediate != null)
+            data.remove("picture");
+
+        return result;
+
+    }
+
+    /**
+     * Binds a Restaurant instance with the pertinent data from the given Map
+     * @param data The data to bind the Restaurant with
+     * @return Restaurant instance
+     */
+    private Restaurant bindRestaurantFrom(final Map<String, AttributeValue> data) {
+
+        final Restaurant restaurant = new Restaurant();
+
+        // Set the id
+        restaurant.setId(
+                Objects.requireNonNull(data.get("id")).s());
+
+        // Set the name
+        restaurant.setName(
+                Objects.requireNonNull(data.get("name")).s());
+
+        // Set the address
+        restaurant.setAddress1(
+                Objects.requireNonNull(data.get("address1")).s());
+
+        // Set the other address
+        restaurant.setAddress1(
+                Objects.requireNonNull(data.get("address2")).s());
+
+        // Set the longitude
+        restaurant.setLongitude(Double.parseDouble(
+                Objects.requireNonNull(data.get("longitude")).s()));
+
+        // Set the latitude
+        restaurant.setLatitude(Double.parseDouble(
+                Objects.requireNonNull(data.get("latitude")).s()));
+
+        return restaurant;
+
+    }
+
+    /// ---------------------------
+    /// RestaurantContract.Database
+
+    /**
+     * Sets the credentials required to build the DynamoDB client and S3 client
      * @param credentials The credentials to set.
      */
     @Override
     public void setCredentials(final Map<String, String> credentials) {
 
-        client = DynamoDbClient
+        this.client = DynamoDbClient
                 .builder()
                 .region(Region.of(this.region))
                 .httpClient(this.httpClient)
                 .credentialsProvider(() -> AwsSessionCredentials.create(
-                        credentials.get("ACCESS_KEY"),
-                        credentials.get("SECRET_KEY"),
-                        credentials.get("SESSION_TOKEN")))
+                        Objects.requireNonNull(credentials.get(ACCESS_KEY)),
+                        Objects.requireNonNull(credentials.get(SECRET_KEY)),
+                        Objects.requireNonNull(credentials.get(SESSION_TOKEN))))
+                .build();
+
+        this.s3Client = S3Client
+                .builder()
+                .region(Region.of(this.region))
+                .httpClient(this.httpClient)
+                .credentialsProvider(() -> AwsSessionCredentials.create(
+                        Objects.requireNonNull(credentials.get(ACCESS_KEY)),
+                        Objects.requireNonNull(credentials.get(SECRET_KEY)),
+                        Objects.requireNonNull(credentials.get(SESSION_TOKEN))))
                 .build();
 
     }
 
     /**
-     * Retrieves the restaurant corresponding with the given id.
-     * @param id the restaurant id
-     * @return RestaurantContract.Restaurant instance
+     * Creates a Restaurant with the given data on the current database table. This method
+     * will also upload a picture from the corresponding S3 bucket.
+     * @param data The data to create the Restaurant entry with
+     * @param ownerId
      */
     @Override
-    public RestaurantContract.Restaurant getRestaurant(final String id) {
+    public void createRestaurant(final Map<String, Object> data, final String ownerId) {
 
-        final RestaurantContract.Restaurant restaurant;
+        // Retrieve a handle to ourselves, the picture stream (if any), and create a picture id
+        final RestaurantDatabase    database            = this                                     ;
+        final InputStream           pictureStream       = getRestaurantPictureInputStreamFrom(data);
+        final String                restaurantPictureId = GenerateId()                             ;
+        final long                  contentLength       = (Long) data.get("contentLength")         ;
 
-        if(client != null){
+        // Generate an id for the restaurant
+        data.put("id", GenerateId());
+        data.put("picture_id", restaurantPictureId);
+        data.put("restaurant_owner", ownerId);
 
-            final Map<String, AttributeValue> restaurantBlob = getItem("id", id);
-            final String name = Objects.requireNonNull(restaurantBlob.get("name")).s();
+        // Remove the content length
+        data.remove("contentLength");
 
-            restaurant =  new Restaurant(id, name);
+        final Thread thread = new Thread(() ->
+                database.putItem(createItemFrom(data)));
 
-            restaurant.setLongitude(
-                    String.valueOf(Double.parseDouble(
-                            Objects.requireNonNull(restaurantBlob.get("longitude")).s())));
-            restaurant.setLatitude(
-                    String.valueOf(Double.parseDouble(
-                            Objects.requireNonNull(restaurantBlob.get("latitude")).s())));
-            restaurant.setPricing(
-                    String.valueOf(Integer.parseInt(
-                            Objects.requireNonNull(restaurantBlob.get("pricing")).s())));
+        final Thread uploadThread = new Thread(() ->
+                database.putObject(restaurantPictureId, pictureStream, contentLength));
 
-        } else restaurant = null;
+        try {
 
-        return restaurant;
+            thread.start();
+            uploadThread.start();
+            thread.join();
+            uploadThread.join();
+
+        } catch (final Exception exception) {
+
+            Log.e("RestaurantDatabase", exception.getMessage());
+
+        }
+
     }
 
     /**
-     * Returns a list of RestaurantContract.Restaurants that are within the specified radius.
-     * @param longitude The center longitude
-     * @param latitude The center latitude
-     * @param radius The radius
-     * @return List of Restaurants.
+     * Retrieves the Restaurants that contain the given tag in their list of tags*
+     * @param tag The [String] tag to search
+     * @return [List] of restaurants that contain the tag
      */
     @Override
-    public List<RestaurantContract.Restaurant> getRestaurantsFromRadiusLocation(final double longitude,
-                                                                                final double latitude,
-                                                                                final double radius) {
-        //mercator projection
-        //use scan function to query tables
-        //TODO: implement query to find restaurants based off radius
-        return null;
-    }
+    public List<RestaurantContract.Restaurant> retrieveRestaurantsByTag(final String tag) {
 
-    @Override
-    public List<RestaurantContract.Restaurant> search(String query) {
+        final List<RestaurantContract.Restaurant> results                     = new ArrayList<>();
+        final Map<String, AttributeValue>         expressionAttributeValues   = new HashMap<String, AttributeValue>();
 
-        List<RestaurantContract.Restaurant> retList = new ArrayList<>();
-        Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
         expressionAttributeValues.put(":tags", AttributeValue
                 .builder()
-                .s(query)
+                .s(tag)
                 .build());
-        ScanRequest scanRequest = ScanRequest
+
+        final ScanRequest scanRequest = ScanRequest
                 .builder()
-                .tableName("restaurantTestTableAlpha")
+                .tableName(this.tableName)
                 .filterExpression("contains(tags, :tags)")
                 .expressionAttributeValues(expressionAttributeValues)
                 .build();
@@ -181,13 +448,10 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
             try {
 
-                ScanResponse scanResponse = client.scan(scanRequest);
+                final ScanResponse scanResponse = client.scan(scanRequest);
 
-
-                for (Map<String, AttributeValue> item : scanResponse.items()) {
-                    final RestaurantContract.Restaurant restaurant = new Restaurant(item.get("id").s(), item.get("name").s());
-                    retList.add(restaurant);
-                }
+                for (final Map<String, AttributeValue> item : scanResponse.items())
+                    results.add(bindRestaurantFrom(item));
 
             } catch (final Exception exception) {
 
@@ -208,7 +472,90 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
         }
 
-        return retList;
+        return results;
+    }
+
+    /**
+     * Retrieves the Restaurants that match with the owner id*
+     * @param ownerId The id of the owner
+     * @return [List] of restaurants
+     */
+    @Override
+    public List<RestaurantContract.Restaurant> retrieveRestaurantsByOwnerId(final String ownerId) {
+
+        final List<RestaurantContract.Restaurant>   results                     = new ArrayList<>();
+        final Map<String, AttributeValue>           expressionAttributeValues   = new HashMap<>();
+
+        expressionAttributeValues.put(":owner", AttributeValue
+                .builder()
+                .s(ownerId)
+                .build());
+
+        final ScanRequest scanRequest = ScanRequest
+                .builder()
+                .tableName(this.tableName)
+                .filterExpression("restaurant_owner = :owner")
+                .expressionAttributeValues(expressionAttributeValues)
+                .build();
+
+        final Thread thread = new Thread(() -> {
+
+            try {
+
+                final ScanResponse scanResponse = client.scan(scanRequest);
+
+                for (final Map<String, AttributeValue> item : scanResponse.items())
+                    results.add(bindRestaurantFrom(item));
+
+            } catch (final Exception exception) {
+
+                Log.e("RestaurantDatabase", exception.toString());
+
+            }
+
+        });
+
+        try {
+
+            thread.start();
+            thread.join();
+
+        } catch (final Exception exception) {
+
+            Log.e("RestaurantDatabase", exception.getMessage());
+
+        }
+
+        return results;
+    }
+    
+    /**
+     * Returns a list of RestaurantContract.Restaurants that are within the specified radius.
+     * @param longitude The center longitude
+     * @param latitude The center latitude
+     * @param radius The radius
+     * @return List of Restaurants.
+     */
+    @Override
+    public List<RestaurantContract.Restaurant> retrieveRestaurantsByLocation(final double longitude,
+                                                                             final double latitude,
+                                                                             final double radius) {
+        //mercator projection
+        //use scan function to query tables
+        //TODO: implement query to find restaurants based off radius
+        return null;
+    }
+
+    /**
+     * Retrieves the restaurant corresponding with the given id, if any
+     * @param id the restaurant id
+     * @return RestaurantContract.Restaurant instance
+     */
+    @Override
+    public RestaurantContract.Restaurant getRestaurant(final String id) {
+
+        return bindRestaurantFrom(getItem("id", id));
+
     }
 
 }

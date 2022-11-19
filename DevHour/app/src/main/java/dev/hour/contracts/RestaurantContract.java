@@ -8,12 +8,16 @@ public interface RestaurantContract {
     interface Database {
 
         void setCredentials(final Map<String, String> credentials);
+        void createRestaurant(final Map<String, Object> data, String ownerId);
+        List<Restaurant> retrieveRestaurantsByTag(final String tag);
+        List<Restaurant> retrieveRestaurantsByOwnerId(final String ownerId);
         Restaurant getRestaurant(String id);
-        List<Restaurant> getRestaurantsFromRadiusLocation(final double longitude,
-                                                          final double latitude,
-                                                          final double radius);
+        List<Restaurant> retrieveRestaurantsByLocation(final double longitude,
+                                                       final double latitude,
+                                                       final double radius);
 
-        List<Restaurant> search(String query);
+
+
     }
 
     interface Presenter {
@@ -22,12 +26,16 @@ public interface RestaurantContract {
         void setView(final View view);
         void invalidate();
         void search(String query);
+        void createRestaurant(final Map<String, Object> data, String ownerId);
+        void setRestaurantsBy(final String owner);
 
         interface InteractionListener {
 
             void onAddRestaurantRequest();
-            void onCreateRestaurantRequest(final Map<String, String> data);
-
+            void onCreateRestaurantRequest(final Map<String, Object> data);
+            void onShowBusinessRestaurantListRequest();
+            void onShowBusinessAddImageRequest();
+            void onShowTagRequest(final Map<String, String> tags);
 
         }
 
@@ -46,11 +54,16 @@ public interface RestaurantContract {
         double getLongitude();
         double getLatitude();
         int getPricing();
+        String getAddress1();
+        String getAddress2();
 
-        String setName(String name);
-        double setLongitude(String longitude);
-        double setLatitude(String latitude);
-        int setPricing(String pricing);
+        void setId(final String id);
+        void setName(final String name);
+        void setPricing(final int pricing);
+        void setAddress1(final String address1);
+        void setAddress2(final String address2);
+        void setLongitude(final double longitude);
+        void setLatitude(final double latitude);
 
     }
 

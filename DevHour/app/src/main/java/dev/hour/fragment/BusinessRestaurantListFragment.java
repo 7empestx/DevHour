@@ -40,7 +40,7 @@ public class BusinessRestaurantListFragment extends Fragment implements Restaura
         final View          layout          =
                 layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
         final RecyclerView  recyclerView    =
-                layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
+                layout.findViewById(R.id.fragment_business_restaurant_list_recycler_view);
         final View          floatingActionButton =
                 layout.findViewById(R.id.fragment_business_restaurant_list_add_button);
 

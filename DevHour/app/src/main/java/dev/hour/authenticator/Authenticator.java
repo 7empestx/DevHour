@@ -244,6 +244,11 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
                             .name("name")
                             .value(input.get("name"))
                             .build())
+                    .userAttributes(AttributeType
+                            .builder()
+                            .name("email")
+                            .value(input.get("email"))
+                            .build())
                     .build();
 
             try {
@@ -358,7 +363,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
         } catch (final Exception exception) {
 
-            Log.e("Authenticator", exception.getMessage());
+            Log.e("Authenticator", "ERROR: " + exception.getMessage());
 
             if(listener != null)
                 listener.onSignInFailed("Sign-in failed");

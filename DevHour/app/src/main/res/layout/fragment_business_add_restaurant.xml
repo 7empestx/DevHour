@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/back_button_color_light"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"/>
 
     <TextView
         android:id="@+id/fragment_business_add_restaurant_title"
@@ -27,75 +27,54 @@
         android:layout_marginBottom="8dp"
         android:text="Add Restaurant"/>
 
-    <TextView
-        android:id="@+id/fragment_business_add_restaurant_name_subtitle"
-        style="@style/Theme.DevHour.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_title"
+    <ImageView
+        android:id="@+id/fragment_business_add_restaurant_image"
+        style="@style/Theme.DevHour.BigRoundImage"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Name"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_title"/>
 
     <EditText
         android:id="@+id/fragment_business_add_restaurant_name_input"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.EditText"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
+        android:hint="Restaurant Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_name_subtitle"/>
-
-    <TextView
-        android:id="@+id/fragment_business_add_restaurant_address_text_1"
-        style="@style/Theme.DevHour.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_name_input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Street Address"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_image"/>
 
     <EditText
         android:id="@+id/fragment_business_add_restaurant_address_input_1"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.EditText"
         android:layout_marginTop="8dp"
+        android:hint="Street Address"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_address_text_1"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_name_input"/>
 
-    <TextView
-        android:id="@+id/fragment_business_add_restaurant_address_text_2"
-        style="@style/Theme.DevHour.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_address_input_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="State, Zip"/>
 
     <EditText
         android:id="@+id/fragment_business_add_restaurant_address_input_2"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.EditText"
         android:layout_marginTop="8dp"
+        android:hint="City State, Zip Code"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_address_text_2"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_address_input_1"/>
 
     <Button
         android:id="@+id/fragment_business_add_restaurant_tag_button"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.ActionButton"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="Tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_business_add_restaurant_confirm_button"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_address_input_2"/>
 
     <Button
         android:id="@+id/fragment_business_add_restaurant_confirm_button"
@@ -106,6 +85,6 @@
         android:text="Confirm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_restaurant_tag_button"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

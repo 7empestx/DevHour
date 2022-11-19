@@ -21,7 +21,8 @@ import dev.hour.contracts.RestaurantContract;
  * @version 1.0.0
  */
 public class BusinessRestaurantListAdapter extends
-        RecyclerView.Adapter<BusinessRestaurantListAdapter.BusinessRestaurantListItemViewHolder> {
+        RecyclerView.Adapter<BusinessRestaurantListAdapter.BusinessRestaurantListItemViewHolder>
+        implements View.OnClickListener {
 
     /// --------------
     /// Private Fields
@@ -56,7 +57,7 @@ public class BusinessRestaurantListAdapter extends
         if(restaurant != null){
 
             final TextView      title       =
-                    view.findViewById(R.id.fragment_business_restaurant_list_title);
+                    view.findViewById(R.id.fragment_business_restaurant_list_item_title);
             final ImageButton   image       =
                     view.findViewById(R.id.fragment_business_restaurant_list_item_image);
             final TextView      address1    =
@@ -65,8 +66,10 @@ public class BusinessRestaurantListAdapter extends
                     view.findViewById(R.id.fragment_business_restaurant_list_item_address_line_2);
 
             title.setText(restaurant.getName());
+            address1.setText(restaurant.getAddress1());
+            address2.setText(restaurant.getAddress2());
 
-            // TODO: Set Address1, Address2, & Image
+            // TODO: Set Image
 
         }
 
@@ -86,6 +89,11 @@ public class BusinessRestaurantListAdapter extends
     public int getItemCount() {
 
         return (this.restaurantList == null) ? 0 : this.restaurantList.size();
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 

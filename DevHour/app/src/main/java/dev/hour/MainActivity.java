@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,7 @@ import dev.hour.fragment.ProfileFragment;
 import dev.hour.fragment.RestaurantListFragment;
 import dev.hour.fragment.SignUpFragment;
 import dev.hour.fragment.BusinessRestaurantListFragment;
+import dev.hour.fragment.AddPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements
     private RestaurantContract.Database         restaurantDatabase      ;
     private Fragment                            lastFragment            ;
     private SdkHttpClient                       httpClient              ;
+    private String                              userId                  ;
 
     /// ------------------
     /// Activity Lifecycle
@@ -111,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements
         // Set up the restaurant presenter
         restaurantPresenter     = new RestaurantPresenter();
         restaurantDatabase      = new RestaurantDatabase(
-                this.getString(R.string.region), this.getString(R.string.restaurant_table_name), this.httpClient);
+                this.getString(R.string.region), this.getString(R.string.restaurant_table_name), this.getString(R.string.restaurant_bucket_name), this.httpClient);
 
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
@@ -138,6 +141,33 @@ public class MainActivity extends AppCompatActivity implements
 
         // Check if we're authenticated
         this.authenticator.checkSession();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, final String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+
+            case AddPictureFragment.STORAGE_PERMISSION_REQUEST:
+
+                if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    final Fragment fragment =
+                            getSupportFragmentManager().findFragmentByTag(AddPictureFragment.TAG);
+
+                    if (fragment instanceof AddPictureFragment)
+                        ((AddPictureFragment) fragment).storagePermissionsGranted();
+
+                }
+
+                break;
+
+            default:
+                break;
+
+        }
 
     }
 
@@ -171,6 +201,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onAuthenticated(final Map<String, String> credentials, final String userId) {
 
+        // Provisional
+        this.userId = userId;
+
         // Set the credentials
         this.userDatabase.setCredentials(credentials);
         this.dietDatabase.setCredentials(credentials);
@@ -178,12 +211,18 @@ public class MainActivity extends AppCompatActivity implements
         this.userPresenter.setUser(userId);
 
         // Retrieve the user
-        final UserContract.User user = this.userPresenter.getUser(userId);
-        final String userType = user.getType();
+        final UserContract.User user        = this.userPresenter.getUser(userId)    ;
+        final String            userType    = user.getType()                        ;
 
         if(userType.equals("customer")) showMapFragment();
 
-        else showBusinessRestaurantListFragment();
+        else {
+
+            this.restaurantPresenter.setRestaurantsBy(this.userId);
+
+            showBusinessRestaurantListFragment();
+
+        }
 
     }
 
@@ -234,6 +273,37 @@ public class MainActivity extends AppCompatActivity implements
     public void onAddRestaurantRequest() {
 
         showBusinessAddRestaurantFragment();
+
+    }
+
+    @Override
+    public void onCreateRestaurantRequest(final Map<String, Object> data) {
+
+        if(data != null) {
+
+            this.restaurantPresenter.createRestaurant(data, this.userId);
+            this.restaurantPresenter.setRestaurantsBy(this.userId);
+
+        }
+
+        showBusinessRestaurantListFragment();
+
+    }
+
+    @Override
+    public void onShowTagRequest(final Map<String, String> data) {
+
+    }
+
+    @Override
+    public void onShowBusinessAddImageRequest() {
+
+    }
+
+    @Override
+    public void onShowBusinessRestaurantListRequest() {
+
+        showBusinessRestaurantListFragment();
 
     }
 
@@ -347,12 +417,16 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new BusinessAddRestaurantFragment();
             transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantFragment.TAG);
 
+            ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
+
         } else if(fragment.isAdded()) {
+
+            ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
 
         }
 
         transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
 
         transaction.show(fragment);
 
@@ -446,11 +520,15 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new BusinessRestaurantListFragment();
             transaction.add(R.id.activity_main, fragment, BusinessRestaurantListFragment.TAG);
 
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
+
             ((BusinessRestaurantListFragment) fragment).setInteractionListener(this);
 
         } else if(fragment.isAdded()) {
 
             ((BusinessRestaurantListFragment) fragment).setInteractionListener(this);
+
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
 
         }
 
