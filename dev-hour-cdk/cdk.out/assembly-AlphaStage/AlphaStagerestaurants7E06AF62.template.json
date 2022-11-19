@@ -1,28 +1,23 @@
 {
  "Resources": {
-  "DevHourInternetGateway": {
-   "Type": "AWS::EC2::InternetGateway",
+  "restaurants0B9AC02E": {
+   "Type": "AWS::S3::Bucket",
    "Properties": {
-    "Tags": [
-     {
-      "Key": "vpcId",
-      "Value": {
-       "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
-      }
-     }
-    ]
+    "BucketName": "restaurants"
    },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourInternetGatewayStack/DevHourInternetGateway"
+    "aws:cdk:path": "AlphaStage/restaurants/restaurants/Resource"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHXM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFpyYb6Tmn5XnmlaQW5aWWuCeWpJYnVuoAhYJSi/NLi5JTa3Xy8lNS9bKK9csMLfRARmUVZ2bqFpXmlWTmpuoFQWgAlO6lMmYAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHXM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFFxvrVTuVJmenlug4p+VBWLUgZlBqcX5pUXJqrU5efkqqXlaxfpmhhR7IpKzizEzdotK8kszcVL0gCA0AI+9gp2UAAAA="
    },
    "Metadata": {
-    "aws:cdk:path": "AlphaStage/DevHourInternetGatewayStack/CDKMetadata/Default"
+    "aws:cdk:path": "AlphaStage/restaurants/CDKMetadata/Default"
    }
   }
  },
