@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,7 +104,7 @@ public class BusinessAddRestaurantFragment extends Fragment implements
                     if(this.tags != null)
                         this.tags = new HashMap<>();
 
-                    this.interactionListener.onShowTagRequest(this.tags);
+                    this.interactionListener.onShowBusinessAddRestaurantTagRequest(this.tags);
 
                 }
 
@@ -115,7 +113,7 @@ public class BusinessAddRestaurantFragment extends Fragment implements
             case R.id.fragment_business_add_restaurant_image:
 
                 if(this.interactionListener != null)
-                    this.interactionListener.onShowBusinessAddImageRequest();
+                    this.interactionListener.onShowBusinessAddRestaurantImageRequest();
 
                 break;
 

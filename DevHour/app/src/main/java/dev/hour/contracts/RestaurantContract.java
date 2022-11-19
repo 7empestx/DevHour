@@ -10,7 +10,7 @@ public interface RestaurantContract {
         void setCredentials(final Map<String, String> credentials);
         void createRestaurant(final Map<String, Object> data, String ownerId);
         List<Restaurant> retrieveRestaurantsByTag(final String tag);
-        List<Restaurant> retrieveRestaurantsByOwnerId(final String ownerId);
+        List<Restaurant> retrieveRestaurantsByOwner(final String ownerId);
         Restaurant getRestaurant(String id);
         List<Restaurant> retrieveRestaurantsByLocation(final double longitude,
                                                        final double latitude,
@@ -24,18 +24,17 @@ public interface RestaurantContract {
 
         void setDatabase(final Database database);
         void setView(final View view);
-        void invalidate();
-        void search(String query);
-        void createRestaurant(final Map<String, Object> data, String ownerId);
-        void setRestaurantsBy(final String owner);
+        void createRestaurant(final Map<String, Object> data, final String ownerId);
+        void setRestaurantsByTag(final String query);
+        void setRestaurantsByOwner(final String owner);
 
         interface InteractionListener {
 
             void onAddRestaurantRequest();
             void onCreateRestaurantRequest(final Map<String, Object> data);
             void onShowBusinessRestaurantListRequest();
-            void onShowBusinessAddImageRequest();
-            void onShowTagRequest(final Map<String, String> tags);
+            void onShowBusinessAddRestaurantImageRequest();
+            void onShowBusinessAddRestaurantTagRequest(final Map<String, String> tags);
 
         }
 

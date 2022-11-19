@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements
 
         else {
 
-            this.restaurantPresenter.setRestaurantsBy(this.userId);
+            this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
             showBusinessRestaurantListFragment();
 
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements
         if(data != null) {
 
             this.restaurantPresenter.createRestaurant(data, this.userId);
-            this.restaurantPresenter.setRestaurantsBy(this.userId);
+            this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
         }
 
@@ -291,12 +291,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onShowTagRequest(final Map<String, String> data) {
+    public void onShowBusinessAddRestaurantTagRequest(final Map<String, String> data) {
 
     }
 
     @Override
-    public void onShowBusinessAddImageRequest() {
+    public void onShowBusinessAddRestaurantImageRequest() {
 
     }
 
@@ -875,7 +875,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSearch(String query) {
-        restaurantPresenter.search(query);
+        restaurantPresenter.setRestaurantsByTag(query);
     }
 
     @Override

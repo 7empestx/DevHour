@@ -481,7 +481,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
      * @return [List] of restaurants
      */
     @Override
-    public List<RestaurantContract.Restaurant> retrieveRestaurantsByOwnerId(final String ownerId) {
+    public List<RestaurantContract.Restaurant> retrieveRestaurantsByOwner(final String ownerId) {
 
         final List<RestaurantContract.Restaurant>   results                     = new ArrayList<>();
         final Map<String, AttributeValue>           expressionAttributeValues   = new HashMap<>();

@@ -29,14 +29,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     }
 
     @Override
-    public void invalidate() {
-        if(view != null) {
-            view.setRestaurants(restaurants);
-        }
-    }
-
-    @Override
-    public void search(String query) {
+    public void setRestaurantsByTag(final String query) {
         if (this.database != null){
             List<RestaurantContract.Restaurant> restaurants= this.database.retrieveRestaurantsByTag(query);
             if (this.view != null){
@@ -46,7 +39,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     }
 
     @Override
-    public void createRestaurant(final Map<String, Object> data, String ownerId) {
+    public void createRestaurant(final Map<String, Object> data, final String ownerId) {
 
         if(this.database != null)
             this.database.createRestaurant(data, ownerId);
@@ -54,11 +47,11 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     }
 
     @Override
-    public void setRestaurantsBy(final String owner) {
+    public void setRestaurantsByOwner(final String ownerId) {
 
         // Retrieve the restaurants by owner id
         this.restaurants = (this.database != null) ?
-                this.database.retrieveRestaurantsByOwnerId(owner) : new ArrayList<>();
+                this.database.retrieveRestaurantsByOwner(ownerId) : new ArrayList<>();
 
         // Set the restaurants if possible
         if(this.view != null)
