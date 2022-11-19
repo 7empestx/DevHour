@@ -1,5 +1,6 @@
 package dev.hour.contracts;
 
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,7 @@ public interface RestaurantContract {
         String getMenuId();
         String getAddress1();
         String getAddress2();
+        OutputStream getImageStream();
 
         void setId(final String id);
         void setName(final String name);
@@ -64,6 +66,7 @@ public interface RestaurantContract {
         void setAddress2(final String address2);
         void setLongitude(final double longitude);
         void setLatitude(final double latitude);
+        void setImageStream(final OutputStream imageStream);
 
     }
 

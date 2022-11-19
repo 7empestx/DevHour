@@ -96,7 +96,6 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     /// ---------------
     /// Private Methods
 
-
     /**
      * Creates an item that can update a DynamoDB table item.
      * @param data The item to set
@@ -341,6 +340,11 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         restaurant.setLatitude(Double.parseDouble(
                 Objects.requireNonNull(data.get("latitude")).s()));
 
+        final String pictureId = Objects.requireNonNull(data.get("picture_id")).s();
+
+        if((pictureId != null) && !(pictureId.isEmpty()))
+            restaurant.setImageStream(getObject(pictureId));
+
         return restaurant;
 
     }
@@ -390,7 +394,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final RestaurantDatabase    database            = this                                     ;
         final InputStream           pictureStream       = getRestaurantPictureInputStreamFrom(data);
         final String                restaurantPictureId = GenerateId()                             ;
-        final long                  contentLength       = (Long) data.get("contentLength")         ;
+        final long                  contentLength       = (Long) data.get("content_length")         ;
 
         // Generate an id for the restaurant
         data.put("id", GenerateId());
@@ -398,7 +402,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         data.put("restaurant_owner", ownerId);
 
         // Remove the content length
-        data.remove("contentLength");
+        data.remove("content_length");
 
         final Thread thread = new Thread(() ->
                 database.putItem(createItemFrom(data)));

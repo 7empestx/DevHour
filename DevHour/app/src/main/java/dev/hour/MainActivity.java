@@ -37,7 +37,7 @@ import dev.hour.fragment.ProfileFragment;
 import dev.hour.fragment.RestaurantListFragment;
 import dev.hour.fragment.SignUpFragment;
 import dev.hour.fragment.BusinessRestaurantListFragment;
-import dev.hour.fragment.AddPictureFragment;
+import dev.hour.fragment.BusinessAddRestaurantPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
@@ -147,15 +147,15 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (requestCode) {
 
-            case AddPictureFragment.STORAGE_PERMISSION_REQUEST:
+            case BusinessAddRestaurantPictureFragment.STORAGE_PERMISSION_REQUEST:
 
                 if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     final Fragment fragment =
-                            getSupportFragmentManager().findFragmentByTag(AddPictureFragment.TAG);
+                            getSupportFragmentManager().findFragmentByTag(BusinessAddRestaurantPictureFragment.TAG);
 
-                    if (fragment instanceof AddPictureFragment)
-                        ((AddPictureFragment) fragment).storagePermissionsGranted();
+                    if (fragment instanceof BusinessAddRestaurantPictureFragment)
+                        ((BusinessAddRestaurantPictureFragment) fragment).storagePermissionsGranted();
 
                 }
 
@@ -295,6 +295,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onShowBusinessAddRestaurantImageRequest(final Map<String, Object> export) {
+
+        showBusinessAddRestaurantPictureFragment(export);
 
     }
 
@@ -438,6 +440,45 @@ public class MainActivity extends AppCompatActivity implements
         } else if(fragment.isAdded()) {
 
             ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessAddRestaurantPictureFragment(final Map<String, Object> export) {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessAddRestaurantPictureFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessAddRestaurantPictureFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantPictureFragment.TAG);
+
+            ((BusinessAddRestaurantPictureFragment) fragment).setInteractionListener(this);
+            ((BusinessAddRestaurantPictureFragment) fragment).setExport(export);
+
+        } else if(fragment.isAdded()) {
+
+            ((BusinessAddRestaurantPictureFragment) fragment).setInteractionListener(this);
+            ((BusinessAddRestaurantPictureFragment) fragment).setExport(export);
 
         }
 

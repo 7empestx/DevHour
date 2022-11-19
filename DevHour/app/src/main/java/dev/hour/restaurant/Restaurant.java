@@ -1,5 +1,7 @@
 package dev.hour.restaurant;
 
+import java.io.OutputStream;
+
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.RestaurantContract;
 
@@ -8,14 +10,15 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     /// ---------------
     /// Private Members
 
-    private String  id          ;
-    private String  name        ;
-    private int     pricing     ;
-    private String  address1    ;
-    private String  address2    ;
-    private String  menuId      ;
-    private double  longitude   ;
-    private double  latitude    ;
+    private String          id          ;
+    private String          name        ;
+    private int             pricing     ;
+    private String          address1    ;
+    private String          address2    ;
+    private String          menuId      ;
+    private double          longitude   ;
+    private double          latitude    ;
+    private OutputStream    imageStream ;
 
     /// -----------
     /// Constructor
@@ -74,7 +77,14 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public double getLatitude(){
         return latitude;
     }
-    
+
+    @Override
+    public OutputStream getImageStream() {
+
+       return this.imageStream;
+
+    }
+
     @Override
     public void setId(final String id) {
 
@@ -131,5 +141,11 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
 
     }
 
+    @Override
+    public void setImageStream(final OutputStream imageStream) {
+
+        this.imageStream = imageStream;
+
+    }
 
 }
