@@ -73,7 +73,7 @@ public interface MealContract {
 
     interface Menu {
 
-        String      getName();
+        String getId();
         List<Meal>  getMeals();
 
         interface Database {
