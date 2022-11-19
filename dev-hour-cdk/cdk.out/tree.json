@@ -1242,21 +1242,21 @@
               "version": "2.47.0"
             }
           },
-          "restaurants": {
-            "id": "restaurants",
-            "path": "AlphaStage/restaurants",
+          "restaurants-s-three-alpha": {
+            "id": "restaurants-s-three-alpha",
+            "path": "AlphaStage/restaurants-s-three-alpha",
             "children": {
-              "restaurants": {
-                "id": "restaurants",
-                "path": "AlphaStage/restaurants/restaurants",
+              "restaurants-s-three-alpha": {
+                "id": "restaurants-s-three-alpha",
+                "path": "AlphaStage/restaurants-s-three-alpha/restaurants-s-three-alpha",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "AlphaStage/restaurants/restaurants/Resource",
+                    "path": "AlphaStage/restaurants-s-three-alpha/restaurants-s-three-alpha/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
-                        "bucketName": "restaurants"
+                        "bucketName": "restaurants-s-three-alpha"
                       }
                     },
                     "constructInfo": {
@@ -1272,11 +1272,11 @@
               },
               "CDKMetadata": {
                 "id": "CDKMetadata",
-                "path": "AlphaStage/restaurants/CDKMetadata",
+                "path": "AlphaStage/restaurants-s-three-alpha/CDKMetadata",
                 "children": {
                   "Default": {
                     "id": "Default",
-                    "path": "AlphaStage/restaurants/CDKMetadata/Default",
+                    "path": "AlphaStage/restaurants-s-three-alpha/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.47.0"
@@ -1290,7 +1290,7 @@
               },
               "BootstrapVersion": {
                 "id": "BootstrapVersion",
-                "path": "AlphaStage/restaurants/BootstrapVersion",
+                "path": "AlphaStage/restaurants-s-three-alpha/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
                   "version": "2.47.0"
@@ -1298,7 +1298,7 @@
               },
               "CheckBootstrapVersion": {
                 "id": "CheckBootstrapVersion",
-                "path": "AlphaStage/restaurants/CheckBootstrapVersion",
+                "path": "AlphaStage/restaurants-s-three-alpha/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
                   "version": "2.47.0"
@@ -1310,21 +1310,21 @@
               "version": "2.47.0"
             }
           },
-          "meals": {
-            "id": "meals",
-            "path": "AlphaStage/meals",
+          "menu-s-three-alpha": {
+            "id": "menu-s-three-alpha",
+            "path": "AlphaStage/menu-s-three-alpha",
             "children": {
-              "meals": {
-                "id": "meals",
-                "path": "AlphaStage/meals/meals",
+              "menu-s-three-alpha": {
+                "id": "menu-s-three-alpha",
+                "path": "AlphaStage/menu-s-three-alpha/menu-s-three-alpha",
                 "children": {
                   "Resource": {
                     "id": "Resource",
-                    "path": "AlphaStage/meals/meals/Resource",
+                    "path": "AlphaStage/menu-s-three-alpha/menu-s-three-alpha/Resource",
                     "attributes": {
                       "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
                       "aws:cdk:cloudformation:props": {
-                        "bucketName": "meals"
+                        "bucketName": "menu-s-three-alpha"
                       }
                     },
                     "constructInfo": {
@@ -1340,11 +1340,11 @@
               },
               "CDKMetadata": {
                 "id": "CDKMetadata",
-                "path": "AlphaStage/meals/CDKMetadata",
+                "path": "AlphaStage/menu-s-three-alpha/CDKMetadata",
                 "children": {
                   "Default": {
                     "id": "Default",
-                    "path": "AlphaStage/meals/CDKMetadata/Default",
+                    "path": "AlphaStage/menu-s-three-alpha/CDKMetadata/Default",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnResource",
                       "version": "2.47.0"
@@ -1358,11 +1358,11 @@
               },
               "Exports": {
                 "id": "Exports",
-                "path": "AlphaStage/meals/Exports",
+                "path": "AlphaStage/menu-s-three-alpha/Exports",
                 "children": {
-                  "Output{\"Fn::GetAtt\":[\"meals10CA2E2F\",\"Arn\"]}": {
-                    "id": "Output{\"Fn::GetAtt\":[\"meals10CA2E2F\",\"Arn\"]}",
-                    "path": "AlphaStage/meals/Exports/Output{\"Fn::GetAtt\":[\"meals10CA2E2F\",\"Arn\"]}",
+                  "Output{\"Fn::GetAtt\":[\"menusthreealphaA2BA99FF\",\"Arn\"]}": {
+                    "id": "Output{\"Fn::GetAtt\":[\"menusthreealphaA2BA99FF\",\"Arn\"]}",
+                    "path": "AlphaStage/menu-s-three-alpha/Exports/Output{\"Fn::GetAtt\":[\"menusthreealphaA2BA99FF\",\"Arn\"]}",
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.CfnOutput",
                       "version": "2.47.0"
@@ -1376,7 +1376,7 @@
               },
               "BootstrapVersion": {
                 "id": "BootstrapVersion",
-                "path": "AlphaStage/meals/BootstrapVersion",
+                "path": "AlphaStage/menu-s-three-alpha/BootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnParameter",
                   "version": "2.47.0"
@@ -1384,7 +1384,7 @@
               },
               "CheckBootstrapVersion": {
                 "id": "CheckBootstrapVersion",
-                "path": "AlphaStage/meals/CheckBootstrapVersion",
+                "path": "AlphaStage/menu-s-three-alpha/CheckBootstrapVersion",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnRule",
                   "version": "2.47.0"
@@ -1644,7 +1644,7 @@
                                   "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
                                 },
                                 {
-                                  "Fn::ImportValue": "AlphaStage-meals:ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
+                                  "Fn::ImportValue": "AlphaStage-menu-s-three-alpha:ExportsOutputFnGetAttmenusthreealphaA2BA99FFArnFC404B4C"
                                 },
                                 {
                                   "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
@@ -1760,7 +1760,7 @@
                                   "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
                                 },
                                 {
-                                  "Fn::ImportValue": "AlphaStage-meals:ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
+                                  "Fn::ImportValue": "AlphaStage-menu-s-three-alpha:ExportsOutputFnGetAttmenusthreealphaA2BA99FFArnFC404B4C"
                                 },
                                 {
                                   "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
@@ -3050,52 +3050,6 @@
                                 }
                               },
                               {
-                                "name": "meals.Prepare",
-                                "inputArtifacts": [
-                                  {
-                                    "name": "DevHourShellStep_Output"
-                                  }
-                                ],
-                                "actionTypeId": {
-                                  "category": "Deploy",
-                                  "version": "1",
-                                  "owner": "AWS",
-                                  "provider": "CloudFormation"
-                                },
-                                "configuration": {
-                                  "StackName": "AlphaStage-meals",
-                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
-                                  "RoleArn": {
-                                    "Fn::Join": [
-                                      "",
-                                      [
-                                        "arn:",
-                                        {
-                                          "Ref": "AWS::Partition"
-                                        },
-                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
-                                      ]
-                                    ]
-                                  },
-                                  "ActionMode": "CHANGE_SET_REPLACE",
-                                  "ChangeSetName": "PipelineChange",
-                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemeals68953FE9.template.json"
-                                },
-                                "runOrder": 1,
-                                "roleArn": {
-                                  "Fn::Join": [
-                                    "",
-                                    [
-                                      "arn:",
-                                      {
-                                        "Ref": "AWS::Partition"
-                                      },
-                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
-                                    ]
-                                  ]
-                                }
-                              },
-                              {
                                 "name": "menuTestTableAlphaStack.Prepare",
                                 "inputArtifacts": [
                                   {
@@ -3126,6 +3080,52 @@
                                   "ActionMode": "CHANGE_SET_REPLACE",
                                   "ChangeSetName": "PipelineChange",
                                   "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemenuTestTableAlphaStackEDB1572D.template.json"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "menu-s-three-alpha.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "DevHourShellStep_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "AlphaStage-menu-s-three-alpha",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemenusthreealpha6DDB8176.template.json"
                                 },
                                 "runOrder": 1,
                                 "roleArn": {
@@ -3188,7 +3188,7 @@
                                 }
                               },
                               {
-                                "name": "restaurants.Prepare",
+                                "name": "restaurants-s-three-alpha.Prepare",
                                 "inputArtifacts": [
                                   {
                                     "name": "DevHourShellStep_Output"
@@ -3201,7 +3201,7 @@
                                   "provider": "CloudFormation"
                                 },
                                 "configuration": {
-                                  "StackName": "AlphaStage-restaurants",
+                                  "StackName": "AlphaStage-restaurants-s-three-alpha",
                                   "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
                                   "RoleArn": {
                                     "Fn::Join": [
@@ -3217,7 +3217,7 @@
                                   },
                                   "ActionMode": "CHANGE_SET_REPLACE",
                                   "ChangeSetName": "PipelineChange",
-                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagerestaurants7E06AF62.template.json"
+                                  "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagerestaurantssthreealphaB145E4A2.template.json"
                                 },
                                 "runOrder": 1,
                                 "roleArn": {
@@ -3442,7 +3442,7 @@
                                 }
                               },
                               {
-                                "name": "meals.Deploy",
+                                "name": "menuTestTableAlphaStack.Deploy",
                                 "actionTypeId": {
                                   "category": "Deploy",
                                   "version": "1",
@@ -3450,7 +3450,7 @@
                                   "provider": "CloudFormation"
                                 },
                                 "configuration": {
-                                  "StackName": "AlphaStage-meals",
+                                  "StackName": "AlphaStage-menuTestTableAlphaStack",
                                   "ActionMode": "CHANGE_SET_EXECUTE",
                                   "ChangeSetName": "PipelineChange"
                                 },
@@ -3469,7 +3469,7 @@
                                 }
                               },
                               {
-                                "name": "menuTestTableAlphaStack.Deploy",
+                                "name": "menu-s-three-alpha.Deploy",
                                 "actionTypeId": {
                                   "category": "Deploy",
                                   "version": "1",
@@ -3477,7 +3477,7 @@
                                   "provider": "CloudFormation"
                                 },
                                 "configuration": {
-                                  "StackName": "AlphaStage-menuTestTableAlphaStack",
+                                  "StackName": "AlphaStage-menu-s-three-alpha",
                                   "ActionMode": "CHANGE_SET_EXECUTE",
                                   "ChangeSetName": "PipelineChange"
                                 },
@@ -3523,7 +3523,7 @@
                                 }
                               },
                               {
-                                "name": "restaurants.Deploy",
+                                "name": "restaurants-s-three-alpha.Deploy",
                                 "actionTypeId": {
                                   "category": "Deploy",
                                   "version": "1",
@@ -3531,7 +3531,7 @@
                                   "provider": "CloudFormation"
                                 },
                                 "configuration": {
-                                  "StackName": "AlphaStage-restaurants",
+                                  "StackName": "AlphaStage-restaurants-s-three-alpha",
                                   "ActionMode": "CHANGE_SET_EXECUTE",
                                   "ChangeSetName": "PipelineChange"
                                 },
@@ -4281,17 +4281,17 @@
                           "version": "10.1.127"
                         }
                       },
-                      "meals.Prepare": {
-                        "id": "meals.Prepare",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/meals.Prepare",
+                      "menuTestTableAlphaStack.Prepare": {
+                        "id": "menuTestTableAlphaStack.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menuTestTableAlphaStack.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"
                         }
                       },
-                      "menuTestTableAlphaStack.Prepare": {
-                        "id": "menuTestTableAlphaStack.Prepare",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menuTestTableAlphaStack.Prepare",
+                      "menu-s-three-alpha.Prepare": {
+                        "id": "menu-s-three-alpha.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menu-s-three-alpha.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"
@@ -4305,9 +4305,9 @@
                           "version": "10.1.127"
                         }
                       },
-                      "restaurants.Prepare": {
-                        "id": "restaurants.Prepare",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/restaurants.Prepare",
+                      "restaurants-s-three-alpha.Prepare": {
+                        "id": "restaurants-s-three-alpha.Prepare",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/restaurants-s-three-alpha.Prepare",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"
@@ -4369,17 +4369,17 @@
                           "version": "10.1.127"
                         }
                       },
-                      "meals.Deploy": {
-                        "id": "meals.Deploy",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/meals.Deploy",
+                      "menuTestTableAlphaStack.Deploy": {
+                        "id": "menuTestTableAlphaStack.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menuTestTableAlphaStack.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"
                         }
                       },
-                      "menuTestTableAlphaStack.Deploy": {
-                        "id": "menuTestTableAlphaStack.Deploy",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menuTestTableAlphaStack.Deploy",
+                      "menu-s-three-alpha.Deploy": {
+                        "id": "menu-s-three-alpha.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/menu-s-three-alpha.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"
@@ -4393,9 +4393,9 @@
                           "version": "10.1.127"
                         }
                       },
-                      "restaurants.Deploy": {
-                        "id": "restaurants.Deploy",
-                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/restaurants.Deploy",
+                      "restaurants-s-three-alpha.Deploy": {
+                        "id": "restaurants-s-three-alpha.Deploy",
+                        "path": "DevHourPipelineStack/DevHourPipeline/Pipeline/AlphaStage/restaurants-s-three-alpha.Deploy",
                         "constructInfo": {
                           "fqn": "constructs.Construct",
                           "version": "10.1.127"

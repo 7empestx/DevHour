@@ -160,7 +160,7 @@ export class AlphaStage extends Stage {
         this.S3Stack = new S3Stack(this, { 
             account:      props.account,
             instanceName: "S3Stack",
-            id:           "restaurantsS3Alpha",
+            id:           "restaurants-s-three-alpha",
             accountId:    Constants.Account,
             region:       Constants.Region,
             stackId:      "S3StackID",
@@ -170,7 +170,7 @@ export class AlphaStage extends Stage {
         this.S3Stack = new S3Stack(this, { 
             account:      props.account,
             instanceName: "S3Stack",
-            id:           "mealsS3Alpha",
+            id:           "menu-s-three-alpha",
             accountId:    Constants.Account,
             region:       Constants.Region,
             stackId:      "S3StackID",

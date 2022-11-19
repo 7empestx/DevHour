@@ -176,7 +176,7 @@
          "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
         },
         {
-         "Fn::ImportValue": "AlphaStage-meals:ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
+         "Fn::ImportValue": "AlphaStage-menu-s-three-alpha:ExportsOutputFnGetAttmenusthreealphaA2BA99FFArnFC404B4C"
         },
         {
          "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
@@ -262,7 +262,7 @@
          "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
         },
         {
-         "Fn::ImportValue": "AlphaStage-meals:ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
+         "Fn::ImportValue": "AlphaStage-menu-s-three-alpha:ExportsOutputFnGetAttmenusthreealphaA2BA99FFArnFC404B4C"
         },
         {
          "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"

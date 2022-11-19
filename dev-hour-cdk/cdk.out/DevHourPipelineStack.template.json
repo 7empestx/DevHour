@@ -652,52 +652,6 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-meals",
-         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
-         "RoleArn": {
-          "Fn::Join": [
-           "",
-           [
-            "arn:",
-            {
-             "Ref": "AWS::Partition"
-            },
-            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
-           ]
-          ]
-         },
-         "ActionMode": "CHANGE_SET_REPLACE",
-         "ChangeSetName": "PipelineChange",
-         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemeals68953FE9.template.json"
-        },
-        "InputArtifacts": [
-         {
-          "Name": "DevHourShellStep_Output"
-         }
-        ],
-        "Name": "meals.Prepare",
-        "RoleArn": {
-         "Fn::Join": [
-          "",
-          [
-           "arn:",
-           {
-            "Ref": "AWS::Partition"
-           },
-           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
-          ]
-         ]
-        },
-        "RunOrder": 1
-       },
-       {
-        "ActionTypeId": {
-         "Category": "Deploy",
-         "Owner": "AWS",
-         "Provider": "CloudFormation",
-         "Version": "1"
-        },
-        "Configuration": {
          "StackName": "AlphaStage-menuTestTableAlphaStack",
          "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
          "RoleArn": {
@@ -722,6 +676,52 @@
          }
         ],
         "Name": "menuTestTableAlphaStack.Prepare",
+        "RoleArn": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1"
+          ]
+         ]
+        },
+        "RunOrder": 1
+       },
+       {
+        "ActionTypeId": {
+         "Category": "Deploy",
+         "Owner": "AWS",
+         "Provider": "CloudFormation",
+         "Version": "1"
+        },
+        "Configuration": {
+         "StackName": "AlphaStage-menu-s-three-alpha",
+         "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+         "RoleArn": {
+          "Fn::Join": [
+           "",
+           [
+            "arn:",
+            {
+             "Ref": "AWS::Partition"
+            },
+            ":iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1"
+           ]
+          ]
+         },
+         "ActionMode": "CHANGE_SET_REPLACE",
+         "ChangeSetName": "PipelineChange",
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagemenusthreealpha6DDB8176.template.json"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "DevHourShellStep_Output"
+         }
+        ],
+        "Name": "menu-s-three-alpha.Prepare",
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -790,7 +790,7 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-restaurants",
+         "StackName": "AlphaStage-restaurants-s-three-alpha",
          "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
          "RoleArn": {
           "Fn::Join": [
@@ -806,14 +806,14 @@
          },
          "ActionMode": "CHANGE_SET_REPLACE",
          "ChangeSetName": "PipelineChange",
-         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagerestaurants7E06AF62.template.json"
+         "TemplatePath": "DevHourShellStep_Output::assembly-AlphaStage/AlphaStagerestaurantssthreealphaB145E4A2.template.json"
         },
         "InputArtifacts": [
          {
           "Name": "DevHourShellStep_Output"
          }
         ],
-        "Name": "restaurants.Prepare",
+        "Name": "restaurants-s-three-alpha.Prepare",
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -1044,11 +1044,11 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-meals",
+         "StackName": "AlphaStage-menuTestTableAlphaStack",
          "ActionMode": "CHANGE_SET_EXECUTE",
          "ChangeSetName": "PipelineChange"
         },
-        "Name": "meals.Deploy",
+        "Name": "menuTestTableAlphaStack.Deploy",
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -1071,11 +1071,11 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-menuTestTableAlphaStack",
+         "StackName": "AlphaStage-menu-s-three-alpha",
          "ActionMode": "CHANGE_SET_EXECUTE",
          "ChangeSetName": "PipelineChange"
         },
-        "Name": "menuTestTableAlphaStack.Deploy",
+        "Name": "menu-s-three-alpha.Deploy",
         "RoleArn": {
          "Fn::Join": [
           "",
@@ -1125,11 +1125,11 @@
          "Version": "1"
         },
         "Configuration": {
-         "StackName": "AlphaStage-restaurants",
+         "StackName": "AlphaStage-restaurants-s-three-alpha",
          "ActionMode": "CHANGE_SET_EXECUTE",
          "ChangeSetName": "PipelineChange"
         },
-        "Name": "restaurants.Deploy",
+        "Name": "restaurants-s-three-alpha.Deploy",
         "RoleArn": {
          "Fn::Join": [
           "",

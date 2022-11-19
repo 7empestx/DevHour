@@ -752,131 +752,131 @@
       },
       "displayName": "AlphaStage/menuTestTableAlphaStack"
     },
-    "AlphaStagerestaurants7E06AF62.assets": {
+    "AlphaStagerestaurantssthreealphaB145E4A2.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "AlphaStagerestaurants7E06AF62.assets.json",
+        "file": "AlphaStagerestaurantssthreealphaB145E4A2.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "AlphaStagerestaurants7E06AF62": {
+    "AlphaStagerestaurantssthreealphaB145E4A2": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://060498623801/us-west-1",
       "properties": {
-        "templateFile": "AlphaStagerestaurants7E06AF62.template.json",
+        "templateFile": "AlphaStagerestaurantssthreealphaB145E4A2.template.json",
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/fc43d2305804e4e87ac2d5290a357597a34b48ecf6e69862b55cfcadd7e7a34a.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/cb924a5572a7371ab0fd472aff8a81ea68f432482537c1ee43a7b800458cde98.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "AlphaStagerestaurants7E06AF62.assets"
+          "AlphaStagerestaurantssthreealphaB145E4A2.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         },
-        "stackName": "AlphaStage-restaurants"
+        "stackName": "AlphaStage-restaurants-s-three-alpha"
       },
       "dependencies": [
-        "AlphaStagerestaurants7E06AF62.assets"
+        "AlphaStagerestaurantssthreealphaB145E4A2.assets"
       ],
       "metadata": {
-        "/AlphaStage/restaurants/restaurants/Resource": [
+        "/AlphaStage/restaurants-s-three-alpha/restaurants-s-three-alpha/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "restaurants0B9AC02E"
+            "data": "restaurantssthreealphaAF32748F"
           }
         ],
-        "/AlphaStage/restaurants/CDKMetadata/Default": [
+        "/AlphaStage/restaurants-s-three-alpha/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/AlphaStage/restaurants/BootstrapVersion": [
+        "/AlphaStage/restaurants-s-three-alpha/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/AlphaStage/restaurants/CheckBootstrapVersion": [
+        "/AlphaStage/restaurants-s-three-alpha/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "AlphaStage/restaurants"
+      "displayName": "AlphaStage/restaurants-s-three-alpha"
     },
-    "AlphaStagemeals68953FE9.assets": {
+    "AlphaStagemenusthreealpha6DDB8176.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "AlphaStagemeals68953FE9.assets.json",
+        "file": "AlphaStagemenusthreealpha6DDB8176.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "AlphaStagemeals68953FE9": {
+    "AlphaStagemenusthreealpha6DDB8176": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://060498623801/us-west-1",
       "properties": {
-        "templateFile": "AlphaStagemeals68953FE9.template.json",
+        "templateFile": "AlphaStagemenusthreealpha6DDB8176.template.json",
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/0bf15bb205e630b0567c09417a4525fa2e8e4c665617b1d23638a85f77cb7844.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/0d847b5a80d2b2b5ffc13841d4cf0f72341f262bffe3dfcf43cd98bbc4acec72.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "AlphaStagemeals68953FE9.assets"
+          "AlphaStagemenusthreealpha6DDB8176.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-lookup-role-060498623801-us-west-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         },
-        "stackName": "AlphaStage-meals"
+        "stackName": "AlphaStage-menu-s-three-alpha"
       },
       "dependencies": [
-        "AlphaStagemeals68953FE9.assets"
+        "AlphaStagemenusthreealpha6DDB8176.assets"
       ],
       "metadata": {
-        "/AlphaStage/meals/meals/Resource": [
+        "/AlphaStage/menu-s-three-alpha/menu-s-three-alpha/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "meals10CA2E2F"
+            "data": "menusthreealphaA2BA99FF"
           }
         ],
-        "/AlphaStage/meals/CDKMetadata/Default": [
+        "/AlphaStage/menu-s-three-alpha/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/AlphaStage/meals/Exports/Output{\"Fn::GetAtt\":[\"meals10CA2E2F\",\"Arn\"]}": [
+        "/AlphaStage/menu-s-three-alpha/Exports/Output{\"Fn::GetAtt\":[\"menusthreealphaA2BA99FF\",\"Arn\"]}": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "ExportsOutputFnGetAttmeals10CA2E2FArn488275AE"
+            "data": "ExportsOutputFnGetAttmenusthreealphaA2BA99FFArnFC404B4C"
           }
         ],
-        "/AlphaStage/meals/BootstrapVersion": [
+        "/AlphaStage/menu-s-three-alpha/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/AlphaStage/meals/CheckBootstrapVersion": [
+        "/AlphaStage/menu-s-three-alpha/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "AlphaStage/meals"
+      "displayName": "AlphaStage/menu-s-three-alpha"
     },
     "AlphaStageDevHourCognitoStackAF8F29DE.assets": {
       "type": "cdk:asset-manifest",
@@ -894,7 +894,7 @@
         "validateOnSynth": true,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-deploy-role-060498623801-us-west-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-cfn-exec-role-060498623801-us-west-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/76bcf09636340edf91392122b55c9e1bd7c767660a955297ef596e53fd21fd02.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-060498623801-us-west-1/5a9f7f858582416f05f2875c1d36517884b405e6b26a09a3e7468ce3e765283e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -914,7 +914,7 @@
         "AlphaStagedietTestTableAlphaStackA6DC3AEA",
         "AlphaStageingredientTestTableAlphaStack04EB2236",
         "AlphaStagemenuTestTableAlphaStackEDB1572D",
-        "AlphaStagemeals68953FE9",
+        "AlphaStagemenusthreealpha6DDB8176",
         "AlphaStageDevHourCognitoStackAF8F29DE.assets"
       ],
       "metadata": {
