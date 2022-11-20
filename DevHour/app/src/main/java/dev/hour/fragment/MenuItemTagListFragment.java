@@ -19,12 +19,23 @@ import dev.hour.view.list.BusinessMenuListAdapter;
 public class MenuItemTagListFragment extends Fragment {
 
 
+        /// --------------
+    /// Static Members
+
+    public final static String TAG = "MenuItemTagListFragment";
+
+    /// --------------
+    /// Private Fields
+
+    private MenuItemTagListAdapter MenuItemTagListAdapter;
+
+
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
                              final ViewGroup viewGroup, final Bundle bundle) {
 
-        if (this.businessMenuListAdapter == null)
-            this.businessMenuListAdapter = new BusinessMenuListAdapter();
+        if (this.MenuItemTagListAdapter == null)
+            this.MenuItemTagListAdapter = new MenuItemTagListAdapter();
 
         final View layout =
                 layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
