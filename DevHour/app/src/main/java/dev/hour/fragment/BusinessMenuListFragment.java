@@ -13,6 +13,7 @@ import java.util.List;
 
 import dev.hour.R;
 import dev.hour.contracts.MealContract;
+import dev.hour.contracts.RestaurantContract;
 import dev.hour.view.list.BusinessMenuListAdapter;
 
 public class BusinessMenuListFragment extends Fragment implements MealContract.Menu.View {
@@ -26,6 +27,7 @@ public class BusinessMenuListFragment extends Fragment implements MealContract.M
     /// Private Fields
 
     private BusinessMenuListAdapter businessMenuListAdapter;
+    private MealContract.Menu.Presenter.InteractionListener listener;
 
 
     @Override
@@ -36,9 +38,9 @@ public class BusinessMenuListFragment extends Fragment implements MealContract.M
             this.businessMenuListAdapter = new BusinessMenuListAdapter();
 
         final View layout =
-                layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
+                layoutInflater.inflate(R.layout.fragment_business_menu_list, viewGroup, false);
         final RecyclerView recyclerView =
-                layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
+                layout.findViewById(R.id.fragment_business_menu_list_recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(this.businessMenuListAdapter);
@@ -57,4 +59,7 @@ public class BusinessMenuListFragment extends Fragment implements MealContract.M
 
     }
 
+    public void setInteractionListener(final MealContract.Menu.Presenter.InteractionListener listener) {
+        this.listener = listener;
+    }
 }

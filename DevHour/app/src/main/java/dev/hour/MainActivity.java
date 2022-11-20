@@ -11,6 +11,7 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -39,6 +40,7 @@ import dev.hour.fragment.SignUpFragment;
 import dev.hour.fragment.BusinessRestaurantListFragment;
 import dev.hour.fragment.BusinessAddRestaurantPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
+import dev.hour.presenter.MenuPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
 import dev.hour.presenter.DietPresenter;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements
         AuthenticatorContract.Presenter.InteractionListener,
         RestaurantContract.Presenter.InteractionListener,
         NavigationBarView.OnItemSelectedListener,
+        MealContract.Menu.Presenter.InteractionListener,
         MapView.SearchListener {
     //scope......
     static {
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements
     private UserContract.Database               userDatabase            ;
     private MealContract.Diet.Presenter         dietPresenter           ;
     private MealContract.Diet.Database          dietDatabase            ;
+    private MealContract.Menu.Presenter         menuPresenter           ;
     private RestaurantContract.Presenter        restaurantPresenter     ;
     private RestaurantContract.Database         restaurantDatabase      ;
     private Fragment                            lastFragment            ;
@@ -127,6 +131,9 @@ public class MainActivity extends AppCompatActivity implements
         restaurantDatabase      = new RestaurantDatabase(
                 this.getString(R.string.region), this.getString(R.string.restaurant_table_name), this.getString(R.string.restaurant_bucket_name), this.httpClient);
 
+        // Set up the menu presenter
+        menuPresenter = new MenuPresenter();
+        
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
         authenticatorPresenter.setInteractionListener(this);
@@ -232,11 +239,8 @@ public class MainActivity extends AppCompatActivity implements
                 this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
                 showBusinessRestaurantListFragment();
-
             }
-
         }
-
     }
 
     /**
@@ -325,8 +329,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onRestaurantSelected(final RestaurantContract.Restaurant restaurant) {
 
-        // TODO: MenuPresenter -> set Menu Id
-
+        showBusinessMenuListFragment();
     }
 
     /// ----------------------
@@ -560,6 +563,10 @@ public class MainActivity extends AppCompatActivity implements
 
             fragment = new BusinessMenuListFragment();
             transaction.add(R.id.activity_main, fragment, BusinessMenuListFragment.TAG);
+
+            menuPresenter.setView((MealContract.Menu.View) fragment);
+
+            ((BusinessMenuListFragment) fragment).setInteractionListener(this);
 
         } else if(fragment.isAdded()) {
 
@@ -947,4 +954,18 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    public void onShowMenuRequest() {
+
+    }
+
+    @Override
+    public void onShowBusinessAddMenuMeal(Map<String, Object> export) {
+
+    }
+
+    @Override
+    public void onShowBusinessAddMenuAddTag(Map<String, Object> export) {
+
+    }
 }
