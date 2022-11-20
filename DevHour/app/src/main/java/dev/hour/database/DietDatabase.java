@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import dev.hour.contracts.MealContract;
-import dev.hour.diet.Diet;
+import dev.hour.model.Diet;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.regions.Region;

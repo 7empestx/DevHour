@@ -76,7 +76,8 @@ export module Roles {
                     managedPolicies: [
                         new ManagedPolicy(scope, `${Constants.Cognito.AuthenticatedRoleId}AuthenticatedPolicy`,
                             {
-                                statements: [new PolicyStatements.DynamoDB.BasicCRUDPolicyStatement(arns)]
+                                statements: [new PolicyStatements.DynamoDB.BasicCRUDPolicyStatement(arns),
+                                             new PolicyStatements.S3.BasicCRUDPolicyStatement(arns)]
                             })
                     ]
 

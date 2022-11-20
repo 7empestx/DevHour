@@ -1,4 +1,4 @@
-package dev.hour.meal;
+package dev.hour.model;
 
 import java.time.chrono.MinguoDate;
 import java.util.Map;

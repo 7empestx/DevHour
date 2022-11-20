@@ -1,4 +1,4 @@
-package dev.hour.restaurant;
+package dev.hour.model;
 
 import java.io.OutputStream;
 

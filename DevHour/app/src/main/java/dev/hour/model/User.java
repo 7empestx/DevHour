@@ -1,4 +1,4 @@
-package dev.hour.user;
+package dev.hour.model;
 
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.UserContract;
