@@ -83,7 +83,7 @@ public class BusinessAddRestaurantFragment extends Fragment implements
                 data.put("name",        restaurantName.getText().toString());
                 data.put("address1",    address1.getText().toString());
                 data.put("address2",    address2.getText().toString());
-                data.put("pricing", "0");
+                data.put("pricing",     "0");
                 data.put("picture",         image.get("picture"));
                 data.put("content_length",  image.get("content_length"));
 

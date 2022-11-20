@@ -32,7 +32,7 @@ public class MenuItemTagListFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
                              final ViewGroup viewGroup, final Bundle bundle) {
-        
+
         final View layout =
                 layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
         final RecyclerView recyclerView =
