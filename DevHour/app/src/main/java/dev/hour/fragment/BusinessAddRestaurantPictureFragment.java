@@ -252,6 +252,15 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
             case MotionEvent.ACTION_DOWN:
 
+                if(this.startMatrix == null)
+                    this.startMatrix = new Matrix();
+
+                if(this.start == null)
+                    this.start = new PointF();
+
+                if(this.matrix == null)
+                    this.matrix = new Matrix();
+
                 this.startMatrix.set(userImage.getImageMatrix());
 
                 this.start.x = (event.getRawX());

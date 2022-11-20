@@ -15,17 +15,19 @@ import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.view.list.BusinessMenuListAdapter;
 
-public class MenuItemTagListFragment extends Fragment implements MealContract.Menu.View{
 
-        /// --------------
-        /// Static Members
+public class MenuItemTagListFragment extends Fragment {
 
-        public final static String TAG = "MenuItemTagListFragment";
 
-        /// --------------
-        /// Private Fields
+    /// --------------
+    /// Static Members
 
-        private BusinessMenuListAdapter MenuItemTagListAdapter;
+    public final static String TAG = "MenuItemTagListFragment";
+
+    /// --------------
+    /// Private Fields
+
+    private MenuItemTagListAdapter MenuItemTagListAdapter;
 
 
     @Override
@@ -33,7 +35,7 @@ public class MenuItemTagListFragment extends Fragment implements MealContract.Me
                              final ViewGroup viewGroup, final Bundle bundle) {
 
         if (this.MenuItemTagListAdapter == null)
-            this.MenuItemTagListAdapter = new BusinessMenuListAdapter();
+            this.MenuItemTagListAdapter = new MenuItemTagListAdapter();
 
         final View layout =
                 layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
@@ -41,7 +43,7 @@ public class MenuItemTagListFragment extends Fragment implements MealContract.Me
                 layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(this.MenuItemTagListAdapter);
+        recyclerView.setAdapter(this.businessMenuListAdapter);
 
         return layout;
 
@@ -50,10 +52,10 @@ public class MenuItemTagListFragment extends Fragment implements MealContract.Me
     @Override
     public void setMenu(List<MealContract.Meal> meals) {
 
-        if (this.MenuItemTagListAdapter == null)
-            this.MenuItemTagListAdapter = new BusinessMenuListAdapter();
+        if (this.businessMenuListAdapter == null)
+            this.businessMenuListAdapter = new BusinessMenuListAdapter();
 
-        this.MenuItemTagListAdapter.setMealsList(meals);
+        this.businessMenuListAdapter.setMealsList(meals);
 
     }
 
