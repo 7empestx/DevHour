@@ -25,4 +25,21 @@ export module PolicyStatements {
 
     }
 
+    export module S3 {
+
+        export class BasicCRUDPolicyStatement extends PolicyStatement {
+
+            constructor(resourceArns: string[]) {
+                super({
+                    effect:     Effect.ALLOW,
+                    actions:    Constants.S3.PolicyStatements.BasicCRUD.AllowActions,
+                    resources:  resourceArns
+                });
+            
+            }
+
+        }
+
+    }
+
 }

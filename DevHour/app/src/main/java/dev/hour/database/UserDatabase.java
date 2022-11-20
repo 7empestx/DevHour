@@ -7,8 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import dev.hour.contracts.UserContract;
-import dev.hour.user.User;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import dev.hour.model.User;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;

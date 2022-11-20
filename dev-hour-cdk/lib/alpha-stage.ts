@@ -13,7 +13,6 @@ import { AttributeType } from 'aws-cdk-lib/aws-dynamodb'
 import { EC2Stack } from './ec2-stack'
 import { HostedZoneStack } from './route53-stack' 
 import { CertificateStack } from './certificate-stack'
-import { InternetGatewayStack } from './internet-gateway-stack'
 import { Roles } from './roles'
 import { S3Stack } from './S3-stack'
 
@@ -45,9 +44,9 @@ export class AlphaStage extends Stage {
     private readonly menuTestTableStack:        DynamoDBStack   ;
     private readonly ec2Stack:                  EC2Stack        ;
     private readonly hostedZoneStack:           HostedZoneStack ;
-    private readonly internetGatewayStack:      InternetGatewayStack;
     private readonly certificateStack:          CertificateStack;
-    private readonly S3Stack:                   S3Stack         ;
+    private readonly mealBucketStack:           S3Stack         ;
+    private readonly restaurantBucketStack:     S3Stack         ;
 
     /// -----------
     /// Constructor
@@ -93,14 +92,6 @@ export class AlphaStage extends Stage {
                     subnetType:     Constants.EC2.VPC.SubnetConfiguration.Type
                 }
             ]
-        });
-
-        this.internetGatewayStack = new InternetGatewayStack(this, {
-            accountId:  props.account,
-            region:     props.region,
-            stackId:    Constants.EC2.InternetGateway.StackId,
-            id:         Constants.EC2.InternetGateway.Id,
-            vpcId:      this.vpcStack.vpc.vpcId,
         });
 
         this.userTestTableStack = new DynamoDBStack(this, {
@@ -157,24 +148,22 @@ export class AlphaStage extends Stage {
             region:       Constants.Region,
         });
 
-        this.S3Stack = new S3Stack(this, { 
+        this.restaurantBucketStack = new S3Stack(this, { 
             account:      props.account,
-            instanceName: "S3Stack",
-            id:           "restaurantsS3Alpha",
+            bucketName:   "restauranttestbucketalpha",
             accountId:    Constants.Account,
+            id:           "restaurantTestBucketAlphaId",
             region:       Constants.Region,
-            stackId:      "S3StackID",
-            keyName:      Constants.EC2.KeyName,
+            stackId:      "restaurantTestBucketAlphaStack",
         });
 
-        this.S3Stack = new S3Stack(this, { 
+        this.mealBucketStack = new S3Stack(this, { 
             account:      props.account,
-            instanceName: "S3Stack",
-            id:           "mealsS3Alpha",
+            bucketName:   "mealtestbucketalpha",
             accountId:    Constants.Account,
+            id:           "mealTestBucketAlphaId",
             region:       Constants.Region,
-            stackId:      "S3StackID",
-            keyName:      Constants.EC2.KeyName,
+            stackId:      "mealTestBucketAlphaStack",
         });
 
 
@@ -203,7 +192,8 @@ export class AlphaStage extends Stage {
                                              this.dietTestTableStack.tableArn,
                                              this.ingredientTestTableStack.tableArn,
                                              this.menuTestTableStack.tableArn,
-                                             this.S3Stack.bucketArn],
+                                             this.restaurantBucketStack.bucketArn,
+                                             this.mealBucketStack.bucketArn],
         });
 
         this.ec2Stack = new EC2Stack(this, {

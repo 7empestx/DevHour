@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import dev.hour.contracts.RestaurantContract;
-import dev.hour.restaurant.Restaurant;
+import dev.hour.model.Restaurant;
 
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.core.ResponseInputStream;

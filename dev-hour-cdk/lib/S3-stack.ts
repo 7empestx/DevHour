@@ -4,25 +4,24 @@ import { Bucket } from 'aws-cdk-lib/aws-s3'
 
 export interface TableProps {
     account:      string,
-    instanceName: string,
-    id:           string,
+    bucketName:   string,
     accountId:    string,
+    id:           string,
     region:       string,
     stackId:      string,
-    keyName:      string,
 }
 
 export class S3Stack extends Stack {
     private readonly _s3: Bucket;
 
     constructor(scope: Construct, props: TableProps) {
-        super(scope, props.id, { env: {
+        super(scope, props.stackId, { env: {
             account: props.accountId,
             region: props.region,
         }});
         
         this._s3 = new Bucket(this, props.id, {
-            bucketName: props.id,
+            bucketName: props.bucketName,
         });
     }
 

@@ -8,7 +8,7 @@
     <string name="user_table_name">userTestTableAlpha</string>
     <string name="diet_table_name">dietTestTableAlpha</string>
     <string name="restaurant_table_name">restaurantTestTableAlpha</string>
-    <string name="restaurant_bucket_name">restaurantTestBucketAlpha</string>
+    <string name="restaurant_bucket_name">restauranttestaucketalpha</string>
     <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>
     <string name="bottom_navigation_location">Location</string>
     <string name="bottom_navigation_list">List</string>

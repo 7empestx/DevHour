@@ -1,4 +1,4 @@
-package dev.hour.diet;
+package dev.hour.model;
 
 import java.util.ArrayList;
 import java.util.List;

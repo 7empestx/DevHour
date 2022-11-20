@@ -254,6 +254,33 @@ export module Constants {
 
     }
 
+    /// --
+    /// S3
+
+    export module S3 {
+
+        export const Id         =  `${AppName}S3`     ;
+        export const StackId    =  `${Id}Stack`       ;
+
+        /// -----------------
+        /// Policy Statements
+
+        export module PolicyStatements {
+
+            /// ----------
+            /// Basic Read
+
+            export module BasicCRUD {
+
+                export const AllowActions = [   's3:PutObject',
+                                                's3:GetObject'];
+
+            }
+
+        }
+
+    }
+
     /// --------
     /// Route53
     

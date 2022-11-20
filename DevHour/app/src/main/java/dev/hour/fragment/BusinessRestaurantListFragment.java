@@ -16,7 +16,8 @@ import dev.hour.contracts.RestaurantContract;
 import dev.hour.view.list.BusinessRestaurantListAdapter;
 import dev.hour.view.list.CustomerRestaurantListAdapter;
 
-public class BusinessRestaurantListFragment extends Fragment implements RestaurantContract.View, View.OnClickListener {
+public class BusinessRestaurantListFragment extends Fragment
+        implements RestaurantContract.View, View.OnClickListener, BusinessRestaurantListAdapter.Listener {
 
     /// --------------
     /// Static Members
@@ -89,4 +90,18 @@ public class BusinessRestaurantListFragment extends Fragment implements Restaura
 
     }
 
+    @Override
+    public void onEditButtonClicked(RestaurantContract.Restaurant restaurant) {
+
+
+    }
+
+    @Override
+    public void onItemClicked(RestaurantContract.Restaurant restaurant) {
+
+        if(this.listener != null)
+            this.listener.onRestaurantSelected(restaurant);
+
+    }
+    
 }
