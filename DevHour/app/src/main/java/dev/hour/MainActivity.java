@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements
     private Fragment                            lastFragment            ;
     private SdkHttpClient                       httpClient              ;
     private String                              userId                  ;
+    public boolean                             tearDown                 = false;
 
     /// ------------------
     /// Activity Lifecycle
@@ -136,8 +137,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
 
-        // Check if we're authenticated
-        this.authenticator.checkSession();
+        if(!tearDown)
+            this.authenticator.checkSession();
 
     }
 

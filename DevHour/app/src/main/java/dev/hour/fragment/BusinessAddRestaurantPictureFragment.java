@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
+import dev.hour.MainActivity;
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
 
@@ -293,6 +294,11 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
 
+        final Activity activity = requireActivity();
+
+        if(activity instanceof MainActivity)
+            ((MainActivity) activity).tearDown = true;
+
         final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -311,6 +317,8 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
                             fitImage();
 
                         }
+
+                        ((MainActivity) activity).tearDown = false;
 
                     }
 
