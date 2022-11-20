@@ -289,42 +289,21 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
     public void storagePermissionsGranted() {
 
-        final Intent intent = new Intent();
+        final ActivityResultLauncher<String> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                uri -> {
 
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
+                    if(userImage != null) {
 
-        final Activity activity = requireActivity();
+                        userImage.setScaleType(ImageView.ScaleType.MATRIX);
+                        userImage.setImageURI(uri);
 
-        if(activity instanceof MainActivity)
-            ((MainActivity) activity).tearDown = true;
-
-        final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-
-                    // If we received an OK code
-                    if(result.getResultCode() == Activity.RESULT_OK) {
-
-                        // Attempt to retrieve the uri
-                        final Uri filePath = result.getData().getData();
-
-                        if(userImage != null) {
-
-                            userImage.setScaleType(ImageView.ScaleType.MATRIX);
-                            userImage.setImageURI(filePath);
-
-                            fitImage();
-
-                        }
-
-                        ((MainActivity) activity).tearDown = false;
+                        fitImage();
 
                     }
 
-                }
+                });
 
-        );
+        activityResultLauncher.launch("image/*");
 
     }
 

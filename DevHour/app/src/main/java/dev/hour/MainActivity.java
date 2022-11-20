@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements
     private Fragment                            lastFragment            ;
     private SdkHttpClient                       httpClient              ;
     private String                              userId                  ;
-    public boolean                             tearDown                 = false;
 
     /// ------------------
     /// Activity Lifecycle
@@ -137,8 +136,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
 
-        if(!tearDown)
-            this.authenticator.checkSession();
+        this.authenticator.checkSession();
 
     }
 
@@ -211,13 +209,17 @@ public class MainActivity extends AppCompatActivity implements
         // Retrieve the user
         final UserContract.User user = this.userPresenter.getUser(userId)    ;
 
-        if(user.getType().equals("customer")) showMapFragment();
+        if(user != null) {
 
-        else {
+            if (user.getType().equals("customer")) showMapFragment();
 
-            this.restaurantPresenter.setRestaurantsByOwner(this.userId);
+            else {
 
-            showBusinessRestaurantListFragment();
+                this.restaurantPresenter.setRestaurantsByOwner(this.userId);
+
+                showBusinessRestaurantListFragment();
+
+            }
 
         }
 
