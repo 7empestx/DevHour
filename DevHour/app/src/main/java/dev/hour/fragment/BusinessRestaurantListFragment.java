@@ -48,6 +48,7 @@ public class BusinessRestaurantListFragment extends Fragment
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(this.businessRestaurantListAdapter);
 
+        this.businessRestaurantListAdapter.setListener(this);
         floatingActionButton.setOnClickListener(this);
 
         return layout;
