@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,8 +76,8 @@ public class BusinessRestaurantListAdapter extends
     /// Private Fields
 
     private List<RestaurantContract.Restaurant>         restaurantList  ;
-    private Map<String, RestaurantContract.Restaurant>  restaurants     ;
     private Map<String, Bitmap>                         images          ;
+    private Listener                                    listener        ;
 
     /**
      * Invoked when a view holder is to be created. Inflates a new Listener, and assigns it
@@ -98,6 +99,7 @@ public class BusinessRestaurantListAdapter extends
         final ImageView editButton  =
                 view.findViewById(R.id.fragment_business_restaurant_list_item_edit_button);
 
+        view.setOnClickListener(this);
         editButton.setOnClickListener(this);
 
         return new BusinessRestaurantListAdapter.BusinessRestaurantListItemViewHolder(view);
@@ -168,8 +170,36 @@ public class BusinessRestaurantListAdapter extends
 
     }
 
+    /**
+     * Invoked when a [BusinessRestaurantListItemViewHolder] [View] has been clicked.
+     * Notifies the [Listener] of the interaction
+     * @param v The [Alert] list item [View]
+     */
     @Override
     public void onClick(View v) {
+
+        int position;
+
+        switch(v.getId()) {
+
+            case R.id.fragment_business_restaurant_list_item_edit_button:
+
+                position = Integer.valueOf(v.getTag().toString());
+
+                if(this.listener != null)
+                    this.listener.onEditButtonClicked(this.restaurantList.get(position));
+
+                break;
+
+            default:
+
+                position = Integer.valueOf(v.getTag().toString());
+
+                if(this.listener != null)
+                    this.listener.onItemClicked(this.restaurantList.get(position));
+
+                break;
+        }
 
     }
 
@@ -208,6 +238,17 @@ public class BusinessRestaurantListAdapter extends
 
         this.restaurantList = Lists;
 
+        if(this.images == null)
+            this.images = new HashMap<>();
+
+        else this.images.clear();
+
+    }
+
+    public void setListener(final Listener listener) {
+
+        this.listener = listener;
+
     }
 
     /// ----------
@@ -215,7 +256,8 @@ public class BusinessRestaurantListAdapter extends
 
     public interface Listener {
 
-
+        void onEditButtonClicked(final RestaurantContract.Restaurant restaurant);
+        void onItemClicked(final RestaurantContract.Restaurant restaurant);
 
     }
 
