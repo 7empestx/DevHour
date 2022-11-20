@@ -19,7 +19,7 @@ import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.view.list.CustomerRestaurantListAdapter;
 
-public class RestaurantListFragment extends Fragment {
+public class MenuItemTagListFragment extends Fragment {
 
     public final static String TAG = "RestaurantListFragment";
 

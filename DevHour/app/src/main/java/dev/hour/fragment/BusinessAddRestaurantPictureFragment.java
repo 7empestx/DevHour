@@ -61,9 +61,30 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
     private int                     pointerCount            ;
     private float                   scale                   ;
     private GestureDetector         clickGestureDetector    ;
+    private ActivityResultLauncher<String> activityResultLauncher;
 
     /// --------
     /// Fragment
+
+    @Override
+    public void onCreate(final Bundle bundle) {
+        super.onCreate(bundle);
+
+        this.activityResultLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                uri -> {
+
+                    if (userImage != null) {
+
+                        userImage.setScaleType(ImageView.ScaleType.MATRIX);
+                        userImage.setImageURI(uri);
+
+                        fitImage();
+
+                    }
+
+                });
+
+    }
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -288,20 +309,6 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
     }
 
     public void storagePermissionsGranted() {
-
-        final ActivityResultLauncher<String> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                uri -> {
-
-                    if(userImage != null) {
-
-                        userImage.setScaleType(ImageView.ScaleType.MATRIX);
-                        userImage.setImageURI(uri);
-
-                        fitImage();
-
-                    }
-
-                });
 
         activityResultLauncher.launch("image/*");
 
