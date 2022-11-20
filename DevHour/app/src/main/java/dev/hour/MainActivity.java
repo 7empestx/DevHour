@@ -172,7 +172,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
 
-        this.authenticator.checkSession();
+        if((this.userId == null) || this.userId.isEmpty())
+            this.authenticator.checkSession();
 
     }
 
@@ -245,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements
         this.userPresenter.setUser(userId);
 
         // Retrieve the user
-        final UserContract.User user = this.userPresenter.getUser(userId)    ;
+        final UserContract.User user = this.userPresenter.getUser(this.userId)    ;
 
         if(user != null) {
 

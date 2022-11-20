@@ -132,9 +132,14 @@ public class BusinessRestaurantListAdapter extends
 
             final Bitmap restaurantImage = getImageFor(restaurant);
 
-            if(restaurantImage != null)
+            if(restaurantImage != null) {
+
                 image.setImageBitmap(Bitmap.createScaledBitmap(
-                        restaurantImage, image.getMeasuredWidth(), image.getMeasuredHeight(), false));
+                        restaurantImage, 192, 192, false));
+
+                image.setClipToOutline(true);
+
+            }
 
             holder.itemView.setTag(String.valueOf(position));
             editButton.setTag(String.valueOf(position));

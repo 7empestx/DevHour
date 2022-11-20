@@ -464,19 +464,17 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
         if(pictureStream != null) {
 
-            final Thread uploadThread = new Thread(() ->
-                    database.putObject(restaurantPictureId, pictureStream, contentLength));
-
             try {
 
-                thread.start();
-                thread.join();
+                final Thread uploadThread = new Thread(() ->
+                        database.putObject(restaurantPictureId, pictureStream, contentLength));
+
                 uploadThread.start();
                 uploadThread.join();
 
             } catch (final Exception exception) {
 
-                Log.e("RestaurantDatabase", exception.getMessage());
+                Log.e("RestaurantDatabase", "Error: " + exception.getMessage());
 
             }
 
@@ -567,7 +565,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
                 final ScanResponse scanResponse = client.scan(scanRequest);
 
-                for (final Map<String, AttributeValue> item : scanResponse.items())
+                for (final Map<String, AttributeValue> item: scanResponse.items())
                     results.add(bindRestaurantFrom(item));
 
             } catch (final Exception exception) {
