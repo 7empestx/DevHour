@@ -3,6 +3,7 @@ package dev.hour.database;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,23 +17,52 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
+import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 
 public class DietDatabase implements MealContract.Diet.Database {
+
+    /// ---------------------
+    /// Public Static Members
+
+    public final static String ACCESS_KEY       = "ACCESS_KEY"      ;
+    public final static String SECRET_KEY       = "SECRET_KEY"      ;
+    public final static String SESSION_TOKEN    = "SESSION_TOKEN"   ;
+
+    /// ---------------------
+    /// Public Static Methods
+
+    /**
+     * Generates a semi-unique hexadecimal identifier based on the current time
+     * @return [String] value of a semi-unique hexadecimal identifier
+     */
+    public static String GenerateId() {
+
+        final long      time        = Calendar.getInstance().getTimeInMillis();
+        final String    timeString  = String.valueOf(time);
+
+        return Integer.toHexString(timeString.hashCode());
+
+    }
 
     /// ---------------
     /// Private Members
 
-    private DynamoDbClient client      ;
-    private String                      tableName   ;
-    private String                      region      ;
-    private SdkHttpClient httpClient  ;
-    private Map<String, AttributeValue> response    ;
+    private DynamoDbClient                          client          ;
+    private String                                  tableName       ;
+    private String                                  region          ;
+    private SdkHttpClient                           httpClient      ;
+    private Map<String, AttributeValue>             response        ;
 
     /// ------------
     /// Constructing
 
-    public DietDatabase(final String region, final String tableName,
-                              final SdkHttpClient httpClient){
+    /**
+     * Initializes the [DietDatabase] to its' default state.
+     * @param region The [Region] corresponding the Menu resources
+     * @param tableName The name of the Menu table
+     * @param httpClient The http client to perform the requests.
+     */
+    public DietDatabase(final String region, final String tableName, final SdkHttpClient httpClient){
 
         this.client     = null          ;
         this.tableName  = tableName     ;
@@ -45,7 +75,43 @@ public class DietDatabase implements MealContract.Diet.Database {
     /// Private Methods
 
     /**
-     * Creates a GetItemRequest to get the item  with the specified key, value pair.
+     * Creates an item that can update a DynamoDB table item.
+     * @param data The item to set
+     * @return Map<String, AttributeValue> with the given data.
+     */
+    private Map<String, AttributeValue> createItemFrom(final Map<String, Object> data) {
+
+        final Map<String, AttributeValue> result;
+
+        if(data != null) {
+
+            result = new HashMap<>();
+
+            for(Map.Entry<String, Object> entry: data.entrySet()) {
+
+                final Object value = entry.getValue();
+                AttributeValue attributeValue = null;
+
+                if(value instanceof String)
+                    attributeValue = AttributeValue.builder().s((String) value).build();
+
+                else if(value instanceof List)
+                    attributeValue = AttributeValue.builder().l((List) value).build();
+
+                if(attributeValue != null)
+                    result.put(entry.getKey(), attributeValue);
+
+            }
+
+
+        } else result = new HashMap<>();
+
+        return result;
+
+    }
+
+    /**
+     * Creates a GetItemRequest to retrieve the item with the specified key-value pair.
      * @param key The value of the key
      * @param value The specific value to match
      * @return Map containing the requested data, if any
@@ -55,13 +121,13 @@ public class DietDatabase implements MealContract.Diet.Database {
         final Map<String, AttributeValue> keyMap = new HashMap<>();
         Map<String, AttributeValue> result;
 
-        if(client != null) {
+        if(this.client != null) {
 
             keyMap.put(key, AttributeValue.builder().s(value).build());
 
             final GetItemRequest request = GetItemRequest.builder()
                     .key(keyMap)
-                    .tableName(tableName)
+                    .tableName(this.tableName)
                     .build();
 
             final DietDatabase database = this;
@@ -90,45 +156,103 @@ public class DietDatabase implements MealContract.Diet.Database {
     }
 
     /**
-     * Sets the credentials required to build the DynamoDB client
+     * Sets the given item with the given data onto the current table
+     * @param item The item to write.
+     */
+    private void putItem(final Map<String, AttributeValue> item) {
+
+        if(this.client != null) {
+
+            final PutItemRequest request =
+                    PutItemRequest.builder().tableName(this.tableName).item(item).build();
+
+            this.client.putItem(request);
+
+        }
+
+    }
+
+    /**
+     * Binds a Diet instance with the pertinent data from the given Map
+     * @param data The data to bind the Diet with
+     * @return Menu instance
+     */
+    private Diet bindDietFrom(final Map<String, AttributeValue> data) {
+
+        final Diet                  diet    = new Diet();
+        final List<AttributeValue>  meals   = Objects.requireNonNull(data.get("meals").l());
+        final List<String>          result  = new ArrayList<>();
+
+        diet.setId(Objects.requireNonNull(data.get("id")).s());
+
+        for(final AttributeValue attributeValue: meals)
+            result.add(attributeValue.s());
+
+        diet.setMealIds(result);
+
+        return diet;
+    }
+
+    /// --------------------------
+    /// MealContract.Diet.Database
+
+    /**
+     * Sets the credentials required to build the DynamoDB client and S3 client
      * @param credentials The credentials to set.
      */
     @Override
     public void setCredentials(final Map<String, String> credentials) {
 
-        client = DynamoDbClient
+        this.client = DynamoDbClient
                 .builder()
                 .region(Region.of(this.region))
                 .httpClient(this.httpClient)
                 .credentialsProvider(() -> AwsSessionCredentials.create(
-                        credentials.get("ACCESS_KEY"),
-                        credentials.get("SECRET_KEY"),
-                        credentials.get("SESSION_TOKEN")))
+                        Objects.requireNonNull(credentials.get(ACCESS_KEY)),
+                        Objects.requireNonNull(credentials.get(SECRET_KEY)),
+                        Objects.requireNonNull(credentials.get(SESSION_TOKEN))))
                 .build();
 
     }
 
+    /**
+     * Creates a Diet with the given data on the current database table.
+     * @param data The data to create the Diet entry with
+     */
     @Override
-    public MealContract.Diet getDiet(String id) {
-        final MealContract.Diet diet;
+    public void updateDiet(final Map<String, Object> data) {
 
-        if(client != null) {
-            final Map<String, AttributeValue> dietBlob = getItem("id", id);
+        // Retrieve a handle to ourselves
+        final DietDatabase  database = this;
 
-            final List<AttributeValue> allergensAttributeValues = Objects.requireNonNull(dietBlob.get("allergens")).l();
-            final List<AttributeValue> dietsAttributeValues = Objects.requireNonNull(dietBlob.get("diets")).l();
+        // Define the thread
+        final Thread thread = new Thread(() ->
+                database.putItem(createItemFrom(data)));
 
-            List<String> allergens = new ArrayList<String>();
-            List<String> diets = new ArrayList<String>();
-            for (AttributeValue index : dietsAttributeValues) {
-                diets.add(index.s());
-            }
-            diet = new Diet();
+        try {
 
-            diet.setAllergens(allergens);
+            // Create it
+            thread.start();
+            thread.join();
 
-        } else diet = null;
+        } catch (final Exception exception) {
 
-        return diet;
+            Log.e("DietDatabase", exception.getMessage());
+
+        }
+
     }
+
+    /**
+     * Retrieves the Diet corresponding with the given id, if any
+     * @param id the Diet id
+     * @return Diet
+     */
+    @Override
+    public MealContract.Diet getDiet(final String id) {
+
+        return bindDietFrom(getItem("id", id));
+
+    }
+
 }

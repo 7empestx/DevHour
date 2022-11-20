@@ -215,7 +215,6 @@ public class MenuDatabase implements MealContract.Menu.Database {
                         Objects.requireNonNull(credentials.get(SESSION_TOKEN))))
                 .build();
 
-
     }
 
     /**

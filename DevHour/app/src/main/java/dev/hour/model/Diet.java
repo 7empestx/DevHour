@@ -12,6 +12,7 @@ public class Diet implements MealContract.Diet {
     private String                  id          ;
     private List<String>            allergens   ;
     private List<MealContract.Meal> meals       ;
+    private List<String>            mealIds     ;
 
     public Diet() {
 
@@ -19,31 +20,57 @@ public class Diet implements MealContract.Diet {
 
     @Override
     public String getId() {
-        return null;
+
+        return this.id;
+
     }
 
     @Override
     public List<String> getAllergens() {
-        return allergens;
+
+        return this.allergens;
+
     }
 
     @Override
     public List<MealContract.Meal> getMeals() {
-        return meals;
-    }
 
-    @Override
-    public void setId(String id) {
+        return this.meals;
 
     }
 
     @Override
-    public void setAllergens(List<String> allergens) {
+    public List<String> getMealIds() {
+
+        return this.mealIds;
 
     }
 
     @Override
-    public void setMeals(List<MealContract.Meal> meals) {
+    public void setId(final String id) {
+
+        this.id = id;
+
+    }
+
+    @Override
+    public void setAllergens(final List<String> allergens) {
+
+        this.allergens = allergens;
+
+    }
+
+    @Override
+    public void setMeals(final List<MealContract.Meal> meals) {
+
+        this.meals = meals;
+
+    }
+
+    @Override
+    public void setMealIds(final List<String> mealIds) {
+
+        this.mealIds = mealIds;
 
     }
 

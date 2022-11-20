@@ -90,7 +90,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
      * @param httpClient The http client to perform the requests.
      */
     public RestaurantDatabase(final String region, final String tableName, final String bucketName,
-                              final SdkHttpClient httpClient){
+                              final SdkHttpClient httpClient) {
 
         this.client     = null          ;
         this.tableName  = tableName     ;
@@ -357,6 +357,9 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
         // Set the other address
         restaurant.setAddress1(getStringFrom(data, "address2"));
+
+        // Set the menu id
+        restaurant.setMenuId(getStringFrom(data, "menu_id"));
 
         final String longitude = getStringFrom(data, "longitude");
         final String latitude  = getStringFrom(data, "latitude");

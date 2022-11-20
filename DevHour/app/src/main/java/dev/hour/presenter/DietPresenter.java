@@ -1,10 +1,11 @@
 package dev.hour.presenter;
 
+import java.util.Map;
+
 import dev.hour.contracts.MealContract;
 
-public class DietPresenter implements MealContract.Diet.Presenter,
-        MealContract.Diet.View.Listener {
-    //Private Members
+public class DietPresenter implements MealContract.Diet.Presenter, MealContract.Diet.View.Listener {
+
     private MealContract.Diet.Database database;
     private MealContract.Diet.View view;
 
@@ -14,8 +15,18 @@ public class DietPresenter implements MealContract.Diet.Presenter,
     }
 
     @Override
+    public void setDiet(String menuId) {
+
+    }
+
+    @Override
     public void setView(MealContract.Diet.View view) {
         this.view = view;
+    }
+
+    @Override
+    public void createDiet(Map<String, Object> data) {
+
     }
 
     @Override

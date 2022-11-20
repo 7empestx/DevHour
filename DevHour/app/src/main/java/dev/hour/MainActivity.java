@@ -344,7 +344,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onRestaurantSelected(final RestaurantContract.Restaurant restaurant) {
 
+        this.menuPresenter.setMenu(restaurant.getMenuId());
+
         showBusinessMenuListFragment();
+
     }
 
     /// ----------------------
