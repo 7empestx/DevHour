@@ -66,9 +66,10 @@ public interface MealContract {
         interface Presenter {
 
             void setDatabase(final Database database);
-            void setDiet(final String menuId);
+            void setMeals(final List<Meal> meals);
             void setView(final View view);
-            void createDiet(final Map<String, Object> data);
+            void updateDiet(final Map<String, Object> data);
+            List<String> getMealIdsForDiet(final String dietId);
 
             interface InteractionListener {
 
@@ -83,15 +84,7 @@ public interface MealContract {
 
         interface View {
 
-            void setDiet(final Diet diet);
-            void setDietListener(MealContract.Diet.View.Listener listener);
-            void onDisplayDietInfo(final Diet diet);
-
-            interface Listener {
-
-                void onGetDietRequest(String id);
-
-            }
+            void setDiet(final List<Meal> meals);
 
         }
 
@@ -118,9 +111,10 @@ public interface MealContract {
         interface Presenter {
 
             void setDatabase(final Database database);
-            void setMenu(final String menuId);
+            void setMeals(final List<Meal> meals);
             void setView(final View view);
-            void createMenu(final Map<String, Object> data);
+            void updateMenu(final Map<String, Object> data);
+            List<String> getMealIdsForMenu(final String menuId);
 
             interface InteractionListener {
 

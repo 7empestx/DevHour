@@ -23,7 +23,7 @@ public interface RestaurantContract {
 
         void setDatabase(final Database database);
         void setView(final View view);
-        void createRestaurant(final Map<String, Object> data, final String ownerId);
+        void updateRestaurant(final Map<String, Object> data, final String ownerId);
         void setRestaurantsByTag(final String query);
         void setRestaurantsByOwner(final String owner);
 

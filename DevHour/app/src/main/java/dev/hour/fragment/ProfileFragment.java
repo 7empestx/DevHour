@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.contracts.UserContract;
@@ -35,7 +37,6 @@ public class ProfileFragment extends Fragment implements
     private TextView                        lastNameTextView    ;
     private String                          userId              ;
     private UserContract.View.Listener      userListener        ;
-    private MealContract.Diet.View.Listener dietListener        ;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
@@ -49,20 +50,7 @@ public class ProfileFragment extends Fragment implements
         // Populate the name views for the current user
         userListener.onGetUserRequest();
 
-        // Set the diet filter switches to the correct state for the current user
-        dietListener.onGetDietRequest(userId);
-
         return layout;
-
-    }
-
-    @Override
-    public void setDiet(MealContract.Diet diet) {
-
-    }
-
-    @Override
-    public void onDisplayDietInfo(MealContract.Diet diet) {
 
     }
 
@@ -86,11 +74,6 @@ public class ProfileFragment extends Fragment implements
         this.userListener = listener;
     }
 
-    @Override
-    public void setDietListener(MealContract.Diet.View.Listener listener) {
-        this.dietListener = listener;
-    }
-
     /**
      * Invoked when the save changes Button has been clicked
      * @param view The [View] that has been clicked
@@ -106,6 +89,11 @@ public class ProfileFragment extends Fragment implements
         this.firstNameTextView.setText(user.getFirstName());
         this.lastNameTextView.setText(user.getLastName());
         this.userId = user.getId();
+
+    }
+
+    @Override
+    public void setDiet(List<MealContract.Meal> meals) {
 
     }
 }

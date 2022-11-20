@@ -18,11 +18,21 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     /// ----------------------------
     /// RestaurantContract.Presenter
 
+    /**
+     * Sets the [RestaurantContract.Database] instance
+     * @param database The [RestaurantContract.Database] instance
+     */
     @Override
     public void setDatabase(RestaurantContract.Database database) {
+
         this.database = database;
+
     }
 
+    /**
+     * Sets the [RestaurantContract.View] instance.
+     * @param view The [RestaurantContract.View] instance.
+     */
     @Override
     public void setView(RestaurantContract.View view) {
 
@@ -34,24 +44,42 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
 
     }
 
+    /**
+     * Invokes the [RestaurantContract.Database] to create a restaurant with the given data.
+     * @param data The Restautant data.
+     * @param ownerId The Restaurant owner id
+     */
     @Override
-    public void createRestaurant(final Map<String, Object> data, final String ownerId) {
+    public void updateRestaurant(final Map<String, Object> data, final String ownerId) {
 
         if(this.database != null)
             this.database.updateRestaurant(data, ownerId);
 
     }
 
+    /**
+     * Sets the Restaurant list by tag
+     * @param tag The [String] tag to set the Restaurant lists from
+     */
     @Override
-    public void setRestaurantsByTag(final String query) {
+    public void setRestaurantsByTag(final String tag) {
+
         if (this.database != null){
-            List<RestaurantContract.Restaurant> restaurants= this.database.retrieveRestaurantsByTag(query);
-            if (this.view != null){
+
+            final List<RestaurantContract.Restaurant> restaurants =
+                    this.database.retrieveRestaurantsByTag(tag);
+
+            if (this.view != null)
                 this.view.setRestaurants(restaurants);
-            }
+
         }
+
     }
 
+    /**
+     * Sets the Restaurant list by owner
+     * @param ownerId The owner id to set the Restaurant lists
+     */
     @Override
     public void setRestaurantsByOwner(final String ownerId) {
 

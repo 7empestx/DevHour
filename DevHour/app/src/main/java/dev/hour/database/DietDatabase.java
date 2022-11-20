@@ -75,6 +75,52 @@ public class DietDatabase implements MealContract.Diet.Database {
     /// Private Methods
 
     /**
+     * Retrieves a String value from the AttributeValue with the given key
+     * @param item The item to extract the [String] from
+     * @param key The [String] key corresponding to the value
+     * @return [String] instance
+     */
+    private String getStringFrom(final Map<String, AttributeValue> item, final String key) {
+
+        String result = "";
+
+        if(item != null) {
+
+            final AttributeValue attributeValue = item.get(key);
+
+            if(attributeValue != null)
+                result = attributeValue.s();
+
+        }
+
+        return result;
+
+    }
+
+    /**
+     * Retrieves a List value from the AttributeValue with the given key
+     * @param item The item to extract the [List] from
+     * @param key The [String] key corresponding to the value
+     * @return [List] instance
+     */
+    private List<AttributeValue> getListFrom(final Map<String, AttributeValue> item, final String key) {
+
+        List<AttributeValue> result = new ArrayList<>();
+
+        if(item != null) {
+
+            final AttributeValue attributeValue = item.get(key);
+
+            if(attributeValue != null)
+                result = attributeValue.l();
+
+        }
+
+        return result;
+
+    }
+
+    /**
      * Creates an item that can update a DynamoDB table item.
      * @param data The item to set
      * @return Map<String, AttributeValue> with the given data.
@@ -180,10 +226,10 @@ public class DietDatabase implements MealContract.Diet.Database {
     private Diet bindDietFrom(final Map<String, AttributeValue> data) {
 
         final Diet                  diet    = new Diet();
-        final List<AttributeValue>  meals   = Objects.requireNonNull(data.get("meals").l());
+        final List<AttributeValue>  meals   = getListFrom(data, "meals");
         final List<String>          result  = new ArrayList<>();
 
-        diet.setId(Objects.requireNonNull(data.get("id")).s());
+        diet.setId(getStringFrom(data, "id"));
 
         for(final AttributeValue attributeValue: meals)
             result.add(attributeValue.s());

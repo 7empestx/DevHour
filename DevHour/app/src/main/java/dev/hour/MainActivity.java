@@ -11,7 +11,6 @@ import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -311,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(data != null) {
 
-            this.restaurantPresenter.createRestaurant(data, this.userId);
+            this.restaurantPresenter.updateRestaurant(data, this.userId);
 
             final Map<String, Object> menuData = new HashMap<>();
 
@@ -319,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements
             menuData.put("id", data.get("menu_id"));
             menuData.put("meal_ids", new ArrayList<>());
 
-            this.menuPresenter.createMenu(menuData);
+            this.menuPresenter.updateMenu(menuData);
 
             this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
@@ -344,7 +343,15 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onRestaurantSelected(final RestaurantContract.Restaurant restaurant) {
 
-        this.menuPresenter.setMenu(restaurant.getMenuId());
+        if(this.menuPresenter != null) {
+
+            // Retrieve the meal ids
+            final List<String> mealIds = this.menuPresenter.getMealIdsForMenu(restaurant.getMenuId());
+
+            // TODO: Get the meals from the meals database
+            // TODO: Set the meals to the menu
+
+        }
 
         showBusinessMenuListFragment();
 
@@ -715,8 +722,7 @@ public class MainActivity extends AppCompatActivity implements
             userPresenter.setView((UserContract.View) fragment);
 
             dietPresenter.setView((MealContract.Diet.View) fragment);
-            ((MealContract.Diet.View)fragment)
-                    .setDietListener((MealContract.Diet.View.Listener) dietPresenter);
+
             transaction.add(R.id.activity_main, fragment, ProfileFragment.TAG);
 
         } else if(fragment.isAdded()) {
