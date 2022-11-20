@@ -2,6 +2,7 @@ package dev.hour.database;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +26,26 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
 
     @Override
-    public List<MealContract.Meal> getMenu(String menuId){
-        return null;
+    public List<Meal> getMenu(String menuId){
+        return toMeals(getItem("id", menuId));
+    }
+
+    private List<Meal> toMeals(final Map<String, AttributeValue> data){
+        List<Meal> res = new ArrayList<Meal>();
+
+        List<AttributeValue> objs = Objects.requireNonNull(data.get("meals")).l();
+
+        for(AttributeValue v: objs){
+
+            String calories = Objects.requireNonNull(v.get("calories")).s();
+            String name = Objects.requireNonNull(v.get("name")).s();
+
+            Meal meal = new Meal(calories, name, null);
+
+            res.add(meal);
+        }
+
+        return res;
     }
 
     /// ---------------------
@@ -201,10 +220,6 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
 
     }
-
-
-
-
 
 
 
