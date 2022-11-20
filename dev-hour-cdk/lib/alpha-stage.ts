@@ -18,7 +18,6 @@ import { S3Stack } from './S3-stack'
 
 /// ----------------
 /// AlphaStage Props
-///
 
 export interface AlphaStageProps {
     account:   string,
