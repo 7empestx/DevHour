@@ -1,0 +1,66 @@
+{
+ "Resources": {
+  "DevHourCertificateB909B3F9": {
+   "Type": "AWS::CertificateManager::Certificate",
+   "Properties": {
+    "DomainName": "devhour.app",
+    "DomainValidationOptions": [
+     {
+      "DomainName": "devhour.app",
+      "HostedZoneId": "Z07215181F0MV3GAXD1UU"
+     }
+    ],
+    "SubjectAlternativeNames": [
+     "*.devhour.app"
+    ],
+    "ValidationMethod": "DNS"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCertificateStack/DevHourCertificate/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHVM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFJ6cWlWSmZSYnlqTmJuYlpqcW6VU7I8R0nNPykLi1IH5QanF+aVEykJOXn5Kql1WsX2ZooWdoCLQkqzgzU7eoNK8kMzdVLwhCAwCvchYhgAAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/DevHourCertificateStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

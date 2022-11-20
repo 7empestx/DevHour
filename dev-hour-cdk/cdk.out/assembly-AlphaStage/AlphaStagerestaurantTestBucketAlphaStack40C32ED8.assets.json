@@ -1,0 +1,20 @@
+{
+  "version": "21.0.0",
+  "files": {
+    "db353a80bee74202bd6cfb506188c083769662e8a4dce097863867b0c51b68c7": {
+      "source": {
+        "path": "AlphaStagerestaurantTestBucketAlphaStack40C32ED8.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "060498623801-us-west-1": {
+          "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
+          "objectKey": "db353a80bee74202bd6cfb506188c083769662e8a4dce097863867b0c51b68c7.json",
+          "region": "us-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

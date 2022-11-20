@@ -1,0 +1,71 @@
+{
+ "Resources": {
+  "restaurantTestBucketAlphaId6C1CDA3C": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "restauranttestbucketalpha"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/restaurantTestBucketAlphaStack/restaurantTestBucketAlphaId/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzHVM1BMLC/WTU7J1s3JTNKrDi5JTM7WAQrFFxvrVTuVJmenlug4p+VBWLUgZlBqcX5pUXJqrU5efkqqXlaxfpmhhZ6hIdCorOLMTN2i0rySzNxUvSAIDQCWe63jZgAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/restaurantTestBucketAlphaStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ExportsOutputFnGetAttrestaurantTestBucketAlphaId6C1CDA3CArn834B32C0": {
+   "Value": {
+    "Fn::GetAtt": [
+     "restaurantTestBucketAlphaId6C1CDA3C",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "AlphaStage-restaurantTestBucketAlphaStack:ExportsOutputFnGetAttrestaurantTestBucketAlphaId6C1CDA3CArn834B32C0"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

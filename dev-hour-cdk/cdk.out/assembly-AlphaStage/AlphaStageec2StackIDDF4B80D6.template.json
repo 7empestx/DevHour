@@ -1,0 +1,211 @@
+{
+ "Resources": {
+  "ec2IDSecurityGroup0533C6EE": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "AlphaStage/ec2StackID/ec2IDSecurityGroup",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "SSH Access",
+      "FromPort": 22,
+      "IpProtocol": "tcp",
+      "ToPort": 22
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "HTTPS",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "VpcId": {
+     "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPC77A046B525023B2B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2IDSecurityGroup/Resource"
+   }
+  },
+  "DevHourIngestionRolePolicy31721C73": {
+   "Type": "AWS::IAM::ManagedPolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "AlphaStage-dietTestTableAlphaStack:ExportsOutputFnGetAttdietTestTableAlphaIDC014BB2FArn259F9FB4"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-ingredientTestTableAlphaStack:ExportsOutputFnGetAttingredientTestTableAlphaIDF5FB8886Arn5758161F"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-mealTestTableAlphaStack:ExportsOutputFnGetAttmealTestTableAlphaID3E07DECAArn4F597D95"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-menuTestTableAlphaStack:ExportsOutputFnGetAttmenuTestTableAlphaID3743E851Arn01658A43"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-restaurantTestTableAlphaStack:ExportsOutputFnGetAttrestaurantTestTableAlphaID37264F16Arn4A7D35F0"
+        },
+        {
+         "Fn::ImportValue": "AlphaStage-userTestTableAlphaStack:ExportsOutputFnGetAttuserTestTableAlphaID263AD0DAArn5E2E0F70"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "",
+    "Path": "/"
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/DevHourIngestionRolePolicy/Resource"
+   }
+  },
+  "DevHourIngestionRole63434C1D": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Ref": "DevHourIngestionRolePolicy31721C73"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/DevHourIngestionRole/Resource"
+   }
+  },
+  "ec2IDInstanceProfile20C1288F": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "DevHourIngestionRole63434C1D"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/InstanceProfile"
+   }
+  },
+  "ec2ID5A6DA2B1": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": "us-west-1b",
+    "IamInstanceProfile": {
+     "Ref": "ec2IDInstanceProfile20C1288F"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t2.micro",
+    "KeyName": "devhour-ingestion",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "ec2IDSecurityGroup0533C6EE",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": {
+     "Fn::ImportValue": "AlphaStage-DevHourVPCStack:ExportsOutputRefDevHourVPCDevHourVPCSubnetSubnet1SubnetEAE7A32791C744C6"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "ec2Stack"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "DevHourIngestionRole63434C1D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/ec2ID/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WPzQ6CMBCEn8V7WYVo4t2D8WBC8AHMWhazUFrSHw0hfXdB0gOnmf0mk80UcDzBYYdfl8m6yxS/YHp4lJ2Y0XMiWcw3yWDZj1drwiAujd6Cm3YetaQlST4Kxh6mO2p8U10axXJc8i2ojPq3kqZ2aU3DimJcYIkWe/JkRUXOBLs+Sj4KbWqC1u0/+RnyfN7SOubMBu25J6hW/QEVr1y45wAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "AlphaStage/ec2StackID/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

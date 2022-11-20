@@ -24,7 +24,7 @@ export class InternetGatewayStack extends Stack {
             tags:[ {
                 key: 'vpcId',
                 value: props.vpcId,
-            }],c
+            }]
         });
     }
     public get internetGateway() {

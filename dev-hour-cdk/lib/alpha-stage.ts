@@ -192,8 +192,8 @@ export class AlphaStage extends Stage {
                                              this.dietTestTableStack.tableArn,
                                              this.ingredientTestTableStack.tableArn,
                                              this.menuTestTableStack.tableArn,
-                                             this.restaurantBucketStack.bucketArn,
-                                             this.mealBucketStack.bucketArn],
+                                             `${this.restaurantBucketStack.bucketArn}/*`,
+                                             `${this.mealBucketStack.bucketArn}/*`],
         });
 
         this.ec2Stack = new EC2Stack(this, {

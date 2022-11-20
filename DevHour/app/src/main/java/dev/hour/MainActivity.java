@@ -61,15 +61,15 @@ public class MainActivity extends AppCompatActivity implements
     //scope......
     static {
         System.setProperty(
-                "org.apache.poi.javax.xml.stream.XMLInputFactory",
+                "javax.xml.stream.XMLInputFactory",
                 "com.fasterxml.aalto.stax.InputFactoryImpl"
         );
         System.setProperty(
-                "org.apache.poi.javax.xml.stream.XMLOutputFactory",
+                "javax.xml.stream.XMLOutputFactory",
                 "com.fasterxml.aalto.stax.OutputFactoryImpl"
         );
         System.setProperty(
-                "org.apache.poi.javax.xml.stream.XMLEventFactory",
+                "javax.xml.stream.XMLEventFactory",
                 "com.fasterxml.aalto.stax.EventFactoryImpl"
         );
     }
@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity implements
                 this.getString(R.string.region), this.getString(R.string.restaurant_table_name), this.getString(R.string.restaurant_bucket_name), this.httpClient);
 
         // Set up the menu presenter
-        menuPresenter = new MenuPresenter();
-        menuDatabase  = new MenuDatabase(
+        menuPresenter           = new MenuPresenter();
+        menuDatabase            = new MenuDatabase(
                 this.getString(R.string.region), this.getString(R.string.menu_table_name), this.httpClient);
 
         // Set up the user presenter
@@ -331,7 +331,6 @@ public class MainActivity extends AppCompatActivity implements
             menuData.put("meal_ids", new ArrayList<>());
 
             this.menuPresenter.updateMenu(menuData);
-
             this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
         }
@@ -360,8 +359,13 @@ public class MainActivity extends AppCompatActivity implements
             // Retrieve the meal ids
             final List<String> mealIds = this.menuPresenter.getMealIdsForMenu(restaurant.getMenuId());
 
-            // TODO: Get the meals from the meals database
-            // TODO: Set the meals to the menu
+            if(this.mealDatabase != null) {
+
+                final List<MealContract.Meal> meals = this.mealDatabase.getMealsFrom(mealIds);
+
+                this.menuPresenter.setMeals(meals);
+
+            }
 
         }
 
@@ -374,7 +378,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onSearch(final String query) {
+
         restaurantPresenter.setRestaurantsByTag(query);
+
     }
 
     @Override

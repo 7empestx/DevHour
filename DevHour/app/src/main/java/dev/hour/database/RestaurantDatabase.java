@@ -218,7 +218,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final OutputStream result = new BufferedOutputStream(new ByteArrayOutputStream());
 
         // If we have a client
-        if(this.s3Client != null) {
+        if((this.s3Client != null) && (key != null) && (!key.isEmpty())) {
 
             // Create the request
             final GetObjectRequest request = GetObjectRequest.builder()
@@ -423,8 +423,9 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         // Retrieve a handle to ourselves, the picture stream (if any), and create a picture id
         final RestaurantDatabase    database            = this                                     ;
         final InputStream           pictureStream       = getRestaurantPictureInputStreamFrom(data);
-        final String                restaurantPictureId = GenerateId()                             ;
-        final long                  contentLength       = (Long) data.get("content_length")        ;
+
+        String restaurantPictureId = GenerateId();
+        long   contentLength        = (pictureStream != null) ? (Long) data.get("content_length") : 0L;
 
         // Generate an id for the restaurant
         data.put("id", GenerateId());
@@ -438,19 +439,34 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final Thread thread = new Thread(() ->
                 database.putItem(createItemFrom(data)));
 
-        final Thread uploadThread = new Thread(() ->
-                database.putObject(restaurantPictureId, pictureStream, contentLength));
-
         try {
 
             thread.start();
             thread.join();
-            uploadThread.start();
-            uploadThread.join();
 
         } catch (final Exception exception) {
 
             Log.e("RestaurantDatabase", exception.getMessage());
+
+        }
+
+        if(pictureStream != null) {
+
+            final Thread uploadThread = new Thread(() ->
+                    database.putObject(restaurantPictureId, pictureStream, contentLength));
+
+            try {
+
+                thread.start();
+                thread.join();
+                uploadThread.start();
+                uploadThread.join();
+
+            } catch (final Exception exception) {
+
+                Log.e("RestaurantDatabase", exception.getMessage());
+
+            }
 
         }
 

@@ -1,0 +1,20 @@
+{
+  "version": "21.0.0",
+  "files": {
+    "be38646dfc6373d4db63b4a1d6e317f8c57a5db0c2e8a3195630797d5b4fec27": {
+      "source": {
+        "path": "AlphaStagemealTestBucketAlphaStack00FC0898.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "060498623801-us-west-1": {
+          "bucketName": "cdk-hnb659fds-assets-060498623801-us-west-1",
+          "objectKey": "be38646dfc6373d4db63b4a1d6e317f8c57a5db0c2e8a3195630797d5b4fec27.json",
+          "region": "us-west-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::060498623801:role/cdk-hnb659fds-file-publishing-role-060498623801-us-west-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -169,7 +169,8 @@ public class MenuDatabase implements MealContract.Menu.Database {
         final Map<String, AttributeValue> keyMap = new HashMap<>();
         Map<String, AttributeValue> result;
 
-        if(this.client != null) {
+        if((this.client != null) && (key != null) && (!key.isEmpty()) &&
+                (value != null) && (!value.isEmpty())) {
 
             keyMap.put(key, AttributeValue.builder().s(value).build());
 
