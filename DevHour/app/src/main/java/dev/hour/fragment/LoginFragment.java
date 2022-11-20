@@ -103,7 +103,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
             case R.id.fragment_login_sign_in_button:
 
                 final Button signInButton =
-                        this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+                        this.getView().findViewById(R.id.fragment_login_sign_in_button);
 
                 signInButton.setEnabled(false);
 
@@ -144,7 +144,7 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     @Override
     public void onSignIn() {
 
-        final Button signInButton = this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+        final Button signInButton = this.getView().findViewById(R.id.fragment_login_sign_in_button);
 
         signInButton.setEnabled(true);
 
@@ -158,11 +158,11 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     @Override
     public void onSignInFailed(final String message) {
 
-        Button signInButton = this.requireView().findViewById(R.id.fragment_login_sign_in_button);
+        Button signInButton = this.getView().findViewById(R.id.fragment_login_sign_in_button);
 
         signInButton.setEnabled(true);
 
-        this.snackBar = Snackbar.make(this.requireView(), ("Error: " + message), 10000);
+        this.snackBar = Snackbar.make(this.getView(), ("Error: " + message), 10000);
 
         this.snackBar.show();
 
