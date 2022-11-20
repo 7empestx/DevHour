@@ -6,7 +6,7 @@
     style="@style/Fragment">
 
     <ImageButton
-        android:id="@+id/fragment_business_menu_item_detail_back_button"
+        android:id="@+id/fragment_business_menu_list_back_button"
         style="@style/Theme.DevHour.BackButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_item_detail_back_button" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_list_back_button" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_business_menu_list_recycler_view"
