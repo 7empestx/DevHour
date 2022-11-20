@@ -18,6 +18,7 @@ import android.view.View;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +27,7 @@ import dev.hour.contracts.AuthenticatorContract;
 import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
+import dev.hour.database.MenuDatabase;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements
     private MealContract.Diet.Presenter         dietPresenter           ;
     private MealContract.Diet.Database          dietDatabase            ;
     private MealContract.Menu.Presenter         menuPresenter           ;
+    private MealContract.Menu.Database          menuDatabase            ;
     private RestaurantContract.Presenter        restaurantPresenter     ;
     private RestaurantContract.Database         restaurantDatabase      ;
     private Fragment                            lastFragment            ;
@@ -133,14 +136,17 @@ public class MainActivity extends AppCompatActivity implements
 
         // Set up the menu presenter
         menuPresenter = new MenuPresenter();
+        menuDatabase  = new MenuDatabase(
+                this.getString(R.string.region), this.getString(R.string.menu_table_name), this.httpClient);
         
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
         authenticatorPresenter.setInteractionListener(this);
 
         userPresenter.setDatabase(userDatabase);
-        restaurantPresenter.setDatabase(restaurantDatabase);
         dietPresenter.setDatabase(dietDatabase);
+        restaurantPresenter.setDatabase(restaurantDatabase);
+        menuPresenter.setDatabase(menuDatabase);
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
@@ -306,6 +312,15 @@ public class MainActivity extends AppCompatActivity implements
         if(data != null) {
 
             this.restaurantPresenter.createRestaurant(data, this.userId);
+
+            final Map<String, Object> menuData = new HashMap<>();
+
+            // Set the menu data
+            menuData.put("id", data.get("menu_id"));
+            menuData.put("meal_ids", new ArrayList<>());
+
+            this.menuPresenter.createMenu(menuData);
+
             this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
         }

@@ -9,7 +9,7 @@ public interface RestaurantContract {
     interface Database {
 
         void setCredentials(final Map<String, String> credentials);
-        void createRestaurant(final Map<String, Object> data, String ownerId);
+        void updateRestaurant(final Map<String, Object> data, String ownerId);
         List<Restaurant> retrieveRestaurantsByTag(final String tag);
         List<Restaurant> retrieveRestaurantsByOwner(final String ownerId);
         Restaurant getRestaurant(String id);

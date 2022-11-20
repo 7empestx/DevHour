@@ -1,6 +1,7 @@
 package dev.hour.presenter;
 
 import java.util.List;
+import java.util.Map;
 
 import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
@@ -18,6 +19,14 @@ public class MenuPresenter implements MealContract.Menu.Presenter {
 
     @Override
     public void setMenu(String menuId) {
+
+    }
+
+    @Override
+    public void createMenu(final Map<String, Object> data) {
+
+        if(this.database != null)
+            this.database.updateMenu(data);
 
     }
 

@@ -82,6 +82,13 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     /// ------------
     /// Constructing
 
+    /**
+     * Initializes the [RestaurantDatabase] to its' default state.
+     * @param region The [Region] corresponding the Restaurant resources
+     * @param tableName The name of the Restaurant table
+     * @param bucketName The name of the Restaurant bucket
+     * @param httpClient The http client to perform the requests.
+     */
     public RestaurantDatabase(final String region, final String tableName, final String bucketName,
                               final SdkHttpClient httpClient){
 
@@ -95,6 +102,29 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
     /// ---------------
     /// Private Methods
+
+    /**
+     * Retrieves a String value from the AttributeValue with the given key
+     * @param item The item to extract the [String] from
+     * @param key The [String] key corresponding to the value
+     * @return [String] instance
+     */
+    private String getStringFrom(final Map<String, AttributeValue> item, final String key) {
+
+        String result = "";
+
+        if(item != null) {
+
+            final AttributeValue attributeValue = item.get(key);
+
+            if(attributeValue != null)
+                result = attributeValue.s();
+
+        }
+
+        return result;
+
+    }
 
     /**
      * Creates an item that can update a DynamoDB table item.
@@ -317,30 +347,27 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final Restaurant restaurant = new Restaurant();
 
         // Set the id
-        restaurant.setId(
-                Objects.requireNonNull(data.get("id")).s());
+        restaurant.setId(getStringFrom(data, "id"));
 
         // Set the name
-        restaurant.setName(
-                Objects.requireNonNull(data.get("name")).s());
+        restaurant.setName(getStringFrom(data, "name"));
 
         // Set the address
-        restaurant.setAddress1(
-                Objects.requireNonNull(data.get("address1")).s());
+        restaurant.setAddress1(getStringFrom(data, "address1"));
 
         // Set the other address
-        restaurant.setAddress1(
-                Objects.requireNonNull(data.get("address2")).s());
+        restaurant.setAddress1(getStringFrom(data, "address2"));
+
+        final String longitude = getStringFrom(data, "longitude");
+        final String latitude  = getStringFrom(data, "latitude");
 
         // Set the longitude
-        restaurant.setLongitude(Double.parseDouble(
-                Objects.requireNonNull(data.get("longitude")).s()));
+        restaurant.setLongitude(Double.parseDouble((longitude != null && !longitude.isEmpty()) ? longitude : "0"));
 
         // Set the latitude
-        restaurant.setLatitude(Double.parseDouble(
-                Objects.requireNonNull(data.get("latitude")).s()));
+        restaurant.setLatitude(Double.parseDouble((longitude != null && !latitude.isEmpty()) ? latitude : "0"));
 
-        final String pictureId = Objects.requireNonNull(data.get("picture_id")).s();
+        final String pictureId = getStringFrom(data, "picture_id");
 
         if((pictureId != null) && !(pictureId.isEmpty()))
             restaurant.setImageStream(getObject(pictureId));
@@ -382,24 +409,25 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     }
 
     /**
-     * Creates a Restaurant with the given data on the current database table. This method
+     * Updates/Creates a Restaurant with the given data on the current database table. This method
      * will also upload a picture from the corresponding S3 bucket.
      * @param data The data to create the Restaurant entry with
-     * @param ownerId
+     * @param ownerId The owner of the restaurant
      */
     @Override
-    public void createRestaurant(final Map<String, Object> data, final String ownerId) {
+    public void updateRestaurant(final Map<String, Object> data, final String ownerId) {
 
         // Retrieve a handle to ourselves, the picture stream (if any), and create a picture id
         final RestaurantDatabase    database            = this                                     ;
         final InputStream           pictureStream       = getRestaurantPictureInputStreamFrom(data);
         final String                restaurantPictureId = GenerateId()                             ;
-        final long                  contentLength       = (Long) data.get("content_length")         ;
+        final long                  contentLength       = (Long) data.get("content_length")        ;
 
         // Generate an id for the restaurant
         data.put("id", GenerateId());
         data.put("picture_id", restaurantPictureId);
         data.put("restaurant_owner", ownerId);
+        data.put("menu_id", GenerateId());
 
         // Remove the content length
         data.remove("content_length");

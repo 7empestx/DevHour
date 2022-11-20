@@ -2,6 +2,7 @@ package dev.hour.database;
 
 import android.util.Log;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -57,6 +58,12 @@ public class MenuDatabase implements MealContract.Menu.Database {
     /// ------------
     /// Constructing
 
+    /**
+     * Initializes the [MenuDatabase] to its' default state.
+     * @param region The [Region] corresponding the Menu resources
+     * @param tableName The name of the Menu table
+     * @param httpClient The http client to perform the requests.
+     */
     public MenuDatabase(final String region, final String tableName, final SdkHttpClient httpClient){
 
         this.client     = null          ;
@@ -208,6 +215,34 @@ public class MenuDatabase implements MealContract.Menu.Database {
                         Objects.requireNonNull(credentials.get(SESSION_TOKEN))))
                 .build();
 
+
+    }
+
+    /**
+     * Creates a Menu with the given data on the current database table.
+     * @param data The data to create the Menu entry with
+     */
+    @Override
+    public void updateMenu(final Map<String, Object> data) {
+
+        // Retrieve a handle to ourselves
+        final MenuDatabase  database = this;
+
+        // Define the thread
+        final Thread thread = new Thread(() ->
+                database.putItem(createItemFrom(data)));
+
+        try {
+
+            // Create it
+            thread.start();
+            thread.join();
+
+        } catch (final Exception exception) {
+
+            Log.e("MenuDatabase", exception.getMessage());
+
+        }
 
     }
 

@@ -280,21 +280,27 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
                 this.matrix.getValues(values);
 
-                float thresholdX = this.userImage.getMeasuredWidth() -
-                        this.userImage.getDrawable().getIntrinsicWidth()*values[0];
+                final Drawable drawable = this.userImage.getDrawable();
 
-                float thresholdY = this.userImage.getMeasuredHeight() -
-                        this.userImage.getDrawable().getIntrinsicHeight()*values[4];
+                if(drawable != null) {
 
-                if(values[2] > 0.0f) values[2] = 0.0f;
-                else if(values[2] < thresholdX) values[2] = thresholdX;
+                    float thresholdX = this.userImage.getMeasuredWidth() -
+                            this.userImage.getDrawable().getIntrinsicWidth() * values[0];
 
-                if(values[5] > 0.0f) values[5] = 0.0f;
-                else if(values[5] < thresholdY) values[5] = thresholdY;
+                    float thresholdY = this.userImage.getMeasuredHeight() -
+                            this.userImage.getDrawable().getIntrinsicHeight() * values[4];
 
-                this.matrix.setValues(values);
+                    if (values[2] > 0.0f) values[2] = 0.0f;
+                    else if (values[2] < thresholdX) values[2] = thresholdX;
 
-                this.userImage.setImageMatrix(new Matrix(matrix));
+                    if (values[5] > 0.0f) values[5] = 0.0f;
+                    else if (values[5] < thresholdY) values[5] = thresholdY;
+
+                    this.matrix.setValues(values);
+
+                    this.userImage.setImageMatrix(new Matrix(matrix));
+
+                }
 
         }
 

@@ -7,6 +7,7 @@
     <string name="region">us-west-1</string>
     <string name="user_table_name">userTestTableAlpha</string>
     <string name="diet_table_name">dietTestTableAlpha</string>
+    <string name="menu_table_name">menuTestTableAlpha</string>
     <string name="restaurant_table_name">restaurantTestTableAlpha</string>
     <string name="restaurant_bucket_name">restauranttestbucketalpha</string>
     <string name="identity_pool_id">us-west-1:1c896551-75af-487f-b8d6-0fcb7c67786a</string>

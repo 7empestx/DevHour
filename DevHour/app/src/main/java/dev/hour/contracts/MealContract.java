@@ -96,6 +96,7 @@ public interface MealContract {
         interface Database {
 
             void setCredentials(final Map<String, String> credentials);
+            void updateMenu(final Map<String, Object> data);
             Menu getMenu(final String id);
 
         }
@@ -105,6 +106,7 @@ public interface MealContract {
             void setDatabase(final Database database);
             void setMenu(final String menuId);
             void setView(final View view);
+            void createMenu(final Map<String, Object> data);
 
             interface InteractionListener {
 

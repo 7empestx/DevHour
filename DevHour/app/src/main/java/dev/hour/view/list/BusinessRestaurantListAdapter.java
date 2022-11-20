@@ -218,13 +218,18 @@ public class BusinessRestaurantListAdapter extends
         if(bitmap == null) {
 
             final ByteArrayOutputStream imageStream = (ByteArrayOutputStream) restaurant.getImageStream();
-            final byte[]                bytes       = imageStream.toByteArray();
 
-            if(bytes.length > 0) {
+            if(imageStream != null) {
 
-                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                final byte[] bytes = imageStream.toByteArray();
 
-                this.images.put(restaurant.getId(), bitmap);
+                if (bytes.length > 0) {
+
+                    bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    this.images.put(restaurant.getId(), bitmap);
+
+                }
 
             }
 

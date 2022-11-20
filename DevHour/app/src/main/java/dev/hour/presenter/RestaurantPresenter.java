@@ -38,7 +38,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     public void createRestaurant(final Map<String, Object> data, final String ownerId) {
 
         if(this.database != null)
-            this.database.createRestaurant(data, ownerId);
+            this.database.updateRestaurant(data, ownerId);
 
     }
 
