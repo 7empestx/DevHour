@@ -24,6 +24,7 @@ public interface MealContract {
 
             void setCredentials(final Map<String, String> credentials);
             Meal getMeal(final String id);
+            void createMeal(final Map<String, Object> data);
 
         }
 
