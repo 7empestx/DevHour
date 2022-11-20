@@ -87,14 +87,16 @@ public interface MealContract {
 
         String getId();
         List<Meal> getMeals();
+        List<String> getMealIds();
 
         void setId(final String id);
         void setMeals(final List<Meal> meals);
+        void setMealIds(final List<String> mealIds);
 
         interface Database {
 
             void setCredentials(final Map<String, String> credentials);
-            List<Meal> getMenu(final String menuId);
+            Menu getMenu(final String id);
 
         }
 

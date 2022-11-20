@@ -7,9 +7,9 @@ import dev.hour.contracts.RestaurantContract;
 
 public class MenuPresenter implements MealContract.Menu.Presenter {
     //Private Members
-    private MealContract.Menu.Database database;
-    private MealContract.Menu.View view;
-    private List<MealContract.Meal> meals ;
+    private MealContract.Menu.Database  database    ;
+    private MealContract.Menu.View      view        ;
+    private List<MealContract.Meal>     meals       ;
 
     @Override
     public void setDatabase(MealContract.Menu.Database database) {

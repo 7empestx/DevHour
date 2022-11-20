@@ -11,6 +11,7 @@ public class Menu implements MealContract.Menu {
 
     private String                  id      ;
     private List<MealContract.Meal> meals   ;
+    private List<String>            mealIds ;
 
     /// -----------------
     /// MealContract.Meal
@@ -19,6 +20,13 @@ public class Menu implements MealContract.Menu {
     public String getId() {
 
         return this.id;
+
+    }
+
+    @Override
+    public List<String> getMealIds() {
+
+        return this.mealIds;
 
     }
 
@@ -33,6 +41,13 @@ public class Menu implements MealContract.Menu {
     public void setId(String id) {
 
         this.id = id;
+
+    }
+
+    @Override
+    public void setMealIds(final List<String> mealIds) {
+
+        this.mealIds = mealIds;
 
     }
 

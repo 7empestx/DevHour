@@ -1,7 +1,6 @@
 package dev.hour.database;
 
 import android.util.Log;
-import android.webkit.ConsoleMessage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,17 +11,14 @@ import java.util.Objects;
 
 import dev.hour.contracts.MealContract;
 import dev.hour.model.Meal;
+import dev.hour.model.Menu;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
-import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectResponse;
-
 
 public class MenuDatabase implements MealContract.Menu.Database {
 
@@ -53,23 +49,18 @@ public class MenuDatabase implements MealContract.Menu.Database {
     /// Private Members
 
     private DynamoDbClient                          client          ;
-    private S3Client                                s3Client        ;
     private String                                  tableName       ;
-    private String                                  bucketName      ;
     private String                                  region          ;
     private SdkHttpClient                           httpClient      ;
     private Map<String, AttributeValue>             response        ;
-    private ResponseInputStream<GetObjectResponse>  objectResponse  ;
 
     /// ------------
     /// Constructing
 
-    public MenuDatabase(final String region, final String tableName, final String bucketName,
-                              final SdkHttpClient httpClient){
+    public MenuDatabase(final String region, final String tableName, final SdkHttpClient httpClient){
 
         this.client     = null          ;
         this.tableName  = tableName     ;
-        this.bucketName = bucketName    ;
         this.region     = region        ;
         this.httpClient = httpClient    ;
 
@@ -177,9 +168,34 @@ public class MenuDatabase implements MealContract.Menu.Database {
     }
 
     /**
+     * Binds a Menu instance with the pertinent data from the given Map
+     * @param data The data to bind the Menu with
+     * @return Menu instance
+     */
+    private Menu bindMenuFrom(final Map<String, AttributeValue> data) {
+
+        final Menu                  menu    = new Menu();
+        final List<AttributeValue>  meals   = Objects.requireNonNull(data.get("meals").l());
+        final List<String>          result  = new ArrayList<>();
+
+        menu.setId(Objects.requireNonNull(data.get("id")).s());
+
+        for(final AttributeValue attributeValue: meals)
+            result.add(attributeValue.s());
+
+        menu.setMealIds(result);
+
+        return menu;
+    }
+
+    /// --------------------------
+    /// MealContract.Menu.Database
+
+    /**
      * Sets the credentials required to build the DynamoDB client and S3 client
      * @param credentials The credentials to set.
      */
+    @Override
     public void setCredentials(final Map<String, String> credentials) {
 
         this.client = DynamoDbClient
@@ -195,34 +211,16 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
     }
 
+    /**
+     * Retrieves the menu corresponding with the given id, if any
+     * @param id the menu id
+     * @return List of meals
+     */
     @Override
-    public List<MealContract.Meal> getMenu(String menuId){
-        return toMeals(getItem("id", menuId));
+    public MealContract.Menu getMenu(final String id) {
+
+        return bindMenuFrom(getItem("id", id));
+
     }
-
-    private List<MealContract.Meal> toMeals(final Map<String, AttributeValue> data){
-
-        List<MealContract.Meal> res = new ArrayList<>();
-
-        List<AttributeValue> objs = Objects.requireNonNull(data.get("meals")).l();
-
-        for(AttributeValue v: objs){
-
-            Map<String, AttributeValue> mealMap = v.m();
-
-            String calories = Objects.requireNonNull(mealMap.get("calories")).s();
-            String name = Objects.requireNonNull(mealMap.get("name")).s();
-
-            Meal meal = new Meal();
-
-            meal.setName(name);
-            meal.setCalories(Integer.parseInt(calories));
-
-            res.add(meal);
-        }
-
-        return res;
-    }
-
 
 }
