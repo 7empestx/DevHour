@@ -1,4 +1,3 @@
-
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
@@ -15,16 +14,21 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/devhour_theme_color_status_bar_dark</item>
-        <item name="colorControlNormal">@color/devhour_theme_color_control_normal_dark</item>
-        <item name="colorControlActivated">@color/devhour_theme_color_control_activated_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/devhour_theme_color_status_bar_light</item>
+        <item name="colorControlNormal">@color/devhour_theme_color_control_normal_light</item>
+        <item name="colorControlActivated">@color/devhour_theme_color_control_activated_light</item>
+        <item name="colorControlHighlight">@color/devhour_theme_color_control_highlight_light</item>
 
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/teal_200</item>
         <item name="android:colorAccent" tools:targetApi="l">@color/teal_200</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <item name="android:colorBackground">@color/devhour_theme_color_background_light</item>
+        <item name="android:colorForeground">@color/devhour_theme_color_foreground_light</item>
 
         <!-- ============= -->
         <!-- Action Button -->
@@ -33,38 +37,82 @@
         <item name="actionButtonEms">10</item>
         <item name="actionButtonTextAllCaps">true</item>
         <item name="actionButtonFontFamily">@font/ibmplexsans_semibold</item>
-        <item name="actionButtonTextColor">@color/action_button_text_color_dark</item>
+        <item name="actionButtonTextColor">@color/action_button_text_color_light</item>
         <item name="actionButtonTextSize">@dimen/action_button_text_size</item>
-        <item name="actionButtonBackground">@drawable/action_button_background_dark</item>
+        <item name="actionButtonBackground">@drawable/action_button_background_light</item>
         <item name="actionButtonElevation">@dimen/action_button_elevation</item>
+
+        <!-- =========== -->
+        <!-- Add Picture -->
+
+        <item name="addPictureBackground">@drawable/add_picture_background_light</item>
+        <item name="addPictureLayoutHeight">@dimen/add_picture_height</item>
+        <item name="addPictureLayoutWidth">@dimen/add_picture_width</item>
+
+        <!-- ============= -->
+        <!-- Alert Display -->
+
+        <item name="alertDisplayLayoutWidth">@dimen/alert_display_width</item>
+        <item name="alertDisplayLayoutHeight">@dimen/alert_display_height</item>
+        <item name="alertDisplayBackground">@drawable/alert_display_background_light</item>
+        <item name="alertDisplayElevation">@dimen/alert_display_elevation</item>
+        <item name="alertDisplayPadding">@dimen/alert_display_padding</item>
+        <item name="alertDisplaySource">@drawable/icon_alert_flag</item>
+
+        <!-- ========== -->
+        <!-- Alert View -->
+
+        <item name="alertViewBackground">@drawable/alert_view_background_light</item>
 
         <!-- =========== -->
         <!-- Back Button -->
 
         <item name="backButtonHeight">@dimen/back_button_height</item>
         <item name="backButtonWidth">@dimen/back_button_width</item>
-        <item name="backButtonSource">@drawable/icon_back_48</item>
+        <item name="backButtonSource">@drawable/icon_back_36</item>
+        <item name="backButtonColor">@color/back_button_color_light</item>
         <item name="backButtonTintMode">@id/src_atop</item>
-        <item name="backButtonBackground">@color/back_button_background_dark</item>
+        <item name="backButtonBackground">@color/back_button_background_light</item>
 
         <!-- ===================== -->
         <!-- Bottom Navigation Bar -->
 
-        <item name="bottomNavigationBackground">@color/bottom_navigation_bar_background_dark</item>
-        <item name="bottomNavigationItemTextColor">@color/bottom_navigation_bar_text_color_dark</item>
+        <item name="bottomNavigationBackground">@color/bottom_navigation_bar_background_light</item>
+        <item name="bottomNavigationItemTextColor">@color/bottom_navigation_bar_text_color_light</item>
 
-        <!-- ================ -->
-        <!-- Navigation Icons -->
+        <!-- ======== -->
+        <!-- Checkbox -->
 
-        <item name="bottomNavigationIconLocation">@drawable/icon_location</item>
-        <item name="bottomNavigationIconList">@drawable/icon_menu</item>
+        <item name="checkBoxLayoutHeight">@dimen/check_box_layout_height</item>
+        <item name="checkBoxTextColor">@color/check_box_text_color_light</item>
+
+        <!-- =================== -->
+        <!-- Country Code Picker -->
+
+        <item name="countryCodePickerLayoutHeight">@dimen/country_code_picker_height</item>
+        <item name="countryCodePickerLayoutWidth">@dimen/country_code_picker_width</item>
+        <item name="countryCodePickerBackground">@drawable/country_code_picker_background_light</item>
+        <item name="countryCodePickerTextColor">@color/country_code_picker_text_color_light</item>
+        <item name="countryCodePickerArrowColor">@color/country_code_picker_arrow_color_light</item>
+        <item name="countryCodePickerContentColor">@color/country_code_picker_content_color_light</item>
+
+        <!-- =========== -->
+        <!-- Edit Button -->
+
+        <item name="editButtonLayoutHeight">@dimen/edit_button_height</item>
+        <item name="editButtonLayoutWidth">@dimen/edit_button_width</item>
+        <item name="editButtonDrawable">@drawable/icon_edit</item>
+        <item name="editButtonTintMode">@id/src_atop</item>
+        <item name="editButtonColor">@color/edit_button_color_light</item>
+        <item name="editButtonBackground">@color/edit_button_background_color_light</item>
+        <item name="editButtonElevation">@dimen/edit_button_elevation</item>
 
         <!-- ======== -->
         <!-- EditText -->
 
-        <item name="editTextColor">@color/edit_text_text_color_dark</item>
-        <item name="editTextHintColor">@color/edit_text_hint_text_color_dark</item>
-        <item name="editTextBackground">@drawable/edit_text_background_dark</item>
+        <item name="editTextColor">@color/edit_text_text_color_light</item>
+        <item name="editTextHintColor">@color/edit_text_hint_text_color_light</item>
+        <item name="editTextBackground">@drawable/edit_text_background_light</item>
         <item name="editTextEms">10</item>
         <item name="editTextPaddingStart">@dimen/edit_text_padding_start</item>
         <item name="editTextPaddingEnd">@dimen/edit_text_padding_end</item>
@@ -72,15 +120,191 @@
         <item name="editTextCursorDrawable">@null</item>
         <item name="editTextLayoutHeight">@dimen/edit_text_height</item>
 
+        <!-- ========== -->
+        <!-- Error Text -->
+
+        <item name="errorTextColor">@color/error_text_text_color_light</item>
+        <item name="errorTextSize">@dimen/error_text_text_size</item>
+        <item name="errorTextLayoutHeight">@dimen/error_text_layout_height</item>
+
         <!-- ======== -->
         <!-- Fragment -->
 
-        <item name="fragmentPadding">@dimen/fragment_padding</item>
+        <item name="fragmentPadding">@dimen/fragment_add_contact_padding</item>
+
+        <!-- ================= -->
+        <!-- Landmark Display -->
+
+        <item name="landmarkDisplayLayoutWidth">@dimen/landmark_display_width</item>
+        <item name="landmarkDisplayLayoutHeight">@dimen/landmark_display_height</item>
+        <item name="landmarkDisplayBackground">@drawable/landmark_display_background_light</item>
+        <item name="landmarkDisplayElevation">@dimen/landmark_display_elevation</item>
+        <item name="landmarkDisplayPadding">@dimen/landmark_display_padding</item>
+        <item name="landmarkDisplaySource">@drawable/icon_landmark</item>
+
+        <!-- ========= -->
+        <!-- List Item -->
+
+        <item name="listItemLayoutHeight">@dimen/list_item_height</item>
+        <item name="listItemPaddingStart">@dimen/list_item_padding_start</item>
+        <item name="listItemPaddingEnd">@dimen/list_item_padding_end</item>
+
+        <!-- ================== -->
+        <!-- List Item Category -->
+
+        <item name="listItemCategoryHeight">@dimen/list_item_category_height</item>
+
+        <!-- ========== -->
+        <!-- List Title -->
+
+        <item name="listTitleTextColor">@color/list_title_text_color_light</item>
+        <item name="listTitleFontFamily">@font/montserrat_regular</item>
+        <item name="listTitleTextSize">@dimen/list_title_text_size</item>
+        <item name="listTitleLayoutHeight">@dimen/list_title_height</item>
+
+        <!-- ============== -->
+        <!-- List Check Box -->
+
+        <item name="listCheckBoxLayoutHeight">@dimen/list_check_box_height</item>
+        <item name="listCheckBoxLayoutWidth">@dimen/list_check_box_width</item>
+        <item name="listCheckBoxMarginEnd">@dimen/list_check_box_margin_end</item>
+
+        <!-- ======================= -->
+        <!-- List Item Category Text -->
+
+        <item name="listItemCategoryTextTextSize">@dimen/list_item_category_text_text_size</item>
+        <item name="listItemCategoryTextTextColor">@color/list_item_category_text_text_color_light</item>
+        <item name="listItemCategoryTextMarginStart">@dimen/list_item_category_text_margin_start</item>
+        <item name="listItemCategoryTextMarginEnd">@dimen/list_item_category_text_margin_end</item>
+        <item name="listItemCategoryTextFontFamily">@font/ibmplexsans_semibold</item>
+
+        <!-- ==================== -->
+        <!-- List Item Coordinate -->
+
+        <item name="listItemCoordinateLayoutHeight">@dimen/list_item_coordinate_height</item>
+        <item name="listItemCoordinateLayoutMarginStart">@dimen/list_item_coordinate_margin_start</item>
+        <item name="listItemCoordinateLayoutMarginEnd">@dimen/list_item_coordinate_margin_end</item>
+        <item name="listItemCoordinateTextColor">@color/list_item_coordinate_text_color_light</item>
+        <item name="listItemCoordinateTextSize">@dimen/list_item_coordinate_text_size</item>
+
+        <!-- ============== -->
+        <!-- List Item Text -->
+
+        <item name="listItemTextTextSize">@dimen/list_item_text_text_size</item>
+        <item name="listItemTextTextColor">@color/list_item_text_text_color_light</item>
+        <item name="listItemTextMarginStart">@dimen/list_item_text_margin_start</item>
+        <item name="listItemTextMarginEnd">@dimen/list_item_text_margin_end</item>
+        <item name="listItemTextFontFamily">@font/ibmplexsans_semibold</item>
+
+        <!-- =================== -->
+        <!-- List Item Indicator -->
+
+        <item name="listItemIndicatorWidth">@dimen/list_item_indicator_width</item>
+        <item name="listItemIndicatorBackground">@drawable/list_item_indicator_background_light</item>
+
+        <!-- ================= -->
+        <!-- List Item Content -->
+
+        <item name="listItemContentBackground">@drawable/list_item_content_background_light</item>
+        <item name="listItemContentHeight">@dimen/list_item_content_height</item>
+        <item name="listItemContentElevation">@dimen/list_item_content_elevation</item>
+
+        <!-- ======================= -->
+        <!-- List Item Remove Button -->
+
+        <item name="listItemRemoveButtonLayoutHeight">@dimen/list_item_remove_button_height</item>
+        <item name="listItemRemoveButtonLayoutWidth">@dimen/list_item_remove_button_width</item>
+        <item name="listItemRemoveButtonElevation">@dimen/list_item_remove_button_elevation</item>
+        <item name="listItemRemoveButtonBackground">@color/list_item_remove_button_background_color_light</item>
+        <item name="listItemRemoveButtonText">@string/list_item_remove</item>
+        <item name="listItemRemoveButtonTextAllCaps">true</item>
+        <item name="listItemRemoveButtonTextColor">@color/list_item_remove_button_text_color_light</item>
+
+        <!-- ========== -->
+        <!-- Menu Icons -->
+
+        <item name="menuIconContacts">@drawable/menu_icon_contacts_light</item>
+        <item name="menuIconCreateMap">@drawable/menu_icon_create_map_light</item>
+        <item name="menuIconMaps">@drawable/menu_icon_maps_light</item>
+        <item name="menuIconSignOut">@drawable/menu_icon_sign_out_light</item>
+
+        <!-- ================= -->
+        <!-- Navigation Header -->
+
+        <item name="navigationHeaderUserNameTextColor">@color/navigation_header_name_text_color_light</item>
+        <item name="navigationHeaderUserTitleTextColor">@color/navigation_header_title_text_color_light</item>
+
+        <!-- ================ -->
+        <!-- Navigation Icons -->
+
+        <item name="bottomNavigationIconAlert">@drawable/navigation_icon_alert_light</item>
+        <item name="bottomNavigationIconDeployment">@drawable/navigation_icon_deployment_light</item>
+        <item name="bottomNavigationIconLandmark">@drawable/navigation_icon_landmark_light</item>
+        <item name="bottomNavigationIconMap">@drawable/navigation_icon_map_light</item>
+
+        <!-- =============== -->
+        <!-- Navigation View -->
+
+        <item name="navigationViewItemTextColor">@color/navigation_view_item_text_color_light</item>
+        <item name="navigationViewItemIconTint">@color/navigation_view_item_icon_color_light</item>
+        <item name="navigationViewMenu">@menu/drawer_menu</item>
+        <item name="navigationViewHeader">@layout/navigation_header</item>
+
+        <!-- ================== -->
+        <!-- Phone Number Input -->
+
+        <item name="phoneNumberInputLayoutHeight">@dimen/phone_number_input_height</item>
+        <item name="phoneNumberInputBackground">@drawable/phone_number_input_background_light</item>
+        <item name="phoneNumberInputPaddingStart">@dimen/phone_number_input_padding_start</item>
+        <item name="phoneNumberInputPaddingEnd">@dimen/phone_number_input_padding_end</item>
+        <item name="phoneNumberInputTextColor">@color/phone_number_input_text_color_light</item>
+        <item name="phoneNumberInputHintTextColor">@color/phone_number_input_hint_text_color_light</item>
+
+        <!-- ============== -->
+        <!-- Paragraph Text -->
+
+        <item name="paragraphTextTextColor">@color/paragraph_text_color_light</item>
+
+        <!-- ============ -->
+        <!-- Progress Bar -->
+
+        <item name="progressBarLayoutWidth">@dimen/progress_bar_width</item>
+        <item name="progressBarLayoutHeight">@dimen/progress_bar_height</item>
+
+        <!-- ============ -->
+        <!-- Radio Button -->
+
+        <item name="radioButtonLayoutHeight">@dimen/radio_button_height</item>
+        <item name="radioButtonTint">@color/radio_button_tint_light</item>
+        <item name="radioButtonMarginTop">@dimen/radio_button_margin_top</item>
+        <item name="radioButtonFontFamily">@font/ibmplexsans_semibold</item>
+        <item name="radioButtonTextColor">@color/radio_button_text_color_light</item>
+
+        <!-- =========== -->
+        <!-- Round Image -->
+
+        <item name="roundImageLayoutHeight">@dimen/round_image_height</item>
+        <item name="roundImageLayoutWidth">@dimen/round_image_width</item>
+        <item name="roundImageBackground">@drawable/round_image_background_light</item>
+
+        <!-- =============== -->
+        <!-- Big Round Image -->
+
+        <item name="bigRoundImageLayoutHeight" format="dimension">@dimen/big_round_image_height</item>
+        <item name="bigRoundImageLayoutWidth" format="dimension">@dimen/big_round_image_width</item>
+        <item name="bigRoundImageBackground" format="reference">@drawable/big_round_image_light</item>
+
+        <!-- ========== -->
+        <!-- Status Pip -->
+
+        <item name="statusPipCircumference">@dimen/status_pip_circumference</item>
+        <item name="statusPipElevation">@dimen/status_pip_elevation</item>
+        <item name="statusPipBackground">@drawable/status_pip_background_light</item>
 
         <!-- ======== -->
         <!-- Subtitle -->
 
-        <item name="subtitleTextColor">@color/subtitle_text_color_dark</item>
+        <item name="subtitleTextColor">@color/subtitle_text_color_light</item>
         <item name="subtitleTextSize">@dimen/sub_title_text_size</item>
         <item name="subtitleFontFamily">@font/montserrat_regular</item>
         <item name="subtitleLayoutHeight">@id/wrap_content</item>
@@ -88,7 +312,7 @@
         <!-- ===== -->
         <!-- Title -->
 
-        <item name="titleTextColor">@color/title_text_color_dark</item>
+        <item name="titleTextColor">@color/title_text_color_light</item>
         <item name="titleFontFamily">@font/montserrat_regular</item>
         <item name="titleTextSize">@dimen/title_text_size</item>
 
@@ -97,9 +321,43 @@
 
         <item name="textButtonEms">5</item>
         <item name="textButtonTextSize">@dimen/text_button_text_size</item>
-        <item name="textButtonTextColor">@color/text_button_text_color_dark</item>
-        <item name="textButtonBackground">@color/text_button_background_color_dark</item>
+        <item name="textButtonTextColor">@color/text_button_text_color_light</item>
+        <item name="textButtonBackground">@color/text_button_background_color_light</item>
         <item name="textButtonElevation">@dimen/text_button_elevation</item>
+
+        <!-- ======= -->
+        <!-- Toolbar -->
+
+        <item name="toolbarBackground">@color/toolbar_background_light</item>
+
+        <!-- =================== -->
+        <!-- Toolbar Icon Button -->
+
+        <item name="toolbarIconButtonTint">@color/toolbar_icon_button_tint_light</item>
+
+        <!-- ============= -->
+        <!-- Toolbar Title -->
+
+        <item name="toolbarTitleTextColor">@color/toolbar_title_text_color_light</item>
+        <item name="toolbarTitleTextSize">@dimen/toolbar_title_text_size</item>
+        <item name="toolbarTitleText">@string/app_name</item>
+        <item name="toolbarTitleTextLetterSpacing">@dimen/toolbar_title_text_letter_spacing</item>
+        <item name="toolbarTitleTextAllCaps">true</item>
+        <item name="toolbarTitleFontFamily">@font/ibmplexsans_semibold</item>
+
+        <!-- ================ -->
+        <!-- Navigation Icons -->
+
+        <item name="bottomNavigationIconLocation">@drawable/icon_location</item>
+        <item name="bottomNavigationIconList">@drawable/icon_menu</item>
+
+        <!-- =========== -->
+        <!-- Switch -->
+
+        <item name="switchTextSize">@dimen/font_size_m</item>
+        <item name="switchTextColor">@color/switch_text_color_light</item>
+        <item name="switchFontFamily">@font/montserrat_regular</item>
+        <item name="switchPaddingHorizontal">@dimen/switch_text_padding_horizontal</item>
 
     </style>
 
