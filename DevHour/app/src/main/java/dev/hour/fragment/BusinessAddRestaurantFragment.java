@@ -29,15 +29,12 @@ public class BusinessAddRestaurantFragment extends Fragment implements
     /// Private Fields
 
     private RestaurantContract.Presenter.InteractionListener interactionListener    ;
-    private Map<String, Object>                              tags                   ;
-    private Map<String, Object>                              image                  ;
+    private final static Map<String, Object>                              tags                   = new HashMap<>();
+    private final static Map<String, Object>                              image                  = new HashMap<>();
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
                              final ViewGroup viewGroup, final Bundle bundle) {
-
-        tags    = new HashMap<>();
-        image   = new HashMap<>();
 
         final View layout =
                 layoutInflater.inflate(R.layout.fragment_business_add_restaurant, viewGroup, false);
@@ -86,6 +83,9 @@ public class BusinessAddRestaurantFragment extends Fragment implements
                 data.put("name",        restaurantName.getText().toString());
                 data.put("address1",    address1.getText().toString());
                 data.put("address2",    address2.getText().toString());
+                data.put("pricing", "0");
+                data.put("picture",         image.get("picture"));
+                data.put("content_length",  image.get("content_length"));
 
                 final List<String> tags = new ArrayList<>();
 

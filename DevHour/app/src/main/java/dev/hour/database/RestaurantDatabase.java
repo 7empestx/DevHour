@@ -413,8 +413,8 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         try {
 
             thread.start();
-            uploadThread.start();
             thread.join();
+            uploadThread.start();
             uploadThread.join();
 
         } catch (final Exception exception) {
