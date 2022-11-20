@@ -21,6 +21,8 @@ public class Meal implements MealContract.Meal {
 
     }
 
+
+
     @Override
     public int getCalories() { return calories; }
 

@@ -1,6 +1,7 @@
 package dev.hour.database;
 
 import android.util.Log;
+import android.webkit.ConsoleMessage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import dev.hour.contracts.MealContract;
+import dev.hour.model.Meal;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.http.SdkHttpClient;
@@ -26,21 +28,22 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
 
     @Override
-    public List<Meal> getMenu(String menuId){
+    public List<MealContract.Meal> getMenu(String menuId){
         return toMeals(getItem("id", menuId));
     }
 
-    private List<Meal> toMeals(final Map<String, AttributeValue> data){
-        List<Meal> res = new ArrayList<Meal>();
+    private List<MealContract.Meal> toMeals(final Map<String, AttributeValue> data){
+
+        List<MealContract.Meal> res = new ArrayList<>();
 
         List<AttributeValue> objs = Objects.requireNonNull(data.get("meals")).l();
 
         for(AttributeValue v: objs){
 
-            String calories = Objects.requireNonNull(v.get("calories")).s();
-            String name = Objects.requireNonNull(v.get("name")).s();
+            String calories = Objects.requireNonNull(data.get("calories")).s();
+            String name = Objects.requireNonNull(data.get("name")).s();
 
-            Meal meal = new Meal(calories, name, null);
+            Meal meal = new Meal(name, Integer.parseInt(calories), null);
 
             res.add(meal);
         }
