@@ -1,18 +1,20 @@
 package dev.hour.menu;
 
+import java.util.List;
+
+import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.MealContract;
-import dev.hour.meal.Meal;
 
 public class Menu implements MealContract.Menu , MapObjectContract.MapObject {
 
     private String menuId;
-    private List<Meal> meals;
+    private List<MealContract.Meal> meals;
 
     Menu(final String id){
         this.menuId = id;
     }
 
-    Menu(final String id, List<Meal> meals){
+    Menu(final String id, List<MealContract.Meal> meals){
         this.menuId = id;
         this.meals = meals;
     }
@@ -23,12 +25,26 @@ public class Menu implements MealContract.Menu , MapObjectContract.MapObject {
     }
 
     @Override
-    public List<Meal> getMeals(){
+    public List<MealContract.Meal> getMeals(){
         return this.meals;
     }
 
-    public void setMeals(List<Meal> meals){
+    @Override
+    public void setId(String id) {
+
+    }
+
+    public void setMeals(List<MealContract.Meal> meals){
         this.meals =  meals;
     }
 
+    @Override
+    public double getLongitude() {
+        return 0;
+    }
+
+    @Override
+    public double getLatitude() {
+        return 0;
+    }
 }
