@@ -127,18 +127,6 @@ public class BusinessAddRestaurantFragment extends Fragment implements
 
     }
 
-    /// -----------------------
-    /// RestaurantContract.View
-
-    /**
-     * Sets the list of [RestaurantContract.Restaurant]s to display
-     * @param restaurants The [List] of [RestaurantContract.Restaurant]s to display
-     */
-    @Override
-    public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
-
-    }
-
     /// --------------------
     /// View.OnClickListener
 
@@ -200,6 +188,18 @@ public class BusinessAddRestaurantFragment extends Fragment implements
             default: break;
 
         }
+
+    }
+
+    /// -----------------------
+    /// RestaurantContract.View
+
+    /**
+     * Sets the list of [RestaurantContract.Restaurant]s to display
+     * @param restaurants The [List] of [RestaurantContract.Restaurant]s to display
+     */
+    @Override
+    public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
 
     }
 

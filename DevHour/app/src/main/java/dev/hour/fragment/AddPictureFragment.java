@@ -1,16 +1,14 @@
 package dev.hour.fragment;
 
 import android.Manifest;
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -21,57 +19,54 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Map;
 
-import dev.hour.MainActivity;
 import dev.hour.R;
-import dev.hour.contracts.RestaurantContract;
 
-public class BusinessAddRestaurantPictureFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
+public class AddPictureFragment extends Fragment implements
+        View.OnClickListener, View.OnTouchListener {
 
-    /// --------------
-    /// Static Members
+    /// ---------------------
+    /// Public Static Members
 
-    public final static String TAG                      = "AddPictureFragment";
-    public final static int STORAGE_PERMISSION_REQUEST = 901;
-    public final static int CHOOSE_PICTURE_REQUEST     = 912;
-    public final static int STANDARD_WIDTH             = 192;
-    public final static int STANDARD_HEIGHT            = 192;
+    public final static String  TAG                         = "AddPictureFragment"  ;
+    public final static int     STORAGE_PERMISSION_REQUEST  = 901                   ;
+    public final static int     STANDARD_WIDTH              = 192                   ;
+    public final static int     STANDARD_HEIGHT             = 192                   ;
 
     /// ---------------
     /// Private Members
 
-    private RestaurantContract.Presenter.InteractionListener listener;
-    private Map<String, Object>     export                  ;
-    private ImageView               userImage               ;
-    private PointF                  start                   ;
-    private Matrix                  startMatrix             ;
-    private Matrix                  matrix                  ;
-    private ScaleGestureDetector    scaleGestureDetector    ;
-    private int                     pointerCount            ;
-    private float                   scale                   ;
-    private GestureDetector         clickGestureDetector    ;
-    private ActivityResultLauncher<String> activityResultLauncher;
+    private Listener                        listener                ;
+    private Object                          requestor               ;
+    private Map<String, Object>             export                  ;
+    private ImageView                       userImage               ;
+    private PointF                          start                   ;
+    private Matrix                          startMatrix             ;
+    private Matrix                          matrix                  ;
+    private float                           scale                   ;
+    private ActivityResultLauncher<String>  activityResultLauncher  ;
 
     /// --------
     /// Fragment
 
+    /**
+     * Invoked when the [BusinessAddRestaurantPictureFragment] should be created its' view.
+     * Registers the [ActivityResultLauncher]
+     * @param bundle SavedInstanceState
+     */
     @Override
     public void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
 
-        this.activityResultLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                uri -> {
+        this.activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.GetContent(), uri -> {
 
                     if (userImage != null) {
 
@@ -86,10 +81,21 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
     }
 
+    /**
+     * Invoked when the [BusinessAddRestaurantPictureFragment] should create its' view. Inflates the
+     * view and any persist state
+     * @param layoutInflater The [LayoutInflater] responsible for inflating the view
+     * @param viewGroup The parent
+     * @param savedInstanceState SavedInstanceState
+     * @return [View] instance
+     */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public View onCreateView(final LayoutInflater layoutInflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater layoutInflater, final ViewGroup viewGroup,
+                             final Bundle savedInstanceState) {
 
-        clickGestureDetector = new GestureDetector(requireContext(), new GestureDetector.OnGestureListener() {
+        final GestureDetector clickGestureDetector =
+                new GestureDetector(requireContext(), new GestureDetector.OnGestureListener() {
             @Override
             public boolean onDown(MotionEvent e) {
 
@@ -119,10 +125,14 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
             }
         });
 
-        final View layout = layoutInflater.inflate(R.layout.fragment_add_picture, container, false);
-        final View uploadPictureButton = layout.findViewById(R.id.fragment_add_picture_upload_picture_button);
-        final View backButton          = layout.findViewById(R.id.fragment_add_picture_back_button);
-        final View savePictureButton   = layout.findViewById(R.id.fragment_add_picture_save_picture_button);
+        final View layout               =
+                layoutInflater.inflate(R.layout.fragment_add_picture, viewGroup, false);
+        final View uploadPictureButton  =
+                layout.findViewById(R.id.fragment_add_picture_upload_picture_button);
+        final View backButton           =
+                layout.findViewById(R.id.fragment_add_picture_back_button);
+        final View savePictureButton    =
+                layout.findViewById(R.id.fragment_add_picture_save_picture_button);
 
         this.userImage = layout.findViewById(R.id.fragment_add_picture_user_image);
 
@@ -132,7 +142,8 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
         this.userImage.setOnTouchListener(this);
 
-        this.scaleGestureDetector = new ScaleGestureDetector(requireContext(), new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        final ScaleGestureDetector scaleGestureDetector =
+                new ScaleGestureDetector(requireContext(), new ScaleGestureDetector.SimpleOnScaleGestureListener() {
 
             @Override
             public boolean onScale(final ScaleGestureDetector detector) {
@@ -145,12 +156,17 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
         });
 
         this.scale          = 1.0f  ;
-        this.pointerCount   = 0     ;
 
         return layout;
 
     }
 
+    /**
+     * Invoked when a [View] of interest is clicked by the user. Invokes the corresponding
+     * callbacks depending on the [View] that was clicked
+     * @param view The [View] instance that was clicked
+     */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(final View view) {
 
@@ -160,7 +176,7 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
             case R.id.fragment_add_picture_upload_picture_button:
 
-                final Context context = requireContext();
+                final Context context = getContext();
 
                 if(context != null) {
 
@@ -187,8 +203,8 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
                 if(this.userImage != null) {
 
                     // Create an empty bitmap
-                    final Bitmap bitmap = Bitmap.createBitmap
-                            (this.userImage.getWidth(),
+                    final Bitmap bitmap = Bitmap.createBitmap(
+                            this.userImage.getWidth(),
                                     this.userImage.getHeight(), Bitmap.Config.ARGB_8888);
 
                     // Insert it into the canvas
@@ -199,7 +215,8 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
                     // Scale the bitmap
                     final Bitmap scaledBitmap =
-                            Bitmap.createScaledBitmap(bitmap, STANDARD_WIDTH, STANDARD_HEIGHT, false);
+                            Bitmap.createScaledBitmap(
+                                    bitmap, STANDARD_WIDTH, STANDARD_HEIGHT, false);
 
                     try {
 
@@ -228,7 +245,7 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
                     }
 
                     if(this.listener != null)
-                        this.listener.onAddRestaurantRequest();
+                        this.listener.onAddPictureReceived(this.requestor);
 
                 }
 
@@ -237,7 +254,7 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
             case R.id.fragment_add_picture_back_button:
 
                 if(this.listener != null)
-                    this.listener.onAddRestaurantRequest();
+                    this.listener.onAddPictureCancelled(this.requestor);
 
                 break;
 
@@ -245,6 +262,14 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
     }
 
+    /// --------------------
+    /// View.OnTouchListener
+
+    /**
+     * Invoked when a [View] of interest is touched by the user. Invokes the corresponding
+     * callbacks depending on the [View] that was touched
+     * @param view The [View] instance that was touched
+     */
     @Override
     public boolean onTouch(final View view, final MotionEvent event) {
 
@@ -311,24 +336,46 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
     /// --------------
     /// Public Methods
 
-    public void setInteractionListener(RestaurantContract.Presenter.InteractionListener listener) {
+    /**
+     * Sets the [Listener] that will receive callbacks when the user interacts with the [Fragment]
+     * @param listener The [Listener] that will receive callbacks when the user interacts with the
+     *                 fragment
+     * @param requestor The instance that requested the [Fragment]
+     */
+    public void setListener(final Listener listener, final Object requestor) {
 
         this.listener = listener;
+        this.requestor = requestor;
 
     }
 
+    /**
+     * Sets the [Map] export object. The selected image will be placed in the given object
+     * to be retrieved by the requestor
+     * @param export The [Map] instance that holds the image and content length
+     */
     public void setExport(final Map<String, Object> export) {
 
         this.export = export;
 
     }
 
+    /**
+     * Invoked when the appropriate storage permissions have been
+     * granted by the user. Begins the image selection activity.
+     */
     public void storagePermissionsGranted() {
 
         activityResultLauncher.launch("image/*");
 
     }
 
+    /// ---------------
+    /// Private Methods
+
+    /**
+     * Fits the current image into the boundaries of the display
+     */
     private void fitImage() {
 
         final Drawable drawable = this.userImage.getDrawable();
@@ -340,9 +387,9 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
             final int imageWidth    = drawable.getIntrinsicWidth();
             final int imageHeight   = drawable.getIntrinsicHeight();
 
-            final int scaleDimension = (imageHeight > imageWidth) ? imageWidth : imageHeight;
+            final int scaleDimension = Math.min(imageHeight, imageWidth);
 
-            final float scale = Float.valueOf(viewWidth) / scaleDimension;
+            final float scale = (float) viewWidth / scaleDimension;
             final Matrix matrix = this.userImage.getImageMatrix();
 
             matrix.setScale(scale, scale);
@@ -350,6 +397,19 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
             userImage.setImageMatrix(matrix);
 
         }
+
+    }
+
+    /// ----------
+    /// Interfaces
+
+    /**
+     * Defines callbacks to allow generic classes to request an image.
+     */
+    public interface Listener {
+
+        void onAddPictureReceived(final Object requestor);
+        void onAddPictureCancelled(final Object requestor);
 
     }
 

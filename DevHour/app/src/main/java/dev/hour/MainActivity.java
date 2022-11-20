@@ -40,7 +40,7 @@ import dev.hour.fragment.ProfileFragment;
 import dev.hour.fragment.RestaurantListFragment;
 import dev.hour.fragment.SignUpFragment;
 import dev.hour.fragment.BusinessRestaurantListFragment;
-import dev.hour.fragment.BusinessAddRestaurantPictureFragment;
+import dev.hour.fragment.AddPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements
         RestaurantContract.Presenter.InteractionListener,
         NavigationBarView.OnItemSelectedListener,
         MealContract.Menu.Presenter.InteractionListener,
+        AddPictureFragment.Listener,
         MapView.SearchListener {
     //scope......
     static {
@@ -183,15 +184,15 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (requestCode) {
 
-            case BusinessAddRestaurantPictureFragment.STORAGE_PERMISSION_REQUEST:
+            case AddPictureFragment.STORAGE_PERMISSION_REQUEST:
 
                 if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     final Fragment fragment =
-                            getSupportFragmentManager().findFragmentByTag(BusinessAddRestaurantPictureFragment.TAG);
+                            getSupportFragmentManager().findFragmentByTag(AddPictureFragment.TAG);
 
-                    if (fragment instanceof BusinessAddRestaurantPictureFragment)
-                        ((BusinessAddRestaurantPictureFragment) fragment).storagePermissionsGranted();
+                    if (fragment instanceof AddPictureFragment)
+                        ((AddPictureFragment) fragment).storagePermissionsGranted();
 
                 }
 
@@ -343,7 +344,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onShowBusinessAddRestaurantImageRequest(final Map<String, Object> export) {
 
-        showBusinessAddRestaurantPictureFragment(export);
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        showAddPictureFragment(export,
+                fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG));
 
     }
 
@@ -523,26 +527,26 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void showBusinessAddRestaurantPictureFragment(final Map<String, Object> export) {
+    private void showAddPictureFragment(final Map<String, Object> export, final Object requestor) {
 
         final FragmentManager       fragmentManager = getSupportFragmentManager();
         final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
 
         Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessAddRestaurantPictureFragment.TAG);
+                fragmentManager.findFragmentByTag(AddPictureFragment.TAG);
 
         if(fragment == null) {
 
-            fragment = new BusinessAddRestaurantPictureFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantPictureFragment.TAG);
+            fragment = new AddPictureFragment();
+            transaction.add(R.id.activity_main, fragment, AddPictureFragment.TAG);
 
-            ((BusinessAddRestaurantPictureFragment) fragment).setInteractionListener(this);
-            ((BusinessAddRestaurantPictureFragment) fragment).setExport(export);
+            ((AddPictureFragment) fragment).setListener(this, requestor);
+            ((AddPictureFragment) fragment).setExport(export);
 
         } else if(fragment.isAdded()) {
 
-            ((BusinessAddRestaurantPictureFragment) fragment).setInteractionListener(this);
-            ((BusinessAddRestaurantPictureFragment) fragment).setExport(export);
+            ((AddPictureFragment) fragment).setListener(this, requestor);
+            ((AddPictureFragment) fragment).setExport(export);
 
         }
 
@@ -1034,6 +1038,25 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onConfirmButton(Map<String, Object> input) {
+
+    }
+
+    /// ---------------------------
+    /// AddPictureFragment.Listener
+
+    @Override
+    public void onAddPictureReceived(final Object requestor) {
+
+        if(requestor instanceof BusinessAddRestaurantFragment)
+            showBusinessAddRestaurantFragment();
+
+    }
+
+    @Override
+    public void onAddPictureCancelled(final Object requestor) {
+
+        if(requestor instanceof BusinessAddRestaurantFragment)
+            showBusinessAddRestaurantFragment();
 
     }
 }
