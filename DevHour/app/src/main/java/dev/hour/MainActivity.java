@@ -1009,4 +1009,24 @@ public class MainActivity extends AppCompatActivity implements
     public void onMealSelected(MealContract.Meal meal) {
 
     }
+
+    @Override
+    public void onEditPicture() {
+
+    }
+
+    @Override
+    public void onAddIngredientButton() {
+
+    }
+
+    @Override
+    public void onTagButton() {
+
+    }
+
+    @Override
+    public void onConfirmButton(Map<String, Object> input) {
+
+    }
 }

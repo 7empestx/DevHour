@@ -125,6 +125,10 @@ public interface MealContract {
                 void onShowBusinessAddMenuMeal(final Map<String, Object> export);
                 void onShowBusinessAddMenuAddTag(final Map<String, Object> export);
                 void onMealSelected(final Meal meal);
+                void onEditPicture();
+                void onAddIngredientButton();
+                void onTagButton();
+                void onConfirmButton(Map <String, Object> input);
 
             }
 

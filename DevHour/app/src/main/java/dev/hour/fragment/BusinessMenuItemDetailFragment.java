@@ -5,29 +5,48 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
-
-import com.google.android.material.snackbar.Snackbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import dev.hour.R;
-import dev.hour.contracts.AuthenticatorContract;
 import dev.hour.contracts.MealContract;
+import dev.hour.view.list.BusinessMenuItemDetailListAdapter;
 
-public class BusinessMenuItemDetailFragment extends Fragment implements View.OnClickListener {
+public class BusinessMenuItemDetailFragment extends Fragment implements View.OnClickListener{
     public final static String TAG = "BusinessMenuItemDetail";
 
     /// --------------
     /// Private Fields
 
+    private BusinessMenuItemDetailListAdapter businessMenuItemDetailListAdapter;
+    private MealContract.Menu.Presenter.InteractionListener listener;
+
     @Override
-    public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
-        final View layout = (View) lf.inflate(R.layout.fragment_business_menu_item_detail, vg, false);
+    public View onCreateView(final LayoutInflater layoutInflater,
+                             final ViewGroup viewGroup, final Bundle bundle){
+
+        if (this.businessMenuItemDetailListAdapter == null)
+            this.businessMenuItemDetailListAdapter = new BusinessMenuItemDetailListAdapter();
+
+        final View layout =
+                layoutInflater.inflate(R.layout.fragment_business_menu_item_detail, viewGroup, false);
+        final RecyclerView recyclerView =
+                layout.findViewById(R.id.fragment_business_menu_item_detail_recycler_view);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(this.businessMenuItemDetailListAdapter);
+
         return layout;
+    }
+
+    public void setInteractionListener(final MealContract.Menu.Presenter.InteractionListener listener) {
+        this.listener = listener;
     }
 
     /// --------------------
@@ -40,35 +59,30 @@ public class BusinessMenuItemDetailFragment extends Fragment implements View.OnC
     @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
 
-        final String input = "Text from the text box";
+        Map <String, Object> input;
 
         switch(view.getId()) {
 
+            case R.id.fragment_business_menu_item_detail_meal_image:
+
+                this.listener.onEditPicture();
+                break;
             case R.id.fragment_business_menu_item_detail_ingredient_button:
 
-                final Button signInButton =
-                        this.requireView().findViewById(R.id.fragment_business_menu_item_detail_ingredient_button);
-
-                signInButton.setEnabled(false);
-
+                this.listener.onAddIngredientButton();
                 break;
             case R.id.fragment_business_menu_item_detail_tag_button:
 
-                final Button tagButton =
-                        this.requireView().findViewById(R.id.fragment_business_menu_item_detail_tag_button);
-
-                tagButton.setEnabled(false);
-
+                this.listener.onTagButton();
                 break;
 
             case R.id.fragment_business_menu_item_detail_confirm_button:
 
-                final Button confirmButton =
-                        this.requireView().findViewById(R.id.fragment_business_menu_item_detail_confirm_button);
+                EditText editText = this.getView().findViewById(R.id.fragment_business_menu_item_detail_name_input);
+                input = new HashMap<>();
+                input.put("name", editText.getText().toString());
 
-                confirmButton.setEnabled(false);
-
-
+                this.listener.onConfirmButton(input);
                 break;
             default:
 
