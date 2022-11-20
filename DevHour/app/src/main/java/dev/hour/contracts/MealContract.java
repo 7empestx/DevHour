@@ -113,6 +113,8 @@ public interface MealContract {
                 void onShowMenuRequest();
                 void onShowBusinessAddMenuMeal(final Map<String, Object> export);
                 void onShowBusinessAddMenuAddTag(final Map<String, Object> export);
+                void onMealSelected(final Meal meal);
+
 
             }
 

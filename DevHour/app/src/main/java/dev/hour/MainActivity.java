@@ -983,4 +983,9 @@ public class MainActivity extends AppCompatActivity implements
     public void onShowBusinessAddMenuAddTag(Map<String, Object> export) {
 
     }
+
+    @Override
+    public void onMealSelected(MealContract.Meal meal) {
+
+    }
 }

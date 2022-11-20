@@ -14,9 +14,11 @@ import java.util.List;
 import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
+import dev.hour.model.Meal;
 import dev.hour.view.list.BusinessMenuListAdapter;
 
-public class BusinessMenuListFragment extends Fragment implements MealContract.Menu.View {
+public class BusinessMenuListFragment extends Fragment
+        implements MealContract.Menu.View, View.OnClickListener, BusinessMenuListAdapter.Listener {
 
     /// --------------
     /// Static Members
@@ -61,5 +63,24 @@ public class BusinessMenuListFragment extends Fragment implements MealContract.M
 
     public void setInteractionListener(final MealContract.Menu.Presenter.InteractionListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void onItemClicked(MealContract.Meal meal) {
+
+        if(this.listener != null)
+            this.listener.onMealSelected(meal);
+
+    }
+
+    @Override
+    public void onAddButtonClicked(MealContract.Meal meal) {
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

@@ -190,7 +190,7 @@ public class BusinessMenuListAdapter extends
                 position = Integer.valueOf(v.getTag().toString());
 
                 if(this.listener != null)
-                    this.listener.onEditButtonClicked(this.mealsList.get(position));
+                    this.listener.onAddButtonClicked(this.mealsList.get(position));
 
                 break;
 
@@ -260,7 +260,7 @@ public class BusinessMenuListAdapter extends
 
     public interface Listener {
 
-        void onEditButtonClicked(final MealContract.Meal meal);
+        void onAddButtonClicked(final MealContract.Meal meal);
         void onItemClicked(final MealContract.Meal meal);
 
 
