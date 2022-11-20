@@ -26,6 +26,7 @@ import dev.hour.contracts.AuthenticatorContract;
 import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
+import dev.hour.database.MealDatabase;
 import dev.hour.database.MenuDatabase;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
@@ -41,6 +42,7 @@ import dev.hour.fragment.SignUpFragment;
 import dev.hour.fragment.BusinessRestaurantListFragment;
 import dev.hour.fragment.BusinessAddRestaurantPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
+import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
 import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements
     private AuthenticatorContract.Authenticator authenticator           ;
     private UserContract.Presenter              userPresenter           ;
     private UserContract.Database               userDatabase            ;
+    private MealContract.Meal.Database          mealDatabase            ;
+    private MealContract.Meal.Presenter         mealPresenter           ;
     private MealContract.Diet.Presenter         dietPresenter           ;
     private MealContract.Diet.Database          dietDatabase            ;
     private MealContract.Menu.Presenter         menuPresenter           ;
@@ -123,11 +127,6 @@ public class MainActivity extends AppCompatActivity implements
         userDatabase            = new UserDatabase(
                 this.getString(R.string.region), this.getString(R.string.user_table_name), this.httpClient);
 
-        // Set up the user presenter
-        dietPresenter           = new DietPresenter();
-        dietDatabase            = new DietDatabase(
-                this.getString(R.string.region), this.getString(R.string.diet_table_name), this.httpClient);
-
         // Set up the restaurant presenter
         restaurantPresenter     = new RestaurantPresenter();
         restaurantDatabase      = new RestaurantDatabase(
@@ -137,15 +136,26 @@ public class MainActivity extends AppCompatActivity implements
         menuPresenter = new MenuPresenter();
         menuDatabase  = new MenuDatabase(
                 this.getString(R.string.region), this.getString(R.string.menu_table_name), this.httpClient);
+
+        // Set up the user presenter
+        dietPresenter           = new DietPresenter();
+        dietDatabase            = new DietDatabase(
+                this.getString(R.string.region), this.getString(R.string.diet_table_name), this.httpClient);
+
+        // Set up the Meal presenter
+        mealPresenter           = new MealPresenter();
+        mealDatabase            = new MealDatabase(
+                this.getString(R.string.region), this.getString(R.string.meal_table_name), this.getString(R.string.meal_bucket_name), this.httpClient);
         
         // Bind the model
         authenticatorPresenter.setAuthenticator(authenticator);
         authenticatorPresenter.setInteractionListener(this);
 
         userPresenter.setDatabase(userDatabase);
-        dietPresenter.setDatabase(dietDatabase);
         restaurantPresenter.setDatabase(restaurantDatabase);
+        dietPresenter.setDatabase(dietDatabase);
         menuPresenter.setDatabase(menuDatabase);
+        mealPresenter.setDatabase(mealDatabase);
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
@@ -230,6 +240,8 @@ public class MainActivity extends AppCompatActivity implements
         this.userDatabase.setCredentials(credentials);
         this.dietDatabase.setCredentials(credentials);
         this.restaurantDatabase.setCredentials(credentials);
+        this.menuDatabase.setCredentials(credentials);
+        this.mealDatabase.setCredentials(credentials);
         this.userPresenter.setUser(userId);
 
         // Retrieve the user

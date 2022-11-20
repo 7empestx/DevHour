@@ -25,6 +25,7 @@ public interface MealContract {
             void setCredentials(final Map<String, String> credentials);
             Meal getMeal(final String id);
             void createMeal(final Map<String, Object> data);
+            List<Meal> getMealsFrom(final List<String> mealIds);
 
         }
 
@@ -32,6 +33,8 @@ public interface MealContract {
 
             void setDatabase(final Database database);
             void setView(final View view);
+            void setMealFrom(final String id);
+            List<Meal> getMealsFrom(final List<String> mealIds);
 
         }
 

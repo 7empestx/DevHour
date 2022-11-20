@@ -6,6 +6,7 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.waiters.S3Waiter;
 
 public class MealDatabase implements MealContract.Meal.Database {
+
     /// ---------------------
     /// Public Static Members
 
@@ -64,18 +66,25 @@ public class MealDatabase implements MealContract.Meal.Database {
     /// ---------------
     /// Private Members
 
-    private DynamoDbClient client          ;
-    private S3Client s3Client        ;
+    private DynamoDbClient                          client          ;
+    private S3Client                                s3Client        ;
     private String                                  tableName       ;
     private String                                  bucketName      ;
     private String                                  region          ;
-    private SdkHttpClient httpClient      ;
-    private Map<String, AttributeValue> response        ;
-    private ResponseInputStream<GetObjectResponse> objectResponse  ;
+    private SdkHttpClient                           httpClient      ;
+    private Map<String, AttributeValue>             response        ;
+    private ResponseInputStream<GetObjectResponse>  objectResponse  ;
 
     /// ------------
     /// Constructing
 
+    /**
+     * Initializes the [MealDatabase] to its' default state.
+     * @param region The [Region] corresponding the Restaurant resources
+     * @param tableName The name of the Restaurant table
+     * @param bucketName The name of the Restaurant bucket
+     * @param httpClient The http client to perform the requests.
+     */
     public MealDatabase(final String region, final String tableName, final String bucketName,
                               final SdkHttpClient httpClient){
 
@@ -89,6 +98,29 @@ public class MealDatabase implements MealContract.Meal.Database {
 
     /// ---------------
     /// Private Methods
+
+    /**
+     * Retrieves a String value from the AttributeValue with the given key
+     * @param item The item to extract the [String] from
+     * @param key The [String] key corresponding to the value
+     * @return [String] instance
+     */
+    private String getStringFrom(final Map<String, AttributeValue> item, final String key) {
+
+        String result = "";
+
+        if(item != null) {
+
+            final AttributeValue attributeValue = item.get(key);
+
+            if(attributeValue != null)
+                result = attributeValue.s();
+
+        }
+
+        return result;
+
+    }
 
     /**
      * Creates an item that can update a DynamoDB table item.
@@ -309,31 +341,29 @@ public class MealDatabase implements MealContract.Meal.Database {
     private Meal bindMealFrom(final Map<String, AttributeValue> data) {
 
         final Meal meal = new Meal();
-        final Map <String, AttributeValue> tempMap = Objects.requireNonNull(data.get("ingredients")).m();
-        Map <String, String> ingredientsMap;
 
         // Set the id
-        meal.setId(
-                Objects.requireNonNull(data.get("id")).s());
+        meal.setId(getStringFrom(data, "id"));
 
         // Set the name
-        meal.setName(
-                Objects.requireNonNull(data.get("name")).s());
+        meal.setName(getStringFrom(data, "name"));
 
-        // Set the longitude
-        meal.setCalories(Integer.parseInt(
-                Objects.requireNonNull(data.get("calories")).s()));
+        final String calorieString = getStringFrom(data, "calories");
+        final int calories = (calorieString != null && !calorieString.isEmpty()) ? Integer.parseInt(calorieString) : 0;
 
-        ingredientsMap = new HashMap<>();
-        for (Map.Entry<String, AttributeValue> entry : tempMap.entrySet())
-        {
-            ingredientsMap.put(entry.getKey(), Objects.requireNonNull(entry.getValue()).s());
-        }
+        // Set the calories
+        meal.setCalories(calories);
+
+        final Map <String, AttributeValue>  tempMap         = Objects.requireNonNull(data.get("ingredients")).m();
+        final Map <String, String>          ingredientsMap  = new HashMap<>();
+
+        for (final Map.Entry<String, AttributeValue> entry: tempMap.entrySet())
+            ingredientsMap.put(entry.getKey(), entry.getKey());
 
         // Set the ingredients
         meal.setIngredients(ingredientsMap);
 
-        final String pictureId = Objects.requireNonNull(data.get("picture_id")).s();
+        final String pictureId = getStringFrom(data, "picture_id");
 
         if((pictureId != null) && !(pictureId.isEmpty()))
             meal.setImageStream(getObject(pictureId));
@@ -417,6 +447,24 @@ public class MealDatabase implements MealContract.Meal.Database {
     }
 
     /**
+     * Returns a List of MealContract.Meals from the list of mealids
+     * @param mealIds The meal id's of the MealContract.Meals to retrieve
+     * @return List of MealContract.Meals
+     */
+    @Override
+    public List<MealContract.Meal> getMealsFrom(final List<String> mealIds) {
+
+        final List<MealContract.Meal> result = new ArrayList<>();
+
+        if(mealIds != null)
+            for(final String id: mealIds)
+                result.add(bindMealFrom(getItem("id", id)));
+
+        return result;
+
+    }
+
+    /**
      * Retrieves the meal corresponding with the given id, if any
      * @param id the meal id
      * @return MealContract.Meal instance
@@ -427,4 +475,5 @@ public class MealDatabase implements MealContract.Meal.Database {
         return bindMealFrom(getItem("id", id));
 
     }
+
 }
