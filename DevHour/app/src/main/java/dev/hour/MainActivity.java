@@ -31,7 +31,7 @@ import dev.hour.database.MenuDatabase;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
-import dev.hour.fragment.BusinessAddRestaurantFragment;
+import dev.hour.fragment.business.BusinessAddRestaurantFragment;
 import dev.hour.fragment.BusinessMenuItemDetailFragment;
 import dev.hour.fragment.BusinessMenuListFragment;
 import dev.hour.fragment.LoginFragment;
