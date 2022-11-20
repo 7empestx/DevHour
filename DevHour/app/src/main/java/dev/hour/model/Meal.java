@@ -1,8 +1,10 @@
 package dev.hour.model;
 
+import java.io.OutputStream;
 import java.time.chrono.MinguoDate;
 import java.util.Map;
 
+import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.MealContract;
 
 public class Meal implements MealContract.Meal {
@@ -12,6 +14,7 @@ public class Meal implements MealContract.Meal {
     private int calories;
     private String name;
     private Map<String, MealContract.Ingredient> ingredients;
+    private OutputStream imageStream;
 
     public Meal(final String name, final int calories, final Map<String, MealContract.Ingredient> ingredients) {
 
@@ -20,9 +23,15 @@ public class Meal implements MealContract.Meal {
         this.ingredients = ingredients;
 
     }
+    //getter
+    @Override
+    public OutputStream getImageStream() {
 
+        return this.imageStream;
 
+    }
 
+    //setter
     @Override
     public int getCalories() { return calories; }
 
@@ -31,4 +40,12 @@ public class Meal implements MealContract.Meal {
 
     @Override
     public Map<String, MealContract.Ingredient> getIngredients() { return ingredients; }
+
+    @Override
+    public void setImageStream(final OutputStream imageStream) {
+
+        this.imageStream = imageStream;
+
+    }
 }
+

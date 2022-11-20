@@ -1,5 +1,6 @@
 package dev.hour.contracts;
 
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,12 @@ public interface MealContract {
     interface Meal {
 
         int getCalories();
+        OutputStream getImageStream();
         String getName();
         Map<String, Ingredient> getIngredients();
+
+        void setImageStream(final OutputStream imageStream);
+
 
         interface View {
 

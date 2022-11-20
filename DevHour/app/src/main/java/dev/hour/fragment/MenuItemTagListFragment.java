@@ -15,16 +15,25 @@ import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.view.list.BusinessMenuListAdapter;
 
+public class MenuItemTagListFragment extends Fragment implements MealContract.Menu.View{
 
-public class MenuItemTagListFragment extends Fragment {
+        /// --------------
+        /// Static Members
+
+        public final static String TAG = "MenuItemTagListFragment";
+
+        /// --------------
+        /// Private Fields
+
+        private BusinessMenuListAdapter MenuItemTagListAdapter;
 
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
                              final ViewGroup viewGroup, final Bundle bundle) {
 
-        if (this.businessMenuListAdapter == null)
-            this.businessMenuListAdapter = new BusinessMenuListAdapter();
+        if (this.MenuItemTagListAdapter == null)
+            this.MenuItemTagListAdapter = new BusinessMenuListAdapter();
 
         final View layout =
                 layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
@@ -32,7 +41,7 @@ public class MenuItemTagListFragment extends Fragment {
                 layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(this.businessMenuListAdapter);
+        recyclerView.setAdapter(this.MenuItemTagListAdapter);
 
         return layout;
 
@@ -41,10 +50,10 @@ public class MenuItemTagListFragment extends Fragment {
     @Override
     public void setMenu(List<MealContract.Meal> meals) {
 
-        if (this.businessMenuListAdapter == null)
-            this.businessMenuListAdapter = new BusinessMenuListAdapter();
+        if (this.MenuItemTagListAdapter == null)
+            this.MenuItemTagListAdapter = new BusinessMenuListAdapter();
 
-        this.businessMenuListAdapter.setMealsList(meals);
+        this.MenuItemTagListAdapter.setMealsList(meals);
 
     }
 
