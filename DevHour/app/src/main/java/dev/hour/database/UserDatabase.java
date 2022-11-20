@@ -81,7 +81,7 @@ public class UserDatabase implements UserContract.Database {
         final Map<String, AttributeValue> keyMap = new HashMap<>();
         Map<String, AttributeValue> result;
 
-        if(client != null) {
+        if((client != null) && (key != null) && !(key.isEmpty()) && (value != null) && !(value.isEmpty())) {
 
             keyMap.put(key, AttributeValue.builder().s(value).build());
 
@@ -161,7 +161,7 @@ public class UserDatabase implements UserContract.Database {
 
         final UserContract.User user;
 
-        if(client != null) {
+        if((client != null) && (id != null) && (!id.isEmpty())) {
 
             final Map<String, AttributeValue> userBlob = getItem("id", id);
 

@@ -61,9 +61,30 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
     private int                     pointerCount            ;
     private float                   scale                   ;
     private GestureDetector         clickGestureDetector    ;
+    private ActivityResultLauncher<String> activityResultLauncher;
 
     /// --------
     /// Fragment
+
+    @Override
+    public void onCreate(final Bundle bundle) {
+        super.onCreate(bundle);
+
+        this.activityResultLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
+                uri -> {
+
+                    if (userImage != null) {
+
+                        userImage.setScaleType(ImageView.ScaleType.MATRIX);
+                        userImage.setImageURI(uri);
+
+                        fitImage();
+
+                    }
+
+                });
+
+    }
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -289,42 +310,7 @@ public class BusinessAddRestaurantPictureFragment extends Fragment implements Vi
 
     public void storagePermissionsGranted() {
 
-        final Intent intent = new Intent();
-
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-
-        final Activity activity = requireActivity();
-
-        if(activity instanceof MainActivity)
-            ((MainActivity) activity).tearDown = true;
-
-        final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-
-                    // If we received an OK code
-                    if(result.getResultCode() == Activity.RESULT_OK) {
-
-                        // Attempt to retrieve the uri
-                        final Uri filePath = result.getData().getData();
-
-                        if(userImage != null) {
-
-                            userImage.setScaleType(ImageView.ScaleType.MATRIX);
-                            userImage.setImageURI(filePath);
-
-                            fitImage();
-
-                        }
-
-                        ((MainActivity) activity).tearDown = false;
-
-                    }
-
-                }
-
-        );
+        activityResultLauncher.launch("image/*");
 
     }
 

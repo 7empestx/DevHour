@@ -144,11 +144,17 @@ public final class LoginFragment extends Fragment implements AuthenticatorContra
     @Override
     public void onSignIn() {
 
-        final Button signInButton = this.getView().findViewById(R.id.fragment_login_sign_in_button);
+        final View view = this.getView();
 
-        signInButton.setEnabled(true);
+        if(view != null) {
 
-        if (this.snackBar != null)  this.snackBar.dismiss();
+            final Button signInButton = view.findViewById(R.id.fragment_login_sign_in_button);
+
+            signInButton.setEnabled(true);
+
+            if (this.snackBar != null) this.snackBar.dismiss();
+
+        }
 
     }
 

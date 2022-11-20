@@ -15,17 +15,8 @@ import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.view.list.BusinessMenuListAdapter;
 
-public class MenuItemTagListFragment extends Fragment implements MealContract.Menu.View {
 
-    /// --------------
-    /// Static Members
-
-    public final static String TAG = "MenuItemTagListFragment";
-
-    /// --------------
-    /// Private Fields
-
-    private BusinessMenuListAdapter businessMenuListAdapter;
+public class MenuItemTagListFragment extends Fragment {
 
 
     @Override
