@@ -93,6 +93,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                               final SdkHttpClient httpClient) {
 
         this.client     = null          ;
+        this.s3Client   = null          ;
         this.tableName  = tableName     ;
         this.bucketName = bucketName    ;
         this.region     = region        ;
@@ -215,7 +216,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     private OutputStream getObject(final String key) {
 
         // Create the resultant OutputStream
-        final OutputStream result = new BufferedOutputStream(new ByteArrayOutputStream());
+        final OutputStream result = new ByteArrayOutputStream();
 
         // If we have a client
         if((this.s3Client != null) && (key != null) && (!key.isEmpty())) {
@@ -230,8 +231,19 @@ public class RestaurantDatabase implements RestaurantContract.Database {
             final RestaurantDatabase database = this;
 
             // Create the request thread
-            final Thread thread = new Thread(() ->
-                    database.objectResponse = database.s3Client.getObject(request));
+            final Thread thread = new Thread(() -> {
+
+                try {
+
+                    database.objectResponse = database.s3Client.getObject(request);
+
+                } catch(final Exception exception) {
+
+                    Log.e("RestaurantDatabase", exception.getMessage());
+
+                }
+
+            });
 
             try {
 
