@@ -1,7 +1,3 @@
-// public class MenuItemTagListFragment {
-    
-// }
-
 package dev.hour.fragment;
 
 import android.os.Bundle;
@@ -16,28 +12,49 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import dev.hour.R;
-import dev.hour.contracts.RestaurantContract;
-import dev.hour.view.list.CustomerRestaurantListAdapter;
+import dev.hour.contracts.MealContract;
+import dev.hour.view.list.BusinessMenuListAdapter;
 
-public class RestaurantListFragment extends Fragment {
+public class MenuItemTagListFragment extends Fragment implements MealContract.Menu.View {
 
-    public final static String TAG = "RestaurantListFragment";
+    /// --------------
+    /// Static Members
 
-    private CustomerRestaurantListAdapter restaurantListAdapter;
+    public final static String TAG = "MenuItemTagListFragment";
+
+    /// --------------
+    /// Private Fields
+
+    private BusinessMenuListAdapter businessMenuListAdapter;
+
+
     @Override
-    public View onCreateView(LayoutInflater lf, ViewGroup vg, Bundle b){
-        this.restaurantListAdapter = new CustomerRestaurantListAdapter();
-        final ViewGroup layout = (ViewGroup) lf.inflate(R.layout.fragment_customer_restaurant_list, vg, false);
-        final RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
+    public View onCreateView(final LayoutInflater layoutInflater,
+                             final ViewGroup viewGroup, final Bundle bundle) {
+
+        if (this.businessMenuListAdapter == null)
+            this.businessMenuListAdapter = new BusinessMenuListAdapter();
+
+        final View layout =
+                layoutInflater.inflate(R.layout.fragment_business_restaurant_list, viewGroup, false);
+        final RecyclerView recyclerView =
+                layout.findViewById(R.id.fragment_customer_restaurant_list_recycler_view);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(restaurantListAdapter);
+        recyclerView.setAdapter(this.businessMenuListAdapter);
+
         return layout;
-    }
-
-    public void setRestaurantList(List<RestaurantContract.Restaurant> list){
-        if(restaurantListAdapter != null){
-            this.restaurantListAdapter.setRestaurantLists(list);
-        }
 
     }
+
+    @Override
+    public void setMenu(List<MealContract.Meal> meals) {
+
+        if (this.businessMenuListAdapter == null)
+            this.businessMenuListAdapter = new BusinessMenuListAdapter();
+
+        this.businessMenuListAdapter.setMealsList(meals);
+
+    }
+
 }
