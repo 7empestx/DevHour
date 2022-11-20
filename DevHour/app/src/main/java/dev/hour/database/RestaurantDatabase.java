@@ -49,7 +49,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     /// ----------------------
     /// Private Static Members
 
-    private final static int BUFFER_SIZE = 4096;
+    private final static int BUFFER_SIZE        = 4096              ;
 
     /// ---------------------
     /// Public Static Methods

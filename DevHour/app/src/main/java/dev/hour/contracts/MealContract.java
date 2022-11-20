@@ -92,6 +92,7 @@ public interface MealContract {
 
         interface Database {
 
+            void setCredentials(final Map<String, String> credentials);
             List<Meal> getMenu(final String menuId);
 
         }

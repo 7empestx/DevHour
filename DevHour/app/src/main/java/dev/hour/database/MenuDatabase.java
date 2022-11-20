@@ -26,43 +26,12 @@ import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 
 public class MenuDatabase implements MealContract.Menu.Database {
 
-
-    @Override
-    public List<MealContract.Meal> getMenu(String menuId){
-        return toMeals(getItem("id", menuId));
-    }
-
-    private List<MealContract.Meal> toMeals(final Map<String, AttributeValue> data){
-
-        List<MealContract.Meal> res = new ArrayList<>();
-
-        List<AttributeValue> objs = Objects.requireNonNull(data.get("meals")).l();
-
-        for(AttributeValue v: objs){
-
-            Map<String, AttributeValue> mealMap = v.m();
-
-            String calories = Objects.requireNonNull(mealMap.get("calories")).s();
-            String name = Objects.requireNonNull(mealMap.get("name")).s();
-
-            Meal meal = new Meal();
-
-            meal.setName(name);
-            meal.setCalories(Integer.parseInt(calories));
-
-            res.add(meal);
-        }
-
-        return res;
-    }
-
     /// ---------------------
     /// Public Static Members
 
     public final static String ACCESS_KEY       = "ACCESS_KEY"      ;
     public final static String SECRET_KEY       = "SECRET_KEY"      ;
     public final static String SESSION_TOKEN    = "SESSION_TOKEN"   ;
-
 
     /// ---------------------
     /// Public Static Methods
@@ -108,7 +77,6 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
     /// ---------------
     /// Private Methods
-
 
     /**
      * Creates an item that can update a DynamoDB table item.
@@ -191,7 +159,6 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
     }
 
-
     /**
      * Sets the given item with the given data onto the current table
      * @param item The item to write.
@@ -208,7 +175,6 @@ public class MenuDatabase implements MealContract.Menu.Database {
         }
 
     }
-
 
     /**
      * Sets the credentials required to build the DynamoDB client and S3 client
@@ -229,6 +195,34 @@ public class MenuDatabase implements MealContract.Menu.Database {
 
     }
 
+    @Override
+    public List<MealContract.Meal> getMenu(String menuId){
+        return toMeals(getItem("id", menuId));
+    }
+
+    private List<MealContract.Meal> toMeals(final Map<String, AttributeValue> data){
+
+        List<MealContract.Meal> res = new ArrayList<>();
+
+        List<AttributeValue> objs = Objects.requireNonNull(data.get("meals")).l();
+
+        for(AttributeValue v: objs){
+
+            Map<String, AttributeValue> mealMap = v.m();
+
+            String calories = Objects.requireNonNull(mealMap.get("calories")).s();
+            String name = Objects.requireNonNull(mealMap.get("name")).s();
+
+            Meal meal = new Meal();
+
+            meal.setName(name);
+            meal.setCalories(Integer.parseInt(calories));
+
+            res.add(meal);
+        }
+
+        return res;
+    }
 
 
 }
