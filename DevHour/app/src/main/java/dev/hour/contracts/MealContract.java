@@ -8,43 +8,49 @@ public interface MealContract {
 
     interface Meal {
 
-        int getCalories();
-        OutputStream getImageStream();
+        String getId();
         String getName();
-        Map<String, Ingredient> getIngredients();
+        int getCalories();
+        Map<String, String> getIngredients();
+        OutputStream getImageStream();
 
+        void setId(final String id);
+        void setName(final String name);
+        void setCalories(final int calories);
+        void setIngredients(final Map<String, String> ingredients);
         void setImageStream(final OutputStream imageStream);
 
+        interface Database {
+
+            void setCredentials(final Map<String, String> credentials);
+            Meal getMeal(final String id);
+
+        }
+
+        interface Presenter {
+
+            void setDatabase(final Database database);
+            void setView(final View view);
+
+        }
 
         interface View {
 
-            void setIngredients(final Map<String, Ingredient> ingredients);
+            void setMeal(final Meal meal);
 
         }
 
     }
 
-    enum Ingredient {
-        Potato,
-        Salt,
-
-
-    }
-
-    enum Diets {
-        VEGAN,
-        VEGETARIAN,
-        HALAL,
-        KOSHER,
-        LACTOSE_FREE,
-        GLUTEN_FREE
-
-    }
-
     interface Diet {
 
-        List<Ingredient> getAllergens();
-        List<Diets> getDiets();
+        String getId();
+        List<String> getAllergens();
+        List<Meal> getMeals();
+        
+        void setId(final String id);
+        void setAllergens(final List<String> allergens);
+        void setMeals(final List<Meal> meals);
 
         interface Database {
 

@@ -8,22 +8,52 @@ import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.MealContract;
 
 public class Meal implements MealContract.Meal {
+
     /// --------------
     /// Private Fields
 
-    private int calories;
-    private String name;
-    private Map<String, MealContract.Ingredient> ingredients;
-    private OutputStream imageStream;
+    private String              id          ;
+    private String              name        ;
+    private int                 calories    ;
+    private Map<String, String> ingredients ;
+    private OutputStream        imageStream ;
 
-    public Meal(final String name, final int calories, final Map<String, MealContract.Ingredient> ingredients) {
+    /// -----------
+    /// Constructor
 
-        this.name = name;
-        this.calories = calories;
-        this.ingredients = ingredients;
+    public Meal() { /* Empty */ }
+
+    /// -----------------
+    /// MealContract.Meal
+
+    @Override
+    public String getId() {
+
+        return this.id;
 
     }
-    //getter
+
+    @Override
+    public String getName() {
+
+        return name;
+
+    }
+
+    @Override
+    public int getCalories() {
+
+        return calories;
+
+    }
+
+    @Override
+    public Map<String, String> getIngredients() {
+
+        return ingredients;
+
+    }
+
     @Override
     public OutputStream getImageStream() {
 
@@ -31,15 +61,33 @@ public class Meal implements MealContract.Meal {
 
     }
 
-    //setter
     @Override
-    public int getCalories() { return calories; }
+    public void setId(String id) {
+
+        this.id = id;
+
+    }
 
     @Override
-    public String getName() { return name; }
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
 
     @Override
-    public Map<String, MealContract.Ingredient> getIngredients() { return ingredients; }
+    public void setCalories(int calories) {
+
+        this.calories = calories;
+
+    }
+
+    @Override
+    public void setIngredients(Map<String, String> ingredients) {
+
+        this.ingredients = ingredients;
+
+    }
 
     @Override
     public void setImageStream(final OutputStream imageStream) {
@@ -47,5 +95,6 @@ public class Meal implements MealContract.Meal {
         this.imageStream = imageStream;
 
     }
+
 }
 

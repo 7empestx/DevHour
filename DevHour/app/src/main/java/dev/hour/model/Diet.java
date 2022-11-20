@@ -1,6 +1,5 @@
 package dev.hour.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dev.hour.contracts.MealContract;
@@ -10,25 +9,42 @@ public class Diet implements MealContract.Diet {
     /// --------------
     /// Private Fields
 
-    private String id;
-    private List<MealContract.Ingredient> allergens;
-    private List<MealContract.Diets> diets;
+    private String                  id          ;
+    private List<String>            allergens   ;
+    private List<MealContract.Meal> meals       ;
 
-    public Diet(List<String> allergens, List<String> diets) {
-        // TODO: Set allergens after deciding on enum values for ingredients
-        this.diets = new ArrayList<MealContract.Diets>();
-        for (String diet : diets) {
-            this.diets.add(MealContract.Diets.valueOf(diet));
-        }
+    public Diet() {
+
     }
 
     @Override
-    public List<MealContract.Ingredient> getAllergens() {
+    public String getId() {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllergens() {
         return allergens;
     }
 
     @Override
-    public List<MealContract.Diets> getDiets() {
-        return diets;
+    public List<MealContract.Meal> getMeals() {
+        return meals;
     }
+
+    @Override
+    public void setId(String id) {
+
+    }
+
+    @Override
+    public void setAllergens(List<String> allergens) {
+
+    }
+
+    @Override
+    public void setMeals(List<MealContract.Meal> meals) {
+
+    }
+
 }

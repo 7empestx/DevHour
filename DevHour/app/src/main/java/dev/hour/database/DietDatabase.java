@@ -123,7 +123,10 @@ public class DietDatabase implements MealContract.Diet.Database {
             for (AttributeValue index : dietsAttributeValues) {
                 diets.add(index.s());
             }
-            diet = new Diet(allergens, diets);
+            diet = new Diet();
+
+            diet.setAllergens(allergens);
+
         } else diet = null;
 
         return diet;

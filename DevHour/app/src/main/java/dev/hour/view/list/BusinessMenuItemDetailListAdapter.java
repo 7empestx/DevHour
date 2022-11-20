@@ -26,7 +26,7 @@ public class BusinessMenuItemDetailListAdapter extends
     /// --------------
     /// Private Fields
 
-    private List<MealContract.Ingredient> ingredientsList;
+    private List<String> ingredientsList;
 
     @NonNull
     @Override
@@ -46,7 +46,7 @@ public class BusinessMenuItemDetailListAdapter extends
     public void onBindViewHolder(@NonNull BusinessMenuItemDetailListAdapter.BusinessMenuItemDetailListItemViewHolder holder, int position) {
 
         final ViewGroup view = (ViewGroup) holder.itemView;
-        final MealContract.Ingredient ingredient = (this.ingredientsList == null) ? null : ingredientsList.get(position);
+        final String ingredient = (this.ingredientsList == null) ? null : ingredientsList.get(position);
 
         if(ingredient != null){
 
@@ -55,7 +55,7 @@ public class BusinessMenuItemDetailListAdapter extends
             final ImageButton   image       =
                     view.findViewById(R.id.fragment_business_menu_list_item_detail_image);
 
-            title.setText(ingredient.toString());
+            title.setText(ingredient);
 
             // TODO: Image
 
@@ -63,7 +63,7 @@ public class BusinessMenuItemDetailListAdapter extends
 
     }
 
-    public void setIngredientsList(final List <MealContract.Ingredient> ingredients){
+    public void setIngredientsList(final List <String> ingredients){
 
         this.ingredientsList = ingredients;
 

@@ -45,7 +45,10 @@ public class MenuDatabase implements MealContract.Menu.Database {
             String calories = Objects.requireNonNull(mealMap.get("calories")).s();
             String name = Objects.requireNonNull(mealMap.get("name")).s();
 
-            Meal meal = new Meal(name, Integer.parseInt(calories), null);
+            Meal meal = new Meal();
+
+            meal.setName(name);
+            meal.setCalories(Integer.parseInt(calories));
 
             res.add(meal);
         }
