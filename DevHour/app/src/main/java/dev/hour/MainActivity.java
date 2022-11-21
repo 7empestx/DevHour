@@ -31,16 +31,16 @@ import dev.hour.database.MenuDatabase;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
-import dev.hour.fragment.business.BusinessAddRestaurantFragment;
+import dev.hour.fragment.business.BusinessUpdateRestaurantFragment;
 import dev.hour.fragment.BusinessMenuItemDetailFragment;
 import dev.hour.fragment.BusinessMenuListFragment;
-import dev.hour.fragment.LoginFragment;
+import dev.hour.fragment.general.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
-import dev.hour.fragment.RestaurantListFragment;
-import dev.hour.fragment.SignUpFragment;
-import dev.hour.fragment.BusinessRestaurantListFragment;
-import dev.hour.fragment.AddPictureFragment;
+import dev.hour.fragment.CustomerRestaurantListFragment;
+import dev.hour.fragment.general.SignUpFragment;
+import dev.hour.fragment.business.BusinessRestaurantListFragment;
+import dev.hour.fragment.general.AddPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
@@ -307,9 +307,9 @@ public class MainActivity extends AppCompatActivity implements
     /// RestaurantContract.Presenter.InteractionListener
 
     @Override
-    public void onAddRestaurantRequest() {
+    public void onUpdateRestaurantRequest(final RestaurantContract.Restaurant restaurant) {
 
-        showBusinessAddRestaurantFragment();
+        showBusinessAddRestaurantFragment(restaurant);
 
     }
 
@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         showAddPictureFragment(export,
-                fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG));
+                fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG));
 
     }
 
@@ -446,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(RestaurantListFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(CustomerRestaurantListFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -455,7 +455,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -491,24 +491,26 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void showBusinessAddRestaurantFragment() {
+    private void showBusinessAddRestaurantFragment(final RestaurantContract.Restaurant restaurant) {
 
         final FragmentManager       fragmentManager = getSupportFragmentManager();
         final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
 
         Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG);
+                fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG);
 
         if(fragment == null) {
 
-            fragment = new BusinessAddRestaurantFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantFragment.TAG);
+            fragment = new BusinessUpdateRestaurantFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessUpdateRestaurantFragment.TAG);
 
-            ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
+            ((BusinessUpdateRestaurantFragment) fragment).setInteractionListener(this);
+            ((BusinessUpdateRestaurantFragment) fragment).setRestaurant(restaurant);
 
         } else if(fragment.isAdded()) {
 
-            ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
+            ((BusinessUpdateRestaurantFragment) fragment).setInteractionListener(this);
+            ((BusinessUpdateRestaurantFragment) fragment).setRestaurant(restaurant);
 
         }
 
@@ -1048,16 +1050,16 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onAddPictureReceived(final Object requestor) {
 
-        if(requestor instanceof BusinessAddRestaurantFragment)
-            showBusinessAddRestaurantFragment();
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessAddRestaurantFragment(null);
 
     }
 
     @Override
     public void onAddPictureCancelled(final Object requestor) {
 
-        if(requestor instanceof BusinessAddRestaurantFragment)
-            showBusinessAddRestaurantFragment();
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessAddRestaurantFragment(null);
 
     }
 }

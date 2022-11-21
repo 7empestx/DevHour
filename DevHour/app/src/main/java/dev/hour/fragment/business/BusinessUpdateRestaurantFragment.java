@@ -26,8 +26,7 @@ import java.util.Map;
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
 
-public class BusinessAddRestaurantFragment extends Fragment implements
-        RestaurantContract.View, View.OnClickListener {
+public class BusinessUpdateRestaurantFragment extends Fragment implements View.OnClickListener {
 
     /// ---------------------
     /// Public Static Members
@@ -46,7 +45,8 @@ public class BusinessAddRestaurantFragment extends Fragment implements
     /// --------------
     /// Private Fields
 
-    private RestaurantContract.Presenter.InteractionListener interactionListener;
+    private RestaurantContract.Presenter.InteractionListener interactionListener    ;
+    private RestaurantContract.Restaurant                    restaurant             ;
 
     /// --------
     /// Fragment
@@ -76,16 +76,33 @@ public class BusinessAddRestaurantFragment extends Fragment implements
         image.setOnClickListener(this);
         backButton.setOnClickListener(this);
 
-        final Object picture = BusinessAddRestaurantFragment.image.get("picture");
+        return layout;
+
+    }
+
+    /**
+     * Invoked when the fragment should resume. Binds any persist data to the edit texts.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        bindData();
+
+        final Object picture = (data.get("picture") == null) ?
+                BusinessUpdateRestaurantFragment.image.get("picture") : data.get("picture");
 
         if(picture != null) {
 
+            final AppCompatImageView                    image       =
+                    getView().findViewById(R.id.fragment_business_add_restaurant_image);
+            
             final ByteArrayInputStream                  imageStream = (ByteArrayInputStream) picture;
             final Pair<ByteArrayInputStream, byte[]>    pair        = clone(imageStream);
 
             if(pair != null) {
 
-                BusinessAddRestaurantFragment.image.put("picture", pair.first);
+                BusinessUpdateRestaurantFragment.image.put("picture", pair.first);
 
                 final byte[]    bytes   = pair.second;
                 final Context   context = getContext();
@@ -111,19 +128,6 @@ public class BusinessAddRestaurantFragment extends Fragment implements
             }
 
         }
-
-        return layout;
-
-    }
-
-    /**
-     * Invoked when the fragment should resume. Binds any persist data to the edit texts.
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        bindData();
 
     }
 
@@ -151,6 +155,8 @@ public class BusinessAddRestaurantFragment extends Fragment implements
                 image.clear();
                 tags.clear();
                 data.clear();
+
+                this.restaurant = null;
 
                 break;
 
@@ -180,6 +186,8 @@ public class BusinessAddRestaurantFragment extends Fragment implements
                 image.clear();
                 tags.clear();
 
+                this.restaurant = null;
+
                 if(this.interactionListener != null)
                     this.interactionListener.onShowBusinessRestaurantListRequest();
 
@@ -188,18 +196,6 @@ public class BusinessAddRestaurantFragment extends Fragment implements
             default: break;
 
         }
-
-    }
-
-    /// -----------------------
-    /// RestaurantContract.View
-
-    /**
-     * Sets the list of [RestaurantContract.Restaurant]s to display
-     * @param restaurants The [List] of [RestaurantContract.Restaurant]s to display
-     */
-    @Override
-    public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
 
     }
 
@@ -214,6 +210,37 @@ public class BusinessAddRestaurantFragment extends Fragment implements
     public void setInteractionListener(RestaurantContract.Presenter.InteractionListener listener) {
 
         this.interactionListener = listener;
+
+    }
+
+    /**
+     * Sets the RestaurantContract.Restaurant instance to the given RestaurantContract.Restaurant
+     * instance if not null. This will bind the persist data of the given restaurant.
+     * @param restaurant The [RestaurantContract.Restaurant] instance to set.
+     */
+    public void setRestaurant(final RestaurantContract.Restaurant restaurant) {
+
+        if(restaurant != null) {
+
+            this.restaurant = restaurant;
+
+            data.clear();
+            image.clear();
+            tags.clear();
+
+            data.put("id", this.restaurant.getId());
+            data.put("name", this.restaurant.getName());
+            data.put("address1", this.restaurant.getAddress1());
+            data.put("address2", this.restaurant.getAddress2());
+            data.put("menu_id", this.restaurant.getMenuId());
+            data.put("pricing", this.restaurant.getPricing());
+            data.put("longitude", String.valueOf(this.restaurant.getLongitude()));
+            data.put("latitude", String.valueOf(this.restaurant.getLatitude()));
+            data.put("picture", toInputStream((ByteArrayOutputStream) this.restaurant.getImageStream()));
+            data.put("picture_id", this.restaurant.getPictureId());
+            data.put("restaurant_owner", this.restaurant.getOwnerId());
+
+        }
 
     }
 
@@ -265,11 +292,25 @@ public class BusinessAddRestaurantFragment extends Fragment implements
     }
 
     /**
+     * Converts the given [ByteArrayOutputStream] to a copy [ByteArrayInputStream]
+     * @param outputStream The [ByteArrayOutputStream] to copy
+     * @return [ByteArrayInputStream]
+     */
+    private ByteArrayInputStream toInputStream(final ByteArrayOutputStream outputStream) {
+
+        ByteArrayInputStream result = null;
+
+        if(outputStream != null)
+            result = new ByteArrayInputStream(outputStream.toByteArray());
+
+        return result;
+
+    }
+
+    /**
      * Saves the [EditText] and image data, if any, to persist across tear-down.
      */
     private void persistData() {
-
-        data.clear();
 
         final EditText restaurantName =
                 this.requireView()
@@ -283,16 +324,21 @@ public class BusinessAddRestaurantFragment extends Fragment implements
                 this.requireView()
                         .findViewById(R.id.fragment_business_add_restaurant_address_input_2);
 
+        image.putIfAbsent("picture", data.get("picture"));
+
+        final ByteArrayInputStream imageStream = (ByteArrayInputStream) image.get("picture");
+
+        if(imageStream != null)
+            image.put("content_length", imageStream.available());
+
         data.put("name",            restaurantName.getText().toString());
         data.put("address1",        address1.getText().toString());
         data.put("address2",        address2.getText().toString());
         data.put("pricing",         "0");
-        data.put("picture",         image.get("picture"));
-        data.put("content_length",  image.get("content_length"));
 
         final List<String> tags = new ArrayList<>();
 
-        for(final Map.Entry<String, Object> entry: BusinessAddRestaurantFragment.tags.entrySet())
+        for(final Map.Entry<String, Object> entry: BusinessUpdateRestaurantFragment.tags.entrySet())
             tags.add((String) entry.getValue());
 
         data.put("tags", tags);
@@ -311,17 +357,17 @@ public class BusinessAddRestaurantFragment extends Fragment implements
         if((name != null) && (!name.isEmpty()))
             ((EditText) this.requireView()
                 .findViewById(R.id.fragment_business_add_restaurant_name_input))
-                .setHint(name);
+                .setText(name);
 
         if((address1 != null) && (!address1.isEmpty()))
             ((EditText) this.requireView()
                 .findViewById(R.id.fragment_business_add_restaurant_address_input_1))
-                .setHint(address1);
+                .setText(address1);
 
         if((address2 != null) && (!address2.isEmpty()))
             ((EditText) this.requireView()
                 .findViewById(R.id.fragment_business_add_restaurant_address_input_2))
-                .setHint(address2);
+                .setText(address2);
 
     }
 
