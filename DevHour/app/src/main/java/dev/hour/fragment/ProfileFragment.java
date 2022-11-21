@@ -13,18 +13,23 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.contracts.UserContract;
+import dev.hour.model.DietPreferenceItem;
+import dev.hour.model.DietPreferenceItemViewHolder;
 
 /**
  * Basic User Profile [Fragment] that allows a user to update their settings
@@ -49,11 +54,8 @@ public class ProfileFragment extends Fragment implements
     private UserContract.View.Listener      userListener        ;
     private MealContract.Diet.View.Listener dietListener        ;
     private ListView                        listView            ;
-    private ArrayAdapter<String>            adapter             ;
-    // TODO: Populate list with more ingredients, potentially even just grab this from a table instead
-    private String[] ingredientAndDietArray = {"Vegetarian",  "Halal", "Kosher","Vegan", "Dairy-Free",
-            "Beef", "Gluten-Free", "Peanut-Free", "ShellFish-Free", "Fish-Free", "Banana",
-            "Strawberry", "Pineapple", "Wheat", "Olive", "Onion", "Tomato", "Mushroom"};
+    private ArrayAdapter<DietPreferenceItem> adapter             ;
+    private DietPreferenceItem[]            dietPrefs           ;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
@@ -65,16 +67,31 @@ public class ProfileFragment extends Fragment implements
         lastNameTextView    = layout.findViewById(R.id.fragment_profile_last_name);
 
         listView = layout.findViewById(R.id.fragment_profile_list_view);
-        adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_list_item_multiple_choice, ingredientAndDietArray);
-        listView.setAdapter(adapter);
 
-        // Populate the name views for the current user
-        userListener.onGetUserRequest();
-        dietListener.onGetDietRequest(userId);
-
+        dietPrefs = (DietPreferenceItem[]) onRetainCustomNonConfigurationInstance();
+        if (dietPrefs == null) {
+            dietPrefs = new DietPreferenceItem[] {
+                    new DietPreferenceItem("Vegetarian"), new DietPreferenceItem("Vegan"),
+                    new DietPreferenceItem("Kosher"), new DietPreferenceItem("Halal"),
+                    new DietPreferenceItem("Dairy-Free"), new DietPreferenceItem("Beef"),
+                    new DietPreferenceItem("Peanut-Free"), new DietPreferenceItem("Gluten-Free"),
+                    new DietPreferenceItem("Nut-Free"), new DietPreferenceItem("Fish-Free"),
+                    new DietPreferenceItem("ShellFish-Free"), new DietPreferenceItem("Banana-Free"),
+                    new DietPreferenceItem("Pineapple-Free"), new DietPreferenceItem("Strawberry-Free"),
+                    new DietPreferenceItem("Tomato-Free"), new DietPreferenceItem("Olive-Free"),
+                    new DietPreferenceItem("Wheat-Free"), new DietPreferenceItem("Onion-Free"),
+            };
+        }
         initSearchWidget(layout);
         setUpOnclickListener();
+        userListener.onGetUserRequest();
+
+        ArrayList<DietPreferenceItem> dietPrefList = new ArrayList<DietPreferenceItem>();
+        dietPrefList.addAll( Arrays.asList(dietPrefs) );
+
+        adapter = new DietPreferenceArrayAdapter(getContext(), dietPrefList);
+        listView.setAdapter(adapter);
+        dietListener.onGetDietRequest(userId);
 
         return layout;
 
@@ -85,8 +102,11 @@ public class ProfileFragment extends Fragment implements
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                String selectedString = (String) (listView.getItemAtPosition(pos));
 
+                DietPreferenceItem dietPreferenceItem = adapter.getItem(pos);
+                dietPreferenceItem.toggleChecked();
+                DietPreferenceItemViewHolder viewHolder = (DietPreferenceItemViewHolder) view.getTag();
+                viewHolder.getCheckBox().setChecked(dietPreferenceItem.isChecked());
                 // Todo: Send request to Diet table to remove or add diet preference for user, for this item
             }
         });
@@ -105,21 +125,24 @@ public class ProfileFragment extends Fragment implements
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ArrayList<String> filteredIngredientsAndDiets = new ArrayList<String>();
-                for (String diet_preference : ingredientAndDietArray) {
-                    if (diet_preference.toLowerCase().contains(s.toLowerCase())) {
-                        filteredIngredientsAndDiets.add(diet_preference);
+                ArrayList<DietPreferenceItem> filteredIngredientsAndDiets = new ArrayList<DietPreferenceItem>();
+                for (DietPreferenceItem dietPref : dietPrefs) {
+                    if (dietPref.getName().toLowerCase().contains(s.toLowerCase())) {
+                        filteredIngredientsAndDiets.add(dietPref);
                     }
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-                        android.R.layout.simple_list_item_multiple_choice,filteredIngredientsAndDiets);
+                DietPreferenceArrayAdapter adapter = new DietPreferenceArrayAdapter(getContext(), filteredIngredientsAndDiets);
                 listView.setAdapter(adapter);
 
                 return false;
             }
         });
 
+    }
+
+    public Object onRetainCustomNonConfigurationInstance () {
+        return dietPrefs ;
     }
 
     @Override
@@ -172,6 +195,15 @@ public class ProfileFragment extends Fragment implements
 
     @Override
     public void onDisplayDietInfo(MealContract.Diet diet) {
-        // TODO: Set checkboxes as selected for diet preferences set in given diet
+        Set<String> allergen_set = new HashSet<>(diet.getAllergens());
+        Set<String> diets_set = new HashSet<>(diet.getDiets());
+
+        // Set the checkboxes to match user's saved diet preferences.
+        for (int i = 0; i < listView.getCount(); i++) {
+            DietPreferenceItem item = (DietPreferenceItem) listView.getItemAtPosition(i);
+            if (allergen_set.contains(item.getName()) || diets_set.contains(item.getName())) {
+                item.toggleChecked();
+            }
+        }
     }
 }

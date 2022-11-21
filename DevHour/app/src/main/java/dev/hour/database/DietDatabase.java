@@ -225,17 +225,28 @@ public class DietDatabase implements MealContract.Diet.Database {
      */
     private Diet bindDietFrom(final Map<String, AttributeValue> data) {
 
-        Log.i("TESTE", data.toString());
         final Diet                  diet    = new Diet();
         final List<AttributeValue>  meals   = getListFrom(data, "meals");
-        final List<String>          result  = new ArrayList<>();
+        final List<AttributeValue>  diets   = getListFrom(data, "diets");
+        final List<AttributeValue>  allergens   = getListFrom(data, "allergens");
+        final List<String>          meal_result  = new ArrayList<>();
+        final List<String>          diet_result  = new ArrayList<>();
+        final List<String>          allergen_result  = new ArrayList<>();
 
         diet.setId(getStringFrom(data, "id"));
 
         for(final AttributeValue attributeValue: meals)
-            result.add(attributeValue.s());
+            meal_result.add(attributeValue.s());
 
-        diet.setMealIds(result);
+        for(final AttributeValue attributeValue: diets)
+            diet_result.add(attributeValue.s());
+
+        for(final AttributeValue attributeValue: allergens)
+            allergen_result.add(attributeValue.s());
+
+        diet.setMealIds(meal_result);
+        diet.setDiets(diet_result);
+        diet.setAllergens(allergen_result);
 
         return diet;
     }

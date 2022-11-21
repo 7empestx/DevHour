@@ -52,11 +52,15 @@ public interface MealContract {
 
         String getId();
         List<String> getAllergens();
+        List<String> getIngredients();
+        List<String> getDiets();
         List<Meal> getMeals();
         List<String> getMealIds();
         
         void setId(final String id);
         void setAllergens(final List<String> allergens);
+        void setIngredients(final List<String> ingredients);
+        void setDiets(final List<String> diets);
         void setMeals(final List<Meal> meals);
         void setMealIds(final List<String> mealIds);
 
