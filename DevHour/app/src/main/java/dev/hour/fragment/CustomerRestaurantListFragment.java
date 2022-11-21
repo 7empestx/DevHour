@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,7 +18,7 @@ import dev.hour.contracts.MealContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.view.list.CustomerRestaurantListAdapter;
 
-public class CustomerRestaurantListFragment extends Fragment {
+public class CustomerRestaurantListFragment extends Fragment implements RestaurantContract.View {
 
     public final static String TAG = "CustomerRestaurantListFragment";
 
@@ -41,15 +42,15 @@ public class CustomerRestaurantListFragment extends Fragment {
         return layout;
     }
 
-    public void setRestaurantList(List<RestaurantContract.Restaurant> list){
-        /*
-        if(restaurantListAdapter != null){
-            this.restaurantListAdapter.setRestaurantLists(list);
-        }
-        */
+    public void setInteractionListener() {
+
     }
 
-    public void setInteractionListener(MainActivity mainActivity) {
-
+    @Override
+    public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
+        if(customerRestaurantListAdapter == null){
+            this.customerRestaurantListAdapter = new CustomerRestaurantListAdapter();
+        }
+        this.customerRestaurantListAdapter.setRestaurantLists(restaurants);
     }
 }
