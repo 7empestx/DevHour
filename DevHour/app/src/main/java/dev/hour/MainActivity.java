@@ -1000,13 +1000,43 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (item.getItemId()) {
 
-            case R.id.navigation_list: showBusinessRestaurantListFragment(); break;
+            case R.id.navigation_list: showCustomerRestaurantListFragment(); break;
             case R.id.navigation_location: showMapFragment(); break;
+            case R.id.profile: showProfileFragment(); break;
+        }
+        return true;
+    }
+
+    private void showCustomerRestaurantListFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(CustomerRestaurantListFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new CustomerRestaurantListFragment();
+            transaction.add(R.id.activity_main, fragment, CustomerRestaurantListFragment.TAG);
+
+            ((CustomerRestaurantListFragment) fragment).setInteractionListener(this);
+
+        } else if(fragment.isAdded()) {
 
         }
 
-        return true;
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
 
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
     }
 
     @Override
