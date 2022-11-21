@@ -88,6 +88,13 @@ public interface MealContract {
         interface View {
 
             void setDiet(final List<Meal> meals);
+            void setDietListener(MealContract.Diet.View.Listener listener);
+            void onDisplayDietInfo(MealContract.Diet diet);
+            interface Listener {
+
+                void onGetDietRequest(String id);
+
+            }
 
         }
 

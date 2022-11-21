@@ -225,6 +225,7 @@ public class DietDatabase implements MealContract.Diet.Database {
      */
     private Diet bindDietFrom(final Map<String, AttributeValue> data) {
 
+        Log.i("TESTE", data.toString());
         final Diet                  diet    = new Diet();
         final List<AttributeValue>  meals   = getListFrom(data, "meals");
         final List<String>          result  = new ArrayList<>();

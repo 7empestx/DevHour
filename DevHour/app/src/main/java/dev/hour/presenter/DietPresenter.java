@@ -6,7 +6,7 @@ import java.util.Map;
 
 import dev.hour.contracts.MealContract;
 
-public class DietPresenter implements MealContract.Diet.Presenter {
+public class DietPresenter implements MealContract.Diet.Presenter, MealContract.Diet.View.Listener {
 
     /// ---------------
     /// Private Members
@@ -83,4 +83,8 @@ public class DietPresenter implements MealContract.Diet.Presenter {
 
     }
 
+    @Override
+    public void onGetDietRequest(String id) {
+        view.onDisplayDietInfo(this.database.getDiet(id));
+    }
 }
