@@ -13,7 +13,10 @@ import java.util.List;
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
 
-public class CustomerRestaurantListAdapter extends RecyclerView.Adapter<CustomerRestaurantListAdapter.CustomerRestaurantListItemViewHolder> {
+public class CustomerRestaurantListAdapter extends
+        RecyclerView.Adapter<CustomerRestaurantListAdapter.CustomerRestaurantListItemViewHolder> {
+
+
     private List<RestaurantContract.Restaurant> RestaurantLists;
 
     @NonNull
