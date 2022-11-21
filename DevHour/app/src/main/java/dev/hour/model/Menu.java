@@ -12,6 +12,7 @@ public class Menu implements MealContract.Menu {
     private String                  id      ;
     private List<MealContract.Meal> meals   ;
     private List<String>            mealIds ;
+    private List<String>            tags    ;
 
     /// -----------------
     /// MealContract.Meal
@@ -57,5 +58,14 @@ public class Menu implements MealContract.Menu {
         this.meals = meals;
 
     }
+
+    @Override
+    public void setTags(final List<String> tags) {
+
+        this.tags = tags;
+
+    }
+
+
 
 }

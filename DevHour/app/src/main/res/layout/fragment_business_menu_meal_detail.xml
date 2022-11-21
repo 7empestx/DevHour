@@ -35,7 +35,7 @@
         android:text="Meal Name"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_business_menu_item_detail_recycler_view"
+        android:id="@+id/fragment_business_update_menu_item_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

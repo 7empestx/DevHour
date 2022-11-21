@@ -2,6 +2,7 @@ package dev.hour.model;
 
 import java.io.OutputStream;
 import java.time.chrono.MinguoDate;
+import java.util.List;
 import java.util.Map;
 
 import dev.hour.contracts.MapObjectContract;
@@ -17,6 +18,7 @@ public class Meal implements MealContract.Meal {
     private int                 calories    ;
     private Map<String, String> ingredients ;
     private OutputStream        imageStream ;
+    private List<String>        tags        ;
 
     /// -----------
     /// Constructor
@@ -93,6 +95,20 @@ public class Meal implements MealContract.Meal {
     public void setImageStream(final OutputStream imageStream) {
 
         this.imageStream = imageStream;
+
+    }
+
+    @Override
+    public void setTags(final List<String> tags) {
+
+        this.tags = tags;
+
+    }
+
+    @Override
+    public List<String> getTags() {
+
+        return this.tags;
 
     }
 

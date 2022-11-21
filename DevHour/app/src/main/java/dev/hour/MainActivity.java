@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements
         AddPictureFragment.Listener,
         TagFragment.Listener,
         MapView.SearchListener {
-    //scope......
+
     static {
         System.setProperty(
                 "javax.xml.stream.XMLInputFactory",
@@ -430,6 +430,31 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onAddMenuItemImageRequest(Map<String, Object> export) {
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        showAddPictureFragment(export,
+                fragmentManager.findFragmentByTag(BusinessUpdateMenuItemFragment.TAG));
+
+    }
+
+    @Override
+    public void onAddMenuItemIngredientRequest(Map<String, Object> export) {
+
+    }
+
+    @Override
+    public void onAddMenuItemTagRequest(Map<String, Object> export) {
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        showTagFragment(export,
+                fragmentManager.findFragmentByTag(BusinessUpdateMenuItemFragment.TAG));
+
+    }
+
+    @Override
     public void onShowMenuRequest() {
 
         showBusinessMenuListFragment();
@@ -439,7 +464,12 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onUpdateMealRequest(MealContract.Meal meal) {
 
-        showBusinessUpdateMenuItemFragment();
+        showBusinessUpdateMenuItemFragment(meal);
+
+    }
+
+    @Override
+    public void onCreateMealRequest(Map<String, Object> export) {
 
     }
 
@@ -466,6 +496,9 @@ public class MainActivity extends AppCompatActivity implements
         if(requestor instanceof BusinessUpdateRestaurantFragment)
             showBusinessUpdateRestaurantFragment(null);
 
+        else if(requestor instanceof BusinessUpdateMenuItemFragment)
+            showBusinessUpdateMenuItemFragment(null);
+        
     }
 
     @Override
@@ -473,6 +506,9 @@ public class MainActivity extends AppCompatActivity implements
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
             showBusinessUpdateRestaurantFragment(null);
+
+        else if(requestor instanceof BusinessUpdateMenuItemFragment)
+            showBusinessUpdateMenuItemFragment(null);
 
     }
 
@@ -482,6 +518,9 @@ public class MainActivity extends AppCompatActivity implements
         if(requestor instanceof BusinessUpdateRestaurantFragment)
             showBusinessUpdateRestaurantFragment(null);
 
+        else if(requestor instanceof BusinessUpdateMenuItemFragment)
+            showBusinessUpdateMenuItemFragment(null);
+
     }
 
     @Override
@@ -489,6 +528,9 @@ public class MainActivity extends AppCompatActivity implements
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
             showBusinessUpdateRestaurantFragment(null);
+
+        else if(requestor instanceof BusinessUpdateMenuItemFragment)
+            showBusinessUpdateMenuItemFragment(null);
 
     }
 
@@ -727,7 +769,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void showBusinessUpdateMenuItemFragment() {
+    private void showBusinessUpdateMenuItemFragment(final MealContract.Meal meal) {
 
         final FragmentManager       fragmentManager = getSupportFragmentManager();
         final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
@@ -740,7 +782,13 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new BusinessUpdateMenuItemFragment();
             transaction.add(R.id.activity_main, fragment, BusinessUpdateMenuItemFragment.TAG);
 
+            ((BusinessUpdateMenuItemFragment) fragment).setMeal(meal);
+            ((BusinessUpdateMenuItemFragment) fragment).setInteractionListener(this);
+
         } else if(fragment.isAdded()) {
+
+            ((BusinessUpdateMenuItemFragment) fragment).setMeal(meal);
+            ((BusinessUpdateMenuItemFragment) fragment).setInteractionListener(this);
 
         }
 
@@ -1071,9 +1119,7 @@ public class MainActivity extends AppCompatActivity implements
 
             fragment = new CustomerRestaurantListFragment();
             transaction.add(R.id.activity_main, fragment, CustomerRestaurantListFragment.TAG);
-
-            ((CustomerRestaurantListFragment) fragment).setInteractionListener(this);
-
+            
         } else if(fragment.isAdded()) {
 
         }
@@ -1228,96 +1274,4 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
-
-    private void showCustomerRestaurantListFragment() {
-
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(CustomerRestaurantListFragment.TAG);
-
-        if(fragment == null) {
-
-            fragment = new CustomerRestaurantListFragment();
-            transaction.add(R.id.activity_main, fragment, CustomerRestaurantListFragment.TAG);
-            restaurantPresenter.setView((RestaurantContract.View) fragment);
-
-            //((CustomerRestaurantListFragment) fragment).setInteractionListener(this);
-
-        } else if(fragment.isAdded()) {
-            restaurantPresenter.setView((RestaurantContract.View) fragment);
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
-
-        transaction.show(fragment);
-
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
-    }
-
-    @Override
-    public void onShowMenuRequest() {
-
-    }
-
-    @Override
-    public void onShowBusinessAddMenuMeal(Map<String, Object> export) {
-
-    }
-
-    @Override
-    public void onShowBusinessAddMenuAddTag(Map<String, Object> export) {
-
-    }
-
-    @Override
-    public void onMealSelected(MealContract.Meal meal) {
-
-    }
-
-    @Override
-    public void onEditPicture() {
-
-    }
-
-    @Override
-    public void onAddIngredientButton() {
-
-    }
-
-    @Override
-    public void onTagButton() {
-
-    }
-
-    @Override
-    public void onConfirmButton(Map<String, Object> input) {
-
-    }
-
-    /// ---------------------------
-    /// AddPictureFragment.Listener
-
-    @Override
-    public void onAddPictureReceived(final Object requestor) {
-
-        if(requestor instanceof BusinessUpdateRestaurantFragment)
-            showBusinessAddRestaurantFragment(null);
-
-    }
-
-    @Override
-    public void onAddPictureCancelled(final Object requestor) {
-
-        if(requestor instanceof BusinessUpdateRestaurantFragment)
-            showBusinessAddRestaurantFragment(null);
-
-    }
 }

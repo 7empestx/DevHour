@@ -42,9 +42,6 @@ public class CustomerRestaurantListFragment extends Fragment implements Restaura
         return layout;
     }
 
-    public void setInteractionListener() {
-
-    }
 
     @Override
     public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {

@@ -13,6 +13,8 @@ public interface MealContract {
         int getCalories();
         Map<String, String> getIngredients();
         OutputStream getImageStream();
+        List<String> getTags();
+        void setTags(final List<String> tags);
 
         void setId(final String id);
         void setName(final String name);
@@ -109,6 +111,7 @@ public interface MealContract {
         void setId(final String id);
         void setMeals(final List<Meal> meals);
         void setMealIds(final List<String> mealIds);
+        void setTags(final List<String> tags);
 
         interface Database {
 
@@ -128,8 +131,12 @@ public interface MealContract {
 
             interface InteractionListener {
 
+                void onAddMenuItemImageRequest(final Map<String, Object> export);
+                void onAddMenuItemIngredientRequest(final Map<String, Object> export);
+                void onAddMenuItemTagRequest(final Map<String, Object> export);
                 void onShowMenuRequest();
                 void onUpdateMealRequest(final Meal meal);
+                void onCreateMealRequest(final Map<String, Object> export);
                 void onCloseBusinessMenuRequest();
                 void onBusinessMealSelected(final Meal meal);
 
