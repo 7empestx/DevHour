@@ -5,14 +5,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
 import java.util.Map;
 
 import dev.hour.R;
+import dev.hour.view.list.TagListAdapter;
 
 public class TagFragment  extends Fragment implements View.OnClickListener{
 
@@ -24,9 +27,10 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
     /// ---------------
     /// Private Members
 
-    private Listener            listener    ;
-    private Object              requestor   ;
-    private Map<String, Object> export      ;
+    private Listener            listener        ;
+    private Object              requestor       ;
+    private Map<String, Object> export          ;
+    private TagListAdapter      tagListAdapter  ;
 
     /// --------
     /// Fragment
@@ -47,8 +51,8 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
         final View layout               =
                 layoutInflater.inflate(R.layout.fragment_tag, viewGroup, false);
 
-        //if(this.businessRestaurantListAdapter == null)
-            //this.businessRestaurantListAdapter = new BusinessRestaurantListAdapter();
+        if(this.tagListAdapter == null)
+            this.tagListAdapter = new TagListAdapter();
 
         final RecyclerView recyclerView    =
                 layout.findViewById(R.id.fragment_tag_recycler_view);
@@ -60,11 +64,31 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
                 layout.findViewById(R.id.fragment_tag_back_button);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //recyclerView.setAdapter(this.businessRestaurantListAdapter);
+        recyclerView.setAdapter(this.tagListAdapter);
 
+        confirmButton.setOnClickListener(this);
         addTagButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
 
         return layout;
+
+    }
+
+    /**
+     * Invoked when the TagFragment is to be resumed
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if((this.export != null) && (this.export.get("tags") != null)) {
+
+            final List<String> tags = (List) this.export.get("tags");
+
+            for(final String tag: tags)
+                this.tagListAdapter.addTag(tag);
+
+        }
 
     }
 
@@ -81,15 +105,33 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
 
         switch(id) {
 
-            case R.id.fragment_add_picture_upload_picture_button:
+            case R.id.fragment_tag_button:
+
+                final String tag =
+                        ((EditText) getView().findViewById(R.id.fragment_tag_input))
+                                .getText().toString();
+
+                if(this.tagListAdapter != null)
+                    this.tagListAdapter.addTag(tag);
 
                 break;
 
-            case R.id.fragment_add_picture_save_picture_button:
+            case R.id.fragment_tag_confirm_button:
+
+                if(this.export != null)
+                    this.export.put("tags", this.tagListAdapter.getTags());
+
+                if(this.listener != null)
+                    this.listener.onTagReceived(this.requestor);
 
                 break;
 
-            case R.id.fragment_add_picture_back_button:
+            case R.id.fragment_tag_back_button:
+
+                this.export.clear();
+
+                if(this.listener != null)
+                    this.listener.onTagCancelled(this.requestor);
 
                 break;
 
@@ -123,9 +165,6 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
         this.export = export;
 
     }
-
-    /// ---------------
-    /// Private Methods
 
     /// ----------
     /// Interfaces

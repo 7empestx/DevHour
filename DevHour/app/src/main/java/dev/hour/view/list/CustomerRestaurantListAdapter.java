@@ -26,8 +26,8 @@ public class CustomerRestaurantListAdapter extends RecyclerView.Adapter<Customer
     @Override
     public void onBindViewHolder(@NonNull CustomerRestaurantListItemViewHolder holder, int position) {
 
-        final ViewGroup view = (ViewGroup) holder.itemView;
-        final RestaurantContract.Restaurant restaurant = (RestaurantLists == null)?null : RestaurantLists.get(position);
+        final ViewGroup                     view        = (ViewGroup) holder.itemView;
+        final RestaurantContract.Restaurant restaurant  = (RestaurantLists == null) ? null : RestaurantLists.get(position);
 
         final TextView title    = view.findViewById(R.id.fragment_customer_restaurant_list_item_title);
         final TextView address1 = view.findViewById(R.id.fragment_customer_restaurant_list_item_address_line_1);

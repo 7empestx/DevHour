@@ -10,6 +10,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ import dev.hour.fragment.CustomerRestaurantListFragment;
 import dev.hour.fragment.general.SignUpFragment;
 import dev.hour.fragment.business.BusinessRestaurantListFragment;
 import dev.hour.fragment.general.AddPictureFragment;
+import dev.hour.fragment.general.TagFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements
         NavigationBarView.OnItemSelectedListener,
         MealContract.Menu.Presenter.InteractionListener,
         AddPictureFragment.Listener,
+        TagFragment.Listener,
         MapView.SearchListener {
     //scope......
     static {
@@ -352,7 +355,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onShowBusinessAddRestaurantTagRequest(final Map<String, Object> data) {
+    public void onShowBusinessAddRestaurantTagRequest(final Map<String, Object> export) {
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        showTagFragment(export,
+                fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG));
 
     }
 
@@ -514,7 +522,12 @@ public class MainActivity extends AppCompatActivity implements
 
         }
 
-        transaction
+        if((lastFragment instanceof AddPictureFragment) || (lastFragment instanceof TagFragment))
+            transaction
+                    .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        else
+            transaction
                 .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
 
         transaction.show(fragment);
@@ -550,6 +563,46 @@ public class MainActivity extends AppCompatActivity implements
 
             ((AddPictureFragment) fragment).setListener(this, requestor);
             ((AddPictureFragment) fragment).setExport(export);
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+
+    private void showTagFragment(final Map<String, Object> export, final Object requestor) {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(TagFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new TagFragment();
+            transaction.add(R.id.activity_main, fragment, AddPictureFragment.TAG);
+
+            ((TagFragment) fragment).setListener(this, requestor);
+            ((TagFragment) fragment).setExport(export);
+
+        } else if(fragment.isAdded()) {
+
+            ((TagFragment) fragment).setListener(this, requestor);
+            ((TagFragment) fragment).setExport(export);
 
         }
 
@@ -1062,6 +1115,22 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onAddPictureCancelled(final Object requestor) {
+
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessAddRestaurantFragment(null);
+
+    }
+
+    @Override
+    public void onTagReceived(Object requestor) {
+
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessAddRestaurantFragment(null);
+
+    }
+
+    @Override
+    public void onTagCancelled(Object requestor) {
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
             showBusinessAddRestaurantFragment(null);

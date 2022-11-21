@@ -57,6 +57,8 @@
         <entry key="app/src/main/res/layout/fragment_listview.xml" value="0.32083333333333336" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_restaurant_list.xml" value="0.32083333333333336" />
+        <entry key="app/src/main/res/layout/fragment_tag.xml" value="0.29438405797101447" />
+        <entry key="app/src/main/res/layout/fragment_tag_list_item.xml" value="0.29438405797101447" />
         <entry key="app/src/main/res/layout/fragment_user_sign_up.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/list_item_view.xml" value="0.32083333333333336" />
         <entry key="app/src/main/res/layout/meal_details.xml" value="0.1852355072463768" />

@@ -59,6 +59,7 @@ public interface RestaurantContract {
         String getAddress1();
         String getAddress2();
         OutputStream getImageStream();
+        List<String> getTags();
 
         void setId(final String id);
         void setName(final String name);
@@ -71,6 +72,7 @@ public interface RestaurantContract {
         void setLongitude(final double longitude);
         void setLatitude(final double latitude);
         void setImageStream(final OutputStream imageStream);
+        void setTags(final List<String> tags);
 
     }
 

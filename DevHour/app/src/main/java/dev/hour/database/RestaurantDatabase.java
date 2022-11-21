@@ -128,6 +128,29 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     }
 
     /**
+     * Retrieves a List value from the AttributeValue with the given key
+     * @param item The item to extract the [List] from
+     * @param key The [String] key corresponding to the value
+     * @return [List] instance
+     */
+    private List<AttributeValue> getListFrom(final Map<String, AttributeValue> item, final String key) {
+
+        List<AttributeValue> result = new ArrayList<>();
+
+        if(item != null) {
+
+            final AttributeValue attributeValue = item.get(key);
+
+            if(attributeValue != null)
+                result = attributeValue.l();
+
+        }
+
+        return result;
+
+    }
+
+    /**
      * Creates an item that can update a DynamoDB table item.
      * @param data The item to set
      * @return Map<String, AttributeValue> with the given data.
@@ -148,8 +171,17 @@ public class RestaurantDatabase implements RestaurantContract.Database {
                 if(value instanceof String)
                     attributeValue = AttributeValue.builder().s((String) value).build();
 
-                else if(value instanceof List)
-                    attributeValue = AttributeValue.builder().l((List) value).build();
+                else if(value instanceof List) {
+
+                    final List<String> list = (List) value;
+                    final List<AttributeValue> attributeValues = new ArrayList<>();
+
+                    for(final String string: list)
+                        attributeValues.add(AttributeValue.builder().s(string).build());
+
+                    attributeValue = AttributeValue.builder().l(attributeValues).build();
+
+                }
 
                 if(attributeValue != null)
                     result.put(entry.getKey(), attributeValue);
@@ -389,6 +421,14 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         restaurant.setLatitude(Double.parseDouble((longitude != null && !latitude.isEmpty()) ? latitude : "0"));
 
         restaurant.setPictureId(getStringFrom(data, "picture_id"));
+
+        final List<AttributeValue> tagsList = getListFrom(data, "tags");
+        final List<String> tags = new ArrayList<>();
+
+        for(final AttributeValue attributeValue: tagsList)
+            tags.add(Objects.requireNonNull(attributeValue.s()));
+
+        restaurant.setTags(tags);
 
         if((restaurant.getPictureId() != null) && !(restaurant.getPictureId().isEmpty()))
             restaurant.setImageStream(getObject(restaurant.getPictureId()));
