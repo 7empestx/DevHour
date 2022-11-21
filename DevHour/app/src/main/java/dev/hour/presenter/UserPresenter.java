@@ -31,7 +31,6 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
 
     @Override
     public void setUserLocation(double longitude, double latitude) {
-
     }
 
     @Override
