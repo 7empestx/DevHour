@@ -737,6 +737,8 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new ProfileFragment();
             ((UserContract.View)fragment)
                     .setUserListener((UserContract.View.Listener) userPresenter);
+            ((MealContract.Diet.View)fragment)
+                    .setDietListener((MealContract.Diet.View.Listener) dietPresenter);
             userPresenter.setView((UserContract.View) fragment);
 
             dietPresenter.setView((MealContract.Diet.View) fragment);
@@ -746,8 +748,11 @@ public class MainActivity extends AppCompatActivity implements
         } else if(fragment.isAdded()) {
             ((UserContract.View)fragment)
                     .setUserListener((UserContract.View.Listener) userPresenter);
+            ((MealContract.Diet.View)fragment)
+                    .setDietListener((MealContract.Diet.View.Listener) dietPresenter);
 
             userPresenter.setView((UserContract.View) fragment);
+            dietPresenter.setView((MealContract.Diet.View) fragment);
 
         }
 

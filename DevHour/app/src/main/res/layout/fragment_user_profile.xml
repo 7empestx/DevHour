@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_profile_layout"
@@ -24,65 +25,23 @@
         app:layout_constraintStart_toEndOf="@+id/fragment_profile_first_name"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/fragment_profile_filter_vegan"
-        style="@style/Theme.DevHour.Switch"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Vegan"
+    <SearchView
+        android:id="@+id/fragment_profile_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Diets and Ingredients"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_last_name"/>
+
+    <ListView
+        android:id="@+id/fragment_profile_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_last_name" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_search_view"
+        android:choiceMode="multipleChoice"/>
 
-    <Switch
-        android:id="@+id/fragment_profile_filter_vegetarian"
-        style="@style/Theme.DevHour.Switch"
-        android:layout_marginBottom="8dp"
-        android:text="Vegetarian"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_profile_filter_vegan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/fragment_profile_filter_halal"
-        style="@style/Theme.DevHour.Switch"
-        android:layout_marginBottom="8dp"
-        android:text="Halal"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_profile_filter_vegetarian"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/fragment_profile_filter_kosher"
-        style="@style/Theme.DevHour.Switch"
-        android:layout_marginBottom="8dp"
-        android:text="Kosher"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_profile_filter_halal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/fragment_profile_filter_lactose_free"
-        style="@style/Theme.DevHour.Switch"
-        android:layout_marginTop="8dp"
-        android:text="Lactose-Free"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_filter_vegan" />
-
-    <Switch
-        android:id="@+id/fragment_profile_filter_gluten_free"
-        style="@style/Theme.DevHour.Switch"
-        android:layout_marginTop="8dp"
-        android:text="Gluten-Free"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_profile_filter_lactose_free" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
