@@ -16,6 +16,10 @@ import java.util.Map;
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
 
+import com.mapbox.maps.MapboxMap;
+import com.mapbox.maps.MapView;
+import com.mapbox.maps.Style;
+
 public class BusinessAddRestaurantConfirmationFragment extends Fragment implements RestaurantContract.View, View.OnClickListener {
 
     /// --------------
@@ -25,10 +29,9 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
     /// --------------
     /// Private Fields
 
-    private RestaurantContract.Presenter.InteractionListener interactionListener    ;
-    private final static Map<String, Object>                              tags                   = new HashMap<>();
-    private final static Map<String, Object>                              image                  = new HashMap<>();
+    private RestaurantContract.Presenter.InteractionListener interactionListener    ; //maybe
     private Map<String, Object>     export                  ;
+    private MapView mapView;
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
@@ -38,8 +41,12 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
         final View confirmButton = layout.findViewById(R.id.fragment_business_add_restaurant_confirm_button);
 
         confirmButton.setOnClickListener(this);
+        mapView = new MapView(getContext()); //?
+        mapView = layout.findViewById(R.id.mapView);
+        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS);
 
-        return layout;
+//        return layout;
+        return mapView;
     }
 
 
@@ -74,6 +81,34 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
             default: break;
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(mapView != null)
+            mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(mapView != null)
+            mapView.onStop();
+    }
+
+    public void onLowMemory() {
+        super.onLowMemory();
+        if(mapView != null)
+            mapView.onLowMemory();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mapView != null)
+            mapView.onDestroy();
+    }
+
 
     public void setInteractionListener(RestaurantContract.Presenter.InteractionListener listener) { //uhh idk yet
         this.interactionListener = listener;
