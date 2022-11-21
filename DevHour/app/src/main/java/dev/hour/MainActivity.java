@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
-
+        userPresenter.setUserLocation(36.10757832570942, -115.14353593092915);
         // Retrieve the most recent Fragment and show the login screen
         bindRecentFragment();
 

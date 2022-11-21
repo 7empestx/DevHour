@@ -20,6 +20,10 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
     @Override
     public void setView(UserContract.View view) {
         this.view = view;
+
+        if(this.view != null)
+            this.view.update(user);
+
     }
 
     @Override
