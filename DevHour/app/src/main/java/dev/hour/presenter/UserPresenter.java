@@ -7,9 +7,9 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
     /// ---------------
     /// Private Members
 
-    private UserContract.Database database;
-    private UserContract.User user;
-    private UserContract.View view;
+    private UserContract.Database   database    ;
+    private UserContract.User       user        ;
+    private UserContract.View       view        ;
     @Override
     public void setDatabase(UserContract.Database database) {
 
@@ -20,6 +20,10 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
     @Override
     public void setView(UserContract.View view) {
         this.view = view;
+
+        if(this.view != null)
+            this.view.update(user);
+
     }
 
     @Override
@@ -32,6 +36,15 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
     @Override
     public void setUserLocation(double longitude, double latitude) {
 
+        if(this.user != null) {
+
+            this.user.setLatitude(latitude);
+            this.user.setLongitude(longitude);
+
+        }
+
+        if(this.view != null)
+            this.view.update(this.user);
     }
 
     @Override

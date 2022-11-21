@@ -1,4 +1,4 @@
-package dev.hour.view.list;
+package dev.hour.view.list.business;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -36,6 +36,13 @@ public class BusinessRestaurantListAdapter extends
     /// ----------------------
     /// Private Static Methods
 
+    /**
+     * Attempts to fit the given text into the [TextView] limited by the given bounds.*
+     * @param textView The [TextView] to fit the text
+     * @param otherView The [View] to relate the dimensions to
+     * @param text The [String] value to fit.
+     */
+    @SuppressLint("SetTextI18n")
     private static void FitTextInsideTextView(final TextView textView, final View otherView, final String text) {
 
         int end = 0;
@@ -75,9 +82,9 @@ public class BusinessRestaurantListAdapter extends
     /// --------------
     /// Private Fields
 
-    private List<RestaurantContract.Restaurant>         restaurantList  ;
-    private Map<String, Bitmap>                         images          ;
-    private Listener                                    listener        ;
+    private List<RestaurantContract.Restaurant> restaurantList  ;
+    private Map<String, Bitmap>                 images          ;
+    private Listener                            listener        ;
 
     /**
      * Invoked when a view holder is to be created. Inflates a new Listener, and assigns it
@@ -102,7 +109,7 @@ public class BusinessRestaurantListAdapter extends
         view.setOnClickListener(this);
         editButton.setOnClickListener(this);
 
-        return new BusinessRestaurantListAdapter.BusinessRestaurantListItemViewHolder(view);
+        return new BusinessRestaurantListItemViewHolder(view);
 
     }
 
@@ -132,26 +139,21 @@ public class BusinessRestaurantListAdapter extends
 
             final Bitmap restaurantImage = getImageFor(restaurant);
 
-            if(restaurantImage != null)
+            if(restaurantImage != null) {
+
                 image.setImageBitmap(Bitmap.createScaledBitmap(
-                        restaurantImage, image.getMeasuredWidth(), image.getMeasuredHeight(), false));
+                        restaurantImage, 192, 192, false));
+
+                image.setClipToOutline(true);
+
+            }
+
+            title.setText(restaurant.getName());
+            address1.setText(restaurant.getAddress1());
+            address2.setText(restaurant.getAddress2());
 
             holder.itemView.setTag(String.valueOf(position));
             editButton.setTag(String.valueOf(position));
-
-            holder.itemView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    FitTextInsideTextView(title, holder.itemView, restaurant.getName());
-                    FitTextInsideTextView(address1, holder.itemView, restaurant.getAddress1());
-                    FitTextInsideTextView(address2, holder.itemView, restaurant.getAddress2());
-
-                    holder.itemView.getViewTreeObserver().removeOnPreDrawListener(this);
-
-                    return true;
-
-                }
-            });
 
             holder.itemView.setTranslationX(0.0f);
 
@@ -175,6 +177,7 @@ public class BusinessRestaurantListAdapter extends
      * Notifies the [Listener] of the interaction
      * @param v The [Alert] list item [View]
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
 
@@ -184,7 +187,7 @@ public class BusinessRestaurantListAdapter extends
 
             case R.id.fragment_business_restaurant_list_item_edit_button:
 
-                position = Integer.valueOf(v.getTag().toString());
+                position = Integer.parseInt(v.getTag().toString());
 
                 if(this.listener != null)
                     this.listener.onEditButtonClicked(this.restaurantList.get(position));
@@ -193,7 +196,7 @@ public class BusinessRestaurantListAdapter extends
 
             default:
 
-                position = Integer.valueOf(v.getTag().toString());
+                position = Integer.parseInt(v.getTag().toString());
 
                 if(this.listener != null)
                     this.listener.onItemClicked(this.restaurantList.get(position));
@@ -239,17 +242,28 @@ public class BusinessRestaurantListAdapter extends
 
     }
 
-    public void setRestaurantLists(final List <RestaurantContract.Restaurant> Lists){
+    /**
+     * Sets the Restaurant List to the given list.
+     * @param restaurants The List of RestaurantContract.Restaurant to set.
+     */
+    @SuppressLint("NotifyDataSetChanged")
+    public void setRestaurantLists(final List <RestaurantContract.Restaurant> restaurants) {
 
-        this.restaurantList = Lists;
+        this.restaurantList = restaurants;
 
         if(this.images == null)
             this.images = new HashMap<>();
 
         else this.images.clear();
 
+        notifyDataSetChanged();
+
     }
 
+    /**
+     * Sets the [Listener] that will receive callbacks on user interaction
+     * @param listener The [Listener] that will receive callbacks on user interaction
+     */
     public void setListener(final Listener listener) {
 
         this.listener = listener;
@@ -259,6 +273,9 @@ public class BusinessRestaurantListAdapter extends
     /// ----------
     /// Interfaces
 
+    /**
+     * Defines callbacks that are invoked on user interaction
+     */
     public interface Listener {
 
         void onEditButtonClicked(final RestaurantContract.Restaurant restaurant);
@@ -269,7 +286,10 @@ public class BusinessRestaurantListAdapter extends
     /// -------
     /// Classes
 
-    class BusinessRestaurantListItemViewHolder extends RecyclerView.ViewHolder{
+    /**
+     * The [ViewHolder] instance that holds the view to be bound.
+     */
+    static class BusinessRestaurantListItemViewHolder extends RecyclerView.ViewHolder{
 
         BusinessRestaurantListItemViewHolder(View view){
             super(view);

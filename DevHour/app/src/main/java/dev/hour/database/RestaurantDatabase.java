@@ -368,7 +368,13 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         restaurant.setAddress1(getStringFrom(data, "address1"));
 
         // Set the other address
-        restaurant.setAddress1(getStringFrom(data, "address2"));
+        restaurant.setAddress2(getStringFrom(data, "address2"));
+
+        // Set the owner id
+        restaurant.setOwnerId(getStringFrom(data, "restaurant_owner"));
+
+        // Set the pricing
+        restaurant.setPricing(Integer.parseInt(getStringFrom(data, "pricing")));
 
         // Set the menu id
         restaurant.setMenuId(getStringFrom(data, "menu_id"));
@@ -382,10 +388,10 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         // Set the latitude
         restaurant.setLatitude(Double.parseDouble((longitude != null && !latitude.isEmpty()) ? latitude : "0"));
 
-        final String pictureId = getStringFrom(data, "picture_id");
+        restaurant.setPictureId(getStringFrom(data, "picture_id"));
 
-        if((pictureId != null) && !(pictureId.isEmpty()))
-            restaurant.setImageStream(getObject(pictureId));
+        if((restaurant.getPictureId() != null) && !(restaurant.getPictureId().isEmpty()))
+            restaurant.setImageStream(getObject(restaurant.getPictureId()));
 
         return restaurant;
 
@@ -436,22 +442,43 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final RestaurantDatabase    database            = this                                     ;
         final InputStream           pictureStream       = getRestaurantPictureInputStreamFrom(data);
 
-        String restaurantPictureId = GenerateId();
-        long   contentLength        = (pictureStream != null) ? (Long) data.get("content_length") : 0L;
+        data.putIfAbsent("id", GenerateId());
 
-        // Generate an id for the restaurant
-        data.put("id", GenerateId());
-        data.put("picture_id", restaurantPictureId);
-        data.put("restaurant_owner", ownerId);
-        data.put("menu_id", GenerateId());
+        data.putIfAbsent("menu_id", GenerateId());
 
-        // Remove the content length
-        data.remove("content_length");
-
-        final Thread thread = new Thread(() ->
-                database.putItem(createItemFrom(data)));
+        data.putIfAbsent("restaurant_owner", ownerId);
 
         try {
+
+            if((pictureStream != null) && (pictureStream.available() > 0)) {
+
+                final String restaurantPictureId = GenerateId();
+                final long contentLength =
+                        (data.get("content_length") == null) ? 0L : (Long) data.get("content_length");
+
+                // Remove the content length
+                data.remove("content_length");
+
+                data.putIfAbsent("picture_id", restaurantPictureId);
+
+                final Thread uploadThread = new Thread(() ->
+                        database.putObject(restaurantPictureId, pictureStream, contentLength));
+
+                uploadThread.start();
+                uploadThread.join();
+
+            }
+
+        } catch (final Exception exception) {
+
+            Log.e("RestaurantDatabase", "Error: " + exception.getMessage());
+
+        }
+
+        try {
+
+            final Thread thread = new Thread(() ->
+                    database.putItem(createItemFrom(data)));
 
             thread.start();
             thread.join();
@@ -459,26 +486,6 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         } catch (final Exception exception) {
 
             Log.e("RestaurantDatabase", exception.getMessage());
-
-        }
-
-        if(pictureStream != null) {
-
-            final Thread uploadThread = new Thread(() ->
-                    database.putObject(restaurantPictureId, pictureStream, contentLength));
-
-            try {
-
-                thread.start();
-                thread.join();
-                uploadThread.start();
-                uploadThread.join();
-
-            } catch (final Exception exception) {
-
-                Log.e("RestaurantDatabase", exception.getMessage());
-
-            }
 
         }
 
@@ -567,7 +574,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
                 final ScanResponse scanResponse = client.scan(scanRequest);
 
-                for (final Map<String, AttributeValue> item : scanResponse.items())
+                for (final Map<String, AttributeValue> item: scanResponse.items())
                     results.add(bindRestaurantFrom(item));
 
             } catch (final Exception exception) {
