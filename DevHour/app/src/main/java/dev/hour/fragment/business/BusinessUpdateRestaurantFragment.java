@@ -64,7 +64,7 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
                              final ViewGroup viewGroup, final Bundle bundle) {
 
         final View layout =
-                layoutInflater.inflate(R.layout.fragment_business_add_restaurant, viewGroup, false);
+                layoutInflater.inflate(R.layout.fragment_business_update_restaurant, viewGroup, false);
 
         final View               confirmButton   = layout.findViewById(R.id.fragment_business_add_restaurant_confirm_button);
         final View               tagButton       = layout.findViewById(R.id.fragment_business_add_restaurant_tag_button);
@@ -224,9 +224,7 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
 
             this.restaurant = restaurant;
 
-            data.clear();
             image.clear();
-            tags.clear();
 
             data.put("id", this.restaurant.getId());
             data.put("name", this.restaurant.getName());
@@ -239,6 +237,7 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
             data.put("picture", toInputStream((ByteArrayOutputStream) this.restaurant.getImageStream()));
             data.put("picture_id", this.restaurant.getPictureId());
             data.put("restaurant_owner", this.restaurant.getOwnerId());
+            tags.put("tags", this.restaurant.getTags());
 
         }
 
@@ -336,12 +335,12 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
         data.put("address2",        address2.getText().toString());
         data.put("pricing",         "0");
 
-        final List<String> tags = new ArrayList<>();
+        final Object retrieved = BusinessUpdateRestaurantFragment.tags.get("tags");
 
-        for(final Map.Entry<String, Object> entry: BusinessUpdateRestaurantFragment.tags.entrySet())
-            tags.add((String) entry.getValue());
+        if(retrieved != null)
+            data.put("tags", retrieved);
 
-        data.put("tags", tags);
+        else data.put("tags", new ArrayList<>());
 
     }
 

@@ -1,4 +1,4 @@
-package dev.hour.view.list;
+package dev.hour.view.list.business;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -23,7 +23,6 @@ import java.util.Map;
 
 import dev.hour.R;
 import dev.hour.contracts.MealContract;
-import dev.hour.contracts.RestaurantContract;
 
 /**
  * Business Menu list adapter. Defines the View Holder for the Business
@@ -38,6 +37,12 @@ public class BusinessMenuListAdapter extends
     /// ----------------------
     /// Private Static Methods
 
+    /**
+     * Attempts to fit the given text into the [TextView] limited by the given bounds.*
+     * @param textView The [TextView] to fit the text
+     * @param otherView The [View] to relate the dimensions to
+     * @param text The [String] value to fit.
+     */
     private static void FitTextInsideTextView(final TextView textView, final View otherView, final String text) {
 
         int end = 0;
@@ -73,6 +78,7 @@ public class BusinessMenuListAdapter extends
 
 
     }
+
     /// --------------
     /// Private Fields
 
@@ -114,36 +120,51 @@ public class BusinessMenuListAdapter extends
 
         if(meal != null){
 
+            final View          layout      =
+                    view.findViewById(R.id.fragment_business_menu_list_item_content);
             final TextView      title       =
-                    view.findViewById(R.id.fragment_business_restaurant_list_item_title);
+                    view.findViewById(R.id.fragment_business_menu_list_item_title);
             final ImageButton   image       =
-                    view.findViewById(R.id.fragment_business_restaurant_list_item_image);
-            final TextView      address1    =
-                    view.findViewById(R.id.fragment_business_restaurant_list_item_address_line_1);
-            final TextView      address2    =
-                    view.findViewById(R.id.fragment_business_restaurant_list_item_address_line_2);
+                    view.findViewById(R.id.fragment_business_menu_list_item_image);
+            final TextView      details1    =
+                    view.findViewById(R.id.fragment_business_menu_list_item_details_text_1);
+            final TextView      details2    =
+                    view.findViewById(R.id.fragment_business_menu_list_item_details_text_2);
             final ImageView     editButton  =
-                    view.findViewById(R.id.fragment_business_restaurant_list_item_edit_button);
+                    view.findViewById(R.id.fragment_business_menu_list_item_edit_button);
 
-            final Bitmap MenuImage = getImageFor(meal);
+            final Bitmap menuImage = getImageFor(meal);
 
-            if(MenuImage != null)
+            if(menuImage != null) {
+
                 image.setImageBitmap(Bitmap.createScaledBitmap(
-                        MenuImage, image.getMeasuredWidth(), image.getMeasuredHeight(), false));
+                        menuImage, 192, 192, false));
 
-            holder.itemView.setTag(String.valueOf(position));
-            editButton.setTag(String.valueOf(position));
+                image.setClipToOutline(true);
+
+            }
+
+            title.setText(meal.getName());
+            details2.setText(meal.getCalories() + " Calories");
+
+            final String ingredientsList = getIngredientsList(meal);
 
             holder.itemView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
-                    FitTextInsideTextView(title, holder.itemView, meal.getName());
+
+                    FitTextInsideTextView(details1, layout, ingredientsList);
+
                     holder.itemView.getViewTreeObserver().removeOnPreDrawListener(this);
 
                     return true;
 
                 }
+                
             });
+
+            holder.itemView.setTag(String.valueOf(position));
+            editButton.setTag(String.valueOf(position));
 
             holder.itemView.setTranslationX(0.0f);
 
@@ -152,13 +173,18 @@ public class BusinessMenuListAdapter extends
     }
 
     /**
-     * Returns the amount of items in the list
-     * @return int value of the amount of Restaurants in the list
+     * Sets the list of Meals presented by the BusinessMenuListAdapter
      */
-
     public void setMealsList(final List <MealContract.Meal> meals){
 
         this.mealsList = meals;
+
+        if(this.images == null)
+            this.images = new HashMap<>();
+
+        else this.images.clear();
+
+        notifyDataSetChanged();
 
     }
 
@@ -178,6 +204,7 @@ public class BusinessMenuListAdapter extends
      * Notifies the [Listener] of the interaction
      * @param v The [Alert] list item [View]
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
 
@@ -185,23 +212,24 @@ public class BusinessMenuListAdapter extends
 
         switch(v.getId()) {
 
-            case R.id.fragment_business_restaurant_list_item_edit_button:
+            case R.id.fragment_business_menu_list_item_edit_button:
 
-                position = Integer.valueOf(v.getTag().toString());
+                position = Integer.parseInt(v.getTag().toString());
 
                 if(this.listener != null)
-                    this.listener.onAddButtonClicked(this.mealsList.get(position));
+                    this.listener.onEditMealButtonClicked(this.mealsList.get(position));
 
                 break;
 
             default:
 
-                position = Integer.valueOf(v.getTag().toString());
+                position = Integer.parseInt(v.getTag().toString());
 
                 if(this.listener != null)
                     this.listener.onItemClicked(this.mealsList.get(position));
 
                 break;
+
         }
 
     }
@@ -237,38 +265,59 @@ public class BusinessMenuListAdapter extends
 
     }
 
-    public void setMenuLists(final List <MealContract.Meal> Lists){
-
-        this.mealsList = Lists;
-
-        if(this.images == null)
-            this.images = new HashMap<>();
-
-        else this.images.clear();
-
-    }
-
+    /**
+     * Sets the [Listener] that will receive callbacks on user interaction
+     * @param listener The [Listener] that will receive callbacks on user interaction
+     */
     public void setListener(final BusinessMenuListAdapter.Listener listener) {
 
         this.listener = listener;
 
     }
 
+    /**
+     * Retrieves the Ingredients as a list
+     * @param meal The meal to retrieve the ingredients from
+     * @return String value of the ingredients list
+     */
+    private String getIngredientsList(final MealContract.Meal meal) {
+
+        final StringBuilder builder = new StringBuilder();
+        int index = 0;
+        int size = meal.getIngredients().size();
+
+        for(final Map.Entry<String, String> entry: meal.getIngredients().entrySet()) {
+
+            builder.append(entry.getValue());
+
+            if(index < (size - 1))
+                builder.append(", ");
+
+        }
+
+        return builder.toString();
+
+    }
+
     /// ----------
     /// Interfaces
 
-
+    /**
+     * Defines callbacks that are invoked on user interaction
+     */
     public interface Listener {
 
-        void onAddButtonClicked(final MealContract.Meal meal);
+        void onEditMealButtonClicked(final MealContract.Meal meal);
         void onItemClicked(final MealContract.Meal meal);
-
 
     }
 
     /// -------
     /// Classes
 
+    /**
+     * The [ViewHolder] instance that holds the view to be bound.
+     */
     class BusinessMenuListItemViewHolder extends RecyclerView.ViewHolder{
 
         BusinessMenuListItemViewHolder(View view){

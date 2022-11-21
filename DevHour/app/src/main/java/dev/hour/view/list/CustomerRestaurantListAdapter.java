@@ -80,9 +80,8 @@ public class CustomerRestaurantListAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull CustomerRestaurantListItemViewHolder holder, int position) {
-
-        final ViewGroup view = (ViewGroup) holder.itemView;
-        final RestaurantContract.Restaurant restaurant = (RestaurantLists == null) ? null : RestaurantLists.get(position);
+        final ViewGroup                     view        = (ViewGroup) holder.itemView;
+        final RestaurantContract.Restaurant restaurant  = (RestaurantLists == null) ? null : RestaurantLists.get(position);
 
         if(restaurant != null) {
             final TextView title    = view.findViewById(R.id.fragment_customer_restaurant_list_item_title);

@@ -16,7 +16,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/fragment_business_menu_meal_image"
+        android:id="@+id/fragment_business_menu_meal_detail_image"
         style="@style/Theme.DevHour.BigRoundImage"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_meal_image"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_business_menu_meal_detail_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Meal Name"/>
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fragment_business_menu_meal_list_fab"
+        android:id="@+id/fragment_business_menu_meal_detail_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

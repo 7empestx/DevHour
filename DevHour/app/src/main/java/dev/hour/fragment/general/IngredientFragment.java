@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 import dev.hour.R;
-import dev.hour.view.list.TagListAdapter;
+import dev.hour.view.list.business.IngredientListAdapter;
 
-public class TagFragment  extends Fragment implements View.OnClickListener{
+public class IngredientFragment  extends Fragment implements View.OnClickListener{
 
     /// ---------------------
     /// Public Static Members
 
-    public final static String TAG = "TagFragment"  ;
+    public final static String INGREDIENT = "IngredientFragment"  ;
 
     /// ---------------
     /// Private Members
@@ -30,13 +30,13 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
     private Listener            listener        ;
     private Object              requestor       ;
     private Map<String, Object> export          ;
-    private TagListAdapter      tagListAdapter  ;
+    private IngredientListAdapter      ingredientListAdapter  ;
 
     /// --------
     /// Fragment
 
     /**
-     * Invoked when the [TagFragment] should create its' view. Inflates the
+     * Invoked when the [IngredientFragment] should create its' view. Inflates the
      * view and any persist state
      * @param layoutInflater The [LayoutInflater] responsible for inflating the view
      * @param viewGroup The parent
@@ -49,25 +49,25 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
                              final Bundle savedInstanceState) {
 
         final View layout               =
-                layoutInflater.inflate(R.layout.fragment_tag, viewGroup, false);
+                layoutInflater.inflate(R.layout.fragment_ingredient, viewGroup, false);
 
-        if(this.tagListAdapter == null)
-            this.tagListAdapter = new TagListAdapter();
+        if(this.ingredientListAdapter == null)
+            this.ingredientListAdapter = new IngredientListAdapter();
 
         final RecyclerView recyclerView    =
-                layout.findViewById(R.id.fragment_tag_recycler_view);
-        final View          addTagButton =
-                layout.findViewById(R.id.fragment_tag_button);
+                layout.findViewById(R.id.fragment_ingredient_recycler_view);
+        final View          addIngredientButton =
+                layout.findViewById(R.id.fragment_ingredient_button);
         final View          confirmButton =
-                layout.findViewById(R.id.fragment_tag_confirm_button);
+                layout.findViewById(R.id.fragment_ingredient_confirm_button);
         final View          backButton =
-                layout.findViewById(R.id.fragment_tag_back_button);
+                layout.findViewById(R.id.fragment_ingredient_back_button);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(this.tagListAdapter);
+        recyclerView.setAdapter(this.ingredientListAdapter);
 
         confirmButton.setOnClickListener(this);
-        addTagButton.setOnClickListener(this);
+        addIngredientButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
 
         return layout;
@@ -75,18 +75,18 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
     }
 
     /**
-     * Invoked when the TagFragment is to be resumed
+     * Invoked when the IngredientFragment is to be resumed
      */
     @Override
     public void onResume() {
         super.onResume();
 
-        if((this.export != null) && (this.export.get("tags") != null)) {
+        if((this.export != null) && (this.export.get("ingredients") != null)) {
 
-            final List<String> tags = (List) this.export.get("tags");
+            final List<String> ingredients = (List) this.export.get("ingredients");
 
-            for(final String tag: tags)
-                this.tagListAdapter.addTag(tag);
+            for(final String ingredient: ingredients)
+                this.ingredientListAdapter.addIngredient(ingredient);
 
         }
 
@@ -105,33 +105,33 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
 
         switch(id) {
 
-            case R.id.fragment_tag_button:
+            case R.id.fragment_ingredient_button:
 
-                final String tag =
-                        ((EditText) getView().findViewById(R.id.fragment_tag_input))
+                final String ingredient =
+                        ((EditText) getView().findViewById(R.id.fragment_ingredient_input))
                                 .getText().toString();
 
-                if(this.tagListAdapter != null)
-                    this.tagListAdapter.addTag(tag);
+                if(this.ingredientListAdapter != null)
+                    this.ingredientListAdapter.addIngredient(ingredient);
 
                 break;
 
-            case R.id.fragment_tag_confirm_button:
+            case R.id.fragment_ingredient_confirm_button:
 
                 if(this.export != null)
-                    this.export.put("tags", this.tagListAdapter.getTags());
+                    this.export.put("ingredients", this.ingredientListAdapter.getIngredients());
 
                 if(this.listener != null)
-                    this.listener.onTagReceived(this.requestor);
+                    this.listener.onIngredientReceived(this.requestor);
 
                 break;
 
-            case R.id.fragment_tag_back_button:
+            case R.id.fragment_ingredient_back_button:
 
                 this.export.clear();
 
                 if(this.listener != null)
-                    this.listener.onTagCancelled(this.requestor);
+                    this.listener.onIngredientCancelled(this.requestor);
 
                 break;
 
@@ -174,8 +174,8 @@ public class TagFragment  extends Fragment implements View.OnClickListener{
      */
     public interface Listener {
 
-        void onTagReceived(final Object requestor);
-        void onTagCancelled(final Object requestor);
+        void onIngredientReceived(final Object requestor);
+        void onIngredientCancelled(final Object requestor);
 
     }
 
