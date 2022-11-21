@@ -19,8 +19,6 @@
     <ImageView
         android:id="@+id/fragment_business_update_menu_item_meal_image"
         style="@style/Theme.DevHour.BigRoundImage"
-        app:srcCompat="@drawable/icon_edit"
-        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_business_update_menu_item_back_button"/>

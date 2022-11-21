@@ -127,7 +127,7 @@ public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnC
 
                 if((bytes.length > 0) && (context != null)) {
 
-                    final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    final Bitmap bitmap = BitmapFactory.decodeByteArray(pair.second, 0, bytes.length);
 
                     final Resources resources = context.getResources();
 

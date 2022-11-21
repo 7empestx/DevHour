@@ -1267,7 +1267,8 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (item.getItemId()) {
 
-            case R.id.navigation_list: showCustomerRestaurantListFragment(); break;
+            //case R.id.navigation_list: showCustomerRestaurantListFragment(); break;
+            case R.id.navigation_list: showBusinessUpdateRestaurantFragment(null); break;
             case R.id.navigation_location: showMapFragment(); break;
             case R.id.profile: showProfileFragment(); break;
         }
