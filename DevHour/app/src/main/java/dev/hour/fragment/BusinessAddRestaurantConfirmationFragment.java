@@ -34,18 +34,19 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
     private MapView mapView;
 
     @Override
-    public View onCreateView(final LayoutInflater layoutInflater,
+    public View onCreateView(final LayoutInflater layoutInflater, //why onCreateView and not onCreate?
                              final ViewGroup viewGroup, final Bundle bundle) {
         final View layout = layoutInflater.inflate(R.layout.fragment_business_add_restaurant_confirmation, viewGroup, false);
+        final View confirmButton = layout.findViewById(R.id.fragment_business_add_restaurant_confirm_button); //dont know if needed yet lol
 
-        final View confirmButton = layout.findViewById(R.id.fragment_business_add_restaurant_confirm_button);
-
-        confirmButton.setOnClickListener(this);
-        mapView = new MapView(getContext()); //?
         mapView = layout.findViewById(R.id.mapView);
         mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS);
 
-//        return layout;
+        //all examples use onCreate and have an extra dependency that allows mapbox.getinstance (maybe its something im missing)
+        //because i see no instance of the mapbox token yet, soo i assume we'll need to use it.
+
+        confirmButton.setOnClickListener(this);
+
         return mapView;
     }
 
