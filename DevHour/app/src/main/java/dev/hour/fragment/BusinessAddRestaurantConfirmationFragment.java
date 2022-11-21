@@ -28,6 +28,7 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
     private RestaurantContract.Presenter.InteractionListener interactionListener    ;
     private final static Map<String, Object>                              tags                   = new HashMap<>();
     private final static Map<String, Object>                              image                  = new HashMap<>();
+    private Map<String, Object>     export                  ;
 
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
@@ -51,7 +52,6 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.fragment_business_add_restaurant_confirm_button:
-                final Map<String, Object> data = new HashMap<>();
 
                 final EditText restaurantName =
                         this.requireView()
@@ -64,7 +64,12 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
                         this.requireView()
                                 .findViewById(R.id.fragment_business_add_restaurant_confirmation_address_two);
 
+                this.export.put("name", restaurantName.getText().toString());
+                this.export.put("address1", address1.getText().toString());
+                this.export.put("address2", address2.getText().toString());
+
                 break;
+
 
             default: break;
         }
@@ -74,4 +79,7 @@ public class BusinessAddRestaurantConfirmationFragment extends Fragment implemen
         this.interactionListener = listener;
     }
 
+    public void setExport(final Map<String, Object> export) {
+        this.export = export;
+    }
 }
