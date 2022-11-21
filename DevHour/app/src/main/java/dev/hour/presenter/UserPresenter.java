@@ -43,11 +43,8 @@ public class UserPresenter implements UserContract.Presenter, UserContract.View.
 
         }
 
-
-
         if(this.view != null)
             this.view.update(this.user);
-
     }
 
     @Override
