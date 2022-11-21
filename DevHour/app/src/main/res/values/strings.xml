@@ -73,5 +73,6 @@
     <string name="fragment_add_picture_upload_button_title">Upload</string>
     <string name="fragment_add_picture_save_button_title">Save</string>
     <string name="fragment_add_picture_skip_button_title">Skip</string>
+    <string name="done">Done</string>
 
 </resources>

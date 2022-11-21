@@ -50,6 +50,7 @@ public class MapView extends FrameLayout implements
     private final static String DEFAULT_MAP_STYLE_ID = ""   ;
     private final static long   ANIMATION_DURATION   = 300  ;
     private final static double DEFAULT_CAMERA_ZOOM  = 15.0 ;
+    private final static double SEARCH_CAMERA_ZOOM   = 12.0  ;
 
     /// ---------------
     /// Private Members
@@ -98,6 +99,7 @@ public class MapView extends FrameLayout implements
     /// ------------
     /// Constructors
 
+
     /**
      * Initializes the MapView to its' default state
      * @param context The constructing Context
@@ -124,7 +126,6 @@ public class MapView extends FrameLayout implements
         this.searchBar.setLayoutParams(
                 new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
         // We want to set the children draw order in order to draw the user's dot
         // on top of the map as well as the flag that enables drawing on the ViewGroup's
         // canvas
@@ -160,7 +161,6 @@ public class MapView extends FrameLayout implements
 
         if(mapView != null)
             mapView.onStart();
-
     }
 
     @Override
@@ -245,13 +245,15 @@ public class MapView extends FrameLayout implements
     public void onRenderFrameFinished(@NonNull RenderFrameFinishedEventData renderFrameFinishedEventData) {
 
         updateUserDotViewPositions();
-
     }
 
     @Override
     public void onRenderFrameStarted(@NonNull RenderFrameStartedEventData renderFrameStartedEventData) {
 
         updateUserDotViewPositions();
+        for(final Map.Entry<String, RestaurantDotView> view : this.restaurantDotViews.entrySet()) {
+            setScreenLocationFor(view.getValue());
+        }
 
     }
 
@@ -293,6 +295,7 @@ public class MapView extends FrameLayout implements
 
         setScreenLocationFor(userDotView);
 
+        panTo(userDotView.getMapObject());
     }
 
     /**
@@ -473,7 +476,7 @@ public class MapView extends FrameLayout implements
      * @param mapObject The desired MapObjectContract.MapObject to show on the map
      */
     private void panTo(final MapObjectContract.MapObject mapObject) {
-
+        
         if(this.mapboxMap != null) {
 
             final CameraAnimationsPlugin camera =
@@ -481,6 +484,7 @@ public class MapView extends FrameLayout implements
 
             camera.flyTo(
                     (new CameraOptions.Builder())
+                            .zoom(SEARCH_CAMERA_ZOOM)
                             .center(Point.fromLngLat(
                                     mapObject.getLongitude(),
                                     mapObject.getLatitude()))

@@ -9,11 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import dev.hour.R;
-import dev.hour.contracts.MealContract;
-import dev.hour.view.list.BusinessMenuListAdapter;
 
 
 public class MenuItemTagListFragment extends Fragment {

@@ -107,8 +107,7 @@ public class MapFragment extends Fragment implements
     public void update(UserContract.User user) {
 
         if(this.mapView != null)
-            this.mapView.remove(user);
-
+            this.mapView.update(user);
     }
 
     /**
@@ -151,7 +150,9 @@ public class MapFragment extends Fragment implements
      */
     @Override
     public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
-
+        if(this.mapView != null) {
+            this.mapView.set(restaurants);
+        }
     }
 
     public void setSearchListener(MapView.SearchListener searchListener){

@@ -29,7 +29,7 @@ public interface RestaurantContract {
 
         interface InteractionListener {
 
-            void onAddRestaurantRequest();
+            void onUpdateRestaurantRequest(final Restaurant restaurant);
             void onShowBusinessRestaurantListRequest();
             void onCreateRestaurantRequest(final Map<String, Object> data);
             void onShowBusinessAddRestaurantImageRequest(final Map<String, Object> export);
@@ -50,6 +50,8 @@ public interface RestaurantContract {
 
         String getId();
         String getName();
+        String getOwnerId();
+        String getPictureId();
         double getLongitude();
         double getLatitude();
         int getPricing();
@@ -57,16 +59,20 @@ public interface RestaurantContract {
         String getAddress1();
         String getAddress2();
         OutputStream getImageStream();
+        List<String> getTags();
 
         void setId(final String id);
         void setName(final String name);
         void setPricing(final int pricing);
+        void setOwnerId(final String id);
+        void setPictureId(final String id);
         void setMenuId(final String menuId);
         void setAddress1(final String address1);
         void setAddress2(final String address2);
         void setLongitude(final double longitude);
         void setLatitude(final double latitude);
         void setImageStream(final OutputStream imageStream);
+        void setTags(final List<String> tags);
 
     }
 

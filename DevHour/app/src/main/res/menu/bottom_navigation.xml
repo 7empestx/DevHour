@@ -10,5 +10,9 @@
         android:id="@+id/navigation_location"
         android:icon="?attr/bottomNavigationIconLocation"
         android:title="@string/bottom_navigation_location"/>
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/icon_person"
+        android:title="Profile" />
 
 </menu>

@@ -1,6 +1,7 @@
 package dev.hour.model;
 
 import java.io.OutputStream;
+import java.util.List;
 
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.RestaurantContract;
@@ -16,9 +17,12 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     private String          address1    ;
     private String          address2    ;
     private String          menuId      ;
+    private String          ownerId     ;
+    private String          pictureId   ;
     private double          longitude   ;
     private double          latitude    ;
     private OutputStream    imageStream ;
+    private List<String>    tags        ;
 
     /// -----------
     /// Constructor
@@ -40,6 +44,16 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     @Override
     public String getName(){
         return name;
+    }
+
+    @Override
+    public String getOwnerId() {
+        return this.ownerId;
+    }
+
+    @Override
+    public String getPictureId() {
+        return this.pictureId;
     }
 
     @Override
@@ -86,6 +100,11 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     }
 
     @Override
+    public List<String> getTags() {
+        return this.tags;
+    }
+
+    @Override
     public void setId(final String id) {
 
         this.id = id;
@@ -103,6 +122,20 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public void setPricing(final int pricing) {
 
         this.pricing = pricing;
+
+    }
+
+    @Override
+    public void setOwnerId(String id) {
+
+        this.ownerId = id;
+
+    }
+
+    @Override
+    public void setPictureId(String id) {
+
+        this.pictureId = id;
 
     }
 
@@ -145,6 +178,13 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public void setImageStream(final OutputStream imageStream) {
 
         this.imageStream = imageStream;
+
+    }
+
+    @Override
+    public void setTags(final List<String> tags) {
+
+        this.tags = tags;
 
     }
 

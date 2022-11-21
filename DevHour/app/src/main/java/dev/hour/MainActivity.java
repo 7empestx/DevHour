@@ -31,17 +31,18 @@ import dev.hour.database.MenuDatabase;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
-import dev.hour.fragment.BusinessAddRestaurantFragment;
-import dev.hour.fragment.BusinessAddRestaurantConfirmationFragment;
-import dev.hour.fragment.BusinessMenuItemDetailFragment;
-import dev.hour.fragment.BusinessMenuListFragment;
-import dev.hour.fragment.LoginFragment;
+import dev.hour.fragment.business.BusinessUpdateRestaurantFragment;
+import dev.hour.fragment.BusinessUpdateMenuItemFragment;
+import dev.hour.fragment.business.BusinessMenuListFragment;
+import dev.hour.fragment.general.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
-import dev.hour.fragment.RestaurantListFragment;
-import dev.hour.fragment.SignUpFragment;
-import dev.hour.fragment.BusinessRestaurantListFragment;
-import dev.hour.fragment.BusinessAddRestaurantPictureFragment;
+import dev.hour.fragment.CustomerRestaurantListFragment;
+import dev.hour.fragment.general.SignUpFragment;
+import dev.hour.fragment.business.BusinessRestaurantListFragment;
+import dev.hour.fragment.general.AddPictureFragment;
+import dev.hour.fragment.general.TagFragment;
+import dev.hour.fragment.BusinessAddRestaurantConfirmationFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements
         RestaurantContract.Presenter.InteractionListener,
         NavigationBarView.OnItemSelectedListener,
         MealContract.Menu.Presenter.InteractionListener,
+        AddPictureFragment.Listener,
+        TagFragment.Listener,
         MapView.SearchListener {
     //scope......
     static {
@@ -160,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
-
         // Retrieve the most recent Fragment and show the login screen
         bindRecentFragment();
 
@@ -173,7 +175,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
 
-        this.authenticator.checkSession();
+        if((this.userId == null) || this.userId.isEmpty())
+            this.authenticator.checkSession();
 
     }
 
@@ -183,15 +186,15 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (requestCode) {
 
-            case BusinessAddRestaurantPictureFragment.STORAGE_PERMISSION_REQUEST:
+            case AddPictureFragment.STORAGE_PERMISSION_REQUEST:
 
                 if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     final Fragment fragment =
-                            getSupportFragmentManager().findFragmentByTag(BusinessAddRestaurantPictureFragment.TAG);
+                            getSupportFragmentManager().findFragmentByTag(AddPictureFragment.TAG);
 
-                    if (fragment instanceof BusinessAddRestaurantPictureFragment)
-                        ((BusinessAddRestaurantPictureFragment) fragment).storagePermissionsGranted();
+                    if (fragment instanceof AddPictureFragment)
+                        ((AddPictureFragment) fragment).storagePermissionsGranted();
 
                 }
 
@@ -246,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements
         this.userPresenter.setUser(userId);
 
         // Retrieve the user
-        final UserContract.User user = this.userPresenter.getUser(userId)    ;
+        final UserContract.User user = this.userPresenter.getUser(this.userId)    ;
 
         if(user != null) {
 
@@ -257,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements
                 this.restaurantPresenter.setRestaurantsByOwner(this.userId);
 
                 showBusinessRestaurantListFragment();
+
             }
         }
     }
@@ -305,9 +309,9 @@ public class MainActivity extends AppCompatActivity implements
     /// RestaurantContract.Presenter.InteractionListener
 
     @Override
-    public void onAddRestaurantRequest() {
+    public void onUpdateRestaurantRequest(final RestaurantContract.Restaurant restaurant) {
 
-        showBusinessAddRestaurantFragment();
+        showBusinessUpdateRestaurantFragment(restaurant);
 
     }
 
@@ -343,12 +347,20 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onShowBusinessAddRestaurantImageRequest(final Map<String, Object> export) {
 
-        showBusinessAddRestaurantPictureFragment(export);
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        showAddPictureFragment(export,
+                fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG));
 
     }
 
     @Override
-    public void onShowBusinessAddRestaurantTagRequest(final Map<String, Object> data) {
+    public void onShowBusinessAddRestaurantTagRequest(final Map<String, Object> export) {
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        showTagFragment(export,
+                fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG));
 
     }
 
@@ -374,6 +386,69 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    public void onShowMenuRequest() {
+
+        showBusinessMenuListFragment();
+
+    }
+
+    @Override
+    public void onUpdateMealRequest(MealContract.Meal meal) {
+
+        showBusinessUpdateMenuItemFragment();
+
+    }
+
+    @Override
+    public void onCloseBusinessMenuRequest() {
+
+        showBusinessRestaurantListFragment();
+
+    }
+
+    @Override
+    public void onBusinessMealSelected(MealContract.Meal meal) {
+
+        /// TODO: Show MealDetailFragment
+
+    }
+
+    /// ---------------------------
+    /// AddPictureFragment.Listener
+
+    @Override
+    public void onAddPictureReceived(final Object requestor) {
+
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessUpdateRestaurantFragment(null);
+
+    }
+
+    @Override
+    public void onAddPictureCancelled(final Object requestor) {
+
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessUpdateRestaurantFragment(null);
+
+    }
+
+    @Override
+    public void onTagReceived(Object requestor) {
+
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessUpdateRestaurantFragment(null);
+
+    }
+
+    @Override
+    public void onTagCancelled(Object requestor) {
+
+        if(requestor instanceof BusinessUpdateRestaurantFragment)
+            showBusinessUpdateRestaurantFragment(null);
+
+    }
+
     /// ----------------------
     /// MapView.SearchListener
 
@@ -386,6 +461,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onTextChange(final String query) {
+
 
     }
 
@@ -441,7 +517,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(RestaurantListFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(CustomerRestaurantListFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -450,7 +526,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -459,7 +535,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(BusinessUpdateMenuItemFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -483,146 +559,6 @@ public class MainActivity extends AppCompatActivity implements
                 lastFragment = fragment;
 
         }
-
-    }
-
-    private void showBusinessAddRestaurantFragment() {
-
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessAddRestaurantFragment.TAG);
-
-        if(fragment == null) {
-
-            fragment = new BusinessAddRestaurantFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantFragment.TAG);
-
-            ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
-
-        } else if(fragment.isAdded()) {
-
-            ((BusinessAddRestaurantFragment) fragment).setInteractionListener(this);
-
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
-
-        transaction.show(fragment);
-
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        hideBottomNavigationBar();
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
-
-    }
-
-    private void showBusinessAddRestaurantConfirmationFragment(final Map<String, Object> export) {
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessAddRestaurantConfirmationFragment.TAG);
-
-        if(fragment == null) {
-            fragment = new BusinessAddRestaurantConfirmationFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantConfirmationFragment.TAG);
-
-            ((BusinessAddRestaurantConfirmationFragment) fragment).setInteractionListener(this);
-            ((BusinessAddRestaurantConfirmationFragment) fragment).setExport(export);
-        } else if(fragment.isAdded()) {
-            ((BusinessAddRestaurantConfirmationFragment) fragment).setInteractionListener(this);
-            ((BusinessAddRestaurantConfirmationFragment) fragment).setExport(export);
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        hideBottomNavigationBar();
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
-
-    }
-
-    private void showBusinessAddRestaurantPictureFragment(final Map<String, Object> export) {
-
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessAddRestaurantPictureFragment.TAG);
-
-        if(fragment == null) {
-
-            fragment = new BusinessAddRestaurantPictureFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantPictureFragment.TAG);
-
-            ((BusinessAddRestaurantPictureFragment) fragment).setInteractionListener(this);
-            ((BusinessAddRestaurantPictureFragment) fragment).setExport(export);
-
-        } else if(fragment.isAdded()) {
-
-            ((BusinessAddRestaurantPictureFragment) fragment).setInteractionListener(this);
-            ((BusinessAddRestaurantPictureFragment) fragment).setExport(export);
-
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
-
-        transaction.show(fragment);
-
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        hideBottomNavigationBar();
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
-
-    }
-
-    private void showBusinessMenuItemDetailFragment() {
-
-        final FragmentManager       fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
-
-        Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
-
-        if(fragment == null) {
-
-            fragment = new BusinessMenuItemDetailFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetailFragment.TAG);
-
-        } else if(fragment.isAdded()) {
-
-        }
-
-        transaction
-                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
-
-        transaction.show(fragment);
-
-        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
-
-        lastFragment = fragment;
-
-        hideBottomNavigationBar();
-
-        transaction.commit();
-        fragmentManager.executePendingTransactions();
 
     }
 
@@ -704,6 +640,192 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+    private void showBusinessUpdateRestaurantFragment(final RestaurantContract.Restaurant restaurant) {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessUpdateRestaurantFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessUpdateRestaurantFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessUpdateRestaurantFragment.TAG);
+
+            ((BusinessUpdateRestaurantFragment) fragment).setInteractionListener(this);
+            ((BusinessUpdateRestaurantFragment) fragment).setRestaurant(restaurant);
+
+        } else if(fragment.isAdded()) {
+
+            ((BusinessUpdateRestaurantFragment) fragment).setInteractionListener(this);
+            ((BusinessUpdateRestaurantFragment) fragment).setRestaurant(restaurant);
+
+        }
+
+        if((lastFragment instanceof AddPictureFragment) || (lastFragment instanceof TagFragment))
+            transaction
+                    .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        else
+            transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessUpdateMenuItemFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessUpdateMenuItemFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new BusinessUpdateMenuItemFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessUpdateMenuItemFragment.TAG);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessAddRestaurantConfirmationFragment(final Map<String, Object> export) {
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessAddRestaurantConfirmationFragment.TAG);
+
+        if(fragment == null) {
+            fragment = new BusinessAddRestaurantConfirmationFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantConfirmationFragment.TAG);
+
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setInteractionListener(this);
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setExport(export);
+        } else if(fragment.isAdded()) {
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setInteractionListener(this);
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setExport(export);
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showAddPictureFragment(final Map<String, Object> export, final Object requestor) {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(AddPictureFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new AddPictureFragment();
+            transaction.add(R.id.activity_main, fragment, AddPictureFragment.TAG);
+
+            ((AddPictureFragment) fragment).setListener(this, requestor);
+            ((AddPictureFragment) fragment).setExport(export);
+
+        } else if(fragment.isAdded()) {
+
+            ((AddPictureFragment) fragment).setListener(this, requestor);
+            ((AddPictureFragment) fragment).setExport(export);
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showTagFragment(final Map<String, Object> export, final Object requestor) {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(TagFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new TagFragment();
+            transaction.add(R.id.activity_main, fragment, AddPictureFragment.TAG);
+
+            ((TagFragment) fragment).setListener(this, requestor);
+            ((TagFragment) fragment).setExport(export);
+
+        } else if(fragment.isAdded()) {
+
+            ((TagFragment) fragment).setListener(this, requestor);
+            ((TagFragment) fragment).setExport(export);
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
     /**
      * Shows the login fragment to the user
      */
@@ -769,6 +891,8 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new ProfileFragment();
             ((UserContract.View)fragment)
                     .setUserListener((UserContract.View.Listener) userPresenter);
+            ((MealContract.Diet.View)fragment)
+                    .setDietListener((MealContract.Diet.View.Listener) dietPresenter);
             userPresenter.setView((UserContract.View) fragment);
 
             dietPresenter.setView((MealContract.Diet.View) fragment);
@@ -778,8 +902,11 @@ public class MainActivity extends AppCompatActivity implements
         } else if(fragment.isAdded()) {
             ((UserContract.View)fragment)
                     .setUserListener((UserContract.View.Listener) userPresenter);
+            ((MealContract.Diet.View)fragment)
+                    .setDietListener((MealContract.Diet.View.Listener) dietPresenter);
 
             userPresenter.setView((UserContract.View) fragment);
+            dietPresenter.setView((MealContract.Diet.View) fragment);
 
         }
 
@@ -887,6 +1014,38 @@ public class MainActivity extends AppCompatActivity implements
         transaction.commit();
         fragmentManager.executePendingTransactions();
 
+    }
+
+    private void showCustomerRestaurantListFragment() {
+
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(CustomerRestaurantListFragment.TAG);
+
+        if(fragment == null) {
+
+            fragment = new CustomerRestaurantListFragment();
+            transaction.add(R.id.activity_main, fragment, CustomerRestaurantListFragment.TAG);
+
+            ((CustomerRestaurantListFragment) fragment).setInteractionListener(this);
+
+        } else if(fragment.isAdded()) {
+
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+        transaction.show(fragment);
+
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
     }
 
     /**
@@ -1019,52 +1178,11 @@ public class MainActivity extends AppCompatActivity implements
 
         switch (item.getItemId()) {
 
-            case R.id.navigation_list: break; /// TODO: Show List Fragment
+            case R.id.navigation_list: showCustomerRestaurantListFragment(); break;
             case R.id.navigation_location: showMapFragment(); break;
-
+            case R.id.profile: showProfileFragment(); break;
         }
-
         return true;
-
     }
 
-    @Override
-    public void onShowMenuRequest() {
-
-    }
-
-    @Override
-    public void onShowBusinessAddMenuMeal(Map<String, Object> export) {
-
-    }
-
-    @Override
-    public void onShowBusinessAddMenuAddTag(Map<String, Object> export) {
-
-    }
-
-    @Override
-    public void onMealSelected(MealContract.Meal meal) {
-
-    }
-
-    @Override
-    public void onEditPicture() {
-
-    }
-
-    @Override
-    public void onAddIngredientButton() {
-
-    }
-
-    @Override
-    public void onTagButton() {
-
-    }
-
-    @Override
-    public void onConfirmButton(Map<String, Object> input) {
-
-    }
 }
