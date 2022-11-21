@@ -18,7 +18,7 @@ import dev.hour.R;
 import dev.hour.contracts.MealContract;
 import dev.hour.view.list.BusinessMenuItemDetailListAdapter;
 
-public class BusinessMenuItemDetailFragment extends Fragment implements View.OnClickListener{
+public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnClickListener{
     public final static String TAG = "BusinessMenuItemDetail";
 
     /// --------------
@@ -35,7 +35,7 @@ public class BusinessMenuItemDetailFragment extends Fragment implements View.OnC
             this.businessMenuItemDetailListAdapter = new BusinessMenuItemDetailListAdapter();
 
         final View layout =
-                layoutInflater.inflate(R.layout.fragment_business_menu_item_detail, viewGroup, false);
+                layoutInflater.inflate(R.layout.fragment_business_update_menu_item, viewGroup, false);
         final RecyclerView recyclerView =
                 layout.findViewById(R.id.fragment_business_menu_item_detail_recycler_view);
 

@@ -74,7 +74,7 @@ public class BusinessMenuListFragment extends Fragment
     }
 
     @Override
-    public void onAddButtonClicked(MealContract.Meal meal) {
+    public void onEditMealButtonClicked(MealContract.Meal meal) {
 
 
     }

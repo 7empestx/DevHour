@@ -9,12 +9,12 @@
         android:id="@+id/fragment_business_menu_list_item_remove_button"
         style="@style/Theme.DevHour.ListItemRemoveButton"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="@id/list_item_alert_content"
+        app:layout_constraintTop_toTopOf="@id/fragment_business_menu_list_item_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/list_item_alert_content"
+        android:id="@+id/fragment_business_menu_list_item_content"
         style="@style/Theme.DevHour.ListItemContent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

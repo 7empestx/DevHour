@@ -10,7 +10,6 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +32,7 @@ import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
 import dev.hour.fragment.business.BusinessUpdateRestaurantFragment;
-import dev.hour.fragment.BusinessMenuItemDetailFragment;
+import dev.hour.fragment.BusinessUpdateMenuItemFragment;
 import dev.hour.fragment.BusinessMenuListFragment;
 import dev.hour.fragment.general.LoginFragment;
 import dev.hour.fragment.MapFragment;
@@ -311,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onUpdateRestaurantRequest(final RestaurantContract.Restaurant restaurant) {
 
-        showBusinessAddRestaurantFragment(restaurant);
+        showBusinessUpdateRestaurantFragment(restaurant);
 
     }
 
@@ -472,7 +471,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(BusinessUpdateMenuItemFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;
@@ -499,7 +498,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    private void showBusinessAddRestaurantFragment(final RestaurantContract.Restaurant restaurant) {
+    private void showBusinessUpdateRestaurantFragment(final RestaurantContract.Restaurant restaurant) {
 
         final FragmentManager       fragmentManager = getSupportFragmentManager();
         final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
@@ -628,12 +627,12 @@ public class MainActivity extends AppCompatActivity implements
         final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
 
         Fragment fragment =
-                fragmentManager.findFragmentByTag(BusinessMenuItemDetailFragment.TAG);
+                fragmentManager.findFragmentByTag(BusinessUpdateMenuItemFragment.TAG);
 
         if(fragment == null) {
 
-            fragment = new BusinessMenuItemDetailFragment();
-            transaction.add(R.id.activity_main, fragment, BusinessMenuItemDetailFragment.TAG);
+            fragment = new BusinessUpdateMenuItemFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessUpdateMenuItemFragment.TAG);
 
         } else if(fragment.isAdded()) {
 
@@ -1139,7 +1138,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onAddPictureReceived(final Object requestor) {
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
-            showBusinessAddRestaurantFragment(null);
+            showBusinessUpdateRestaurantFragment(null);
 
     }
 
@@ -1147,7 +1146,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onAddPictureCancelled(final Object requestor) {
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
-            showBusinessAddRestaurantFragment(null);
+            showBusinessUpdateRestaurantFragment(null);
 
     }
 
@@ -1155,7 +1154,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onTagReceived(Object requestor) {
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
-            showBusinessAddRestaurantFragment(null);
+            showBusinessUpdateRestaurantFragment(null);
 
     }
 
@@ -1163,7 +1162,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onTagCancelled(Object requestor) {
 
         if(requestor instanceof BusinessUpdateRestaurantFragment)
-            showBusinessAddRestaurantFragment(null);
+            showBusinessUpdateRestaurantFragment(null);
 
     }
 }
