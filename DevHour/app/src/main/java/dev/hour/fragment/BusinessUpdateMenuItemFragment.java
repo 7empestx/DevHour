@@ -65,15 +65,12 @@ public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnC
 
             case R.id.fragment_business_menu_item_detail_meal_image:
 
-                this.listener.onEditPicture();
                 break;
             case R.id.fragment_business_menu_item_detail_ingredient_button:
 
-                this.listener.onAddIngredientButton();
                 break;
             case R.id.fragment_business_menu_item_detail_tag_button:
 
-                this.listener.onTagButton();
                 break;
 
             case R.id.fragment_business_menu_item_detail_confirm_button:
@@ -82,7 +79,6 @@ public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnC
                 input = new HashMap<>();
                 input.put("name", editText.getText().toString());
 
-                this.listener.onConfirmButton(input);
                 break;
             default:
 

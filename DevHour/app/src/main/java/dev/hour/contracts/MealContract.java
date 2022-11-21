@@ -129,13 +129,9 @@ public interface MealContract {
             interface InteractionListener {
 
                 void onShowMenuRequest();
-                void onShowBusinessAddMenuMeal(final Map<String, Object> export);
-                void onShowBusinessAddMenuAddTag(final Map<String, Object> export);
-                void onMealSelected(final Meal meal);
-                void onEditPicture();
-                void onAddIngredientButton();
-                void onTagButton();
-                void onConfirmButton(Map <String, Object> input);
+                void onUpdateMealRequest(final Meal meal);
+                void onCloseBusinessMenuRequest();
+                void onBusinessMealSelected(final Meal meal);
 
             }
 

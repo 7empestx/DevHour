@@ -1,4 +1,4 @@
-package dev.hour.view.list;
+package dev.hour.view.list.business;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 

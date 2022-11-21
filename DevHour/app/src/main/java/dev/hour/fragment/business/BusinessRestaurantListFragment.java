@@ -64,6 +64,7 @@ public class BusinessRestaurantListFragment extends Fragment
         return layout;
 
     }
+
     /// --------------------
     /// View.OnClickListener
 
