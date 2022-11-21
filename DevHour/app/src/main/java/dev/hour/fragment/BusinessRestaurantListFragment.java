@@ -1,5 +1,6 @@
 package dev.hour.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,7 @@ import java.util.List;
 
 import dev.hour.R;
 import dev.hour.contracts.RestaurantContract;
-import dev.hour.view.list.BusinessRestaurantListAdapter;
-import dev.hour.view.list.CustomerRestaurantListAdapter;
+import dev.hour.view.list.business.BusinessRestaurantListAdapter;
 
 public class BusinessRestaurantListFragment extends Fragment
         implements RestaurantContract.View, View.OnClickListener, BusinessRestaurantListAdapter.Listener {
@@ -30,7 +30,17 @@ public class BusinessRestaurantListFragment extends Fragment
     private BusinessRestaurantListAdapter                       businessRestaurantListAdapter   ;
     private RestaurantContract.Presenter.InteractionListener    listener                        ;
 
+    /// --------
+    /// Fragment
 
+    /**
+     * Invoked when the [BusinessRestaurantListFragment] should create its' view. Inflates the
+     * view and any persist state
+     * @param layoutInflater The [LayoutInflater] responsible for inflating the view
+     * @param viewGroup The parent
+     * @param bundle SavedInstanceState
+     * @return [View] instance
+     */
     @Override
     public View onCreateView(final LayoutInflater layoutInflater,
                              final ViewGroup viewGroup, final Bundle bundle) {
@@ -54,17 +64,15 @@ public class BusinessRestaurantListFragment extends Fragment
         return layout;
 
     }
+    /// --------------------
+    /// View.OnClickListener
 
-    @Override
-    public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
-
-        if(this.businessRestaurantListAdapter == null)
-            this.businessRestaurantListAdapter = new BusinessRestaurantListAdapter();
-
-        this.businessRestaurantListAdapter.setRestaurantLists(restaurants);
-
-    }
-
+    /**
+     * Invoked when a [View] of interest is clicked by the user. Invokes the corresponding
+     * callbacks depending on the [View] that was clicked
+     * @param view The [View] instance that was clicked
+     */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
 
@@ -75,7 +83,7 @@ public class BusinessRestaurantListFragment extends Fragment
             case R.id.fragment_business_restaurant_list_add_button:
 
                 if(this.listener != null)
-                    this.listener.onAddRestaurantRequest();
+                    this.listener.onUpdateRestaurantRequest(null);
 
                 break;
 
@@ -85,18 +93,25 @@ public class BusinessRestaurantListFragment extends Fragment
 
     }
 
-    public void setInteractionListener(final RestaurantContract.Presenter.InteractionListener listener) {
+    /// --------------------------------------
+    /// BusinessRestaurantListAdapter.Listener
 
-        this.listener = listener;
-
-    }
-
+    /**
+     * Invoked when a list item's edit button has been clicked by the user.
+     * @param restaurant The [RestaurantContract.Restaurant] instance corresponding to the list item
+     */
     @Override
-    public void onEditButtonClicked(RestaurantContract.Restaurant restaurant) {
+    public void onEditButtonClicked(final RestaurantContract.Restaurant restaurant) {
 
+        if(this.listener != null)
+            this.listener.onUpdateRestaurantRequest(restaurant);
 
     }
 
+    /**
+     * Invoked when a list item has been clicked by the user.
+     * @param restaurant The [RestaurantContract.Restaurant] instance corresponding to the list item
+     */
     @Override
     public void onItemClicked(RestaurantContract.Restaurant restaurant) {
 
@@ -104,5 +119,35 @@ public class BusinessRestaurantListFragment extends Fragment
             this.listener.onRestaurantSelected(restaurant);
 
     }
-    
+
+    /// -----------------------
+    /// RestaurantContract.View
+
+    /**
+     * Sets the [RestaurantContract.Restaurant] list from the given List
+     * @param restaurants The [RestaurantContract.Restaurant] list to set.
+     */
+    @Override
+    public void setRestaurants(List<RestaurantContract.Restaurant> restaurants) {
+
+        if(this.businessRestaurantListAdapter == null)
+            this.businessRestaurantListAdapter = new BusinessRestaurantListAdapter();
+
+        this.businessRestaurantListAdapter.setRestaurantLists(restaurants);
+
+    }
+
+    /// --------------
+    /// Public Methods
+
+    /**
+     * Sets the Interaction listener that will receive callbacks on user interactions.
+     * @param listener The listener that will receive callbacks on user interactions.
+     */
+    public void setInteractionListener(final RestaurantContract.Presenter.InteractionListener listener) {
+
+        this.listener = listener;
+
+    }
+
 }

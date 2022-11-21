@@ -16,6 +16,8 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     private String          address1    ;
     private String          address2    ;
     private String          menuId      ;
+    private String          ownerId     ;
+    private String          pictureId   ;
     private double          longitude   ;
     private double          latitude    ;
     private OutputStream    imageStream ;
@@ -40,6 +42,16 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     @Override
     public String getName(){
         return name;
+    }
+
+    @Override
+    public String getOwnerId() {
+        return this.ownerId;
+    }
+
+    @Override
+    public String getPictureId() {
+        return this.pictureId;
     }
 
     @Override
@@ -103,6 +115,20 @@ public class Restaurant implements RestaurantContract.Restaurant, MapObjectContr
     public void setPricing(final int pricing) {
 
         this.pricing = pricing;
+
+    }
+
+    @Override
+    public void setOwnerId(String id) {
+
+        this.ownerId = id;
+
+    }
+
+    @Override
+    public void setPictureId(String id) {
+
+        this.pictureId = id;
 
     }
 
