@@ -16,7 +16,7 @@ public class MenuPresenter implements MealContract.Menu.Presenter {
     private MealContract.Menu.View      view        ;
     private List<String>                mealIds     ;
     private List<MealContract.Meal>     meals       ;
-
+    private String                      selectedMenu;
     /// ---------------------------
     /// MealContract.Menu.Presenter
 
@@ -69,9 +69,28 @@ public class MenuPresenter implements MealContract.Menu.Presenter {
         if(this.database != null)
             this.mealIds = this.database.getMenu(menuId).getMealIds();
 
+        this.selectedMenu = menuId;
         return this.mealIds;
 
     }
+
+    @Override
+    public void addMealID(String mealID) {
+        if(this.mealIds != null) {
+            this.mealIds.add(mealID);
+        }
+    }
+
+    @Override
+    public String getSelectedMenuID() {
+        return this.selectedMenu;
+    }
+
+    @Override
+    public List<String> getMealIds() {
+        return this.mealIds;
+    }
+
 
     /**
      * Sets the Menu from the database

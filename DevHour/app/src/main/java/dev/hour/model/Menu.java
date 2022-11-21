@@ -1,5 +1,6 @@
 package dev.hour.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dev.hour.contracts.MealContract;
@@ -66,6 +67,13 @@ public class Menu implements MealContract.Menu {
 
     }
 
+    @Override
+    public void addMealID(final String mealID) {
 
+        if(this.mealIds == null) {
+            this.mealIds = new ArrayList<>();
+        }
+        this.mealIds.add(mealID);
+    }
 
 }

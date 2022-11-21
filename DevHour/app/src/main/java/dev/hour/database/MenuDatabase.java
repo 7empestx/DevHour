@@ -143,8 +143,17 @@ public class MenuDatabase implements MealContract.Menu.Database {
                 if(value instanceof String)
                     attributeValue = AttributeValue.builder().s((String) value).build();
 
-                else if(value instanceof List)
-                    attributeValue = AttributeValue.builder().l((List) value).build();
+                else if(value instanceof List) {
+
+                    final List<String> list = (List) value;
+                    final List<AttributeValue> attributeValues = new ArrayList<>();
+
+                    for(final String string: list)
+                        attributeValues.add(AttributeValue.builder().s(string).build());
+
+                    attributeValue = AttributeValue.builder().l(attributeValues).build();
+
+                }
 
                 if(attributeValue != null)
                     result.put(entry.getKey(), attributeValue);
@@ -229,7 +238,7 @@ public class MenuDatabase implements MealContract.Menu.Database {
     private Menu bindMenuFrom(final Map<String, AttributeValue> data) {
 
         final Menu                  menu    = new Menu();
-        final List<AttributeValue>  meals   = getListFrom(data, "meals");
+        final List<AttributeValue>  meals   = getListFrom(data, "meal_ids");
         final List<String>          result  = new ArrayList<>();
 
         menu.setId(getStringFrom(data, "id"));
@@ -274,12 +283,12 @@ public class MenuDatabase implements MealContract.Menu.Database {
         // Retrieve a handle to ourselves
         final MenuDatabase  database = this;
 
-        // Define the thread
-        final Thread thread = new Thread(() ->
-                database.putItem(createItemFrom(data)));
+
 
         try {
-
+            // Define the thread
+            final Thread thread = new Thread(() ->
+                    database.putItem(createItemFrom(data)));
             // Create it
             thread.start();
             thread.join();

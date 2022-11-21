@@ -249,16 +249,18 @@ public class BusinessMenuListAdapter extends
         if(bitmap == null) {
 
             final ByteArrayOutputStream imageStream = (ByteArrayOutputStream) meal.getImageStream();
-            final byte[]                bytes       = imageStream.toByteArray();
+            if(imageStream != null) {
 
-            if(bytes.length > 0) {
+                final byte[] bytes = imageStream.toByteArray();
 
-                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                if (bytes.length > 0) {
 
-                this.images.put(meal.getName(), bitmap);
+                    bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
+                    this.images.put(meal.getName(), bitmap);
+
+                }
             }
-
         }
 
         return bitmap;

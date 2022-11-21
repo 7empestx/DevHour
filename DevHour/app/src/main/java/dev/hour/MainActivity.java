@@ -472,6 +472,15 @@ public class MainActivity extends AppCompatActivity implements
     public void onCreateMealRequest(Map<String, Object> export) {
         if (export != null) {
             mealDatabase.updateMeal(export);
+            final String id = (String)export.get("id");
+            Map<String, Object> menu = new HashMap<>();
+            menuPresenter.addMealID(id);
+            menu.put("id", menuPresenter.getSelectedMenuID());
+            menu.put("meal_ids", menuPresenter.getMealIds());
+            menuPresenter.updateMenu(menu);
+            List<String> mealIDs = this.menuPresenter.getMealIdsForMenu(menuPresenter.getSelectedMenuID());
+            List<MealContract.Meal> meals = this.mealDatabase.getMealsFrom(mealIDs);
+            this.menuPresenter.setMeals(meals);
         }
     }
 

@@ -112,6 +112,7 @@ public interface MealContract {
         void setMeals(final List<Meal> meals);
         void setMealIds(final List<String> mealIds);
         void setTags(final List<String> tags);
+        void addMealID(final String mealID);
 
         interface Database {
 
@@ -128,6 +129,9 @@ public interface MealContract {
             void setView(final View view);
             void updateMenu(final Map<String, Object> data);
             List<String> getMealIdsForMenu(final String menuId);
+            void addMealID(final String mealID);
+            String getSelectedMenuID();
+            List<String> getMealIds();
 
             interface InteractionListener {
 

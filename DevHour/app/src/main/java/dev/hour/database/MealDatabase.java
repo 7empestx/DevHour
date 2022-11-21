@@ -243,7 +243,7 @@ public class MealDatabase implements MealContract.Meal.Database {
     private OutputStream getObject(final String key) {
 
         // Create the resultant OutputStream
-        final OutputStream result = new BufferedOutputStream(new ByteArrayOutputStream());
+        final OutputStream result = new ByteArrayOutputStream();
 
         // If we have a client
         if(this.s3Client != null) {
@@ -257,11 +257,12 @@ public class MealDatabase implements MealContract.Meal.Database {
             // Retrieve a handle to ourselves
             final MealDatabase database = this;
 
-            // Create the request thread
-            final Thread thread = new Thread(() ->
-                    database.objectResponse = database.s3Client.getObject(request));
 
             try {
+
+                // Create the request thread
+                final Thread thread = new Thread(() ->
+                        database.objectResponse = database.s3Client.getObject(request));
 
                 // Perform the request
                 thread.start();
@@ -286,7 +287,7 @@ public class MealDatabase implements MealContract.Meal.Database {
 
             } catch(final Exception exception) {
 
-                Log.e("MealDatabase", exception.getMessage());
+                Log.e("MealDatabase", "Error" + exception.getMessage());
 
             }
 
