@@ -49,6 +49,7 @@ import dev.hour.fragment.general.SignUpFragment;
 import dev.hour.fragment.business.BusinessRestaurantListFragment;
 import dev.hour.fragment.general.AddPictureFragment;
 import dev.hour.fragment.general.TagFragment;
+import dev.hour.fragment.BusinessAddRestaurantConfirmationFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
@@ -748,6 +749,37 @@ public class MainActivity extends AppCompatActivity implements
 
         transaction.show(fragment);
 
+        if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+        lastFragment = fragment;
+
+        hideBottomNavigationBar();
+
+        transaction.commit();
+        fragmentManager.executePendingTransactions();
+
+    }
+
+    private void showBusinessAddRestaurantConfirmationFragment(final Map<String, Object> export) {
+        final FragmentManager       fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                fragmentManager.findFragmentByTag(BusinessAddRestaurantConfirmationFragment.TAG);
+
+        if(fragment == null) {
+            fragment = new BusinessAddRestaurantConfirmationFragment();
+            transaction.add(R.id.activity_main, fragment, BusinessAddRestaurantConfirmationFragment.TAG);
+
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setInteractionListener(this);
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setExport(export);
+        } else if(fragment.isAdded()) {
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setInteractionListener(this);
+            ((BusinessAddRestaurantConfirmationFragment) fragment).setExport(export);
+        }
+
+        transaction
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
         if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
 
         lastFragment = fragment;
