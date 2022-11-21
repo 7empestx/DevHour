@@ -1,4 +1,4 @@
-package dev.hour.fragment;
+package dev.hour.fragment.business;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

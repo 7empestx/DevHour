@@ -34,13 +34,13 @@ import dev.hour.database.DietDatabase;
 import dev.hour.fragment.business.BusinessUpdateRestaurantFragment;
 import dev.hour.fragment.BusinessMenuItemDetailFragment;
 import dev.hour.fragment.BusinessMenuListFragment;
-import dev.hour.fragment.LoginFragment;
+import dev.hour.fragment.general.LoginFragment;
 import dev.hour.fragment.MapFragment;
 import dev.hour.fragment.ProfileFragment;
-import dev.hour.fragment.RestaurantListFragment;
-import dev.hour.fragment.SignUpFragment;
-import dev.hour.fragment.BusinessRestaurantListFragment;
-import dev.hour.fragment.AddPictureFragment;
+import dev.hour.fragment.CustomerRestaurantListFragment;
+import dev.hour.fragment.general.SignUpFragment;
+import dev.hour.fragment.business.BusinessRestaurantListFragment;
+import dev.hour.fragment.general.AddPictureFragment;
 import dev.hour.presenter.AuthenticatorPresenter;
 import dev.hour.presenter.MealPresenter;
 import dev.hour.presenter.MenuPresenter;
@@ -445,7 +445,7 @@ public class MainActivity extends AppCompatActivity implements
 
         if(fragment == null) {
 
-            fragment = fragmentManager.findFragmentByTag(RestaurantListFragment.TAG);
+            fragment = fragmentManager.findFragmentByTag(CustomerRestaurantListFragment.TAG);
 
             if(fragment != null)
                 lastFragment = fragment;

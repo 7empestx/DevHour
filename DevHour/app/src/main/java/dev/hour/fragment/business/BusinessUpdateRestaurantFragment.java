@@ -45,8 +45,8 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
     /// --------------
     /// Private Fields
 
-    private RestaurantContract.Presenter.InteractionListener interactionListener;
-    private RestaurantContract.Restaurant                    restaurant         ;
+    private RestaurantContract.Presenter.InteractionListener interactionListener    ;
+    private RestaurantContract.Restaurant                    restaurant             ;
 
     /// --------
     /// Fragment

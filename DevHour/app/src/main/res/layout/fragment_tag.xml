@@ -7,7 +7,7 @@
     style="@style/Fragment">
 
     <ImageButton
-        android:id="@+id/fragment_business_add_tag_back_button"
+        android:id="@+id/fragment_tag_back_button"
         style="@style/Theme.DevHour.BackButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -15,28 +15,37 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/fragment_business_add_tag_meal_name"
-        android:layout_width="match_parent"
-        android:text="Meal Name"
-        android:textAlignment="center"
-        android:textStyle="bold"
+        android:id="@+id/fragment_tag_title"
         style="@style/Theme.DevHour.Title"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_tag_back_button"/>
-
-    <EditText
-        android:id="@+id/fragment_business_add_tag_name_input"
-        android:text="New Tag"
-        android:textAlignment="center"
-        android:textStyle="bold"
         android:layout_width="match_parent"
-        style="@style/Theme.DevHour.EditText"
+        android:text="Tag"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_tag_back_button"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_tag_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_tag_meal_name"/>
+        app:layout_constraintTop_toBottomOf="@+id/fragment_tag_title"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_tag_input"/>
+
+    <EditText
+        android:id="@+id/fragment_tag_input"
+        style="@style/Theme.DevHour.EditText"
+        android:text="New Tag"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_tag_button"/>
 
     <Button
-        android:id="@+id/fragment_business_add_tag_button"
+        android:id="@+id/fragment_tag_button"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.ActionButton"
         android:layout_marginTop="8dp"
@@ -44,21 +53,10 @@
         android:text="Add Tag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_tag_name_input"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_business_add_tag_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_business_add_tag_button"/>
+        app:layout_constraintBottom_toTopOf="@+id/fragment_tag_confirm_button"/>
 
     <Button
-        android:id="@+id/fragment_business_add_tag_confirm_button"
+        android:id="@+id/fragment_tag_confirm_button"
         android:layout_width="match_parent"
         style="@style/Theme.DevHour.ActionButton"
         android:layout_marginTop="8dp"
