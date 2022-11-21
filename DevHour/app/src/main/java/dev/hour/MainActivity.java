@@ -470,7 +470,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onCreateMealRequest(Map<String, Object> export) {
-
+        if (export != null) {
+            mealDatabase.updateMeal(export);
+        }
     }
 
     @Override

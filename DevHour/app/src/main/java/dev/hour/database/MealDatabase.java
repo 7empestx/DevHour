@@ -123,6 +123,29 @@ public class MealDatabase implements MealContract.Meal.Database {
     }
 
     /**
+     * Retrieves a List value from the AttributeValue with the given key
+     * @param item The item to extract the [List] from
+     * @param key The [String] key corresponding to the value
+     * @return [List] instance
+     */
+    private List<AttributeValue> getListFrom(final Map<String, AttributeValue> item, final String key) {
+
+        List<AttributeValue> result = new ArrayList<>();
+
+        if(item != null) {
+
+            final AttributeValue attributeValue = item.get(key);
+
+            if(attributeValue != null)
+                result = attributeValue.l();
+
+        }
+
+        return result;
+
+    }
+
+    /**
      * Creates an item that can update a DynamoDB table item.
      * @param data The item to set
      * @return Map<String, AttributeValue> with the given data.
@@ -143,8 +166,17 @@ public class MealDatabase implements MealContract.Meal.Database {
                 if(value instanceof String)
                     attributeValue = AttributeValue.builder().s((String) value).build();
 
-                else if(value instanceof List)
-                    attributeValue = AttributeValue.builder().l((List) value).build();
+                else if(value instanceof List) {
+
+                    final List<String> list = (List) value;
+                    final List<AttributeValue> attributeValues = new ArrayList<>();
+
+                    for(final String string: list)
+                        attributeValues.add(AttributeValue.builder().s(string).build());
+
+                    attributeValue = AttributeValue.builder().l(attributeValues).build();
+
+                }
 
                 if(attributeValue != null)
                     result.put(entry.getKey(), attributeValue);
@@ -410,33 +442,35 @@ public class MealDatabase implements MealContract.Meal.Database {
      * @param data The data to create the Meal entry with
      */
     @Override
-    public void createMeal(final Map<String, Object> data) {
+    public void updateMeal(final Map<String, Object> data) {
 
         // Retrieve a handle to ourselves, the picture stream (if any), and create a picture id
         final MealDatabase    database                  = this                                     ;
         final InputStream           pictureStream       = getMealPictureInputStreamFrom(data)      ;
-        final String                mealPictureId       = GenerateId()                             ;
-        final long                  contentLength       = (Long) data.get("content_length")        ;
 
-        // Generate an id for the meal
-        data.put("id", GenerateId());
-        data.put("picture_id", mealPictureId);
+        data.putIfAbsent("id", GenerateId());
+        try {
+            if((pictureStream != null) && (pictureStream.available() > 0)) {
+                final String mealPictureID = GenerateId();
+                final long   contentLength =
+                    (data.get("content_length") == null) ? 0l : (Integer) data.get("content_length");
+                data.remove("content_length");
+                data.putIfAbsent("picture_id", mealPictureID);
+                final Thread uploadThread = new Thread(()->
+                        database.putObject(mealPictureID, pictureStream, contentLength));
+                uploadThread.start();
+                uploadThread.join();
+            }
+        } catch (final Exception exception) {
+            Log.e("UpdateMealDatabase", exception.getMessage());
+        }
 
-        // Remove the content length
-        data.remove("content_length");
-
-        final Thread thread = new Thread(() ->
-                database.putItem(createItemFrom(data)));
-
-        final Thread uploadThread = new Thread(() ->
-                database.putObject(mealPictureId, pictureStream, contentLength));
 
         try {
-
+            final Thread thread = new Thread(() ->
+                    database.putItem(createItemFrom(data)));
             thread.start();
             thread.join();
-            uploadThread.start();
-            uploadThread.join();
 
         } catch (final Exception exception) {
 

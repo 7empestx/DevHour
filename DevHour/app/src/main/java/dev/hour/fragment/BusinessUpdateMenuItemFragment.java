@@ -328,12 +328,16 @@ public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnC
                 this.requireView()
                         .findViewById(R.id.fragment_business_update_menu_item_name_input);
 
-        image.putIfAbsent("picture", data.get("picture"));
-
         final ByteArrayInputStream imageStream = (ByteArrayInputStream) image.get("picture");
 
-        if(imageStream != null)
-            image.put("content_length", imageStream.available());
+        if((data.get("picture") == null) && (imageStream != null)) {
+            data.put("picture", image.get("picture"));
+            data.put("content_length", imageStream.available());
+        }
+        else if(data.get("picture") != null) {
+            image.putIfAbsent("picture", data.get("picture"));
+            image.putIfAbsent("content_length", ((ByteArrayInputStream)data.get("picture")).available());
+        }
 
         data.put("name",     mealName.getText().toString());
         data.put("pricing",  "0");
