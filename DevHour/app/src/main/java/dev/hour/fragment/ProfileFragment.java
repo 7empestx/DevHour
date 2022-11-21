@@ -20,9 +20,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import dev.hour.R;
@@ -54,8 +56,10 @@ public class ProfileFragment extends Fragment implements
     private UserContract.View.Listener      userListener        ;
     private MealContract.Diet.View.Listener dietListener        ;
     private ListView                        listView            ;
-    private ArrayAdapter<DietPreferenceItem> adapter             ;
+    private ArrayAdapter<DietPreferenceItem> adapter            ;
     private DietPreferenceItem[]            dietPrefs           ;
+    private Set<String>                     user_allergens      ;
+    private Set<String>                     user_diets          ;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
@@ -71,15 +75,15 @@ public class ProfileFragment extends Fragment implements
         dietPrefs = (DietPreferenceItem[]) onRetainCustomNonConfigurationInstance();
         if (dietPrefs == null) {
             dietPrefs = new DietPreferenceItem[] {
-                    new DietPreferenceItem("Vegetarian"), new DietPreferenceItem("Vegan"),
-                    new DietPreferenceItem("Kosher"), new DietPreferenceItem("Halal"),
-                    new DietPreferenceItem("Dairy-Free"), new DietPreferenceItem("Beef"),
-                    new DietPreferenceItem("Peanut-Free"), new DietPreferenceItem("Gluten-Free"),
-                    new DietPreferenceItem("Nut-Free"), new DietPreferenceItem("Fish-Free"),
-                    new DietPreferenceItem("ShellFish-Free"), new DietPreferenceItem("Banana-Free"),
-                    new DietPreferenceItem("Pineapple-Free"), new DietPreferenceItem("Strawberry-Free"),
-                    new DietPreferenceItem("Tomato-Free"), new DietPreferenceItem("Olive-Free"),
-                    new DietPreferenceItem("Wheat-Free"), new DietPreferenceItem("Onion-Free"),
+                    new DietPreferenceItem("Vegetarian", true), new DietPreferenceItem("Vegan", true),
+                    new DietPreferenceItem("Kosher", true), new DietPreferenceItem("Halal", true),
+                    new DietPreferenceItem("Dairy-Free", false), new DietPreferenceItem("Beef", false),
+                    new DietPreferenceItem("Peanut-Free", false), new DietPreferenceItem("Gluten-Free", false),
+                    new DietPreferenceItem("Nut-Free", false), new DietPreferenceItem("Fish-Free", false),
+                    new DietPreferenceItem("ShellFish-Free", false), new DietPreferenceItem("Banana-Free", false),
+                    new DietPreferenceItem("Pineapple-Free", false), new DietPreferenceItem("Strawberry-Free", false),
+                    new DietPreferenceItem("Tomato-Free", false), new DietPreferenceItem("Olive-Free", false),
+                    new DietPreferenceItem("Wheat-Free", false), new DietPreferenceItem("Onion-Free", false),
             };
         }
         initSearchWidget(layout);
@@ -103,14 +107,35 @@ public class ProfileFragment extends Fragment implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
+                // Toggle the item object and checkbox view
                 DietPreferenceItem dietPreferenceItem = adapter.getItem(pos);
                 dietPreferenceItem.toggleChecked();
                 DietPreferenceItemViewHolder viewHolder = (DietPreferenceItemViewHolder) view.getTag();
                 viewHolder.getCheckBox().setChecked(dietPreferenceItem.isChecked());
-                // Todo: Send request to Diet table to remove or add diet preference for user, for this item
+
+                // Update user preference lists locally with addition or removal of preference
+                // and send off request to update the table to match the local state.
+                Map<String, Object> data = new HashMap<>();
+                if (dietPreferenceItem.isChecked()) {
+                    if (dietPreferenceItem.isAllergen()) {
+                        user_allergens.add(dietPreferenceItem.getName());
+                    } else {
+                        user_diets.add(dietPreferenceItem.getName());
+                    }
+                } else {
+                    if (dietPreferenceItem.isAllergen()) {
+                        user_allergens.remove(dietPreferenceItem.getName());
+                    } else {
+                        user_diets.remove(dietPreferenceItem.getName());
+                    }
+                }
+                data.put("id", userId);
+                data.put("allergens", new ArrayList<>(user_allergens));
+                data.put("diets", new ArrayList<>(user_diets));
+
+                dietListener.onUpdateDietRequest(data);
             }
         });
-
     }
 
     private void initSearchWidget(View layout) {
@@ -195,15 +220,25 @@ public class ProfileFragment extends Fragment implements
 
     @Override
     public void onDisplayDietInfo(MealContract.Diet diet) {
-        Set<String> allergen_set = new HashSet<>(diet.getAllergens());
-        Set<String> diets_set = new HashSet<>(diet.getDiets());
+        user_allergens = new HashSet<>(diet.getAllergens());
+        user_diets = new HashSet<>(diet.getDiets());
 
         // Set the checkboxes to match user's saved diet preferences.
         for (int i = 0; i < listView.getCount(); i++) {
             DietPreferenceItem item = (DietPreferenceItem) listView.getItemAtPosition(i);
-            if (allergen_set.contains(item.getName()) || diets_set.contains(item.getName())) {
+            if (user_allergens.contains(item.getName())) {
                 item.toggleChecked();
+                item.setAsAllergen();
+            } else if (user_diets.contains(item.getName())) {
+                item.toggleChecked();
+                item.setAsDiet();
             }
         }
+    }
+
+    // Called after attempt to update diet preference for the user.
+    public void onUpdateDietRequest() {
+        // TODO: Reset checkbox if request was not successfully written to table
+
     }
 }

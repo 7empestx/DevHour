@@ -120,6 +120,14 @@ public class DietDatabase implements MealContract.Diet.Database {
 
     }
 
+    private List<AttributeValue> convertStringListToAttributeValueList(List<String> list) {
+        List<AttributeValue> result = new ArrayList<>();
+        for (String str : list) {
+            result.add(AttributeValue.fromS(str));
+        }
+        return result;
+    }
+
     /**
      * Creates an item that can update a DynamoDB table item.
      * @param data The item to set
@@ -138,11 +146,12 @@ public class DietDatabase implements MealContract.Diet.Database {
                 final Object value = entry.getValue();
                 AttributeValue attributeValue = null;
 
-                if(value instanceof String)
+                if(value instanceof String) {
                     attributeValue = AttributeValue.builder().s((String) value).build();
-
-                else if(value instanceof List)
-                    attributeValue = AttributeValue.builder().l((List) value).build();
+                } else if(value instanceof List) {
+                    List<AttributeValue> attributeValues = convertStringListToAttributeValueList((List) value);
+                    attributeValue = AttributeValue.builder().l(attributeValues).build();
+                }
 
                 if(attributeValue != null)
                     result.put(entry.getKey(), attributeValue);

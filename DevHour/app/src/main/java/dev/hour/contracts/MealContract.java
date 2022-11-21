@@ -86,7 +86,6 @@ public interface MealContract {
                 void onShowCustomerAddDietMeal(final Map<String, Object> export);
                 void onShowCustomerAddDietAddTag(final Map<String, Object> export);
                 void onMealSelected(final Meal meal);
-
             }
 
         }
@@ -96,10 +95,11 @@ public interface MealContract {
             void setDiet(final List<Meal> meals);
             void setDietListener(MealContract.Diet.View.Listener listener);
             void onDisplayDietInfo(MealContract.Diet diet);
+            void onUpdateDietRequest();
             interface Listener {
 
-                void onGetDietRequest(String id);
-
+                void onGetDietRequest(final String id);
+                void onUpdateDietRequest(final Map<String, Object> data);
             }
 
         }

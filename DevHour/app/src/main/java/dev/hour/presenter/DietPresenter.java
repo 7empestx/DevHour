@@ -84,7 +84,13 @@ public class DietPresenter implements MealContract.Diet.Presenter, MealContract.
     }
 
     @Override
-    public void onGetDietRequest(String id) {
+    public void onGetDietRequest(final String id) {
         view.onDisplayDietInfo(this.database.getDiet(id));
     }
+
+    @Override
+    public void onUpdateDietRequest(final Map<String, Object> data) {
+        this.database.updateDiet(data);
+    }
+
 }
