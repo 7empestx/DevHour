@@ -161,6 +161,8 @@ public class MapView extends FrameLayout implements
 
         if(mapView != null)
             mapView.onStart();
+
+        
     }
 
     @Override

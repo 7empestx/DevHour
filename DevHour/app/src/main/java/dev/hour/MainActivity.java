@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationRequest;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -92,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements
     private Fragment                            lastFragment            ;
     private SdkHttpClient                       httpClient              ;
     private String                              userId                  ;
+    private LocationRequest                     locationRequest         ;
+    private LocationManager                     locationManager         ;
 
     /// ------------------
     /// Activity Lifecycle
@@ -174,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements
 
         if((this.userId == null) || this.userId.isEmpty())
             this.authenticator.checkSession();
-
     }
 
     @Override
@@ -196,12 +204,43 @@ public class MainActivity extends AppCompatActivity implements
                 }
 
                 break;
+            case 420:
+                if(grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("Activity", "420 Granted");
+                }
 
             default:
                 break;
 
         }
 
+    }
+
+    public void checkLocationPermissions() {
+        if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PackageManager.PERMISSION_DENIED ||
+                checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_DENIED) {
+
+            requestPermissions(
+                    new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION },
+                    420);
+
+        } else if(checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+            Log.e("Activity","Permissions Granted");
+
+            locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 500, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(@NonNull Location location) {
+                    userPresenter.setUserLocation(location.getLongitude(), location.getLatitude());
+                    Log.e("Activity","onLocationChanged()");
+                }
+            });
+        }
     }
 
     /// ---------------------------------------------------
@@ -250,7 +289,10 @@ public class MainActivity extends AppCompatActivity implements
 
         if(user != null) {
 
-            if (user.getType().equals("customer")) showMapFragment();
+            if (user.getType().equals("customer")) {
+                checkLocationPermissions();
+                showMapFragment();
+            }
 
             else {
 
@@ -258,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements
 
                 //showBusinessRestaurantListFragment();
                 showMapFragment();
+                checkLocationPermissions();
             }
         }
     }
@@ -1019,11 +1062,12 @@ public class MainActivity extends AppCompatActivity implements
 
             fragment = new CustomerRestaurantListFragment();
             transaction.add(R.id.activity_main, fragment, CustomerRestaurantListFragment.TAG);
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
 
-            ((CustomerRestaurantListFragment) fragment).setInteractionListener(this);
+            //((CustomerRestaurantListFragment) fragment).setInteractionListener(this);
 
         } else if(fragment.isAdded()) {
-
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
         }
 
         transaction
