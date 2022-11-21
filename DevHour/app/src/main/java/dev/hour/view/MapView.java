@@ -161,15 +161,6 @@ public class MapView extends FrameLayout implements
 
         if(mapView != null)
             mapView.onStart();
-
-        // Pan map to 36.10757832570942, -115.14352520209272 (U.N.L.V. Coordinates)
-        // Temporary... we need to call panTo() with object.
-        this.mapboxMap.setCamera(
-                new CameraOptions.Builder()
-                        .center(Point.fromLngLat(-115.14352520209272, 36.10757832570942))
-                        .zoom(SEARCH_CAMERA_ZOOM)
-                        .build());
-
     }
 
     @Override
@@ -254,13 +245,15 @@ public class MapView extends FrameLayout implements
     public void onRenderFrameFinished(@NonNull RenderFrameFinishedEventData renderFrameFinishedEventData) {
 
         updateUserDotViewPositions();
-
     }
 
     @Override
     public void onRenderFrameStarted(@NonNull RenderFrameStartedEventData renderFrameStartedEventData) {
 
         updateUserDotViewPositions();
+        for(final Map.Entry<String, RestaurantDotView> view : this.restaurantDotViews.entrySet()) {
+            setScreenLocationFor(view.getValue());
+        }
 
     }
 
@@ -302,6 +295,7 @@ public class MapView extends FrameLayout implements
 
         setScreenLocationFor(userDotView);
 
+        panTo(userDotView.getMapObject());
     }
 
     /**
@@ -490,6 +484,7 @@ public class MapView extends FrameLayout implements
 
             camera.flyTo(
                     (new CameraOptions.Builder())
+                            .zoom(SEARCH_CAMERA_ZOOM)
                             .center(Point.fromLngLat(
                                     mapObject.getLongitude(),
                                     mapObject.getLatitude()))
