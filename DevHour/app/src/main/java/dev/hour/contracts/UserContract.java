@@ -53,7 +53,7 @@ public interface UserContract {
         void setLastName(final String lastName);
         void setType(final String type);
         void setLongitude(final double longitude);
-        void setLatitude(double latitude);
+        void setLatitude(final double latitude);
 
     }
 

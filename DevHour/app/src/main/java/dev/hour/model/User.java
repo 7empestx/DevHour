@@ -86,7 +86,7 @@ public class User implements UserContract.User, MapObjectContract.MapObject {
     }
 
     @Override
-    public void setLatitude(double latitude) {
+    public void setLatitude(final double latitude) {
 
         this.latitude = latitude;
 

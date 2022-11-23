@@ -46,7 +46,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
 
     /**
      * Invokes the [RestaurantContract.Database] to create a restaurant with the given data.
-     * @param data The Restautant data.
+     * @param data The Restaurant data.
      * @param ownerId The Restaurant owner id
      */
     @Override
