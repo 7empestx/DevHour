@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
@@ -156,6 +157,8 @@ public class AddPictureFragment extends Fragment implements
         });
 
         this.scale          = 1.0f  ;
+
+        handleNavigationBarBackButton();
 
         return layout;
 
@@ -411,6 +414,21 @@ public class AddPictureFragment extends Fragment implements
         void onAddPictureReceived(final Object requestor);
         void onAddPictureCancelled(final Object requestor);
 
+    }
+
+    /**
+     * Invoked when the onCreateView() method has completed. Callback function
+     * for when the back button on the Android OS navigation bar is pressed.
+     */
+    private void handleNavigationBarBackButton() {
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(listener != null)
+                    listener.onAddPictureCancelled(requestor);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 }

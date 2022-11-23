@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,6 +60,8 @@ public class BusinessMenuListFragment extends Fragment
 
         floatingActionButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
+
+        handleNavigationBarBackButton();
 
         return layout;
 
@@ -154,6 +157,21 @@ public class BusinessMenuListFragment extends Fragment
 
         this.listener = listener;
 
+    }
+
+    /**
+     * Invoked when the onCreateView() method has completed. Callback function
+     * for when the back button on the Android OS navigation bar is pressed.
+     */
+    private void handleNavigationBarBackButton() {
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(listener != null)
+                    listener.onCloseBusinessMenuRequest();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 }

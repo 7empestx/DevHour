@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -93,6 +94,8 @@ public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnC
         ingredientButton.setOnClickListener(this);
         image.setOnClickListener(this);
         backButton.setOnClickListener(this);
+
+        handleNavigationBarBackButton();
 
         return layout;
 
@@ -377,6 +380,28 @@ public class BusinessUpdateMenuItemFragment extends Fragment implements View.OnC
 
         }
 
+    }
+
+    /**
+     * Invoked when the onCreateView() method has completed. Callback function
+     * for when the back button on the Android OS navigation bar is pressed.
+     */
+    private void handleNavigationBarBackButton() {
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                data.clear();
+                image.clear();
+                tags.clear();
+
+                meal = null;
+
+                if(listener != null)
+                    listener.onShowMenuRequest();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 }

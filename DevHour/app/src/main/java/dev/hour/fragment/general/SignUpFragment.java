@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -67,6 +68,8 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
         if (createAccountButton != null) createAccountButton.setOnClickListener(this);
 
         if (createAccountClose != null) createAccountClose.setOnClickListener(this);
+
+        handleNavigationBarBackButton();
 
         return layout;
 
@@ -337,6 +340,21 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
         this.snackBar           = null;
         this.signUpListener     = null;
 
+    }
+
+    /**
+     * Invoked when the onCreateView() method has completed. Callback function
+     * for when the back button on the Android OS navigation bar is pressed.
+     */
+    private void handleNavigationBarBackButton() {
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(signUpListener != null)
+                    signUpListener.onRequestSignIn();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 }

@@ -307,7 +307,6 @@ public class MainActivity extends AppCompatActivity implements
                 checkLocationPermissions();
             }
         }
-        onBackButtonPressed();
     }
 
     /**
@@ -1286,16 +1285,6 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.profile: showProfileFragment(); break;
         }
         return true;
-    }
-
-    public void onBackButtonPressed() {
-        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                showMapFragment();
-            }
-        };
-        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
 }

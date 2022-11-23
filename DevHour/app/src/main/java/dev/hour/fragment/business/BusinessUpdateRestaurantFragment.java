@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
@@ -75,6 +76,8 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
         tagButton.setOnClickListener(this);
         image.setOnClickListener(this);
         backButton.setOnClickListener(this);
+
+        handleNavigationBarBackButton();
 
         return layout;
 
@@ -368,6 +371,21 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
                 .findViewById(R.id.fragment_business_add_restaurant_address_input_2))
                 .setText(address2);
 
+    }
+
+    /**
+     * Invoked when the onCreateView() method has completed. Callback function
+     * for when the back button on the Android OS navigation bar is pressed.
+     */
+    private void handleNavigationBarBackButton() {
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if(interactionListener != null)
+                    interactionListener.onShowBusinessRestaurantListRequest();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
     }
 
 }
