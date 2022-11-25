@@ -1,6 +1,7 @@
 package dev.hour.view;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -31,6 +32,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import dev.hour.R;
+import dev.hour.contracts.AuthenticatorContract;
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
@@ -95,6 +97,8 @@ public class MapView extends FrameLayout implements
      * The focus MapObjectContract.MapObject
      */
     private SearchListener                          searchListener      ;
+
+    private UserDotListener                         userDotListener     ;
 
     /// ------------
     /// Constructors
@@ -230,7 +234,15 @@ public class MapView extends FrameLayout implements
         if((view instanceof UserDotView) || (view instanceof RestaurantDotView)) {
 
             updateFocus((MapObjectView) view);
+            Log.d("MapView", "Clicked on a MapObjectView");
+            if((view instanceof UserDotView) && (this.userDotListener != null)){
+                Log.d("MapView", "UserDotView clicked");
+                this.userDotListener.onUserDotClick((UserDotView) view);
+            }
 
+
+            //else if((view instanceof RestaurantDotView) && (this.searchListener != null))
+                //this.searchListener.onRestaurantClicked((RestaurantDotView) view);
         }
         else if(view instanceof SearchBar)
         {
@@ -590,5 +602,13 @@ public class MapView extends FrameLayout implements
 
     public void setSearchListener(SearchListener searchListener){
         this.searchListener = searchListener;
+    }
+
+    public interface UserDotListener{
+        void onUserDotClick(UserDotView userDotView);
+    }
+
+    public void setUserDotListener(UserDotListener userDotListener){
+        this.userDotListener = userDotListener;
     }
 }

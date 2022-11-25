@@ -29,6 +29,8 @@ public class MapFragment extends Fragment implements
     private MapView mapView;
     private UserContract.View.Listener listener;
     private MapView.SearchListener searchListener;
+    private MapView.UserDotListener userDotListener;
+
 
     /// ------------------
     /// Fragment Lifecycle
@@ -46,6 +48,7 @@ public class MapFragment extends Fragment implements
 
         mapView = new MapView(getContext());
         this.mapView.setSearchListener(searchListener);
+        this.mapView.setUserDotListener(userDotListener);
 
         return mapView;
 
@@ -159,6 +162,13 @@ public class MapFragment extends Fragment implements
         this.searchListener = searchListener;
         if (this.mapView != null){
             this.mapView.setSearchListener(searchListener);
+        }
+    }
+
+    public void setUserDotListener(MapView.UserDotListener userDotListener){
+        this.userDotListener = userDotListener;
+        if (this.mapView != null){
+            this.mapView.setUserDotListener(userDotListener);
         }
     }
 }

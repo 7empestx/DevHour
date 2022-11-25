@@ -1,6 +1,5 @@
 package dev.hour;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -19,8 +18,16 @@ import android.location.LocationManager;
 import android.location.LocationRequest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -58,6 +65,7 @@ import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
 import dev.hour.presenter.DietPresenter;
 import dev.hour.view.MapView;
+import dev.hour.view.UserDotView;
 import dev.hour.view.Utilities;
 import software.amazon.awssdk.http.SdkHttpClient;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
@@ -69,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements
         MealContract.Menu.Presenter.InteractionListener,
         AddPictureFragment.Listener,
         TagFragment.Listener,
-        MapView.SearchListener {
+        MapView.SearchListener,
+        MapView.UserDotListener {
 
     static {
         System.setProperty(
@@ -556,6 +565,28 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onTextChange(final String query) {
+
+
+    }
+
+    @Override
+    public void onUserDotClick(UserDotView userDotView) {
+        //int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        //int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+
+        View view = getLayoutInflater().inflate(R.layout.user_dot_popup, null);
+
+        PopupWindow popupWindow = new PopupWindow(view, 1000, 2000, focusable);
+
+        popupWindow.showAtLocation(view, Gravity.TOP, 0, 300);
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                popupWindow.dismiss();
+            }
+        });
 
 
     }
@@ -1102,6 +1133,9 @@ public class MainActivity extends AppCompatActivity implements
 
         }
         ((MapFragment)fragment).setSearchListener(this);
+
+        ((MapFragment)fragment).setUserDotListener(this);
+
         transaction
                 .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
 

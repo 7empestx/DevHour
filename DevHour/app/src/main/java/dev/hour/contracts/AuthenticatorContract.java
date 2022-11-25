@@ -1,6 +1,10 @@
 package dev.hour.contracts;
 
+import android.view.View;
+
 import java.util.Map;
+
+import dev.hour.view.UserDotView;
 
 public interface AuthenticatorContract {
 
