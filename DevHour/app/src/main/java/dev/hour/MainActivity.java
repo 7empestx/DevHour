@@ -46,6 +46,7 @@ import dev.hour.database.MenuDatabase;
 import dev.hour.database.RestaurantDatabase;
 import dev.hour.database.UserDatabase;
 import dev.hour.database.DietDatabase;
+import dev.hour.fragment.GodModeFragment;
 import dev.hour.fragment.business.BusinessUpdateRestaurantFragment;
 import dev.hour.fragment.BusinessUpdateMenuItemFragment;
 import dev.hour.fragment.business.BusinessMenuListFragment;
@@ -65,6 +66,7 @@ import dev.hour.presenter.RestaurantPresenter;
 import dev.hour.presenter.UserPresenter;
 import dev.hour.presenter.DietPresenter;
 import dev.hour.view.MapView;
+import dev.hour.view.RestaurantDotView;
 import dev.hour.view.UserDotView;
 import dev.hour.view.Utilities;
 import software.amazon.awssdk.http.SdkHttpClient;
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements
         AddPictureFragment.Listener,
         TagFragment.Listener,
         MapView.SearchListener,
-        MapView.UserDotListener {
+        MapView.UserDotListener,
+        MapView.RestaurantDotListener {
 
     static {
         System.setProperty(
@@ -576,19 +579,33 @@ public class MainActivity extends AppCompatActivity implements
         boolean focusable = true;
 
         View view = getLayoutInflater().inflate(R.layout.user_dot_popup, null);
-
         PopupWindow popupWindow = new PopupWindow(view, 1000, 2000, focusable);
 
         popupWindow.showAtLocation(view, Gravity.TOP, 0, 300);
-
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 popupWindow.dismiss();
             }
         });
+    }
 
+    @Override
+    public void onRestaurantDotClick(RestaurantDotView restaurantDotView) {
+        // int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        // int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
 
+        View view = getLayoutInflater().inflate(R.layout.restaurant_dot_popup, null);
+        PopupWindow popupWindow = new PopupWindow(view, 1000, 2000, focusable);
+
+        popupWindow.showAtLocation(view, Gravity.TOP, 0, 300);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                popupWindow.dismiss();
+            }
+        });
     }
 
     /// ---------------
@@ -1133,8 +1150,8 @@ public class MainActivity extends AppCompatActivity implements
 
         }
         ((MapFragment)fragment).setSearchListener(this);
-
         ((MapFragment)fragment).setUserDotListener(this);
+        ((MapFragment)fragment).setRestaurantDotListener(this);
 
         transaction
                 .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left);
@@ -1163,7 +1180,9 @@ public class MainActivity extends AppCompatActivity implements
 
             fragment = new CustomerRestaurantListFragment();
             transaction.add(R.id.activity_main, fragment, CustomerRestaurantListFragment.TAG);
-            
+
+            restaurantPresenter.setView((RestaurantContract.View) fragment);
+
         } else if(fragment.isAdded()) {
 
         }
@@ -1179,6 +1198,36 @@ public class MainActivity extends AppCompatActivity implements
 
         transaction.commit();
         fragmentManager.executePendingTransactions();
+    }
+
+    private void showGodModeFragment() {
+
+            final FragmentManager       fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction   transaction     = fragmentManager.beginTransaction();
+
+        Fragment fragment =
+                    fragmentManager.findFragmentByTag(GodModeFragment.TAG);
+
+            if(fragment == null) {
+
+                fragment = new GodModeFragment();
+                transaction.add(R.id.activity_main, fragment, GodModeFragment.TAG);
+
+            } else if(fragment.isAdded()) {
+
+            }
+
+            transaction
+                    .setCustomAnimations(R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right);
+
+            transaction.show(fragment);
+
+            if(lastFragment != null && lastFragment != fragment) transaction.remove(lastFragment);
+
+            lastFragment = fragment;
+
+            transaction.commit();
+            fragmentManager.executePendingTransactions();
     }
 
     /**
@@ -1310,13 +1359,18 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()) {
-
-            //case R.id.navigation_list: showCustomerRestaurantListFragment(); break;
-            case R.id.navigation_list: showBusinessUpdateRestaurantFragment(null); break;
+            case R.id.navigation_list: showGodModeFragment(); break;
             case R.id.navigation_location: showMapFragment(); break;
             case R.id.profile: showProfileFragment(); break;
         }
         return true;
     }
 
+    public void navigateToBusinessRestaurantList() {
+        showBusinessRestaurantListFragment();
+    }
+
+    public void navigateToCustomerRestaurantList() {
+        showCustomerRestaurantListFragment();
+    }
 }

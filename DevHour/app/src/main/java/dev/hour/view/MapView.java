@@ -100,6 +100,8 @@ public class MapView extends FrameLayout implements
 
     private UserDotListener                         userDotListener     ;
 
+    private RestaurantDotListener                   restaurantDotListener;
+
     /// ------------
     /// Constructors
 
@@ -234,15 +236,11 @@ public class MapView extends FrameLayout implements
         if((view instanceof UserDotView) || (view instanceof RestaurantDotView)) {
 
             updateFocus((MapObjectView) view);
-            Log.d("MapView", "Clicked on a MapObjectView");
             if((view instanceof UserDotView) && (this.userDotListener != null)){
-                Log.d("MapView", "UserDotView clicked");
                 this.userDotListener.onUserDotClick((UserDotView) view);
             }
-
-
-            //else if((view instanceof RestaurantDotView) && (this.searchListener != null))
-                //this.searchListener.onRestaurantClicked((RestaurantDotView) view);
+            else if((view instanceof RestaurantDotView) && (this.restaurantDotListener != null))
+                this.restaurantDotListener.onRestaurantDotClick((RestaurantDotView) view);
         }
         else if(view instanceof SearchBar)
         {
@@ -610,5 +608,13 @@ public class MapView extends FrameLayout implements
 
     public void setUserDotListener(UserDotListener userDotListener){
         this.userDotListener = userDotListener;
+    }
+
+    public interface RestaurantDotListener{
+        void onRestaurantDotClick(RestaurantDotView restaurantDotView);
+    }
+
+    public void setRestaurantDotListener(RestaurantDotListener restaurantDotListener){
+        this.restaurantDotListener = restaurantDotListener;
     }
 }

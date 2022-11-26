@@ -30,6 +30,7 @@ public class MapFragment extends Fragment implements
     private UserContract.View.Listener listener;
     private MapView.SearchListener searchListener;
     private MapView.UserDotListener userDotListener;
+    private MapView.RestaurantDotListener restaurantDotListener;
 
 
     /// ------------------
@@ -49,6 +50,7 @@ public class MapFragment extends Fragment implements
         mapView = new MapView(getContext());
         this.mapView.setSearchListener(searchListener);
         this.mapView.setUserDotListener(userDotListener);
+        this.mapView.setRestaurantDotListener(restaurantDotListener);
 
         return mapView;
 
@@ -169,6 +171,13 @@ public class MapFragment extends Fragment implements
         this.userDotListener = userDotListener;
         if (this.mapView != null){
             this.mapView.setUserDotListener(userDotListener);
+        }
+    }
+
+    public void setRestaurantDotListener(MapView.RestaurantDotListener restaurantDotListener){
+        this.restaurantDotListener = restaurantDotListener;
+        if (this.mapView != null){
+            this.mapView.setRestaurantDotListener(restaurantDotListener);
         }
     }
 }
