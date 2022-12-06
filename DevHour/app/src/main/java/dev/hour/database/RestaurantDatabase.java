@@ -650,10 +650,52 @@ public class RestaurantDatabase implements RestaurantContract.Database {
     public List<RestaurantContract.Restaurant> retrieveRestaurantsByLocation(final double longitude,
                                                                              final double latitude,
                                                                              final double radius) {
-        //mercator projection
-        //use scan function to query tables
-        //TODO: implement query to find restaurants based off radius
-        return null;
+
+        final List<RestaurantContract.Restaurant>   results                     = new ArrayList<>();
+        final Map<String, AttributeValue>           expressionAttributeValues   = new HashMap<>();
+
+        expressionAttributeValues.put(":longitudeHi", AttributeValue
+                .builder().n(Double.toString(longitude + radius)).build());
+
+        expressionAttributeValues.put(":longitudeLow", AttributeValue
+                .builder().n(Double.toString(longitude - radius)).build());
+
+        expressionAttributeValues.put(":latitudeHi", AttributeValue
+                .builder().n(Double.toString(latitude + radius)).build());
+
+        expressionAttributeValues.put(":latitudeLow", AttributeValue
+                .builder().n(Double.toString(latitude - radius)).build());
+
+        final ScanRequest scanRequest = ScanRequest
+                .builder()
+                .tableName(this.tableName)
+                .filterExpression("longitude BETWEEN :longitudeLow AND :longitudeHi and latitude BETWEEN :latitudeLow AND :latitudeHi")
+                .expressionAttributeValues(expressionAttributeValues)
+                .build();
+
+        final Thread thread = new Thread(() -> {
+
+            try {
+                final ScanResponse scanResponse = client.scan(scanRequest);
+                for (final Map<String, AttributeValue> item: scanResponse.items()){
+                    RestaurantContract.Restaurant tmp = bindRestaurantFrom(item);
+                    if(Math.hypot(latitude - tmp.getLatitude() , longitude - tmp.getLongitude()) <= radius)
+                        results.add(tmp);
+                }
+
+            } catch (final Exception exception) {
+                Log.e("RestaurantDatabase", exception.toString());
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (final Exception exception) {
+            Log.e("RestaurantDatabase", exception.getMessage());
+        }
+
+        return results;
     }
 
     /**
