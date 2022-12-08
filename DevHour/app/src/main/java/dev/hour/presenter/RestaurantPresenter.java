@@ -93,4 +93,21 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
 
     }
 
+    /**
+     * Sets the Restaurants by location.
+     * @param longitude The user's longitude coordinate
+     * @param latitude The user's latitude coordinate
+     */
+    @Override
+    public void setRestaurantsByLocation(final double longitude, final double latitude) {
+
+        this.restaurants = (this.database != null) ?
+                this.database.retrieveRestaurantsByLocation(longitude, latitude, 300) :
+                new ArrayList<>();
+
+        if(this.view != null)
+            this.view.setRestaurants(this.restaurants);
+
+    }
+
 }

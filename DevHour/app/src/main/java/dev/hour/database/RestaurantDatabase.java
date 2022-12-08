@@ -494,7 +494,7 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
                 final String restaurantPictureId = GenerateId();
                 final long contentLength =
-                        (data.get("content_length") == null) ? 0L : (Long) data.get("content_length");
+                        (data.get("content_length") == null) ? 0L : Long.parseLong(String.valueOf(data.get("content_length")));
 
                 // Remove the content length
                 data.remove("content_length");

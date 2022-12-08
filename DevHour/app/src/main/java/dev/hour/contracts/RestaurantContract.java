@@ -26,6 +26,7 @@ public interface RestaurantContract {
         void updateRestaurant(final Map<String, Object> data, final String ownerId);
         void setRestaurantsByTag(final String query);
         void setRestaurantsByOwner(final String owner);
+        void setRestaurantsByLocation(final double longitude, final double latitude);
 
         interface InteractionListener {
 

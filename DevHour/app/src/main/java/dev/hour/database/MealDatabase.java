@@ -446,30 +446,41 @@ public class MealDatabase implements MealContract.Meal.Database {
     public void updateMeal(final Map<String, Object> data) {
 
         // Retrieve a handle to ourselves, the picture stream (if any), and create a picture id
-        final MealDatabase    database                  = this                                     ;
-        final InputStream           pictureStream       = getMealPictureInputStreamFrom(data)      ;
+        final MealDatabase    database      = this                                     ;
+        final InputStream     pictureStream = getMealPictureInputStreamFrom(data)      ;
 
         data.putIfAbsent("id", GenerateId());
+
         try {
+
             if((pictureStream != null) && (pictureStream.available() > 0)) {
+
                 final String mealPictureID = GenerateId();
-                final long   contentLength =
-                    (data.get("content_length") == null) ? 0l : (Integer) data.get("content_length");
+                final long contentLength =
+                        (data.get("content_length") == null) ? 0L : Long.parseLong(String.valueOf(data.get("content_length")));
+
                 data.remove("content_length");
+
                 data.putIfAbsent("picture_id", mealPictureID);
+
                 final Thread uploadThread = new Thread(()->
                         database.putObject(mealPictureID, pictureStream, contentLength));
+
                 uploadThread.start();
                 uploadThread.join();
-            }
-        } catch (final Exception exception) {
-            Log.e("UpdateMealDatabase", exception.getMessage());
-        }
 
+            }
+
+        } catch (final Exception exception) {
+
+            Log.e("UpdateMealDatabase", exception.getMessage());
+
+        }
 
         try {
             final Thread thread = new Thread(() ->
                     database.putItem(createItemFrom(data)));
+
             thread.start();
             thread.join();
 

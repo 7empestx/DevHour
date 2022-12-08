@@ -326,12 +326,12 @@ public class BusinessUpdateRestaurantFragment extends Fragment implements View.O
                 this.requireView()
                         .findViewById(R.id.fragment_business_add_restaurant_address_input_2);
 
-        image.putIfAbsent("picture", data.get("picture"));
+        data.put("picture", image.get("picture"));
 
         final ByteArrayInputStream imageStream = (ByteArrayInputStream) image.get("picture");
 
         if(imageStream != null)
-            image.put("content_length", imageStream.available());
+            data.put("content_length", imageStream.available());
 
         data.put("name",            restaurantName.getText().toString());
         data.put("address1",        address1.getText().toString());

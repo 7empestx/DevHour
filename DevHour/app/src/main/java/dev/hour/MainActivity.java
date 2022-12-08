@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements
                 if(location != null) {
 
                     userPresenter.setUserLocation(location.getLongitude(), location.getLatitude());
+                    restaurantPresenter.setRestaurantsByLocation(location.getLongitude(), location.getLatitude());
 
                     Log.e("Activity", "onLocationChanged() Longitude: " +
                             location.getLongitude() + " Latitude: " + location.getLatitude());
@@ -367,8 +368,8 @@ public class MainActivity extends AppCompatActivity implements
             else {
 
                 this.restaurantPresenter.setRestaurantsByOwner(this.userId);
-                showMapFragment();
-                checkLocationPermissions();
+                showBusinessRestaurantListFragment();
+
             }
         }
     }
