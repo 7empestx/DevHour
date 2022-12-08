@@ -2,6 +2,7 @@ package dev.hour.view;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -32,7 +33,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import dev.hour.R;
-import dev.hour.contracts.AuthenticatorContract;
 import dev.hour.contracts.MapObjectContract;
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.contracts.UserContract;
@@ -41,6 +41,7 @@ public class MapView extends FrameLayout implements
         OnRenderFrameStartedListener,
         OnRenderFrameFinishedListener,
         View.OnClickListener,
+        View.OnTouchListener,
         SearchView.OnQueryTextListener {
 
     /// ----------------------
@@ -52,7 +53,9 @@ public class MapView extends FrameLayout implements
     private final static String DEFAULT_MAP_STYLE_ID = ""   ;
     private final static long   ANIMATION_DURATION   = 300  ;
     private final static double DEFAULT_CAMERA_ZOOM  = 15.0 ;
-    private final static double SEARCH_CAMERA_ZOOM   = 12.0  ;
+    private final static double SEARCH_CAMERA_ZOOM   = 12.0 ;
+
+    private boolean flag = false;
 
     /// ---------------
     /// Private Members
@@ -150,6 +153,8 @@ public class MapView extends FrameLayout implements
         this.getContext().getResources().getDrawable(R.drawable.search_bar_background, null));
         this.searchBar.setOnSearchClickListener(this);
         this.searchBar.setOnQueryTextListener(this);
+
+        setOnTouchListener(this);
 
         // Add the views
         addView(this.mapView);
@@ -489,6 +494,8 @@ public class MapView extends FrameLayout implements
      */
     private void panTo(final MapObjectContract.MapObject mapObject) {
         
+        if(flag) return;
+
         if(this.mapboxMap != null) {
 
             final CameraAnimationsPlugin camera =
@@ -591,6 +598,18 @@ public class MapView extends FrameLayout implements
         }
         else
             return false;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                flag = true;
+            case MotionEvent.ACTION_UP:
+                flag = false;
+                break;
+        }
+        return false;
     }
 
     public interface SearchListener{
