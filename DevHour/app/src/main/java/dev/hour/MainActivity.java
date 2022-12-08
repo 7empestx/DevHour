@@ -10,24 +10,20 @@ import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationRequest;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.TextView;
+import com.google.android.gms.location.*;
 
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -35,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
 
 import dev.hour.authenticator.Authenticator;
 import dev.hour.contracts.AuthenticatorContract;
@@ -83,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements
         MapView.UserDotListener,
         MapView.RestaurantDotListener {
 
+    private final static String KEY_REQUESTING_LOCATION_UPDATES = "requesting_location_updates";
+    private final static long   INTERVAL_LENGTH                 = 1000L;
+
     static {
         System.setProperty(
                 "javax.xml.stream.XMLInputFactory",
@@ -115,8 +115,28 @@ public class MainActivity extends AppCompatActivity implements
     private Fragment                            lastFragment            ;
     private SdkHttpClient                       httpClient              ;
     private String                              userId                  ;
-    private LocationRequest                     locationRequest         ;
-    private LocationManager                     locationManager         ;
+    private FusedLocationProviderClient         fusedLocationClient     ;
+    private Location                            location                ;
+    private LocationCallback                    locationCallback        ;
+
+    /// --------
+    /// Location
+
+    private boolean requestingLocationUpdates() {
+
+        return PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean(KEY_REQUESTING_LOCATION_UPDATES, false);
+
+    }
+
+    private void setRequestingLocationUpdates(boolean requestingLocationUpdates) {
+
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .edit()
+                .putBoolean(KEY_REQUESTING_LOCATION_UPDATES, requestingLocationUpdates)
+                .apply();
+
+    }
 
     /// ------------------
     /// Activity Lifecycle
@@ -136,6 +156,30 @@ public class MainActivity extends AppCompatActivity implements
 
         // Initialize the http client
         this.httpClient = UrlConnectionHttpClient.create();
+
+        // Initialize the fused location client
+        this.fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // Set the callback
+        this.locationCallback = new LocationCallback() {
+
+            @Override
+            public void onLocationResult(@NonNull final LocationResult locationResult) {
+
+                location = locationResult.getLastLocation();
+
+                if(location != null) {
+
+                    userPresenter.setUserLocation(location.getLongitude(), location.getLatitude());
+
+                    Log.e("Activity", "onLocationChanged() Longitude: " +
+                            location.getLongitude() + " Latitude: " + location.getLatitude());
+
+                }
+
+            }
+
+        };
 
         // Set up the authenticator
         authenticator           = new Authenticator(
@@ -185,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Bind the presenter
         authenticator.setListener((AuthenticatorContract.Authenticator.Listener) authenticatorPresenter);
+
         // Retrieve the most recent Fragment and show the login screen
         bindRecentFragment();
 
@@ -246,16 +291,25 @@ public class MainActivity extends AppCompatActivity implements
                 PackageManager.PERMISSION_GRANTED &&
                 checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) ==
                         PackageManager.PERMISSION_GRANTED) {
+
             Log.e("Activity","Permissions Granted");
 
-            locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 500, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(@NonNull Location location) {
-                    userPresenter.setUserLocation(location.getLongitude(), location.getLatitude());
-                    Log.e("Activity","onLocationChanged()");
-                }
-            });
+            LocationRequest locationRequest =
+                    LocationRequest.create()
+                            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                            .setInterval(INTERVAL_LENGTH);
+
+            try {
+
+                this.fusedLocationClient.requestLocationUpdates(locationRequest,
+                        this.locationCallback, Looper.getMainLooper());
+
+            } catch (final SecurityException unlikelyException) {
+
+                Log.e("MainActivity", unlikelyException.getMessage());
+
+            }
+
         }
     }
 
