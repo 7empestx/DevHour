@@ -368,10 +368,7 @@ public class MainActivity extends AppCompatActivity implements
             else {
 
                 this.restaurantPresenter.setRestaurantsByOwner(this.userId);
-                checkLocationPermissions();
-                showMapFragment();
-
-//                showBusinessRestaurantListFragment();
+                showBusinessRestaurantListFragment();
 
             }
         }
