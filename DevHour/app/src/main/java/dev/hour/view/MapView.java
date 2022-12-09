@@ -391,6 +391,8 @@ public class MapView extends FrameLayout implements
      */
     public void set(final List<RestaurantContract.Restaurant> restaurants) {
 
+        if(restaurants == null) return;
+
         final int difference = restaurants.size() - this.restaurantDotViews.size();
 
         int index = 0;

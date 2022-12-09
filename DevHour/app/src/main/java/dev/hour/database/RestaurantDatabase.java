@@ -652,26 +652,27 @@ public class RestaurantDatabase implements RestaurantContract.Database {
         final List<RestaurantContract.Restaurant>   results                     = new ArrayList<>();
         final Map<String, AttributeValue>           expressionAttributeValues   = new HashMap<>();
 
-        expressionAttributeValues.put(":longitudeHi", AttributeValue
-                .builder().n(Double.toString(longitude + radius)).build());
 
+        expressionAttributeValues.put(":longitudeHi", AttributeValue
+                .builder().s(Double.toString(-150)).build());
+        /*
         expressionAttributeValues.put(":longitudeLow", AttributeValue
-                .builder().n(Double.toString(longitude - radius)).build());
+                .builder().s(Double.toString(longitude - radius)).build());
 
         expressionAttributeValues.put(":latitudeHi", AttributeValue
-                .builder().n(Double.toString(latitude + radius)).build());
+                .builder().s(Double.toString(latitude + radius)).build());
 
         expressionAttributeValues.put(":latitudeLow", AttributeValue
-                .builder().n(Double.toString(latitude - radius)).build());
-
+                .builder().s(Double.toString(latitude - radius)).build());
+        */
         final ScanRequest scanRequest = ScanRequest
                 .builder()
-                .filterExpression("longitude < :longitudeHi")
-                .filterExpression("longitude > :longitudeLow")
-                .filterExpression("latitude < :latitudeHi")
-                .filterExpression("latitude > :latitudeLow")
-                .tableName(this.tableName)
                 .expressionAttributeValues(expressionAttributeValues)
+                .filterExpression("longitude < :longitudeHi")
+                //.filterExpression("longitude > :longitudeLow")
+                //.filterExpression("latitude < :latitudeHi")
+                //.filterExpression("latitude > :latitudeLow")
+                .tableName(this.tableName)
                 .build();
 
         final Thread thread = new Thread(() -> {
