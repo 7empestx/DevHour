@@ -3,38 +3,36 @@ package dev.hour.database;
 
 import android.util.Log;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import dev.hour.contracts.RestaurantContract;
 import dev.hour.model.Restaurant;
-
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.http.SdkHttpClient;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.GetItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
 import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.waiters.S3Waiter;
 
 public class RestaurantDatabase implements RestaurantContract.Database {
@@ -668,8 +666,11 @@ public class RestaurantDatabase implements RestaurantContract.Database {
 
         final ScanRequest scanRequest = ScanRequest
                 .builder()
+                .filterExpression("longitude < :longitudeHi")
+                .filterExpression("longitude > :longitudeLow")
+                .filterExpression("latitude < :latitudeHi")
+                .filterExpression("latitude > :latitudeLow")
                 .tableName(this.tableName)
-                .filterExpression("longitude BETWEEN :longitudeLow AND :longitudeHi and latitude BETWEEN :latitudeLow AND :latitudeHi")
                 .expressionAttributeValues(expressionAttributeValues)
                 .build();
 
