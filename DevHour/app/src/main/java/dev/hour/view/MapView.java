@@ -1,7 +1,6 @@
 package dev.hour.view;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,7 +153,7 @@ public class MapView extends FrameLayout implements
         this.searchBar.setOnSearchClickListener(this);
         this.searchBar.setOnQueryTextListener(this);
 
-        setOnTouchListener(this);
+        this.mapView.setOnTouchListener(this);
 
         // Add the views
         addView(this.mapView);
@@ -605,8 +604,9 @@ public class MapView extends FrameLayout implements
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 flag = true;
+                break;
             case MotionEvent.ACTION_UP:
-                flag = false;
+                //flag = false;
                 break;
         }
         return false;
