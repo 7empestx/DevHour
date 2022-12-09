@@ -102,7 +102,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter {
     public void setRestaurantsByLocation(final double longitude, final double latitude) {
 
         this.restaurants = (this.database != null) ?
-                this.database.retrieveRestaurantsByLocation(longitude, latitude, 300) :
+                this.database.retrieveRestaurantsByLocation(longitude, latitude, 10) :
                 new ArrayList<>();
 
         if(this.view != null)
