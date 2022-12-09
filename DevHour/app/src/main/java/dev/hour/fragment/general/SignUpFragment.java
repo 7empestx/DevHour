@@ -124,6 +124,8 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
                 input.put("first",      getFirstName());
                 input.put("last",       getLastName());
                 input.put("type",       userType);
+                input.put("longitude", "0.0");
+                input.put("latitude", "0.0");
 
                 if(this.signUpListener != null)
                     this.signUpListener.onReceivedSignUpInput(input);
@@ -278,7 +280,7 @@ public final class SignUpFragment extends Fragment implements AuthenticatorContr
 
         final View      view         = this.getView();
         final EditText  passwordText = view != null ?
-                (EditText)view.findViewById(R.id.fragment_sign_up_email_input) : null;
+                (EditText)view.findViewById(R.id.fragment_sign_up_password_input) : null;
 
         String password = "";
 

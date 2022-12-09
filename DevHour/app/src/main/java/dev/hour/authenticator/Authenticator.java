@@ -234,6 +234,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
         final Thread thread = new Thread(() -> {
 
+
             final SignUpRequest signUpRequest = SignUpRequest
                     .builder()
                     .username(input.get("username"))
@@ -244,11 +245,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
                             .name("name")
                             .value(input.get("name"))
                             .build())
-                    .userAttributes(AttributeType
-                            .builder()
-                            .name("email")
-                            .value(input.get("email"))
-                            .build())
+
                     .build();
 
             try {
@@ -277,13 +274,13 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
             final Map<String, String> credentials = softSignIn(input);
 
             // Remove the fields we don't want
-            input.remove("USERNAME");
-            input.remove("PASSWORD");
+            //input.remove("USERNAME");
+            //input.remove("PASSWORD");
             input.remove("password");
 
             // Set the id as the hash of the username; if we're here
             // the username must be unique
-            input.put("id", String.valueOf(input.get("username").hashCode()));
+            input.put("id",input.get("username") );
 
             if(this.listener != null)
                 this.listener.onSignUp(input, credentials);
@@ -363,7 +360,7 @@ public class Authenticator implements AuthenticatorContract.Authenticator {
 
         } catch (final Exception exception) {
 
-            Log.e("Authenticator", "ERROR: " + exception.getMessage());
+            Log.e("Authenticator", "ERROR: " + exception);
 
             if(listener != null)
                 listener.onSignInFailed("Sign-in failed");
