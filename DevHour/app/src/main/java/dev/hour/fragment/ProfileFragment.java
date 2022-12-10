@@ -1,29 +1,23 @@
 package dev.hour.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -84,6 +78,9 @@ public class ProfileFragment extends Fragment implements
                     new DietPreferenceItem("Pineapple-Free", false), new DietPreferenceItem("Strawberry-Free", false),
                     new DietPreferenceItem("Tomato-Free", false), new DietPreferenceItem("Olive-Free", false),
                     new DietPreferenceItem("Wheat-Free", false), new DietPreferenceItem("Onion-Free", false),
+                    new DietPreferenceItem("Garlic-Free", false), new DietPreferenceItem("Egg-Free", false),
+                    new DietPreferenceItem("Soy-Free", false), new DietPreferenceItem("Mustard-Free", false),
+                    new DietPreferenceItem("Sesame-Free", false), new DietPreferenceItem("Pescatarian", false),
             };
         }
         initSearchWidget(layout);
